@@ -14,71 +14,113 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller_administrator">
-   <children>
-      <VBox fx:id="drawer" prefHeight="800.0" prefWidth="199.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <children>
-            <Pane prefHeight="158.0" prefWidth="199.0">
-               <children>
-                  <Label fx:id="lblUserName" layoutX="75.0" layoutY="71.0" text="NOMBRE" />
-                  <Label fx:id="lblUserSurname" layoutX="73.0" layoutY="88.0" text="APELLIDO" />
-               </children>
-            </Pane>
-            <JFXButton fx:id="btnSales" prefHeight="40.0" prefWidth="202.0" text="VENTAS" />
-            <JFXButton fx:id="btnSales1" prefHeight="40.0" prefWidth="202.0" text="CONSULTA" />
-            <JFXButton fx:id="btnSales2" prefHeight="40.0" prefWidth="202.0" text="AÑADIR PRENDAS" />
-            <JFXButton fx:id="btnSales3" prefHeight="40.0" prefWidth="202.0" text="ESTADÍSTICAS" />
-            <JFXButton fx:id="btnSales4" prefHeight="40.0" prefWidth="202.0" text="ADMINISTRADOR" />
-         </children></VBox>
-	      <!-- <children>
-            <Pane prefHeight="183.0" prefWidth="270.0">
-               <children>
-                  <Label fx:id="lblName" layoutX="37.0" layoutY="83.0" text="NOMBRE" />
-                  <Label fx:id="lblSurname" layoutX="37.0" layoutY="103.0" text="APELLIDO" />
-               </children>
-            </Pane>
-            <JFXButton fx:id="btnSales" onAction="#goToSales" prefHeight="40.0" prefWidth="273.0" text="VENTAS" />
-            <JFXButton fx:id="btnConsulations" onAction="#goToConsultations" prefHeight="40.0" prefWidth="273.0" text="CONSULTAS" />
-            <JFXButton fx:id="btnAdd" onAction="#goToAdd" prefHeight="40.0" prefWidth="273.0" text="AÑADIR UNA NUEVA PRENDA" />
-            <JFXButton fx:id="btnStatistics" onAction="#goToStatistics" prefHeight="40.0" prefWidth="273.0" text="ESTADÍSTICAS" />
-            <JFXButton fx:id="btnAdministrator" onAction="#goToAdministrator" prefHeight="40.0" prefWidth="273.0" text="ADMINISTRADOR" />
-         </children></VBox> -->
-      <Label fx:id="textTitleAdministrator" layoutX="240.0" layoutY="64.0" text="ADMINISTRADOR" />
-      <JFXTabPane layoutX="203.0" layoutY="123.0" prefHeight="445.0" prefWidth="662.0" AnchorPane.bottomAnchor="32.0" AnchorPane.leftAnchor="203.0" AnchorPane.rightAnchor="35.0" AnchorPane.topAnchor="123.0">
-         <tabs>
-            <Tab fx:id="tabAddNewUser" text="Nuevo usuario">
-              <content>
-                <AnchorPane fx:id="tabAddUser" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="576.0">
-                     <children>
-                        <Label fx:id="lblName" layoutX="36.0" layoutY="48.0" text="NOMBRE" />
-                        <Label fx:id="lblSurname" layoutX="36.0" layoutY="75.0" text="APELLIDOS" />
-                        <Label fx:id="lblDat" layoutX="36.0" layoutY="129.0" text="FECHA DE NACIMIENTO" />
-                        <Label fx:id="lblDni" layoutX="36.0" layoutY="102.0" prefWidth="59.0" text="DNI" />
-                        <Label fx:id="lblEmail" layoutX="36.0" layoutY="156.0" prefWidth="59.0" text="EMAIL" />
-                        <Label fx:id="lblUser" layoutX="36.0" layoutY="210.0" prefWidth="59.0" text="USUARIO" />
-                        <Label fx:id="lblPassword" layoutX="36.0" layoutY="237.0" prefHeight="17.0" prefWidth="95.0" text="CONTRASEÑA" />
-                        <Label fx:id="lblEmail2" layoutX="36.0" layoutY="183.0" prefHeight="17.0" prefWidth="95.0" text="REPITA EL EMAIL" />
-                        <Label fx:id="lblPassword2" layoutX="36.0" layoutY="264.0" prefHeight="17.0" prefWidth="148.0" text="REPILTA LA CONTRASEÑA" />
-                        <Label fx:id="lblRole" layoutX="36.0" layoutY="301.0" prefHeight="17.0" prefWidth="95.0" text="PUESTO" />
-                        <TextField fx:id="fieldName" layoutX="195.0" layoutY="44.0" prefHeight="25.0" prefWidth="443.0" AnchorPane.leftAnchor="194.0" AnchorPane.rightAnchor="25.0" />
-                        <TextField fx:id="fieldSurname" layoutX="195.0" layoutY="71.0" prefHeight="25.0" prefWidth="443.0" AnchorPane.leftAnchor="194.0" AnchorPane.rightAnchor="25.0" />
-                        <TextField fx:id="fieldDNI" layoutX="195.0" layoutY="98.0" prefHeight="25.0" prefWidth="443.0" AnchorPane.leftAnchor="194.0" AnchorPane.rightAnchor="25.0" />
-                        <DatePicker fx:id="fieldDat" layoutX="195.0" layoutY="125.0" prefHeight="25.0" prefWidth="443.0" AnchorPane.leftAnchor="194.0" AnchorPane.rightAnchor="25.0" />
-                        <TextField fx:id="fieldEmail" layoutX="195.0" layoutY="152.0" prefHeight="25.0" prefWidth="443.0" AnchorPane.leftAnchor="194.0" AnchorPane.rightAnchor="24.0" />
-                        <TextField fx:id="fieldEmail2" layoutX="195.0" layoutY="179.0" prefHeight="25.0" prefWidth="443.0" AnchorPane.leftAnchor="194.0" AnchorPane.rightAnchor="25.0" />
-                        <TextField fx:id="fieldUser" layoutX="195.0" layoutY="206.0" prefHeight="25.0" prefWidth="443.0" AnchorPane.leftAnchor="194.0" AnchorPane.rightAnchor="25.0" />
-                        <PasswordField fx:id="fieldPassword" layoutX="195.0" layoutY="233.0" prefHeight="25.0" prefWidth="443.0" AnchorPane.leftAnchor="194.0" AnchorPane.rightAnchor="25.0" />
-                        <PasswordField fx:id="fieldPassword2" layoutX="195.0" layoutY="260.0" prefHeight="25.0" prefWidth="443.0" AnchorPane.leftAnchor="194.0" AnchorPane.rightAnchor="25.0" />
-                        <ComboBox fx:id="fieldRole" layoutX="195.0" layoutY="297.0" prefHeight="25.0" prefWidth="443.0" AnchorPane.leftAnchor="194.0" AnchorPane.rightAnchor="25.0" />
-                        <JFXCheckBox fx:id="chkAccept" layoutX="57.0" layoutY="344.0" text="Acepta los términos y condiciones." />
-                        <JFXButton fx:id="btnTerm" layoutX="262.0" layoutY="341.0" text="Puede verlos pulsando aquí." />
-                        <Button fx:id="btnSave" layoutX="296.0" layoutY="371.0" mnemonicParsing="false" onAction="#saveUser" text="GUARDAR" />
-                        <Label fx:id="txtResult" layoutX="194.0" layoutY="14.0" prefHeight="17.0" prefWidth="443.0" />
-                     </children>
-                  </AnchorPane>
-              </content>
-            </Tab>
-         </tabs>
-      </JFXTabPane>
-   </children>
+<AnchorPane prefHeight="600.0" prefWidth="900.0"
+	xmlns="http://javafx.com/javafx/8.0.171"
+	xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="application.controller_administrator">
+	<children>
+		<VBox fx:id="drawer" prefHeight="800.0" prefWidth="199.0"
+			AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+			AnchorPane.topAnchor="0.0">
+			<children>
+				<Pane prefHeight="158.0" prefWidth="199.0">
+					<children>
+						<Label fx:id="lblUserName" layoutX="75.0" layoutY="71.0"
+							text="NOMBRE" />
+						<Label fx:id="lblUserSurname" layoutX="73.0" layoutY="88.0"
+							text="APELLIDO" />
+					</children>
+				</Pane>
+				<JFXButton fx:id="btnSales" prefHeight="40.0"
+					prefWidth="202.0" text="VENTAS" />
+				<JFXButton fx:id="btnSales1" prefHeight="40.0"
+					prefWidth="202.0" text="CONSULTA" />
+				<JFXButton fx:id="btnSales2" prefHeight="40.0"
+					prefWidth="202.0" text="AÑADIR PRENDAS" />
+				<JFXButton fx:id="btnSales3" prefHeight="40.0"
+					prefWidth="202.0" text="ESTADÍSTICAS" />
+				<JFXButton fx:id="btnSales4" prefHeight="40.0"
+					prefWidth="202.0" text="ADMINISTRADOR" />
+			</children>
+		</VBox>
+		<Label fx:id="textTitleAdministrator" layoutX="240.0"
+			layoutY="64.0" text="ADMINISTRADOR" />
+		<JFXTabPane layoutX="203.0" layoutY="123.0"
+			prefHeight="445.0" prefWidth="662.0" AnchorPane.bottomAnchor="32.0"
+			AnchorPane.leftAnchor="203.0" AnchorPane.rightAnchor="35.0"
+			AnchorPane.topAnchor="123.0">
+			<tabs>
+				<Tab fx:id="tabAddNewUser" text="Nuevo usuario">
+					<content>
+						<AnchorPane fx:id="tabAddUser" minHeight="0.0"
+							minWidth="0.0" prefHeight="180.0" prefWidth="576.0">
+							<children>
+								<Label fx:id="lblName" layoutX="36.0" layoutY="48.0"
+									text="NOMBRE" />
+								<Label fx:id="lblSurname" layoutX="36.0" layoutY="75.0"
+									text="APELLIDOS" />
+								<Label fx:id="lblDat" layoutX="36.0" layoutY="129.0"
+									text="FECHA DE NACIMIENTO" />
+								<Label fx:id="lblDni" layoutX="36.0" layoutY="102.0"
+									prefWidth="59.0" text="DNI" />
+								<Label fx:id="lblEmail" layoutX="36.0" layoutY="156.0"
+									prefWidth="59.0" text="EMAIL" />
+								<Label fx:id="lblUser" layoutX="36.0" layoutY="210.0"
+									prefWidth="59.0" text="USUARIO" />
+								<Label fx:id="lblPassword" layoutX="36.0" layoutY="237.0"
+									prefHeight="17.0" prefWidth="95.0" text="CONTRASEÑA" />
+								<Label fx:id="lblEmail2" layoutX="36.0" layoutY="183.0"
+									prefHeight="17.0" prefWidth="95.0" text="REPITA EL EMAIL" />
+								<Label fx:id="lblPassword2" layoutX="36.0" layoutY="264.0"
+									prefHeight="17.0" prefWidth="148.0"
+									text="REPILTA LA CONTRASEÑA" />
+								<Label fx:id="lblRole" layoutX="36.0" layoutY="301.0"
+									prefHeight="17.0" prefWidth="95.0" text="PUESTO" />
+								<TextField fx:id="fieldName" layoutX="195.0"
+									layoutY="44.0" prefHeight="25.0" prefWidth="443.0"
+									AnchorPane.leftAnchor="194.0" AnchorPane.rightAnchor="25.0" />
+								<TextField fx:id="fieldSurname" layoutX="195.0"
+									layoutY="71.0" prefHeight="25.0" prefWidth="443.0"
+									AnchorPane.leftAnchor="194.0" AnchorPane.rightAnchor="25.0" />
+								<TextField fx:id="fieldDNI" layoutX="195.0"
+									layoutY="98.0" prefHeight="25.0" prefWidth="443.0"
+									AnchorPane.leftAnchor="194.0" AnchorPane.rightAnchor="25.0" />
+								<DatePicker fx:id="fieldDat" layoutX="195.0"
+									layoutY="125.0" prefHeight="25.0" prefWidth="443.0"
+									AnchorPane.leftAnchor="194.0" AnchorPane.rightAnchor="25.0" />
+								<TextField fx:id="fieldEmail" layoutX="195.0"
+									layoutY="152.0" prefHeight="25.0" prefWidth="443.0"
+									AnchorPane.leftAnchor="194.0" AnchorPane.rightAnchor="24.0" />
+								<TextField fx:id="fieldEmail2" layoutX="195.0"
+									layoutY="179.0" prefHeight="25.0" prefWidth="443.0"
+									AnchorPane.leftAnchor="194.0" AnchorPane.rightAnchor="25.0" />
+								<TextField fx:id="fieldUser" layoutX="195.0"
+									layoutY="206.0" prefHeight="25.0" prefWidth="443.0"
+									AnchorPane.leftAnchor="194.0" AnchorPane.rightAnchor="25.0" />
+								<PasswordField fx:id="fieldPassword"
+									layoutX="195.0" layoutY="233.0" prefHeight="25.0"
+									prefWidth="443.0" AnchorPane.leftAnchor="194.0"
+									AnchorPane.rightAnchor="25.0" />
+								<PasswordField fx:id="fieldPassword2"
+									layoutX="195.0" layoutY="260.0" prefHeight="25.0"
+									prefWidth="443.0" AnchorPane.leftAnchor="194.0"
+									AnchorPane.rightAnchor="25.0" />
+								<ComboBox fx:id="fieldRole" layoutX="195.0"
+									layoutY="297.0" prefHeight="25.0" prefWidth="443.0"
+									AnchorPane.leftAnchor="194.0" AnchorPane.rightAnchor="25.0" />
+								<JFXCheckBox fx:id="chkAccept" layoutX="57.0"
+									layoutY="344.0" text="Acepta los términos y condiciones." />
+								<JFXButton fx:id="btnTerm" layoutX="262.0"
+									layoutY="341.0" text="Puede verlos pulsando aquí." />
+								<Button fx:id="btnSave" layoutX="296.0" layoutY="371.0"
+									mnemonicParsing="false" onAction="#saveUser" text="GUARDAR" />
+								<Label fx:id="txtResult" layoutX="194.0" layoutY="14.0"
+									prefHeight="17.0" prefWidth="443.0" />
+							</children>
+						</AnchorPane>
+					</content>
+				</Tab>
+			</tabs>
+		</JFXTabPane>
+	</children>
 </AnchorPane>
