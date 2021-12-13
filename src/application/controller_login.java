@@ -1,9 +1,6 @@
 
 package application;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-
 import com.jfoenix.controls.JFXButton;
 
 import javafx.event.ActionEvent;
@@ -17,31 +14,32 @@ import javafx.scene.layout.AnchorPane;
 
 public class controller_login {
 	
-    @FXML
+	@FXML
     private AnchorPane loginPage;
 
     @FXML
-    private Button loginButton;
+    private Button btnLogin;
 
     @FXML
-    private JFXButton forgetButton;
+    private JFXButton btnForget;
 
     @FXML
-    private TextField userField;
+    private TextField fieldUser;
 
     @FXML
-    private PasswordField passwordField;
+    private PasswordField fieldPassword;
 
     @FXML
     private Label txtHintPw;
 
     @FXML
-    private Label txtHintUser; 
+    private Label txtHintUser;
+
 
     @FXML
     void deletePw(MouseEvent event) {
     	txtHintPw.setText("");
-    	if (userField.getText().isEmpty()) {
+    	if (fieldUser.getText().isEmpty()) {
     		txtHintUser.setText("Usuario");
     	}
     }
@@ -49,7 +47,7 @@ public class controller_login {
     @FXML
     void deleteUser(MouseEvent event) {
     	txtHintUser.setText("");
-    	if(passwordField.getText().isEmpty()) {
+    	if(fieldPassword.getText().isEmpty()) {
     		txtHintPw.setText("Contraseña");
     	}
     }
@@ -66,15 +64,6 @@ public class controller_login {
 
     @FXML
     void initialize() {
-    	/*
-        assert loginPage != null : "fx:id=\"loginPage\" was not injected: check your FXML file 'login.fxml'.";
-        assert loginButton != null : "fx:id=\"loginButton\" was not injected: check your FXML file 'login.fxml'.";
-        assert forgetButton != null : "fx:id=\"forgetButton\" was not injected: check your FXML file 'login.fxml'.";
-        assert userField != null : "fx:id=\"userField\" was not injected: check your FXML file 'login.fxml'.";
-        assert passwordField != null : "fx:id=\"passwordField\" was not injected: check your FXML file 'login.fxml'.";
-        assert txtHintPw != null : "fx:id=\"txtHintPw\" was not injected: check your FXML file 'login.fxml'.";
-        assert txtHintUser != null : "fx:id=\"txtHintUser\" was not injected: check your FXML file 'login.fxml'.";
-		*/
     	
     }
 
