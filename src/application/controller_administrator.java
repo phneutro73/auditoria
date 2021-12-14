@@ -23,6 +23,8 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
+import db.AdminnistratorPageConnection;
+
 public class controller_administrator {
 
 	@FXML
@@ -198,6 +200,7 @@ public class controller_administrator {
 	private ComboBox<String> cmbSundayEnd;
 
 	// Delete user
+	
 	@FXML
 	private Tab tabDeleteUser;
 
@@ -366,7 +369,8 @@ public class controller_administrator {
 		}
 
 	}
-
+	
+	
 	@FXML
 	void initialize() {
 
@@ -374,15 +378,17 @@ public class controller_administrator {
 
 			// TODO: Sacar el nombre y apellido del usuario y asignarlo a las variables
 			// lblUserName y lblUserSurname
-
+			
+			AdminnistratorPageConnection adminDB = new AdminnistratorPageConnection();
+			
 			drawer.setBackground(
 					new Background(new BackgroundFill(Color.rgb(226, 242, 245), CornerRadii.EMPTY, Insets.EMPTY)));
 
 			btnAdministrator.setStyle("-fx-background-color: #CBE1E6");
 			btnSales.setDisableVisualFocus(true);
-
+			
 			fieldRole.getItems().removeAll(fieldRole.getItems());
-			fieldRole.getItems().addAll("-", "Puesto 1", "Puesto 2", "Puesto 3");
+			fieldRole.getItems().addAll(adminDB.listRoles());
 			fieldRole.getSelectionModel().select("-");
 
 			List<String> list = new ArrayList<String>();
