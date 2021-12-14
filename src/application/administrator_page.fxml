@@ -33,13 +33,13 @@
 				</Pane>
 				<JFXButton fx:id="btnSales" prefHeight="40.0"
 					prefWidth="202.0" text="VENTAS" />
-				<JFXButton fx:id="btnSales1" prefHeight="40.0"
+				<JFXButton fx:id="btnConsultation" prefHeight="40.0"
 					prefWidth="202.0" text="CONSULTA" />
-				<JFXButton fx:id="btnSales2" prefHeight="40.0"
+				<JFXButton fx:id="btnAddArticle" prefHeight="40.0"
 					prefWidth="202.0" text="AÑADIR PRENDAS" />
-				<JFXButton fx:id="btnSales3" prefHeight="40.0"
+				<JFXButton fx:id="btnStatistics" prefHeight="40.0"
 					prefWidth="202.0" text="ESTADÍSTICAS" />
-				<JFXButton fx:id="btnSales4" prefHeight="40.0"
+				<JFXButton fx:id="btnAdministrator" prefHeight="40.0"
 					prefWidth="202.0" text="ADMINISTRADOR" />
 			</children>
 		</VBox>
@@ -77,37 +77,36 @@
 								<Label fx:id="lblRole" layoutX="36.0" layoutY="301.0"
 									prefHeight="17.0" prefWidth="95.0" text="PUESTO" />
 								<TextField fx:id="fieldName" layoutX="195.0"
-									layoutY="44.0" prefHeight="25.0" prefWidth="443.0"
-									AnchorPane.leftAnchor="194.0" AnchorPane.rightAnchor="25.0" />
+									layoutY="44.0" prefHeight="25.0" prefWidth="170.0"
+									AnchorPane.leftAnchor="194.0" AnchorPane.rightAnchor="298.0" />
 								<TextField fx:id="fieldSurname" layoutX="195.0"
-									layoutY="71.0" prefHeight="25.0" prefWidth="443.0"
-									AnchorPane.leftAnchor="194.0" AnchorPane.rightAnchor="25.0" />
+									layoutY="71.0" prefHeight="25.0" prefWidth="170.0"
+									AnchorPane.leftAnchor="194.0" AnchorPane.rightAnchor="298.0" />
 								<TextField fx:id="fieldDNI" layoutX="195.0"
-									layoutY="98.0" prefHeight="25.0" prefWidth="443.0"
-									AnchorPane.leftAnchor="194.0" AnchorPane.rightAnchor="25.0" />
+									layoutY="98.0" prefHeight="25.0" prefWidth="170.0"
+									AnchorPane.leftAnchor="194.0" AnchorPane.rightAnchor="298.0" />
 								<DatePicker fx:id="fieldDat" layoutX="195.0"
-									layoutY="125.0" prefHeight="25.0" prefWidth="443.0"
-									AnchorPane.leftAnchor="194.0" AnchorPane.rightAnchor="25.0" />
+									layoutY="125.0" prefHeight="25.0" prefWidth="170.0"
+									AnchorPane.leftAnchor="194.0" AnchorPane.rightAnchor="298.0" />
 								<TextField fx:id="fieldEmail" layoutX="195.0"
-									layoutY="152.0" prefHeight="25.0" prefWidth="443.0"
-									AnchorPane.leftAnchor="194.0" AnchorPane.rightAnchor="24.0" />
+									layoutY="152.0" prefHeight="25.0" prefWidth="170.0"
+									AnchorPane.leftAnchor="194.0" AnchorPane.rightAnchor="298.0" />
 								<TextField fx:id="fieldEmail2" layoutX="195.0"
-									layoutY="179.0" prefHeight="25.0" prefWidth="443.0"
-									AnchorPane.leftAnchor="194.0" AnchorPane.rightAnchor="25.0" />
+									layoutY="179.0" prefHeight="25.0" prefWidth="170.0"
+									AnchorPane.leftAnchor="194.0" AnchorPane.rightAnchor="298.0" />
 								<TextField fx:id="fieldUser" layoutX="195.0"
-									layoutY="206.0" prefHeight="25.0" prefWidth="443.0"
-									AnchorPane.leftAnchor="194.0" AnchorPane.rightAnchor="25.0" />
+									layoutY="206.0" prefHeight="25.0" prefWidth="170.0"
+									AnchorPane.leftAnchor="194.0" AnchorPane.rightAnchor="298.0" />
 								<PasswordField fx:id="fieldPassword"
 									layoutX="195.0" layoutY="233.0" prefHeight="25.0"
-									prefWidth="443.0" AnchorPane.leftAnchor="194.0"
-									AnchorPane.rightAnchor="25.0" />
+									prefWidth="170.0" AnchorPane.leftAnchor="194.0"
+									AnchorPane.rightAnchor="298.0" />
 								<PasswordField fx:id="fieldPassword2"
 									layoutX="195.0" layoutY="260.0" prefHeight="25.0"
-									prefWidth="443.0" AnchorPane.leftAnchor="194.0"
-									AnchorPane.rightAnchor="25.0" />
+									prefWidth="170.0" AnchorPane.leftAnchor="194.0" />
 								<ComboBox fx:id="fieldRole" layoutX="195.0"
-									layoutY="297.0" prefHeight="25.0" prefWidth="443.0"
-									AnchorPane.leftAnchor="194.0" AnchorPane.rightAnchor="25.0" />
+									layoutY="297.0" prefHeight="25.0" prefWidth="170.0"
+									AnchorPane.leftAnchor="194.0" AnchorPane.rightAnchor="298.0" />
 								<JFXCheckBox fx:id="chkAccept" layoutX="57.0"
 									layoutY="344.0" text="Acepta los términos y condiciones." />
 								<JFXButton fx:id="btnTerm" layoutX="262.0"
@@ -116,6 +115,106 @@
 									mnemonicParsing="false" onAction="#saveUser" text="GUARDAR" />
 								<Label fx:id="txtResult" layoutX="194.0" layoutY="14.0"
 									prefHeight="17.0" prefWidth="443.0" />
+								<Label fx:id="lblMonday" layoutX="388.0" layoutY="48.0"
+									text="LUNES" AnchorPane.rightAnchor="238.0" />
+								<Label fx:id="lblTuesday" layoutX="388.0" layoutY="75.0"
+									text="MARTES" AnchorPane.rightAnchor="229.0" />
+								<Label fx:id="lblWednesday" layoutX="387.0"
+									layoutY="102.0" text="MIERCOLES" AnchorPane.rightAnchor="213.0" />
+								<Label fx:id="lblThursday" layoutX="387.0" layoutY="129.0"
+									text="JUEVES" AnchorPane.rightAnchor="236.0" />
+								<Label fx:id="lblFirday" layoutX="388.0" layoutY="156.0"
+									text="VIERNES" AnchorPane.rightAnchor="228.0" />
+								<ComboBox fx:id="cmbMondayInit" layoutX="464.0"
+									layoutY="44.0" prefHeight="25.0" prefWidth="75.0"
+									AnchorPane.rightAnchor="123.0" />
+								<ComboBox fx:id="cmbMondayEnd" layoutX="552.0"
+									layoutY="44.0" prefHeight="25.0" prefWidth="75.0"
+									AnchorPane.rightAnchor="35.0" />
+								<ComboBox fx:id="cmbTuesdayInit" layoutX="464.0"
+									layoutY="71.0" prefHeight="25.0" prefWidth="75.0"
+									AnchorPane.rightAnchor="123.0" />
+								<ComboBox fx:id="cmbTuesdayEnd" layoutX="552.0"
+									layoutY="71.0" prefHeight="25.0" prefWidth="75.0"
+									AnchorPane.rightAnchor="35.0" />
+								<ComboBox fx:id="cmbWednesdayInit" layoutX="464.0"
+									layoutY="98.0" prefHeight="25.0" prefWidth="75.0"
+									AnchorPane.rightAnchor="123.0" />
+								<ComboBox fx:id="cmbWednesdayEnd" layoutX="552.0"
+									layoutY="98.0" prefHeight="25.0" prefWidth="75.0"
+									AnchorPane.rightAnchor="35.0" />
+								<ComboBox fx:id="cmbThursdayInit" layoutX="464.0"
+									layoutY="125.0" prefHeight="25.0" prefWidth="75.0"
+									AnchorPane.rightAnchor="123.0" />
+								<ComboBox fx:id="cmbThursdayEnd" layoutX="552.0"
+									layoutY="125.0" prefHeight="25.0" prefWidth="75.0"
+									AnchorPane.rightAnchor="35.0" />
+								<ComboBox fx:id="cmbFridayInit" layoutX="464.0"
+									layoutY="152.0" prefHeight="25.0" prefWidth="75.0"
+									AnchorPane.rightAnchor="123.0" />
+								<ComboBox fx:id="cmbFridayEnd" layoutX="552.0"
+									layoutY="152.0" prefHeight="25.0" prefWidth="75.0"
+									AnchorPane.rightAnchor="35.0" />
+								<Label fx:id="lblSaturday" layoutX="388.0" layoutY="183.0"
+									text="SÁBADO" AnchorPane.rightAnchor="227.0" />
+								<Label fx:id="lblSunday" layoutX="389.0" layoutY="210.0"
+									text="DOMINGO" AnchorPane.rightAnchor="215.0" />
+								<ComboBox fx:id="cmbSaturdayInit" layoutX="464.0"
+									layoutY="179.0" prefHeight="25.0" prefWidth="75.0"
+									AnchorPane.rightAnchor="123.0" />
+								<ComboBox fx:id="cmbSaturdayEnd" layoutX="552.0"
+									layoutY="179.0" prefHeight="25.0" prefWidth="75.0"
+									AnchorPane.rightAnchor="35.0" />
+								<ComboBox fx:id="cmbSundayInit" layoutX="464.0"
+									layoutY="206.0" prefHeight="25.0" prefWidth="75.0"
+									AnchorPane.rightAnchor="123.0" />
+								<ComboBox fx:id="cmbSundayEnd" layoutX="552.0"
+									layoutY="206.0" prefHeight="25.0" prefWidth="75.0"
+									AnchorPane.rightAnchor="35.0" />
+								<Label layoutX="543.0" layoutY="48.0" text="-"
+									AnchorPane.rightAnchor="114.0" />
+								<Label layoutX="543.0" layoutY="75.0" text="-"
+									AnchorPane.rightAnchor="114.0" />
+								<Label layoutX="543.0" layoutY="102.0" text="-"
+									AnchorPane.rightAnchor="114.0" />
+								<Label layoutX="543.0" layoutY="129.0" text="-"
+									AnchorPane.rightAnchor="114.0" />
+								<Label layoutX="543.0" layoutY="156.0" text="-"
+									AnchorPane.rightAnchor="114.0" />
+								<Label layoutX="543.0" layoutY="183.0" text="-"
+									AnchorPane.rightAnchor="114.0" />
+								<Label layoutX="543.0" layoutY="210.0" text="-"
+									AnchorPane.rightAnchor="114.0" />
+							</children>
+						</AnchorPane>
+					</content>
+				</Tab>
+				<Tab fx:id="tabDeleteUser" text="Eliminar usuario">
+					<content>
+						<AnchorPane minHeight="0.0" minWidth="0.0"
+							prefHeight="180.0" prefWidth="200.0">
+							<children>
+								<Label fx:id="lblUserDelete" layoutX="40.0" layoutY="40.0"
+									text="USUARIO" />
+								<ComboBox fx:id="cmbUserDelete" layoutX="119.0"
+									layoutY="36.0" prefHeight="25.0" prefWidth="465.0" />
+								<Button fx:id="btnDeleteUser" layoutX="248.0"
+									layoutY="208.0" mnemonicParsing="false" onAction="#deleteUser"
+									text="ELIMINAR USUARIO" />
+								<Label fx:id="txtWarningDelete1" layoutX="40.0"
+									layoutY="74.0" prefHeight="28.0" prefWidth="566.0"
+									text="Esta acción no es reversible. Al eliminar este usuario se perderán todos los datos. Revise los datos."
+									wrapText="true" />
+								<Label fx:id="lblDniDelete" layoutX="40.0" layoutY="154.0"
+									text="DNI" />
+								<TextField fx:id="fieldDniDelete" layoutX="119.0"
+									layoutY="150.0" prefHeight="25.0" prefWidth="190.0" />
+								<Label fx:id="txtWarningDelete2" layoutX="40.0"
+									layoutY="102.0" prefHeight="25.0" prefWidth="566.0"
+									text="Para asegurar que no hay errores, debe introducir el DNI de la persona que desea eliminar."
+									wrapText="true" />
+								<Label fx:id="txtResultDelete" layoutX="248.0"
+									layoutY="244.0" prefHeight="17.0" prefWidth="388.0" />
 							</children>
 						</AnchorPane>
 					</content>

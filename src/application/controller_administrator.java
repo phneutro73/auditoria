@@ -1,9 +1,7 @@
 package application;
 
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
@@ -28,6 +26,11 @@ import javafx.scene.paint.Color;
 public class controller_administrator {
 
 	@FXML
+	private Label textTitleAdministrator;
+
+	// Drawer
+
+	@FXML
 	private VBox drawer;
 
 	@FXML
@@ -40,19 +43,18 @@ public class controller_administrator {
 	private JFXButton btnSales;
 
 	@FXML
-	private JFXButton btnSales1;
+	private JFXButton btnConsultation;
 
 	@FXML
-	private JFXButton btnSales2;
+	private JFXButton btnAddArticle;
 
 	@FXML
-	private JFXButton btnSales3;
+	private JFXButton btnStatistics;
 
 	@FXML
-	private JFXButton btnSales4;
+	private JFXButton btnAdministrator;
 
-	@FXML
-	private Label textTitleAdministrator;
+	// Add user
 
 	@FXML
 	private Tab tabAddNewUser;
@@ -131,6 +133,97 @@ public class controller_administrator {
 
 	@FXML
 	private Label txtResult;
+
+	@FXML
+	private Label lblMonday;
+
+	@FXML
+	private Label lblTuesday;
+
+	@FXML
+	private Label lblWednesday;
+
+	@FXML
+	private Label lblThursday;
+
+	@FXML
+	private Label lblFirday;
+
+	@FXML
+	private Label lblSaturday;
+
+	@FXML
+	private Label lblSunday;
+
+	@FXML
+	private ComboBox<String> cmbMondayInit;
+
+	@FXML
+	private ComboBox<String> cmbMondayEnd;
+
+	@FXML
+	private ComboBox<String> cmbTuesdayInit;
+
+	@FXML
+	private ComboBox<String> cmbTuesdayEnd;
+
+	@FXML
+	private ComboBox<String> cmbWednesdayInit;
+
+	@FXML
+	private ComboBox<String> cmbWednesdayEnd;
+
+	@FXML
+	private ComboBox<String> cmbThursdayInit;
+
+	@FXML
+	private ComboBox<String> cmbThursdayEnd;
+
+	@FXML
+	private ComboBox<String> cmbFridayInit;
+
+	@FXML
+	private ComboBox<String> cmbFridayEnd;
+
+	@FXML
+	private ComboBox<String> cmbSaturdayInit;
+
+	@FXML
+	private ComboBox<String> cmbSaturdayEnd;
+
+	@FXML
+	private ComboBox<String> cmbSundayInit;
+
+	@FXML
+	private ComboBox<String> cmbSundayEnd;
+
+	// Delete user
+	@FXML
+	private Tab tabDeleteUser;
+
+	@FXML
+	private Label lblUserDelete;
+
+	@FXML
+	private ComboBox<String> cmbUserDelete;
+
+	@FXML
+	private Button btnDeleteUser;
+
+	@FXML
+	private Label txtWarningDelete1;
+
+	@FXML
+	private Label lblDniDelete;
+
+	@FXML
+	private TextField fieldDniDelete;
+
+	@FXML
+	private Label txtWarningDelete2;
+
+	@FXML
+	private Label txtResultDelete;
 
 	@FXML
 	void saveUser(ActionEvent event) {
@@ -222,16 +315,158 @@ public class controller_administrator {
 	}
 
 	@FXML
+	void deleteUser(ActionEvent event) {
+
+		try {
+
+			boolean notEmptyFields = checkAllFieldsDelete();
+
+			if (notEmptyFields) {
+				// TODO: Comprobar que el dni pertenezca al usuario
+				boolean isDniUser = true;
+
+				if (isDniUser) {
+					// TODO: Eliminar usuario de la bbdd
+					txtResultDelete.setText("Eliminado correctamente.");
+					txtResultDelete.setTextFill(Color.GREEN);
+				} else {
+					txtResultDelete.setText("Los datos introducidos no concuerdan. Revise los campos.");
+					txtResultDelete.setTextFill(Color.RED);
+				}
+
+			} else {
+				txtResultDelete.setText("Todos los campos son obligatorios.");
+				txtResultDelete.setTextFill(Color.RED);
+			}
+
+		} catch (Exception e) {
+			System.out.println("ERROR: controller_administrator.java - checkSecondField() - " + e.toString());
+			txtResultDelete.setText("Se ha producido un error");
+			txtResultDelete.setTextFill(Color.RED);
+		}
+
+	}
+
+	boolean checkAllFieldsDelete() {
+
+		try {
+
+			if ((!cmbUserDelete.getValue().toString().isEmpty() && cmbUserDelete.getValue() != null
+					&& cmbUserDelete.getValue() != "" && cmbUserDelete.getValue() != "-")
+					&& (!fieldDniDelete.getText().isEmpty() && fieldDniDelete.getText() != null
+							&& fieldDniDelete.getText() != "")) {
+				return true;
+			} else {
+				return false;
+			}
+
+		} catch (Exception e) {
+			System.out.println("ERROR: controller_administrator.java - checkAllFieldsDelete() - " + e.toString());
+			return false;
+		}
+
+	}
+
+	@FXML
 	void initialize() {
 
 		try {
+
+			// TODO: Sacar el nombre y apellido del usuario y asignarlo a las variables
+			// lblUserName y lblUserSurname
+
+			drawer.setBackground(
+					new Background(new BackgroundFill(Color.rgb(226, 242, 245), CornerRadii.EMPTY, Insets.EMPTY)));
+
+			btnAdministrator.setStyle("-fx-background-color: #CBE1E6");
+			btnSales.setDisableVisualFocus(true);
 
 			fieldRole.getItems().removeAll(fieldRole.getItems());
 			fieldRole.getItems().addAll("-", "Puesto 1", "Puesto 2", "Puesto 3");
 			fieldRole.getSelectionModel().select("-");
 
-			drawer.setBackground(
-					new Background(new BackgroundFill(Color.rgb(225, 221, 229), CornerRadii.EMPTY, Insets.EMPTY)));
+			List<String> list = new ArrayList<String>();
+			list.add("-");
+
+			for (int i = 0; i <= 24; i++) {
+				String hour = Integer.toString(i);
+				if (hour.length() < 2) {
+					hour = "0" + hour;
+				}
+				for (int j = 0; j <= 46; j = j + 15) {
+					String minute = Integer.toString(j);
+					if (minute.length() < 2) {
+						minute = "0" + minute;
+					}
+					list.add(hour + ":" + minute);
+				}
+			}
+
+			cmbMondayInit.getItems().removeAll(cmbMondayInit.getItems());
+			cmbMondayInit.getItems().addAll(list);
+			cmbMondayInit.getSelectionModel().select("-");
+
+			cmbMondayEnd.getItems().removeAll(cmbMondayEnd.getItems());
+			cmbMondayEnd.getItems().addAll(list);
+			cmbMondayEnd.getSelectionModel().select("-");
+
+			cmbTuesdayInit.getItems().removeAll(cmbTuesdayInit.getItems());
+			cmbTuesdayInit.getItems().addAll(list);
+			cmbTuesdayInit.getSelectionModel().select("-");
+
+			cmbTuesdayEnd.getItems().removeAll(cmbTuesdayEnd.getItems());
+			cmbTuesdayEnd.getItems().addAll(list);
+			cmbTuesdayEnd.getSelectionModel().select("-");
+
+			cmbWednesdayInit.getItems().removeAll(cmbWednesdayInit.getItems());
+			cmbWednesdayInit.getItems().addAll(list);
+			cmbWednesdayInit.getSelectionModel().select("-");
+
+			cmbWednesdayEnd.getItems().removeAll(cmbWednesdayEnd.getItems());
+			cmbWednesdayEnd.getItems().addAll(list);
+			cmbWednesdayEnd.getSelectionModel().select("-");
+
+			cmbThursdayInit.getItems().removeAll(cmbThursdayInit.getItems());
+			cmbThursdayInit.getItems().addAll(list);
+			cmbThursdayInit.getSelectionModel().select("-");
+
+			cmbThursdayEnd.getItems().removeAll(cmbThursdayEnd.getItems());
+			cmbThursdayEnd.getItems().addAll(list);
+			cmbThursdayEnd.getSelectionModel().select("-");
+
+			cmbFridayInit.getItems().removeAll(cmbFridayInit.getItems());
+			cmbFridayInit.getItems().addAll(list);
+			cmbFridayInit.getSelectionModel().select("-");
+
+			cmbFridayEnd.getItems().removeAll(cmbFridayEnd.getItems());
+			cmbFridayEnd.getItems().addAll(list);
+			cmbFridayEnd.getSelectionModel().select("-");
+
+			cmbSaturdayInit.getItems().removeAll(cmbSaturdayInit.getItems());
+			cmbSaturdayInit.getItems().addAll(list);
+			cmbSaturdayInit.getSelectionModel().select("-");
+
+			cmbSaturdayEnd.getItems().removeAll(cmbSaturdayEnd.getItems());
+			cmbSaturdayEnd.getItems().addAll(list);
+			cmbSaturdayEnd.getSelectionModel().select("-");
+
+			cmbSundayInit.getItems().removeAll(cmbSundayInit.getItems());
+			cmbSundayInit.getItems().addAll(list);
+			cmbSundayInit.getSelectionModel().select("-");
+
+			cmbSundayEnd.getItems().removeAll(cmbSundayEnd.getItems());
+			cmbSundayEnd.getItems().addAll(list);
+			cmbSundayEnd.getSelectionModel().select("-");
+
+			List<String> listUsers = new ArrayList<String>();
+			listUsers.add("-");
+
+			// TODO: Sacar en una select los usuarios que hay en la bbdd y que los guarde en
+			// la lista
+
+			cmbUserDelete.getItems().removeAll(cmbUserDelete.getItems());
+			cmbUserDelete.getItems().addAll(listUsers);
+			cmbUserDelete.getSelectionModel().select("-");
 
 		} catch (Exception e) {
 			System.out.println("ERROR: controller_administrator.java - initialize() - " + e.toString());
