@@ -7,16 +7,29 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane xmlns="http://javafx.com/javafx/8.0.171"
+	xmlns:fx="http://javafx.com/fxml/1">
 	<children>
-		<AnchorPane fx:id="loginPage" prefHeight="300.0" prefWidth="270.0">
+		<AnchorPane fx:id="loginPage" prefHeight="300.0"
+			prefWidth="270.0">
 			<children>
-				<Button fx:id="btnLogin" layoutX="109.0" layoutY="261.0" mnemonicParsing="false" onAction="#loginFunction" prefHeight="35.0" prefWidth="270.0" text="Button" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-				<JFXButton fx:id="btnForget" layoutX="50.0" layoutY="223.0" onAction="#forgetFunction" text="He olvidado mis credenciales" />
-				<TextField fx:id="fieldUser" layoutX="25.0" layoutY="134.0" onMouseClicked="#deleteUser" prefHeight="32.0" prefWidth="220.0" />
-				<PasswordField fx:id="fieldPassword" layoutX="25.0" layoutY="174.0" onMouseClicked="#deletePw" prefHeight="32.0" prefWidth="220.0" />
-				<Label fx:id="txtHintPw" layoutX="33.0" layoutY="181.0" text="Contraseña" />
-				<Label fx:id="txtHintUser" layoutX="33.0" layoutY="142.0" text="Usuario" />
+				<Button fx:id="btnLogin" layoutX="109.0" layoutY="261.0"
+					mnemonicParsing="false" onAction="#loginFunction" prefHeight="35.0"
+					prefWidth="270.0" text="Button" AnchorPane.bottomAnchor="0.0"
+					AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+				<JFXButton fx:id="btnForget" layoutX="50.0"
+					layoutY="223.0" onAction="#forgetFunction"
+					text="He olvidado mis credenciales" />
+				<TextField fx:id="fieldUser" layoutX="25.0"
+					layoutY="134.0" onMouseClicked="#deleteUser" prefHeight="32.0"
+					prefWidth="220.0" />
+				<PasswordField fx:id="fieldPassword" layoutX="25.0"
+					layoutY="174.0" onMouseClicked="#deletePw" prefHeight="32.0"
+					prefWidth="220.0" />
+				<Label fx:id="txtHintPw" layoutX="33.0" layoutY="181.0"
+					text="Contraseña" />
+				<Label fx:id="txtHintUser" layoutX="33.0" layoutY="142.0"
+					text="Usuario" />
 			</children>
 		</AnchorPane>
 	</children>
