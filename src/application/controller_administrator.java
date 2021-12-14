@@ -26,11 +26,6 @@ import javafx.scene.paint.Color;
 public class controller_administrator {
 
 	@FXML
-	private Label textTitleAdministrator;
-
-	// Drawer
-
-	@FXML
 	private VBox drawer;
 
 	@FXML
@@ -54,7 +49,8 @@ public class controller_administrator {
 	@FXML
 	private JFXButton btnAdministrator;
 
-	// Add user
+	@FXML
+	private Label textTitleAdministrator;
 
 	@FXML
 	private Tab tabAddNewUser;
@@ -93,28 +89,28 @@ public class controller_administrator {
 	private Label lblRole;
 
 	@FXML
-	private TextField fieldEmail2;
-
-	@FXML
-	private TextField fieldUser;
-
-	@FXML
-	private TextField fieldEmail;
-
-	@FXML
-	private DatePicker fieldDat;
-
-	@FXML
-	private TextField fieldDNI;
-
-	@FXML
-	private TextField fieldSurname;
+	private Label lblMonday;
 
 	@FXML
 	private TextField fieldName;
 
 	@FXML
-	private ComboBox<String> fieldRole;
+	private TextField fieldSurname;
+
+	@FXML
+	private TextField fieldDNI;
+
+	@FXML
+	private DatePicker fieldDat;
+
+	@FXML
+	private TextField fieldEmail;
+
+	@FXML
+	private TextField fieldEmail2;
+
+	@FXML
+	private TextField fieldUser;
 
 	@FXML
 	private PasswordField fieldPassword;
@@ -123,19 +119,13 @@ public class controller_administrator {
 	private PasswordField fieldPassword2;
 
 	@FXML
-	private JFXCheckBox chkAccept;
+	private ComboBox<String> fieldRole;
 
 	@FXML
-	private JFXButton btnTerm;
+	private ComboBox<String> cmbMonday;
 
 	@FXML
 	private Button btnSave;
-
-	@FXML
-	private Label txtResult;
-
-	@FXML
-	private Label lblMonday;
 
 	@FXML
 	private Label lblTuesday;
@@ -147,57 +137,35 @@ public class controller_administrator {
 	private Label lblThursday;
 
 	@FXML
-	private Label lblFirday;
-
-	@FXML
-	private Label lblSaturday;
+	private Label lblFriday;
 
 	@FXML
 	private Label lblSunday;
 
 	@FXML
-	private ComboBox<String> cmbMondayInit;
+	private Label lblSaturday;
 
 	@FXML
-	private ComboBox<String> cmbMondayEnd;
+	private ComboBox<String> cmbTuesday;
 
 	@FXML
-	private ComboBox<String> cmbTuesdayInit;
+	private ComboBox<String> cmbWednesday;
 
 	@FXML
-	private ComboBox<String> cmbTuesdayEnd;
+	private ComboBox<String> cmbThursday;
 
 	@FXML
-	private ComboBox<String> cmbWednesdayInit;
+	private ComboBox<String> cmbFriday;
 
 	@FXML
-	private ComboBox<String> cmbWednesdayEnd;
+	private ComboBox<String> cmbSaturday;
 
 	@FXML
-	private ComboBox<String> cmbThursdayInit;
+	private ComboBox<String> cmbSunday;
 
 	@FXML
-	private ComboBox<String> cmbThursdayEnd;
+	private Label txtResult;
 
-	@FXML
-	private ComboBox<String> cmbFridayInit;
-
-	@FXML
-	private ComboBox<String> cmbFridayEnd;
-
-	@FXML
-	private ComboBox<String> cmbSaturdayInit;
-
-	@FXML
-	private ComboBox<String> cmbSaturdayEnd;
-
-	@FXML
-	private ComboBox<String> cmbSundayInit;
-
-	@FXML
-	private ComboBox<String> cmbSundayEnd;
-
-	// Delete user
 	@FXML
 	private Tab tabDeleteUser;
 
@@ -234,9 +202,8 @@ public class controller_administrator {
 			if (notEmptyFields) {
 				boolean checkEmail = checkSecondField("email");
 				boolean checkPassword = checkSecondField("password");
-				boolean isAccepted = chkAccept.isSelected();
 
-				if (checkEmail && checkPassword && isAccepted) {
+				if (checkEmail && checkPassword) {
 					// TODO: guardar en bbdd
 					txtResult.setText("Guardado correctamente.");
 					txtResult.setTextFill(Color.GREEN);
@@ -272,8 +239,8 @@ public class controller_administrator {
 							&& fieldPassword.getText() != "")
 					&& (!fieldPassword2.getText().isEmpty() && fieldPassword2.getText() != null
 							&& fieldPassword2.getText() != "")
-					&& (!fieldRole.getValue().isEmpty() && fieldRole.getValue() != null && fieldRole.getValue() != ""
-							&& fieldRole.getValue() != "-")) {
+					&& (!fieldRole.getValue().toString().isEmpty() && fieldRole.getValue() != null
+							&& fieldRole.getValue() != "" && fieldRole.getValue() != "-")) {
 				return true;
 			} else {
 				return false;
@@ -378,7 +345,7 @@ public class controller_administrator {
 			drawer.setBackground(
 					new Background(new BackgroundFill(Color.rgb(226, 242, 245), CornerRadii.EMPTY, Insets.EMPTY)));
 
-			btnAdministrator.setStyle("-fx-background-color: #CBE1E6");
+			btnAdministrator.setStyle("-fx-background-color: #CBE1E6; -fx-alignment: center-left;");
 			btnSales.setDisableVisualFocus(true);
 
 			fieldRole.getItems().removeAll(fieldRole.getItems());
@@ -401,62 +368,6 @@ public class controller_administrator {
 					list.add(hour + ":" + minute);
 				}
 			}
-
-			cmbMondayInit.getItems().removeAll(cmbMondayInit.getItems());
-			cmbMondayInit.getItems().addAll(list);
-			cmbMondayInit.getSelectionModel().select("-");
-
-			cmbMondayEnd.getItems().removeAll(cmbMondayEnd.getItems());
-			cmbMondayEnd.getItems().addAll(list);
-			cmbMondayEnd.getSelectionModel().select("-");
-
-			cmbTuesdayInit.getItems().removeAll(cmbTuesdayInit.getItems());
-			cmbTuesdayInit.getItems().addAll(list);
-			cmbTuesdayInit.getSelectionModel().select("-");
-
-			cmbTuesdayEnd.getItems().removeAll(cmbTuesdayEnd.getItems());
-			cmbTuesdayEnd.getItems().addAll(list);
-			cmbTuesdayEnd.getSelectionModel().select("-");
-
-			cmbWednesdayInit.getItems().removeAll(cmbWednesdayInit.getItems());
-			cmbWednesdayInit.getItems().addAll(list);
-			cmbWednesdayInit.getSelectionModel().select("-");
-
-			cmbWednesdayEnd.getItems().removeAll(cmbWednesdayEnd.getItems());
-			cmbWednesdayEnd.getItems().addAll(list);
-			cmbWednesdayEnd.getSelectionModel().select("-");
-
-			cmbThursdayInit.getItems().removeAll(cmbThursdayInit.getItems());
-			cmbThursdayInit.getItems().addAll(list);
-			cmbThursdayInit.getSelectionModel().select("-");
-
-			cmbThursdayEnd.getItems().removeAll(cmbThursdayEnd.getItems());
-			cmbThursdayEnd.getItems().addAll(list);
-			cmbThursdayEnd.getSelectionModel().select("-");
-
-			cmbFridayInit.getItems().removeAll(cmbFridayInit.getItems());
-			cmbFridayInit.getItems().addAll(list);
-			cmbFridayInit.getSelectionModel().select("-");
-
-			cmbFridayEnd.getItems().removeAll(cmbFridayEnd.getItems());
-			cmbFridayEnd.getItems().addAll(list);
-			cmbFridayEnd.getSelectionModel().select("-");
-
-			cmbSaturdayInit.getItems().removeAll(cmbSaturdayInit.getItems());
-			cmbSaturdayInit.getItems().addAll(list);
-			cmbSaturdayInit.getSelectionModel().select("-");
-
-			cmbSaturdayEnd.getItems().removeAll(cmbSaturdayEnd.getItems());
-			cmbSaturdayEnd.getItems().addAll(list);
-			cmbSaturdayEnd.getSelectionModel().select("-");
-
-			cmbSundayInit.getItems().removeAll(cmbSundayInit.getItems());
-			cmbSundayInit.getItems().addAll(list);
-			cmbSundayInit.getSelectionModel().select("-");
-
-			cmbSundayEnd.getItems().removeAll(cmbSundayEnd.getItems());
-			cmbSundayEnd.getItems().addAll(list);
-			cmbSundayEnd.getSelectionModel().select("-");
 
 			List<String> listUsers = new ArrayList<String>();
 			listUsers.add("-");
