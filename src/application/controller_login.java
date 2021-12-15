@@ -3,6 +3,7 @@ package application;
 
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
+import java.io.File;
 
 import com.jfoenix.controls.JFXButton;
 
@@ -15,32 +16,37 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class controller_login {
 
-	@FXML
-	private AnchorPane loginPage;
+	  @FXML
+    private AnchorPane loginPage;
 
-	@FXML
-	private Button btnLogin;
+    @FXML
+    private Button btnLogin;
 
-	@FXML
-	private JFXButton btnForget;
+    @FXML
+    private JFXButton btnForget;
 
-	@FXML
-	private TextField fieldUser;
+    @FXML
+    private TextField fieldUser;
 
-	@FXML
-	private PasswordField fieldPassword;
+    @FXML
+    private PasswordField fieldPassword;
 
-	@FXML
-	private Label txtHintPw;
+    @FXML
+    private Label txtHintPw;
 
-	@FXML
-	private Label txtHintUser;
+    @FXML
+    private Label txtHintUser;
+
+    @FXML
+    private ImageView imgLogo;
 
 	@FXML
 	void deletePw(MouseEvent event) {
@@ -88,6 +94,15 @@ public class controller_login {
 	@FXML
 	void initialize() {
 
+		try {
+			
+			loginPage.setStyle("-fx-background-color: #E2F2F5"); 
+			
+			
+			
+		} catch (Exception e) {
+			System.out.println("ERROR: controllerLogin.java - initialize() - " + e.toString());
+		}
 	}
 
 }
