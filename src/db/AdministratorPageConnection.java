@@ -124,8 +124,8 @@ public class AdministratorPageConnection {
 					+ "		@Sun_SCHEDULE = " + sun + "");
 			
 			PreparedStatement statement = conn.prepareStatement(query);
-			statement.setBytes(1, hash);
-			statement.setBytes(2, salt);
+			statement.setBytes(1, salt);
+			statement.setBytes(2, hash);
 			statement.executeUpdate();
 			succes = true;
 		}
