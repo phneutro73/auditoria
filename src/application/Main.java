@@ -15,6 +15,7 @@ public class Main extends Application {
 			loader.setController(control);
 			Parent root = loader.load();
 			primaryStage.setScene(new Scene(root));
+			primaryStage.setTitle("LOGIN");
 			primaryStage.sizeToScene();
 			primaryStage.show();
 		} catch (Exception e) {
