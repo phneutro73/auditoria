@@ -1,11 +1,22 @@
 package application;
 
+import java.nio.charset.StandardCharsets;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.security.spec.InvalidKeySpecException;
+import java.security.spec.KeySpec;
 import java.util.ArrayList;
+import java.util.Base64;
+import java.util.Base64.Encoder;
+import java.util.Hashtable;
 import java.util.List;
 
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXCheckBox;
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.PBEKeySpec;
 
+import org.w3c.dom.ls.LSOutput;
+
+import com.jfoenix.controls.JFXButton;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
@@ -23,7 +34,7 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
-import db.AdminnistratorPageConnection;
+import db.AdministratorPageConnection;
 
 public class controller_administrator {
 
@@ -198,16 +209,21 @@ public class controller_administrator {
 
 	@FXML
 	void saveUser(ActionEvent event) {
-
 		try {
-
+			
 			boolean notEmptyFields = checkAllFields();
 			if (notEmptyFields) {
 				boolean checkEmail = checkSecondField("email");
 				boolean checkPassword = checkSecondField("password");
 
 				if (checkEmail && checkPassword) {
-					// TODO: guardar en bbdd
+					
+					AdministratorPageConnection adminDB = new AdministratorPageConnection();
+					byte[][] pass = encryptPassword(fieldPassword.getText());
+					String[] schedule = new String[] {cmbMonday.getValue(),cmbTuesday.getValue(),cmbWednesday.getValue(),cmbThursday.getValue(),cmbFriday.getValue(),cmbSaturday.getValue(),cmbSunday.getValue()};
+					int[] numScedule = parseSchedule(schedule,adminDB);
+					adminDB.addUser(fieldName.getText(), fieldSurname.getText(), fieldDat.getValue().toString(), fieldUser.getText(), fieldDNI.getText(), fieldEmail.getText(),pass[0] , pass[1], numScedule[0], numScedule[1], numScedule[2], numScedule[3], numScedule[4], numScedule[5], numScedule[6]);
+					
 					txtResult.setText("Guardado correctamente.");
 					txtResult.setTextFill(Color.GREEN);
 				} else {
@@ -223,7 +239,29 @@ public class controller_administrator {
 			System.out.println(e.toString());
 		}
 	}
-
+	
+	byte[][] encryptPassword(String password) throws NoSuchAlgorithmException, InvalidKeySpecException {
+		byte[][] pass = new byte[2][];
+		SecureRandom random = new SecureRandom();
+		byte[] salt = new byte[16];
+		random.nextBytes(salt);
+		KeySpec spec = new PBEKeySpec(password.toCharArray(), salt, 65536, 128);
+		SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
+		byte[] hash = factory.generateSecret(spec).getEncoded();
+		
+		pass[0] = salt; 
+		pass[1] = hash; 
+		return pass;
+	}
+	
+	int[] parseSchedule(String[] schedule,AdministratorPageConnection adminDB) {
+		int[] numeric_schedule = new int[7];
+		Hashtable<String,Integer> scheduleMap = adminDB.scheduleMap();
+		for (int i = 0; i < schedule.length; i++) {
+			 numeric_schedule[i] = scheduleMap.get(schedule[i]);
+			}
+		return numeric_schedule;
+	}
 	boolean checkAllFields() {
 
 		try {
@@ -346,7 +384,7 @@ public class controller_administrator {
 			// TODO: Sacar el nombre y apellido del usuario y asignarlo a las variables
 			// lblUserName y lblUserSurname
 			
-			AdminnistratorPageConnection adminDB = new AdminnistratorPageConnection();
+			AdministratorPageConnection adminDB = new AdministratorPageConnection();
 			
 			drawer.setBackground(
 					new Background(new BackgroundFill(Color.rgb(226, 242, 245), CornerRadii.EMPTY, Insets.EMPTY)));
@@ -354,10 +392,40 @@ public class controller_administrator {
 			btnAdministrator.setStyle("-fx-background-color: #CBE1E6; -fx-alignment: center-left;");
 			btnSales.setDisableVisualFocus(true);
 			
+			List<String> schedules = adminDB.listSchedules();
 			fieldRole.getItems().removeAll(fieldRole.getItems());
 			fieldRole.getItems().addAll(adminDB.listRoles());
 			fieldRole.getSelectionModel().select("-");
-
+			
+			cmbMonday.getItems().removeAll(fieldRole.getItems());
+			cmbMonday.getItems().addAll(schedules);
+			cmbMonday.getSelectionModel().select("-");
+			
+			cmbTuesday.getItems().removeAll(fieldRole.getItems());
+			cmbTuesday.getItems().addAll(schedules);
+			cmbTuesday.getSelectionModel().select("-");
+			
+			cmbWednesday.getItems().removeAll(fieldRole.getItems());
+			cmbWednesday.getItems().addAll(schedules);
+			cmbWednesday.getSelectionModel().select("-");
+			
+			cmbThursday.getItems().removeAll(fieldRole.getItems());
+			cmbThursday.getItems().addAll(schedules);
+			cmbThursday.getSelectionModel().select("-");
+			
+			cmbFriday.getItems().removeAll(fieldRole.getItems());
+			cmbFriday.getItems().addAll(schedules);
+			cmbFriday.getSelectionModel().select("-");
+			
+			cmbSaturday.getItems().removeAll(fieldRole.getItems());
+			cmbSaturday.getItems().addAll(schedules);
+			cmbSaturday.getSelectionModel().select("-");
+			
+			cmbSunday.getItems().removeAll(fieldRole.getItems());
+			cmbSunday.getItems().addAll(schedules);
+			cmbSunday.getSelectionModel().select("-");
+			
+			
 			List<String> list = new ArrayList<String>();
 			list.add("-");
 
