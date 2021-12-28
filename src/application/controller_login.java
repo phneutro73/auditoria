@@ -101,7 +101,6 @@ public class controller_login {
 
 				Stage stage = new Stage();
 				stage.setScene(new Scene(root));
-				stage.setMaximized(true);
 				stage.setTitle("Aplicación de escritorio");
 				stage.show();
 				((Node)(event.getSource())).getScene().getWindow().hide();
