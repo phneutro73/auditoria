@@ -45,7 +45,94 @@ public class AdministratorPageConnection {
 
 		return roles;
 	}
+	public List<String> listActiveUsers(){
+		Connection conn = null;
+		List<String> activeUsers = new ArrayList<>();
+		try {
+			conn = DriverManager.getConnection(connectionUrl);
+			System.out.println("Connected to DB");
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery("[sp_list_active_user]");
 
+			while (rs.next()) {
+				String name = rs.getString("name");
+				String surname = rs.getString("surname");
+				String idNumber = rs.getString("id_number");
+				String completeName = name + " " + surname + ", "+idNumber;
+				activeUsers.add(completeName);
+			}
+		}
+
+		catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException ex) {
+					ex.printStackTrace();
+				}
+			}
+		}
+
+		return activeUsers;
+	}
+	
+	public Hashtable<String, Integer> usersMap() {
+		Connection conn = null;
+		Hashtable<String, Integer> activeUsers = new Hashtable<String, Integer>();
+		
+		try {
+			conn = DriverManager.getConnection(connectionUrl);
+			System.out.println("Connected to DB");
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery("[sp_list_active_user]");
+
+			while (rs.next()) {
+				int id = rs.getInt("id");
+				String name = rs.getString("name");
+				String surname = rs.getString("surname");
+				String idNumber = rs.getString("id_number");
+				String completeName = name + " " + surname + ", "+idNumber;
+				activeUsers.put(completeName, id);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException ex) {
+					ex.printStackTrace();
+				}
+			}
+		}
+		return activeUsers;
+
+	}
+	public void deleteUser(int userId) {
+		Connection conn = null;
+		
+		try {
+			conn = DriverManager.getConnection(connectionUrl);
+			System.out.println("Connected to DB");
+			Statement stmt = conn.createStatement();
+			stmt.executeQuery("[sp_delete_user] "+userId);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException ex) {
+					ex.printStackTrace();
+				}
+			}
+		}
+		
+		
+	}
 	public List<String> listSchedules() {
 		Connection conn = null;
 		List<String> schedules = new ArrayList<>();
@@ -77,9 +164,9 @@ public class AdministratorPageConnection {
 		return schedules;
 
 	}
-	
-	public Hashtable<String,Integer> scheduleMap(){
-		Hashtable<String,Integer> scheduleMap = new Hashtable<String,Integer>();
+
+	public Hashtable<String, Integer> scheduleMap() {
+		Hashtable<String, Integer> scheduleMap = new Hashtable<String, Integer>();
 		Connection conn = null;
 		try {
 			conn = DriverManager.getConnection(connectionUrl);
@@ -90,7 +177,7 @@ public class AdministratorPageConnection {
 			while (rs.next()) {
 				int id = rs.getInt("id");
 				String name = rs.getString("schedule_name");
-				scheduleMap.put(name,id);
+				scheduleMap.put(name, id);
 			}
 		}
 
@@ -107,6 +194,7 @@ public class AdministratorPageConnection {
 		}
 		return scheduleMap;
 	}
+
 	public boolean addUser(String name, String surname, String dob, String username, String idNumber, String email,
 			byte[] salt, byte[] hash, int mon, int tue, int wed, int thu, int fri, int sat, int sun) {
 		boolean succes = false;
@@ -114,15 +202,14 @@ public class AdministratorPageConnection {
 		try {
 			conn = DriverManager.getConnection(connectionUrl);
 			System.out.println("Connected to DB");
-			String query = ("[sp_create_user]" + "		@NAME = '" + name + "',"
-					+ "		@SURNAME = '" + surname + "'," + "		@DOB = '" + dob + "'," + "		@USERNAME = '"
-					+ username + "'," + "		@ID_NUMBER = '" + idNumber + "'," + "		@EMAIL = '" + email + "',"
-					+ "		@PASSWORD_SALT = ?," + "		@PASSWORD_HASH = ?,"
-					+ "		@Mon_SCHEDULE = " + mon + "," + "		@Tue_SCHEDULE = " + tue + ","
-					+ "		@Wed_SCHEDULE = " + wed + "," + "		@Thu_SCHEDULE = " + thu + ","
-					+ "		@Fri_SCHEDULE = " + fri + "," + "		@Sat_SCHEDULE = " + sat + ","
-					+ "		@Sun_SCHEDULE = " + sun + "");
-			
+			String query = ("[sp_create_user]" + "		@NAME = '" + name + "'," + "		@SURNAME = '" + surname
+					+ "'," + "		@DOB = '" + dob + "'," + "		@USERNAME = '" + username + "',"
+					+ "		@ID_NUMBER = '" + idNumber + "'," + "		@EMAIL = '" + email + "',"
+					+ "		@PASSWORD_SALT = ?," + "		@PASSWORD_HASH = ?," + "		@Mon_SCHEDULE = " + mon
+					+ "," + "		@Tue_SCHEDULE = " + tue + "," + "		@Wed_SCHEDULE = " + wed + ","
+					+ "		@Thu_SCHEDULE = " + thu + "," + "		@Fri_SCHEDULE = " + fri + ","
+					+ "		@Sat_SCHEDULE = " + sat + "," + "		@Sun_SCHEDULE = " + sun + "");
+
 			PreparedStatement statement = conn.prepareStatement(query);
 			statement.setBytes(1, salt);
 			statement.setBytes(2, hash);
@@ -132,7 +219,7 @@ public class AdministratorPageConnection {
 
 		catch (SQLException e) {
 			e.printStackTrace();
-			
+
 		} finally {
 			if (conn != null) {
 				try {

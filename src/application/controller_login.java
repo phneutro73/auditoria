@@ -95,7 +95,6 @@ public class controller_login {
 			System.out.println(hash[hash.length-1]);
 			System.out.println(calculatedHash[calculatedHash.length-1]);
 			if(Arrays.equals(hash,calculatedHash)) {
-				System.out.println("YESSSSSS");
 
 				FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/administrator_page.fxml"));
 				Parent root = loader.load();
