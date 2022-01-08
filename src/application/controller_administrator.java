@@ -208,8 +208,9 @@ public class controller_administrator {
 	void saveUser(ActionEvent event) {
 		try {
 			
-			boolean notEmptyFields = checkAllFields();
-			if (notEmptyFields) {
+			boolean noEmptyFields = checkAllFields();
+			boolean noEmptySchedule = checkScheduleField();
+			if (noEmptyFields && noEmptySchedule) {
 				boolean checkEmail = checkSecondField("email");
 				boolean checkPassword = checkSecondField("password");
 
@@ -318,6 +319,28 @@ public class controller_administrator {
 			return false;
 		}
 
+	}
+	
+	boolean checkScheduleField() {
+		
+		try {
+			if (cmbMonday.getValue().toString() != "-" && 
+					cmbTuesday.getValue().toString() != "-" && 
+					cmbWednesday.getValue().toString() != "-" && 
+					cmbThursday.getValue().toString() != "-" && 
+					cmbFriday.getValue().toString() != "-" && 
+					cmbSaturday.getValue().toString() != "-" && 
+					cmbSunday.getValue().toString() != "-") {
+				return true;
+			} else  {
+				return false;
+			}
+			
+		} catch (Exception e) {
+			System.out.println("ERROR: controller_administrator.java - checkScheduleField() - " + e.toString());
+			return false;
+		}
+		
 	}
 
 	@FXML

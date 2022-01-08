@@ -49,29 +49,19 @@ public class controller_login {
     private PasswordField fieldPassword;
 
     @FXML
-    private Label txtHintPw;
-
-    @FXML
-    private Label txtHintUser;
-
-    @FXML
     private ImageView imgLogo;
+    
+    //@FXML
+    //private JFXButton b = new JFXButton("LOGIN");
+;
 
-	@FXML
-	void deletePw(MouseEvent event) {
-		txtHintPw.setText("");
-		if (fieldUser.getText().isEmpty()) {
-			txtHintUser.setText("Usuario");
-		}
-	}
-
-	@FXML
-	void deleteUser(MouseEvent event) {
-		txtHintUser.setText("");
-		if (fieldPassword.getText().isEmpty()) {
-			txtHintPw.setText("Contraseña");
-		}
-	}
+	/*
+	 * @FXML void deletePw(MouseEvent event) { txtHintPw.setText(""); if
+	 * (fieldUser.getText().isEmpty()) { txtHintUser.setText("Usuario"); } }
+	 * 
+	 * @FXML void deleteUser(MouseEvent event) { txtHintUser.setText(""); if
+	 * (fieldPassword.getText().isEmpty()) { txtHintPw.setText("Contraseña"); } }
+	 */
 
 	@FXML
 	void forgetFunction(ActionEvent event) {
@@ -133,7 +123,7 @@ public class controller_login {
 		try {
 			
 			loginPage.setStyle("-fx-background-color: #E2F2F5"); 
-			
+			//b.setStyle("-fx-background-color: #02B6CD; -fx-background-radius: 0");
 			
 			
 		} catch (Exception e) {
