@@ -12,7 +12,6 @@ import java.util.List;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 
-
 import com.jfoenix.controls.JFXButton;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -176,7 +175,6 @@ public class controller_administrator {
 	@FXML
 	private Label txtResult;
 
-
 	@FXML
 	private Tab tabDeleteUser;
 
@@ -207,7 +205,7 @@ public class controller_administrator {
 	@FXML
 	void saveUser(ActionEvent event) {
 		try {
-			
+
 			boolean noEmptyFields = checkAllFields();
 			boolean noEmptySchedule = checkScheduleField();
 			if (noEmptyFields && noEmptySchedule) {
@@ -215,13 +213,18 @@ public class controller_administrator {
 				boolean checkPassword = checkSecondField("password");
 
 				if (checkEmail && checkPassword) {
-					
+
 					AdministratorPageConnection adminDB = new AdministratorPageConnection();
 					byte[][] pass = encryptPassword(fieldPassword.getText());
-					String[] schedule = new String[] {cmbMonday.getValue(),cmbTuesday.getValue(),cmbWednesday.getValue(),cmbThursday.getValue(),cmbFriday.getValue(),cmbSaturday.getValue(),cmbSunday.getValue()};
-					int[] numScedule = parseSchedule(schedule,adminDB);
-					adminDB.addUser(fieldName.getText(), fieldSurname.getText(), fieldDat.getValue().toString(), fieldUser.getText(), fieldDNI.getText(), fieldEmail.getText(),pass[0] , pass[1], numScedule[0], numScedule[1], numScedule[2], numScedule[3], numScedule[4], numScedule[5], numScedule[6]);
-					
+					String[] schedule = new String[] { cmbMonday.getValue(), cmbTuesday.getValue(),
+							cmbWednesday.getValue(), cmbThursday.getValue(), cmbFriday.getValue(),
+							cmbSaturday.getValue(), cmbSunday.getValue() };
+					int[] numScedule = parseSchedule(schedule, adminDB);
+					adminDB.addUser(fieldName.getText(), fieldSurname.getText(), fieldDat.getValue().toString(),
+							fieldUser.getText(), fieldDNI.getText(), fieldEmail.getText(), pass[0], pass[1],
+							numScedule[0], numScedule[1], numScedule[2], numScedule[3], numScedule[4], numScedule[5],
+							numScedule[6]);
+
 					txtResult.setText("Guardado correctamente.");
 					txtResult.setTextFill(Color.GREEN);
 				} else {
@@ -237,7 +240,7 @@ public class controller_administrator {
 			System.out.println(e.toString());
 		}
 	}
-	
+
 	byte[][] encryptPassword(String password) throws NoSuchAlgorithmException, InvalidKeySpecException {
 		byte[][] pass = new byte[2][];
 		SecureRandom random = new SecureRandom();
@@ -248,19 +251,20 @@ public class controller_administrator {
 		byte[] hash = factory.generateSecret(spec).getEncoded();
 		System.out.println(salt[0]);
 		System.out.println(hash[0]);
-		pass[0] = salt; 
-		pass[1] = hash; 
+		pass[0] = salt;
+		pass[1] = hash;
 		return pass;
 	}
-	
-	int[] parseSchedule(String[] schedule,AdministratorPageConnection adminDB) {
+
+	int[] parseSchedule(String[] schedule, AdministratorPageConnection adminDB) {
 		int[] numeric_schedule = new int[7];
-		Hashtable<String,Integer> scheduleMap = adminDB.scheduleMap();
+		Hashtable<String, Integer> scheduleMap = adminDB.scheduleMap();
 		for (int i = 0; i < schedule.length; i++) {
-			 numeric_schedule[i] = scheduleMap.get(schedule[i]);
-			}
+			numeric_schedule[i] = scheduleMap.get(schedule[i]);
+		}
 		return numeric_schedule;
 	}
+
 	boolean checkAllFields() {
 
 		try {
@@ -320,27 +324,24 @@ public class controller_administrator {
 		}
 
 	}
-	
+
 	boolean checkScheduleField() {
-		
+
 		try {
-			if (cmbMonday.getValue().toString() != "-" && 
-					cmbTuesday.getValue().toString() != "-" && 
-					cmbWednesday.getValue().toString() != "-" && 
-					cmbThursday.getValue().toString() != "-" && 
-					cmbFriday.getValue().toString() != "-" && 
-					cmbSaturday.getValue().toString() != "-" && 
-					cmbSunday.getValue().toString() != "-") {
+			if (cmbMonday.getValue().toString() != "-" && cmbTuesday.getValue().toString() != "-"
+					&& cmbWednesday.getValue().toString() != "-" && cmbThursday.getValue().toString() != "-"
+					&& cmbFriday.getValue().toString() != "-" && cmbSaturday.getValue().toString() != "-"
+					&& cmbSunday.getValue().toString() != "-") {
 				return true;
-			} else  {
+			} else {
 				return false;
 			}
-			
+
 		} catch (Exception e) {
 			System.out.println("ERROR: controller_administrator.java - checkScheduleField() - " + e.toString());
 			return false;
 		}
-		
+
 	}
 
 	@FXML
@@ -395,8 +396,7 @@ public class controller_administrator {
 		}
 
 	}
-	
-	
+
 	@FXML
 	void initialize() {
 
@@ -404,49 +404,48 @@ public class controller_administrator {
 
 			// TODO: Sacar el nombre y apellido del usuario y asignarlo a las variables
 			// lblUserName y lblUserSurname
-			
+
 			AdministratorPageConnection adminDB = new AdministratorPageConnection();
-			
+
 			drawer.setBackground(
 					new Background(new BackgroundFill(Color.rgb(226, 242, 245), CornerRadii.EMPTY, Insets.EMPTY)));
 
 			btnAdministrator.setStyle("-fx-background-color: #CBE1E6; -fx-alignment: center-left;");
 			btnSales.setDisableVisualFocus(true);
-			
+
 			List<String> schedules = adminDB.listSchedules();
 			fieldRole.getItems().removeAll(fieldRole.getItems());
 			fieldRole.getItems().addAll(adminDB.listRoles());
 			fieldRole.getSelectionModel().select("-");
-			
+
 			cmbMonday.getItems().removeAll(fieldRole.getItems());
 			cmbMonday.getItems().addAll(schedules);
 			cmbMonday.getSelectionModel().select("-");
-			
+
 			cmbTuesday.getItems().removeAll(fieldRole.getItems());
 			cmbTuesday.getItems().addAll(schedules);
 			cmbTuesday.getSelectionModel().select("-");
-			
+
 			cmbWednesday.getItems().removeAll(fieldRole.getItems());
 			cmbWednesday.getItems().addAll(schedules);
 			cmbWednesday.getSelectionModel().select("-");
-			
+
 			cmbThursday.getItems().removeAll(fieldRole.getItems());
 			cmbThursday.getItems().addAll(schedules);
 			cmbThursday.getSelectionModel().select("-");
-			
+
 			cmbFriday.getItems().removeAll(fieldRole.getItems());
 			cmbFriday.getItems().addAll(schedules);
 			cmbFriday.getSelectionModel().select("-");
-			
+
 			cmbSaturday.getItems().removeAll(fieldRole.getItems());
 			cmbSaturday.getItems().addAll(schedules);
 			cmbSaturday.getSelectionModel().select("-");
-			
+
 			cmbSunday.getItems().removeAll(fieldRole.getItems());
 			cmbSunday.getItems().addAll(schedules);
 			cmbSunday.getSelectionModel().select("-");
-			
-			
+
 			List<String> list = new ArrayList<String>();
 			list.add("-");
 

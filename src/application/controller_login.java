@@ -33,35 +33,23 @@ import db.LoginPageConnection;
 
 public class controller_login {
 
-	  @FXML
-    private AnchorPane loginPage;
+	@FXML
+	private AnchorPane loginPage;
 
-    @FXML
-    private Button btnLogin;
+	@FXML
+	private Button btnLogin;
 
-    @FXML
-    private JFXButton btnForget;
+	@FXML
+	private JFXButton btnForget;
 
-    @FXML
-    private TextField fieldUser;
+	@FXML
+	private TextField fieldUser;
 
-    @FXML
-    private PasswordField fieldPassword;
+	@FXML
+	private PasswordField fieldPassword;
 
-    @FXML
-    private ImageView imgLogo;
-    
-    //@FXML
-    //private JFXButton b = new JFXButton("LOGIN");
-;
-
-	/*
-	 * @FXML void deletePw(MouseEvent event) { txtHintPw.setText(""); if
-	 * (fieldUser.getText().isEmpty()) { txtHintUser.setText("Usuario"); } }
-	 * 
-	 * @FXML void deleteUser(MouseEvent event) { txtHintUser.setText(""); if
-	 * (fieldPassword.getText().isEmpty()) { txtHintPw.setText("Contraseña"); } }
-	 */
+	@FXML
+	private ImageView imgLogo;
 
 	@FXML
 	void forgetFunction(ActionEvent event) {
@@ -75,16 +63,16 @@ public class controller_login {
 			GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
 			int width = gd.getDisplayMode().getWidth();
 			int height = gd.getDisplayMode().getHeight();
-			
+
 			LoginPageConnection loginDB = new LoginPageConnection();
-			byte[] salt= loginDB.getSalt(fieldUser.getText());
-			byte[] hash= loginDB.getHash(fieldUser.getText());
-			byte[] calculatedHash = calculateHash(fieldPassword.getText(),salt);
-			System.out.println(salt[salt.length-1]);
-			System.out.println(hash[hash.length-1]);
-			System.out.println(hash[hash.length-1]);
-			System.out.println(calculatedHash[calculatedHash.length-1]);
-			if(Arrays.equals(hash,calculatedHash)) {
+			byte[] salt = loginDB.getSalt(fieldUser.getText());
+			byte[] hash = loginDB.getHash(fieldUser.getText());
+			byte[] calculatedHash = calculateHash(fieldPassword.getText(), salt);
+			System.out.println(salt[salt.length - 1]);
+			System.out.println(hash[hash.length - 1]);
+			System.out.println(hash[hash.length - 1]);
+			System.out.println(calculatedHash[calculatedHash.length - 1]);
+			if (Arrays.equals(hash, calculatedHash)) {
 				System.out.println("YESSSSSS");
 
 				FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/administrator_page.fxml"));
@@ -94,26 +82,21 @@ public class controller_login {
 				stage.setScene(new Scene(root));
 				stage.setTitle("Aplicación de escritorio");
 				stage.show();
-				((Node)(event.getSource())).getScene().getWindow().hide();
+				((Node) (event.getSource())).getScene().getWindow().hide();
 			}
-			//SOLO SI EL USUARIO EXISTE Y LA CONTRASEÑA ES CORRECTA
-			
+			// SOLO SI EL USUARIO EXISTE Y LA CONTRASEÑA ES CORRECTA
 
-			
-			
-			
 		} catch (Exception e) {
 			System.out.println(e.toString());
 		}
 
 	}
-	
-	byte[] calculateHash(String password,byte[] salt) throws NoSuchAlgorithmException, InvalidKeySpecException{
+
+	byte[] calculateHash(String password, byte[] salt) throws NoSuchAlgorithmException, InvalidKeySpecException {
 		KeySpec spec = new PBEKeySpec(password.toCharArray(), salt, 65536, 128);
 		SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
 		byte[] hash = factory.generateSecret(spec).getEncoded();
-		
-		
+
 		return hash;
 	}
 
@@ -121,11 +104,10 @@ public class controller_login {
 	void initialize() {
 
 		try {
-			
-			loginPage.setStyle("-fx-background-color: #E2F2F5"); 
-			//b.setStyle("-fx-background-color: #02B6CD; -fx-background-radius: 0");
-			
-			
+
+			loginPage.setStyle("-fx-background-color: #E2F2F5");
+			// b.setStyle("-fx-background-color: #02B6CD; -fx-background-radius: 0");
+
 		} catch (Exception e) {
 			System.out.println("ERROR: controllerLogin.java - initialize() - " + e.toString());
 		}
