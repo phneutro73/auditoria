@@ -266,15 +266,14 @@ public class controller_administrator {
 		return numeric_schedule;
 	}
 
-	
-	int parseActiveUsers(String user,AdministratorPageConnection adminDB) {
-		
+	int parseActiveUsers(String user, AdministratorPageConnection adminDB) {
+
 		int userID;
-		Hashtable <String, Integer> usersMap = adminDB.usersMap();
+		Hashtable<String, Integer> usersMap = adminDB.usersMap();
 		userID = usersMap.get(user);
 		return userID;
 	}
-  
+
 	boolean checkAllFields() {
 
 		try {
@@ -356,23 +355,22 @@ public class controller_administrator {
 
 	@FXML
 	void deleteUser(ActionEvent event) {
-		
+
 		try {
 			AdministratorPageConnection adminDB = new AdministratorPageConnection();
 			boolean notEmptyFields = checkAllFieldsDelete();
 
 			if (notEmptyFields) {
 				String userToDelete = cmbUserDelete.getValue();
-				
+
 				if (userToDelete.split(",")[1].trim().equals(fieldDniDelete.getText())) {
 					int idToDelete = parseActiveUsers(userToDelete, adminDB);
 					adminDB.deleteUser(idToDelete);
-					
-					
+
 					txtResultDelete.setText("Eliminado correctamente.");
 					txtResultDelete.setTextFill(Color.GREEN);
 					List<String> activeUsers = adminDB.listActiveUsers();
-					
+
 					cmbUserDelete.getItems().removeAll(cmbUserDelete.getItems());
 					cmbUserDelete.getItems().addAll(activeUsers);
 					cmbUserDelete.getSelectionModel().select("-");
@@ -476,9 +474,9 @@ public class controller_administrator {
 					list.add(hour + ":" + minute);
 				}
 			}
-			
+
 			List<String> activeUsers = adminDB.listActiveUsers();
-			
+
 			cmbUserDelete.getItems().removeAll(cmbUserDelete.getItems());
 			cmbUserDelete.getItems().addAll(activeUsers);
 			cmbUserDelete.getSelectionModel().select("-");

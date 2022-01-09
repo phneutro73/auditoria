@@ -2,39 +2,72 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/8.0.171"
+<AnchorPane fx:id="parent" prefHeight="378.0"
+	prefWidth="270.0" styleClass="softBackgroundParent"
+	stylesheets="@application.css" xmlns="http://javafx.com/javafx/8.0.171"
 	xmlns:fx="http://javafx.com/fxml/1">
 	<children>
-		<AnchorPane fx:id="loginPage" prefHeight="350.0"
-			prefWidth="270.0">
+		<Button fx:id="btnLogin" layoutX="60.0" layoutY="251.0"
+			mnemonicParsing="false" onAction="#loginFunction" prefHeight="35.0"
+			prefWidth="151.0" text="Button" AnchorPane.bottomAnchor="14.0"
+			AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="59.0" />
+		<JFXButton fx:id="btnForget" layoutX="50.0" layoutY="277.0"
+			onAction="#forgetFunction" text="He olvidado mis credenciales" />
+		<TextField fx:id="fieldUser" layoutX="25.0" layoutY="191.0"
+			prefHeight="32.0" prefWidth="220.0" promptText="Usuario" />
+		<PasswordField fx:id="fieldPassword" layoutX="25.0"
+			layoutY="236.0" prefHeight="32.0" prefWidth="220.0"
+			promptText="Contraseña" />
+		<ImageView fitHeight="134.0" fitWidth="144.0" layoutX="69.0"
+			layoutY="42.0" pickOnBounds="true" preserveRatio="true">
+			<image>
+				<Image url="@../resources/assets/logo.png" />
+			</image>
+		</ImageView>
+		<HBox alignment="CENTER_RIGHT" prefHeight="25.0"
+			prefWidth="270.0" styleClass="topBar" stylesheets="@application.css">
 			<children>
-				<Button fx:id="btnLogin" layoutX="60.0" layoutY="251.0"
-					mnemonicParsing="false" onAction="#loginFunction" prefHeight="35.0"
-					prefWidth="151.0" text="Button" AnchorPane.bottomAnchor="14.0"
-					AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="59.0" />
-				<JFXButton fx:id="btnForget" layoutX="50.0"
-					layoutY="262.0" onAction="#forgetFunction"
-					text="He olvidado mis credenciales" />
-				<TextField fx:id="fieldUser" layoutX="25.0"
-					layoutY="159.0" prefHeight="32.0" prefWidth="220.0"
-					promptText="Usuario" />
-				<PasswordField fx:id="fieldPassword" layoutX="25.0"
-					layoutY="204.0" prefHeight="32.0" prefWidth="220.0"
-					promptText="Contraseña" />
-				<ImageView fitHeight="134.0" fitWidth="144.0"
-					layoutX="69.0" layoutY="10.0" pickOnBounds="true"
-					preserveRatio="true">
-					<image>
-						<Image url="@../resources/assets/logo.png" />
-					</image>
-				</ImageView>
+				<Label fx:id="btnMinimize" alignment="CENTER"
+					maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+					minWidth="-Infinity" onMouseClicked="#minimizeScreen"
+					prefHeight="25.0" prefWidth="25.0" styleClass="minimizeButton"
+					stylesheets="@application.css">
+					<graphic>
+						<ImageView fitHeight="4.0" fitWidth="14.0">
+							<image>
+								<Image url="@../resources/assets/minimize_icon.png" />
+							</image>
+						</ImageView>
+					</graphic>
+				</Label>
+				<Label fx:id="btnClose" alignment="CENTER"
+					maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+					minWidth="-Infinity" onMouseClicked="#closeScreen"
+					prefHeight="25.0" prefWidth="25.0" styleClass="closeButton"
+					stylesheets="@application.css">
+					<graphic>
+						<ImageView fitHeight="24.0" fitWidth="24.0">
+							<image>
+								<Image url="@../resources/assets/close_icon.png" />
+							</image>
+						</ImageView>
+					</graphic>
+				</Label>
 			</children>
-		</AnchorPane>
+		</HBox>
+		<ImageView fx:id="loadingIcon" fitHeight="100.0"
+			fitWidth="100.0" layoutX="85.0" layoutY="180.0" visible="false">
+			<image>
+				<Image url="@../resources/assets/loading.png" />
+			</image>
+		</ImageView>
 	</children>
 </AnchorPane>

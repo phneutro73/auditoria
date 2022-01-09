@@ -244,7 +244,7 @@
 				</Label>
 			</children>
 		</AnchorPane>
-		<HBox prefHeight="650.0" prefWidth="200.0">
+		<HBox prefHeight="650.0" prefWidth="60.0">
 			<children>
 				<VBox fx:id="drawer" fillWidth="false" prefHeight="700.0"
 					prefWidth="50.0" styleClass="menu" stylesheets="@application.css">

@@ -1,11 +1,40 @@
 /* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
 
+* {
+	-main-color: '#02B6CD';
+  	-soft-color: '#E2F2F5';
+  	-soft-color2: '#DDEDF0';
+  	-soft-color2-selected: '#CAE1E6';
+  	-almost-black-color: '#434345';
+  	-hover-black-color: '#313333';
+  	-black-color: '#231F20';
+  	-red-color: '#E81123'
+}
+
+.softBackgroundParent {
+	-fx-background-color: -soft-color;
+}
+
+.topBar {
+	-fx-background-color: -soft-color2;
+}
+
+.closeButton:hover {
+	-fx-background-color: -red-color;
+	-fx-background-radius: 2.0px 2.0px 2.0px 2.0px;
+}
+
+.minimizeButton:hover {
+	-fx-background-color: -soft-color2-selected;
+	-fx-background-radius: 2.0px 2.0px 2.0px 2.0px;
+}
+
 .tab {
 	-fx-tab-min-width: 100.0;
 }
 
 .menu {
-	-fx-background-color: '#434345';
+	-fx-background-color: -almost-black-color;
 	-fx-pref-width: 60.0;
 }
 
@@ -15,16 +44,21 @@
 }
 
 .menuButton:hover {
-	-fx-background-color: '#313333';
+	-fx-background-color: -hover-black-color;
 }
 
 .selectedMenuButton {
-	-fx-background-color: '#231F20';
+	-fx-background-color: -black-color;
 }
 
 .pageTitle {
-	-fx-background-color: '#434345';
+	-fx-background-color: -almost-black-color;
 	-fx-background-radius: 0.0px 0.0px 30.0px 30.0px;
 	-fx-border-radius: 0.0px 0.0px 30.0px 30.0px
+}
+
+.loading {
+	-fx-background-color: -main-color;
+	-fx-stroke-dash-array: 15.0;
 }
 
