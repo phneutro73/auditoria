@@ -4,6 +4,7 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.KeySpec;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import java.util.Hashtable;
@@ -265,6 +266,15 @@ public class controller_administrator {
 		return numeric_schedule;
 	}
 
+	
+	int parseActiveUsers(String user,AdministratorPageConnection adminDB) {
+		
+		int userID;
+		Hashtable <String, Integer> usersMap = adminDB.usersMap();
+		userID = usersMap.get(user);
+		return userID;
+	}
+  
 	boolean checkAllFields() {
 
 		try {
@@ -346,19 +356,27 @@ public class controller_administrator {
 
 	@FXML
 	void deleteUser(ActionEvent event) {
-
+		
 		try {
-
+			AdministratorPageConnection adminDB = new AdministratorPageConnection();
 			boolean notEmptyFields = checkAllFieldsDelete();
 
 			if (notEmptyFields) {
-				// TODO: Comprobar que el dni pertenezca al usuario
-				boolean isDniUser = true;
-
-				if (isDniUser) {
-					// TODO: Eliminar usuario de la bbdd
+				String userToDelete = cmbUserDelete.getValue();
+				
+				if (userToDelete.split(",")[1].trim().equals(fieldDniDelete.getText())) {
+					int idToDelete = parseActiveUsers(userToDelete, adminDB);
+					adminDB.deleteUser(idToDelete);
+					
+					
 					txtResultDelete.setText("Eliminado correctamente.");
 					txtResultDelete.setTextFill(Color.GREEN);
+					List<String> activeUsers = adminDB.listActiveUsers();
+					
+					cmbUserDelete.getItems().removeAll(cmbUserDelete.getItems());
+					cmbUserDelete.getItems().addAll(activeUsers);
+					cmbUserDelete.getSelectionModel().select("-");
+					fieldDniDelete.setText("");
 				} else {
 					txtResultDelete.setText("Los datos introducidos no concuerdan. Revise los campos.");
 					txtResultDelete.setTextFill(Color.RED);
@@ -458,15 +476,11 @@ public class controller_administrator {
 					list.add(hour + ":" + minute);
 				}
 			}
-
-			List<String> listUsers = new ArrayList<String>();
-			listUsers.add("-");
-
-			// TODO: Sacar en una select los usuarios que hay en la bbdd y que los guarde en
-			// la lista
-
+			
+			List<String> activeUsers = adminDB.listActiveUsers();
+			
 			cmbUserDelete.getItems().removeAll(cmbUserDelete.getItems());
-			cmbUserDelete.getItems().addAll(listUsers);
+			cmbUserDelete.getItems().addAll(activeUsers);
 			cmbUserDelete.getSelectionModel().select("-");
 
 		} catch (Exception e) {

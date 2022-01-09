@@ -65,15 +65,15 @@ public class controller_login {
 			int height = gd.getDisplayMode().getHeight();
 
 			LoginPageConnection loginDB = new LoginPageConnection();
-			byte[] salt = loginDB.getSalt(fieldUser.getText());
-			byte[] hash = loginDB.getHash(fieldUser.getText());
-			byte[] calculatedHash = calculateHash(fieldPassword.getText(), salt);
-			System.out.println(salt[salt.length - 1]);
-			System.out.println(hash[hash.length - 1]);
-			System.out.println(hash[hash.length - 1]);
-			System.out.println(calculatedHash[calculatedHash.length - 1]);
-			if (Arrays.equals(hash, calculatedHash)) {
-				System.out.println("YESSSSSS");
+
+			byte[] salt= loginDB.getSalt(fieldUser.getText());
+			byte[] hash= loginDB.getHash(fieldUser.getText());
+			byte[] calculatedHash = calculateHash(fieldPassword.getText(),salt);
+			System.out.println(salt[salt.length-1]);
+			System.out.println(hash[hash.length-1]);
+			System.out.println(hash[hash.length-1]);
+			System.out.println(calculatedHash[calculatedHash.length-1]);
+			if(Arrays.equals(hash,calculatedHash)) {
 
 				FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/administrator_page.fxml"));
 				Parent root = loader.load();
