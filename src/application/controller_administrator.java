@@ -404,13 +404,9 @@ public class controller_administrator {
 
 			// TODO: Sacar el nombre y apellido del usuario y asignarlo a las variables
 			// lblUserName y lblUserSurname
-
+			
 			AdministratorPageConnection adminDB = new AdministratorPageConnection();
-
-			drawer.setBackground(
-					new Background(new BackgroundFill(Color.rgb(226, 242, 245), CornerRadii.EMPTY, Insets.EMPTY)));
-
-			btnAdministrator.setStyle("-fx-background-color: #CBE1E6; -fx-alignment: center-left;");
+			
 			btnSales.setDisableVisualFocus(true);
 
 			List<String> schedules = adminDB.listSchedules();
