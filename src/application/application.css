@@ -1,1 +1,30 @@
 /* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+
+.tab {
+	-fx-tab-min-width: 100.0;
+}
+
+.menu {
+	-fx-background-color: '#434345';
+	-fx-pref-width: 60.0;
+}
+
+.menuButton {
+	-fx-pref-width: 300.0;
+	-fx-background-radius: 0.0px 0.0px 0.0px 0.0px;
+}
+
+.menuButton:hover {
+	-fx-background-color: '#313333';
+}
+
+.selectedMenuButton {
+	-fx-background-color: '#231F20';
+}
+
+.pageTitle {
+	-fx-background-color: '#434345';
+	-fx-background-radius: 0.0px 0.0px 30.0px 30.0px;
+	-fx-border-radius: 0.0px 0.0px 30.0px 30.0px
+}
+
