@@ -22,81 +22,180 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane minWidth="1000.0" prefHeight="650.0" prefWidth="941.0" style="-fx-background-color: #F0FBFD;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller_administrator">
+<AnchorPane minWidth="1000.0" prefHeight="650.0"
+	prefWidth="941.0" style="-fx-background-color: #F0FBFD;"
+	xmlns="http://javafx.com/javafx/8.0.171"
+	xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="application.controller_administrator">
 	<children>
-		<JFXTabPane layoutX="60.0" layoutY="79.0" prefHeight="622.0" prefWidth="940.0" styleClass="tab" stylesheets="@application.css" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="79.0">
+		<JFXTabPane layoutX="60.0" layoutY="79.0"
+			prefHeight="622.0" prefWidth="940.0" styleClass="tab"
+			stylesheets="@application.css" AnchorPane.bottomAnchor="-1.0"
+			AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="0.0"
+			AnchorPane.topAnchor="79.0">
 			<tabs>
 				<Tab fx:id="tabAddNewUser" text="Nuevo usuario">
 					<content>
-						<AnchorPane fx:id="tabAddUser" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="940.0">
+						<AnchorPane fx:id="tabAddUser" minHeight="0.0"
+							minWidth="0.0" prefHeight="180.0" prefWidth="940.0">
 							<children>
-								<Label fx:id="lblName" layoutX="47.0" layoutY="46.0" text="NOMBRE" />
-								<Label fx:id="lblSurname" layoutX="47.0" layoutY="73.0" text="APELLIDOS" />
-								<Label fx:id="lblDat" layoutX="47.0" layoutY="127.0" text="FECHA DE NACIMIENTO" />
-								<Label fx:id="lblDni" layoutX="47.0" layoutY="100.0" prefWidth="59.0" text="DNI" />
-								<Label fx:id="lblEmail" layoutX="47.0" layoutY="154.0" prefWidth="59.0" text="EMAIL" />
-								<Label fx:id="lblUser" layoutX="47.0" layoutY="208.0" prefWidth="59.0" text="USUARIO" />
-								<Label fx:id="lblPassword" layoutX="47.0" layoutY="235.0" prefHeight="17.0" prefWidth="95.0" text="CONTRASEÑA" />
-								<Label fx:id="lblEmail2" layoutX="47.0" layoutY="181.0" prefHeight="17.0" prefWidth="95.0" text="REPITA EL EMAIL" />
-								<Label fx:id="lblPassword2" layoutX="47.0" layoutY="262.0" prefHeight="17.0" prefWidth="148.0" text="REPILTA LA CONTRASEÑA" />
-								<Label fx:id="lblRole" layoutX="47.0" layoutY="299.0" prefHeight="17.0" prefWidth="95.0" text="PUESTO" />
-								<Label fx:id="lblMonday" layoutX="364.0" layoutY="46.0" prefHeight="17.0" prefWidth="60.0" text="LUNES" AnchorPane.rightAnchor="271.0" />
-								<TextField fx:id="fieldName" layoutX="217.0" layoutY="42.0" maxHeight="500.0" maxWidth="500.0" minWidth="95.0" prefHeight="25.0" prefWidth="95.0" AnchorPane.leftAnchor="217.0" AnchorPane.rightAnchor="424.0" />
-								<TextField fx:id="fieldSurname" layoutX="217.0" layoutY="69.0" minWidth="95.0" prefHeight="25.0" prefWidth="95.0" AnchorPane.leftAnchor="217.0" AnchorPane.rightAnchor="424.0" />
-								<TextField fx:id="fieldDNI" layoutX="217.0" layoutY="96.0" minWidth="95.0" prefHeight="25.0" prefWidth="95.0" AnchorPane.leftAnchor="217.0" AnchorPane.rightAnchor="424.0" />
-								<DatePicker fx:id="fieldDat" layoutX="217.0" layoutY="123.0" minWidth="95.0" prefHeight="25.0" prefWidth="95.0" AnchorPane.leftAnchor="217.0" AnchorPane.rightAnchor="424.0" />
-								<TextField fx:id="fieldEmail" layoutX="217.0" layoutY="150.0" minWidth="95.0" prefHeight="25.0" prefWidth="95.0" AnchorPane.leftAnchor="217.0" AnchorPane.rightAnchor="424.0" />
-								<TextField fx:id="fieldEmail2" layoutX="217.0" layoutY="177.0" minWidth="95.0" prefHeight="25.0" prefWidth="95.0" AnchorPane.leftAnchor="217.0" AnchorPane.rightAnchor="424.0" />
-								<TextField fx:id="fieldUser" layoutX="217.0" layoutY="204.0" minWidth="95.0" prefHeight="25.0" prefWidth="95.0" AnchorPane.leftAnchor="217.0" AnchorPane.rightAnchor="424.0" />
-								<PasswordField fx:id="fieldPassword" layoutX="217.0" layoutY="231.0" minWidth="95.0" prefHeight="25.0" prefWidth="95.0" AnchorPane.leftAnchor="217.0" AnchorPane.rightAnchor="424.0" />
-								<PasswordField fx:id="fieldPassword2" layoutX="217.0" layoutY="258.0" minWidth="95.0" prefHeight="25.0" prefWidth="95.0" AnchorPane.leftAnchor="217.0" AnchorPane.rightAnchor="424.0" />
-								<ComboBox fx:id="fieldRole" layoutX="217.0" layoutY="295.0" prefHeight="25.0" prefWidth="95.0" AnchorPane.leftAnchor="217.0" AnchorPane.rightAnchor="424.0" />
-								<ComboBox fx:id="cmbMonday" layoutX="448.0" layoutY="42.0" prefHeight="25.0" prefWidth="142.0" AnchorPane.rightAnchor="105.0" />
-								<Label fx:id="lblTuesday" layoutX="364.0" layoutY="73.0" prefHeight="17.0" prefWidth="60.0" text="MARTES" AnchorPane.rightAnchor="271.0" />
-								<Label fx:id="lblWednesday" layoutX="364.0" layoutY="100.0" prefHeight="17.0" prefWidth="70.0" text="MIÉRCOLES" AnchorPane.rightAnchor="261.0" />
-								<Label fx:id="lblThursday" layoutX="364.0" layoutY="127.0" prefHeight="17.0" prefWidth="49.0" text="JUEVES" AnchorPane.rightAnchor="282.0" />
-								<Label fx:id="lblFriday" layoutX="364.0" layoutY="154.0" prefHeight="17.0" prefWidth="60.0" text="VIERNES" AnchorPane.rightAnchor="271.0" />
-								<Label fx:id="lblSunday" layoutX="364.0" layoutY="208.0" prefHeight="17.0" prefWidth="60.0" text="DOMINGO" AnchorPane.rightAnchor="271.0" />
-								<Label fx:id="lblSaturday" layoutX="364.0" layoutY="181.0" prefHeight="17.0" prefWidth="60.0" text="SÁBADO" AnchorPane.rightAnchor="271.0" />
-								<ComboBox fx:id="cmbTuesday" layoutX="448.0" layoutY="69.0" prefHeight="25.0" prefWidth="142.0" AnchorPane.rightAnchor="105.0" />
-								<ComboBox fx:id="cmbWednesday" layoutX="448.0" layoutY="96.0" prefHeight="25.0" prefWidth="142.0" AnchorPane.rightAnchor="105.0" />
-								<ComboBox fx:id="cmbThursday" layoutX="448.0" layoutY="123.0" prefHeight="25.0" prefWidth="142.0" AnchorPane.rightAnchor="105.0" />
-								<ComboBox fx:id="cmbFriday" layoutX="448.0" layoutY="150.0" prefHeight="25.0" prefWidth="142.0" AnchorPane.rightAnchor="105.0" />
-								<ComboBox fx:id="cmbSaturday" layoutX="448.0" layoutY="177.0" prefHeight="25.0" prefWidth="142.0" AnchorPane.rightAnchor="105.0" />
-								<ComboBox fx:id="cmbSunday" layoutX="448.0" layoutY="204.0" prefHeight="25.0" prefWidth="142.0" AnchorPane.rightAnchor="105.0" />
-								<Label fx:id="txtResult" layoutX="219.0" layoutY="14.0" prefHeight="17.0" prefWidth="410.0" />
-                        <BorderPane layoutX="14.0" layoutY="361.0" prefHeight="55.0" prefWidth="940.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
-                           <center>
-      								<Button fx:id="btnSave" mnemonicParsing="false" onAction="#saveUser" text="GUARDAR" BorderPane.alignment="CENTER" />
-                           </center>
-                        </BorderPane>
+								<Label fx:id="lblName" layoutX="47.0" layoutY="46.0"
+									text="NOMBRE" />
+								<Label fx:id="lblSurname" layoutX="47.0" layoutY="73.0"
+									text="APELLIDOS" />
+								<Label fx:id="lblDat" layoutX="47.0" layoutY="127.0"
+									text="FECHA DE NACIMIENTO" />
+								<Label fx:id="lblDni" layoutX="47.0" layoutY="100.0"
+									prefWidth="59.0" text="DNI" />
+								<Label fx:id="lblEmail" layoutX="47.0" layoutY="154.0"
+									prefWidth="59.0" text="EMAIL" />
+								<Label fx:id="lblUser" layoutX="47.0" layoutY="208.0"
+									prefWidth="59.0" text="USUARIO" />
+								<Label fx:id="lblPassword" layoutX="47.0" layoutY="235.0"
+									prefHeight="17.0" prefWidth="95.0" text="CONTRASEÑA" />
+								<Label fx:id="lblEmail2" layoutX="47.0" layoutY="181.0"
+									prefHeight="17.0" prefWidth="95.0" text="REPITA EL EMAIL" />
+								<Label fx:id="lblPassword2" layoutX="47.0" layoutY="262.0"
+									prefHeight="17.0" prefWidth="148.0"
+									text="REPILTA LA CONTRASEÑA" />
+								<Label fx:id="lblRole" layoutX="47.0" layoutY="299.0"
+									prefHeight="17.0" prefWidth="95.0" text="PUESTO" />
+								<Label fx:id="lblMonday" layoutX="364.0" layoutY="46.0"
+									prefHeight="17.0" prefWidth="60.0" text="LUNES"
+									AnchorPane.rightAnchor="271.0" />
+								<TextField fx:id="fieldName" layoutX="217.0"
+									layoutY="42.0" maxHeight="500.0" maxWidth="500.0"
+									minWidth="95.0" prefHeight="25.0" prefWidth="95.0"
+									AnchorPane.leftAnchor="217.0" AnchorPane.rightAnchor="424.0" />
+								<TextField fx:id="fieldSurname" layoutX="217.0"
+									layoutY="69.0" minWidth="95.0" prefHeight="25.0"
+									prefWidth="95.0" AnchorPane.leftAnchor="217.0"
+									AnchorPane.rightAnchor="424.0" />
+								<TextField fx:id="fieldDNI" layoutX="217.0"
+									layoutY="96.0" minWidth="95.0" prefHeight="25.0"
+									prefWidth="95.0" AnchorPane.leftAnchor="217.0"
+									AnchorPane.rightAnchor="424.0" />
+								<DatePicker fx:id="fieldDat" layoutX="217.0"
+									layoutY="123.0" minWidth="95.0" prefHeight="25.0"
+									prefWidth="95.0" AnchorPane.leftAnchor="217.0"
+									AnchorPane.rightAnchor="424.0" />
+								<TextField fx:id="fieldEmail" layoutX="217.0"
+									layoutY="150.0" minWidth="95.0" prefHeight="25.0"
+									prefWidth="95.0" AnchorPane.leftAnchor="217.0"
+									AnchorPane.rightAnchor="424.0" />
+								<TextField fx:id="fieldEmail2" layoutX="217.0"
+									layoutY="177.0" minWidth="95.0" prefHeight="25.0"
+									prefWidth="95.0" AnchorPane.leftAnchor="217.0"
+									AnchorPane.rightAnchor="424.0" />
+								<TextField fx:id="fieldUser" layoutX="217.0"
+									layoutY="204.0" minWidth="95.0" prefHeight="25.0"
+									prefWidth="95.0" AnchorPane.leftAnchor="217.0"
+									AnchorPane.rightAnchor="424.0" />
+								<PasswordField fx:id="fieldPassword"
+									layoutX="217.0" layoutY="231.0" minWidth="95.0"
+									prefHeight="25.0" prefWidth="95.0"
+									AnchorPane.leftAnchor="217.0" AnchorPane.rightAnchor="424.0" />
+								<PasswordField fx:id="fieldPassword2"
+									layoutX="217.0" layoutY="258.0" minWidth="95.0"
+									prefHeight="25.0" prefWidth="95.0"
+									AnchorPane.leftAnchor="217.0" AnchorPane.rightAnchor="424.0" />
+								<ComboBox fx:id="fieldRole" layoutX="217.0"
+									layoutY="295.0" prefHeight="25.0" prefWidth="95.0"
+									AnchorPane.leftAnchor="217.0" AnchorPane.rightAnchor="424.0" />
+								<ComboBox fx:id="cmbMonday" layoutX="448.0"
+									layoutY="42.0" prefHeight="25.0" prefWidth="142.0"
+									AnchorPane.rightAnchor="105.0" />
+								<Label fx:id="lblTuesday" layoutX="364.0" layoutY="73.0"
+									prefHeight="17.0" prefWidth="60.0" text="MARTES"
+									AnchorPane.rightAnchor="271.0" />
+								<Label fx:id="lblWednesday" layoutX="364.0"
+									layoutY="100.0" prefHeight="17.0" prefWidth="70.0"
+									text="MIÉRCOLES" AnchorPane.rightAnchor="261.0" />
+								<Label fx:id="lblThursday" layoutX="364.0" layoutY="127.0"
+									prefHeight="17.0" prefWidth="49.0" text="JUEVES"
+									AnchorPane.rightAnchor="282.0" />
+								<Label fx:id="lblFriday" layoutX="364.0" layoutY="154.0"
+									prefHeight="17.0" prefWidth="60.0" text="VIERNES"
+									AnchorPane.rightAnchor="271.0" />
+								<Label fx:id="lblSunday" layoutX="364.0" layoutY="208.0"
+									prefHeight="17.0" prefWidth="60.0" text="DOMINGO"
+									AnchorPane.rightAnchor="271.0" />
+								<Label fx:id="lblSaturday" layoutX="364.0" layoutY="181.0"
+									prefHeight="17.0" prefWidth="60.0" text="SÁBADO"
+									AnchorPane.rightAnchor="271.0" />
+								<ComboBox fx:id="cmbTuesday" layoutX="448.0"
+									layoutY="69.0" prefHeight="25.0" prefWidth="142.0"
+									AnchorPane.rightAnchor="105.0" />
+								<ComboBox fx:id="cmbWednesday" layoutX="448.0"
+									layoutY="96.0" prefHeight="25.0" prefWidth="142.0"
+									AnchorPane.rightAnchor="105.0" />
+								<ComboBox fx:id="cmbThursday" layoutX="448.0"
+									layoutY="123.0" prefHeight="25.0" prefWidth="142.0"
+									AnchorPane.rightAnchor="105.0" />
+								<ComboBox fx:id="cmbFriday" layoutX="448.0"
+									layoutY="150.0" prefHeight="25.0" prefWidth="142.0"
+									AnchorPane.rightAnchor="105.0" />
+								<ComboBox fx:id="cmbSaturday" layoutX="448.0"
+									layoutY="177.0" prefHeight="25.0" prefWidth="142.0"
+									AnchorPane.rightAnchor="105.0" />
+								<ComboBox fx:id="cmbSunday" layoutX="448.0"
+									layoutY="204.0" prefHeight="25.0" prefWidth="142.0"
+									AnchorPane.rightAnchor="105.0" />
+								<Label fx:id="txtResult" layoutX="219.0" layoutY="14.0"
+									prefHeight="17.0" prefWidth="410.0" />
+								<BorderPane layoutX="14.0" layoutY="361.0"
+									prefHeight="55.0" prefWidth="940.0" AnchorPane.leftAnchor="0.0"
+									AnchorPane.rightAnchor="0.0">
+									<center>
+										<Button fx:id="btnSave" mnemonicParsing="false"
+											onAction="#saveUser" text="GUARDAR"
+											BorderPane.alignment="CENTER" />
+									</center>
+								</BorderPane>
 							</children>
 						</AnchorPane>
 					</content>
 				</Tab>
 				<Tab fx:id="tabDeleteUser" text="Eliminar usuario">
 					<content>
-						<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="698.0">
+						<AnchorPane minHeight="0.0" minWidth="0.0"
+							prefHeight="180.0" prefWidth="698.0">
 							<children>
-								<Label fx:id="lblUserDelete" layoutX="49.0" layoutY="47.0" text="USUARIO" />
-								<ComboBox fx:id="cmbUserDelete" layoutX="128.0" layoutY="43.0" prefHeight="25.0" prefWidth="465.0" />
-								<Button fx:id="btnDeleteUser" layoutX="248.0" layoutY="208.0" mnemonicParsing="false" onAction="#deleteUser" text="ELIMINAR USUARIO" />
-								<Label fx:id="txtWarningDelete1" layoutX="53.0" layoutY="84.0" prefHeight="28.0" prefWidth="566.0" text="Esta acción no es reversible. Al eliminar este usuario se perderán todos los datos. Revise los campos." wrapText="true" />
-								<Label fx:id="lblDniDelete" layoutX="49.0" layoutY="158.0" text="DNI" />
-								<TextField fx:id="fieldDniDelete" layoutX="128.0" layoutY="154.0" prefHeight="25.0" prefWidth="190.0" />
-								<Label fx:id="txtWarningDelete2" layoutX="53.0" layoutY="112.0" prefHeight="25.0" prefWidth="566.0" text="Para asegurar que no hay errores, debe introducir el DNI de la persona que desea eliminar." wrapText="true" />
-								<Label fx:id="txtResultDelete" layoutX="248.0" layoutY="244.0" prefHeight="17.0" prefWidth="388.0" />
-                        <HBox layoutX="291.0" layoutY="308.0" prefHeight="100.0" prefWidth="200.0" />
+								<Label fx:id="lblUserDelete" layoutX="49.0" layoutY="47.0"
+									text="USUARIO" />
+								<ComboBox fx:id="cmbUserDelete" layoutX="128.0"
+									layoutY="43.0" prefHeight="25.0" prefWidth="465.0" />
+								<Button fx:id="btnDeleteUser" layoutX="248.0"
+									layoutY="208.0" mnemonicParsing="false" onAction="#deleteUser"
+									text="ELIMINAR USUARIO" />
+								<Label fx:id="txtWarningDelete1" layoutX="53.0"
+									layoutY="84.0" prefHeight="28.0" prefWidth="566.0"
+									text="Esta acción no es reversible. Al eliminar este usuario se perderán todos los datos. Revise los campos."
+									wrapText="true" />
+								<Label fx:id="lblDniDelete" layoutX="49.0" layoutY="158.0"
+									text="DNI" />
+								<TextField fx:id="fieldDniDelete" layoutX="128.0"
+									layoutY="154.0" prefHeight="25.0" prefWidth="190.0" />
+								<Label fx:id="txtWarningDelete2" layoutX="53.0"
+									layoutY="112.0" prefHeight="25.0" prefWidth="566.0"
+									text="Para asegurar que no hay errores, debe introducir el DNI de la persona que desea eliminar."
+									wrapText="true" />
+								<Label fx:id="txtResultDelete" layoutX="248.0"
+									layoutY="244.0" prefHeight="17.0" prefWidth="388.0" />
+								<HBox layoutX="291.0" layoutY="308.0" prefHeight="100.0"
+									prefWidth="200.0" />
 							</children>
 						</AnchorPane>
 					</content>
 				</Tab>
 				<Tab text="Roles">
 					<content>
-						<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+						<AnchorPane minHeight="0.0" minWidth="0.0"
+							prefHeight="180.0" prefWidth="200.0">
 							<children>
 								<Label layoutX="32.0" layoutY="31.0" text="Roles actuales" />
-								<TableView layoutX="70.0" layoutY="60.0" prefHeight="111.0" prefWidth="267.0">
+								<TableView layoutX="70.0" layoutY="60.0"
+									prefHeight="111.0" prefWidth="267.0">
 									<columns>
 										<TableColumn prefWidth="93.0" text="Rol" />
 										<TableColumn prefWidth="75.0" text="N" />
@@ -109,10 +208,13 @@
 				</Tab>
 				<Tab text="Horarios">
 					<content>
-						<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="927.0">
+						<AnchorPane minHeight="0.0" minWidth="0.0"
+							prefHeight="180.0" prefWidth="927.0">
 							<children>
-								<Label layoutX="32.0" layoutY="31.0" text="Horarios actuales" />
-								<TableView layoutX="70.0" layoutY="60.0" prefHeight="111.0" prefWidth="267.0">
+								<Label layoutX="32.0" layoutY="31.0"
+									text="Horarios actuales" />
+								<TableView layoutX="70.0" layoutY="60.0"
+									prefHeight="111.0" prefWidth="267.0">
 									<columns>
 										<TableColumn prefWidth="93.0" text="Horario" />
 									</columns>
@@ -124,80 +226,95 @@
 				</Tab>
 			</tabs>
 		</JFXTabPane>
-      <AnchorPane layoutX="86.0" prefHeight="55.0" prefWidth="200.0" styleClass="pageTitle" stylesheets="@application.css">
-         <children>
-            <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="28.0" layoutY="13.0">
-               <image>
-                  <Image url="@../resources/assets/admin_high_icon.png" />
-               </image>
-            </ImageView>
-            <Label layoutX="62.0" layoutY="16.0" text="Administrador" textFill="#f0fbfd">
-               <font>
-                  <Font name="System Bold" size="15.0" />
-               </font>
-            </Label>
-         </children>
-      </AnchorPane>
-      <HBox prefHeight="650.0" prefWidth="200.0">
-         <children>
-      		<VBox fx:id="drawer" fillWidth="false" prefHeight="700.0" prefWidth="50.0" styleClass="menu" stylesheets="@application.css">
-      			<children>
-      				<Pane prefHeight="130.0" prefWidth="76.0" />
-                  <JFXButton fx:id="btnSales" alignment="CENTER" contentDisplay="CENTER" prefHeight="55.0" prefWidth="50.0" styleClass="menuButton" stylesheets="@application.css" text=" ">
-                     <graphic>
-                        <ImageView fitHeight="40.0" fitWidth="40.0">
-                           <image>
-                              <Image url="@../resources/assets/sales_icon.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </JFXButton>
-                  <JFXButton fx:id="btnConsultation" alignment="CENTER" contentDisplay="CENTER" prefHeight="55.0" prefWidth="50.0" styleClass="menuButton" stylesheets="@application.css" text=" ">
-                     <graphic>
-                        <ImageView fitHeight="40.0" fitWidth="40.0">
-                           <image>
-                              <Image url="@../resources/assets/consult_icon.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </JFXButton>
-                  <JFXButton fx:id="btnAddArticle" alignment="CENTER" contentDisplay="CENTER" prefHeight="55.0" prefWidth="50.0" styleClass="menuButton" stylesheets="@application.css" text=" ">
-                     <graphic>
-                        <ImageView fitHeight="40.0" fitWidth="40.0">
-                           <image>
-                              <Image url="@../resources/assets/add_icon.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </JFXButton>
-                  <JFXButton fx:id="btnStatistics" alignment="CENTER" contentDisplay="CENTER" prefHeight="55.0" prefWidth="50.0" styleClass="menuButton" stylesheets="@application.css" text=" ">
-                     <graphic>
-                        <ImageView fitHeight="40.0" fitWidth="40.0">
-                           <image>
-                              <Image url="@../resources/assets/statistics_icon.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </JFXButton>
-                  <JFXButton fx:id="btnAdministrator" alignment="CENTER" contentDisplay="CENTER" prefHeight="55.0" prefWidth="50.0" stylesheets="@application.css" text=" ">
-                     <styleClass>
-                        <String fx:value="selectedMenuButton" />
-                        <String fx:value="menuButton" />
-                     </styleClass>
-                     <graphic>
-                        <ImageView fitHeight="40.0" fitWidth="40.0">
-                           <image>
-                              <Image url="@../resources/assets/admin_high_icon.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </JFXButton>
-      			</children>
-               <padding>
-                  <Insets top="10.0" />
-               </padding>
-      		</VBox>
-         </children>
-      </HBox>
+		<AnchorPane layoutX="86.0" prefHeight="55.0"
+			prefWidth="200.0" styleClass="pageTitle"
+			stylesheets="@application.css">
+			<children>
+				<ImageView fitHeight="25.0" fitWidth="25.0" layoutX="28.0"
+					layoutY="13.0">
+					<image>
+						<Image url="@../resources/assets/admin_high_icon.png" />
+					</image>
+				</ImageView>
+				<Label layoutX="62.0" layoutY="16.0" text="Administrador"
+					textFill="#f0fbfd">
+					<font>
+						<Font name="System Bold" size="15.0" />
+					</font>
+				</Label>
+			</children>
+		</AnchorPane>
+		<HBox prefHeight="650.0" prefWidth="200.0">
+			<children>
+				<VBox fx:id="drawer" fillWidth="false" prefHeight="700.0"
+					prefWidth="50.0" styleClass="menu" stylesheets="@application.css">
+					<children>
+						<Pane prefHeight="130.0" prefWidth="76.0" />
+						<JFXButton fx:id="btnSales" alignment="CENTER"
+							contentDisplay="CENTER" prefHeight="55.0" prefWidth="50.0"
+							styleClass="menuButton" stylesheets="@application.css" text=" ">
+							<graphic>
+								<ImageView fitHeight="40.0" fitWidth="40.0">
+									<image>
+										<Image url="@../resources/assets/sales_icon.png" />
+									</image>
+								</ImageView>
+							</graphic>
+						</JFXButton>
+						<JFXButton fx:id="btnConsultation" alignment="CENTER"
+							contentDisplay="CENTER" prefHeight="55.0" prefWidth="50.0"
+							styleClass="menuButton" stylesheets="@application.css" text=" ">
+							<graphic>
+								<ImageView fitHeight="40.0" fitWidth="40.0">
+									<image>
+										<Image url="@../resources/assets/consult_icon.png" />
+									</image>
+								</ImageView>
+							</graphic>
+						</JFXButton>
+						<JFXButton fx:id="btnAddArticle" alignment="CENTER"
+							contentDisplay="CENTER" prefHeight="55.0" prefWidth="50.0"
+							styleClass="menuButton" stylesheets="@application.css" text=" ">
+							<graphic>
+								<ImageView fitHeight="40.0" fitWidth="40.0">
+									<image>
+										<Image url="@../resources/assets/add_icon.png" />
+									</image>
+								</ImageView>
+							</graphic>
+						</JFXButton>
+						<JFXButton fx:id="btnStatistics" alignment="CENTER"
+							contentDisplay="CENTER" prefHeight="55.0" prefWidth="50.0"
+							styleClass="menuButton" stylesheets="@application.css" text=" ">
+							<graphic>
+								<ImageView fitHeight="40.0" fitWidth="40.0">
+									<image>
+										<Image url="@../resources/assets/statistics_icon.png" />
+									</image>
+								</ImageView>
+							</graphic>
+						</JFXButton>
+						<JFXButton fx:id="btnAdministrator" alignment="CENTER"
+							contentDisplay="CENTER" prefHeight="55.0" prefWidth="50.0"
+							stylesheets="@application.css" text=" ">
+							<styleClass>
+								<String fx:value="selectedMenuButton" />
+								<String fx:value="menuButton" />
+							</styleClass>
+							<graphic>
+								<ImageView fitHeight="40.0" fitWidth="40.0">
+									<image>
+										<Image url="@../resources/assets/admin_high_icon.png" />
+									</image>
+								</ImageView>
+							</graphic>
+						</JFXButton>
+					</children>
+					<padding>
+						<Insets top="10.0" />
+					</padding>
+				</VBox>
+			</children>
+		</HBox>
 	</children>
 </AnchorPane>

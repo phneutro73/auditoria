@@ -404,9 +404,9 @@ public class controller_administrator {
 
 			// TODO: Sacar el nombre y apellido del usuario y asignarlo a las variables
 			// lblUserName y lblUserSurname
-			
+
 			AdministratorPageConnection adminDB = new AdministratorPageConnection();
-			
+
 			btnSales.setDisableVisualFocus(true);
 
 			List<String> schedules = adminDB.listSchedules();
