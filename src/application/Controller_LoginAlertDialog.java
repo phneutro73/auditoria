@@ -10,25 +10,25 @@ import javafx.stage.Stage;
 
 public class Controller_LoginAlertDialog {
 
-    @FXML
-    private AnchorPane parent;
-    
-    @FXML
-    private Label btnClose;
+	@FXML
+	private AnchorPane parent;
 
-    @FXML
-    private JFXButton btnAccept;
-    
+	@FXML
+	private Label btnClose;
+
+	@FXML
+	private JFXButton btnAccept;
+
 	private double xOffSet = 0;
 	private double yOffSet = 0;
 
-    @FXML
-    void closeScreen(MouseEvent event) {
-    	Stage stage = (Stage) btnAccept.getScene().getWindow();
-        stage.close();
-    }
-    
-    private void makeStageDragable() {
+	@FXML
+	void closeScreen(MouseEvent event) {
+		Stage stage = (Stage) btnAccept.getScene().getWindow();
+		stage.close();
+	}
+
+	private void makeStageDragable() {
 
 		parent.setOnMousePressed((event) -> {
 			xOffSet = event.getSceneX();
