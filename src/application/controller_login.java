@@ -35,6 +35,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import db.LoginPageConnection;
 
@@ -114,10 +115,13 @@ public class controller_login {
 
 			} else {
 
-				FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/administrator_page.fxml"));
+				FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/LoginAlertDialog.fxml"));
+				Controller_LoginAlertDialog control = new Controller_LoginAlertDialog();
+				loader.setController(control);
 				Parent root = loader.load();
 
 				Stage stage = new Stage();
+				stage.initStyle(StageStyle.UNDECORATED);
 				stage.setScene(new Scene(root));
 				stage.show();
 
@@ -125,11 +129,14 @@ public class controller_login {
 			// SOLO SI EL USUARIO EXISTE Y LA CONTRASEÑA ES CORRECTA
 
 		} catch (Exception e) {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/administrator_page.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/LoginAlertDialog.fxml"));
+			Controller_LoginAlertDialog control = new Controller_LoginAlertDialog();
+			loader.setController(control);
 			Parent root = loader.load();
 
 			Stage stage = new Stage();
 			stage.setScene(new Scene(root));
+			stage.initStyle(StageStyle.UNDECORATED);
 			stage.show();
 			System.out.println(e.toString());
 		}
