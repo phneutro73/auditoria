@@ -52,7 +52,7 @@
 
 .menuButton:hover {
 	-fx-background-color: -hover-almost-black-color;
-	-fx-border-width: 0px 0px 0px 3px;
+	-fx-border-width: 0.0px 0.0px 0.0px 3.0px;
 	-fx-border-color: -soft-color;
 	-fx-border-style: solid;
 }
@@ -61,7 +61,7 @@
 	-fx-pref-width: 300.0;
 	-fx-pref-height: 60.0;
 	-fx-background-color: -black-color;
-	-fx-border-width: 0px 0px 0px 3px;
+	-fx-border-width: 0.0px 0.0px 0.0px 3.0px;
 	-fx-border-color: -main-color;
 	-fx-border-style: solid;
 }
@@ -72,7 +72,7 @@
 
 .expandMenuButton:hover {
 	-fx-background-color: -hover-almost-black-color;
-	-fx-border-width: 0px 0px 0px 3px;
+	-fx-border-width: 0.0px 0.0px 0.0px 3.0px;
 	-fx-border-color: -soft-color;
 	-fx-border-style: solid;
 }

@@ -38,169 +38,168 @@ import db.AdministratorPageConnection;
 public class controller_administrator {
 
 	@FXML
-    private VBox drawer;
+	private VBox drawer;
 
-    @FXML
-    private HBox btnMenu;
+	@FXML
+	private HBox btnMenu;
 
-    @FXML
-    private HBox btnSales;
+	@FXML
+	private HBox btnSales;
 
-    @FXML
-    private HBox btnConsultation;
+	@FXML
+	private HBox btnConsultation;
 
-    @FXML
-    private HBox btnAddArticle;
+	@FXML
+	private HBox btnAddArticle;
 
-    @FXML
-    private HBox btnStatistics;
+	@FXML
+	private HBox btnStatistics;
 
-    @FXML
-    private HBox btnAdministrator;
+	@FXML
+	private HBox btnAdministrator;
 
-    @FXML
-    private Tab tabAddNewUser;
+	@FXML
+	private Tab tabAddNewUser;
 
-    @FXML
-    private AnchorPane tabAddUser;
+	@FXML
+	private AnchorPane tabAddUser;
 
-    @FXML
-    private Label lblName;
+	@FXML
+	private Label lblName;
 
-    @FXML
-    private Label lblSurname;
+	@FXML
+	private Label lblSurname;
 
-    @FXML
-    private Label lblDat;
+	@FXML
+	private Label lblDat;
 
-    @FXML
-    private Label lblDni;
+	@FXML
+	private Label lblDni;
 
-    @FXML
-    private Label lblEmail;
+	@FXML
+	private Label lblEmail;
 
-    @FXML
-    private Label lblUser;
+	@FXML
+	private Label lblUser;
 
-    @FXML
-    private Label lblPassword;
+	@FXML
+	private Label lblPassword;
 
-    @FXML
-    private Label lblEmail2;
+	@FXML
+	private Label lblEmail2;
 
-    @FXML
-    private Label lblPassword2;
+	@FXML
+	private Label lblPassword2;
 
-    @FXML
-    private Label lblRole;
+	@FXML
+	private Label lblRole;
 
-    @FXML
-    private Label lblMonday;
+	@FXML
+	private Label lblMonday;
 
-    @FXML
-    private TextField fieldName;
+	@FXML
+	private TextField fieldName;
 
-    @FXML
-    private TextField fieldSurname;
+	@FXML
+	private TextField fieldSurname;
 
-    @FXML
-    private TextField fieldDNI;
+	@FXML
+	private TextField fieldDNI;
 
-    @FXML
-    private DatePicker fieldDat;
+	@FXML
+	private DatePicker fieldDat;
 
-    @FXML
-    private TextField fieldEmail;
+	@FXML
+	private TextField fieldEmail;
 
-    @FXML
-    private TextField fieldEmail2;
+	@FXML
+	private TextField fieldEmail2;
 
-    @FXML
-    private TextField fieldUser;
+	@FXML
+	private TextField fieldUser;
 
-    @FXML
-    private PasswordField fieldPassword;
+	@FXML
+	private PasswordField fieldPassword;
 
-    @FXML
-    private PasswordField fieldPassword2;
+	@FXML
+	private PasswordField fieldPassword2;
 
-    @FXML
-    private ComboBox<String> fieldRole;
+	@FXML
+	private ComboBox<String> fieldRole;
 
-    @FXML
-    private ComboBox<String> cmbMonday;
+	@FXML
+	private ComboBox<String> cmbMonday;
 
-    @FXML
-    private Label lblTuesday;
+	@FXML
+	private Label lblTuesday;
 
-    @FXML
-    private Label lblWednesday;
+	@FXML
+	private Label lblWednesday;
 
-    @FXML
-    private Label lblThursday;
+	@FXML
+	private Label lblThursday;
 
-    @FXML
-    private Label lblFriday;
+	@FXML
+	private Label lblFriday;
 
-    @FXML
-    private Label lblSunday;
+	@FXML
+	private Label lblSunday;
 
-    @FXML
-    private Label lblSaturday;
+	@FXML
+	private Label lblSaturday;
 
-    @FXML
-    private ComboBox<String> cmbTuesday;
+	@FXML
+	private ComboBox<String> cmbTuesday;
 
-    @FXML
-    private ComboBox<String> cmbWednesday;
+	@FXML
+	private ComboBox<String> cmbWednesday;
 
-    @FXML
-    private ComboBox<String> cmbThursday;
+	@FXML
+	private ComboBox<String> cmbThursday;
 
-    @FXML
-    private ComboBox<String> cmbFriday;
+	@FXML
+	private ComboBox<String> cmbFriday;
 
-    @FXML
-    private ComboBox<String> cmbSaturday;
+	@FXML
+	private ComboBox<String> cmbSaturday;
 
-    @FXML
-    private ComboBox<String> cmbSunday;
+	@FXML
+	private ComboBox<String> cmbSunday;
 
-    @FXML
-    private Label txtResult;
+	@FXML
+	private Label txtResult;
 
-    @FXML
-    private Button btnSave;
+	@FXML
+	private Button btnSave;
 
-    @FXML
-    private Tab tabDeleteUser;
+	@FXML
+	private Tab tabDeleteUser;
 
-    @FXML
-    private Label lblUserDelete;
+	@FXML
+	private Label lblUserDelete;
 
-    @FXML
-    private ComboBox<String> cmbUserDelete;
+	@FXML
+	private ComboBox<String> cmbUserDelete;
 
-    @FXML
-    private Button btnDeleteUser;
+	@FXML
+	private Button btnDeleteUser;
 
-    @FXML
-    private Label txtWarningDelete1;
+	@FXML
+	private Label txtWarningDelete1;
 
-    @FXML
-    private Label lblDniDelete;
+	@FXML
+	private Label lblDniDelete;
 
-    @FXML
-    private TextField fieldDniDelete;
+	@FXML
+	private TextField fieldDniDelete;
 
-    @FXML
-    private Label txtWarningDelete2;
+	@FXML
+	private Label txtWarningDelete2;
 
-    @FXML
-    private Label txtResultDelete;
-    
-    
-    boolean isExpanded = false;
+	@FXML
+	private Label txtResultDelete;
+
+	boolean isExpanded = false;
 
 	@FXML
 	void saveUser(ActionEvent event) {
@@ -483,18 +482,18 @@ public class controller_administrator {
 		}
 
 	}
-	
-	 @FXML
-    void expandMenu(MouseEvent event) {
 
-		 if(isExpanded) {
-			 drawer.setPrefWidth(60);
-			 isExpanded = false;
-		 } else {
-			 drawer.setPrefWidth(190);
-			 isExpanded = true;
-		 }
-		 
-    }
+	@FXML
+	void expandMenu(MouseEvent event) {
+
+		if (isExpanded) {
+			drawer.setPrefWidth(60);
+			isExpanded = false;
+		} else {
+			drawer.setPrefWidth(190);
+			isExpanded = true;
+		}
+
+	}
 
 }
