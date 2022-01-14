@@ -6,8 +6,9 @@
   	-soft-color2: '#DDEDF0';
   	-soft-color2-selected: '#CAE1E6';
   	-almost-black-color: '#434345';
-  	-hover-black-color: '#313333';
+  	-hover-almost-black-color: '#313333';
   	-black-color: '#231F20';
+  	-hover-black-color: '#000000';
   	-red-color: '#E81123'
 }
 
@@ -40,19 +41,40 @@
 .menu {
 	-fx-background-color: -almost-black-color;
 	-fx-pref-width: 60.0;
+	
 }
 
 .menuButton {
 	-fx-pref-width: 300.0;
+	-fx-pref-height: 60.0;
 	-fx-background-radius: 0.0px 0.0px 0.0px 0.0px;
 }
 
 .menuButton:hover {
-	-fx-background-color: -hover-black-color;
+	-fx-background-color: -hover-almost-black-color;
+	-fx-border-width: 0px 0px 0px 3px;
+	-fx-border-color: -soft-color;
+	-fx-border-style: solid;
 }
 
 .selectedMenuButton {
+	-fx-pref-width: 300.0;
+	-fx-pref-height: 60.0;
 	-fx-background-color: -black-color;
+	-fx-border-width: 0px 0px 0px 3px;
+	-fx-border-color: -main-color;
+	-fx-border-style: solid;
+}
+
+.selectedMenuButton:hover {
+	-fx-background-color: -hover-black-color;
+}
+
+.expandMenuButton:hover {
+	-fx-background-color: -hover-almost-black-color;
+	-fx-border-width: 0px 0px 0px 3px;
+	-fx-border-color: -soft-color;
+	-fx-border-style: solid;
 }
 
 .pageTitle {
@@ -66,5 +88,15 @@
 	-fx-background-radius: 5.0px 5.0px 5.0px 5.0px;
 	-fx-pref-width: 100.0;
 	-fx-text-fill: white;
+}
+
+.labelMenuButtons {
+	-fx-text-fill: -soft-color;
+	-fx-ellipsis-string: '';
+}
+
+.labelMenuSelectedButton {
+	-fx-text-fill: white;
+	-fx-ellipsis-string: '';
 }
 
