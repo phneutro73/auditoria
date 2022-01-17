@@ -14,6 +14,8 @@ import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXTextField;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
@@ -23,6 +25,8 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.Tab;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -181,8 +185,8 @@ public class controller_administrator {
 	@FXML
 	private ComboBox<String> cmbUserDelete;
 
-	@FXML
-	private Button btnDeleteUser;
+	// @FXML
+	// private Button btnDeleteUser;
 
 	@FXML
 	private Label txtWarningDelete1;
@@ -198,6 +202,90 @@ public class controller_administrator {
 
 	@FXML
 	private Label txtResultDelete;
+
+	// Tab usuario
+	@FXML
+	private JFXTextField txtUserSearch;
+
+	@FXML
+	private TableView<String> userTable;
+
+	@FXML
+	private TableColumn<String, String> id_userTable;
+
+	@FXML
+	private TableColumn<String, String> name_userTable;
+
+	@FXML
+	private TableColumn<String, String> surname_userTable;
+
+	@FXML
+	private TableColumn<String, String> dni_userTable;
+
+	@FXML
+	private TableColumn<String, String> date_userTable;
+
+	@FXML
+	private TableColumn<String, String> role_userTable;
+
+	@FXML
+	private TableColumn<String, String> schedule_userTable;
+
+	@FXML
+	private JFXButton btnAddUser;
+
+	@FXML
+	private JFXButton btnEditUser;
+
+	@FXML
+	private JFXButton btnDeleteUser;
+
+	// tab schedules
+	@FXML
+	private TableView<String> scheduleTable;
+
+	@FXML
+	private TableColumn<String, String> id_scheduleTable;
+
+	@FXML
+	private TableColumn<String, String> name_scheduleTable;
+
+	@FXML
+	private TableColumn<String, String> checkIn_scheduleTable;
+
+	@FXML
+	private TableColumn<String, String> checkOut_scheduleTable;
+
+	@FXML
+	private JFXButton btnAddSchedule;
+
+	@FXML
+	private JFXButton btnEditSchedule;
+
+	@FXML
+	private JFXButton btnDeleteSchedule;
+
+	// tab role
+	@FXML
+	private TableView<String> roleTable;
+
+	@FXML
+	private TableColumn<String, String> id_roleTable;
+
+	@FXML
+	private TableColumn<String, String> name_roleTable;
+
+	@FXML
+	private TableColumn<String, String> numUsers_roleTable;
+
+	@FXML
+	private JFXButton btnAddRole;
+
+	@FXML
+	private JFXButton btnEditRole;
+
+	@FXML
+	private JFXButton btnDeleteRole;
 
 	boolean isExpanded = false;
 
@@ -421,64 +509,59 @@ public class controller_administrator {
 
 			AdministratorPageConnection adminDB = new AdministratorPageConnection();
 
-			List<String> schedules = adminDB.listSchedules();
-			fieldRole.getItems().removeAll(fieldRole.getItems());
-			fieldRole.getItems().addAll(adminDB.listRoles());
-			fieldRole.getSelectionModel().select("-");
+			/*
+			 * List<String> schedules = adminDB.listSchedules();
+			 * fieldRole.getItems().removeAll(fieldRole.getItems());
+			 * fieldRole.getItems().addAll(adminDB.listRoles());
+			 * fieldRole.getSelectionModel().select("-");
+			 * 
+			 * cmbMonday.getItems().removeAll(fieldRole.getItems());
+			 * cmbMonday.getItems().addAll(schedules);
+			 * cmbMonday.getSelectionModel().select("-");
+			 * 
+			 * cmbTuesday.getItems().removeAll(fieldRole.getItems());
+			 * cmbTuesday.getItems().addAll(schedules);
+			 * cmbTuesday.getSelectionModel().select("-");
+			 * 
+			 * cmbWednesday.getItems().removeAll(fieldRole.getItems());
+			 * cmbWednesday.getItems().addAll(schedules);
+			 * cmbWednesday.getSelectionModel().select("-");
+			 * 
+			 * cmbThursday.getItems().removeAll(fieldRole.getItems());
+			 * cmbThursday.getItems().addAll(schedules);
+			 * cmbThursday.getSelectionModel().select("-");
+			 * 
+			 * cmbFriday.getItems().removeAll(fieldRole.getItems());
+			 * cmbFriday.getItems().addAll(schedules);
+			 * cmbFriday.getSelectionModel().select("-");
+			 * 
+			 * cmbSaturday.getItems().removeAll(fieldRole.getItems());
+			 * cmbSaturday.getItems().addAll(schedules);
+			 * cmbSaturday.getSelectionModel().select("-");
+			 * 
+			 * cmbSunday.getItems().removeAll(fieldRole.getItems());
+			 * cmbSunday.getItems().addAll(schedules);
+			 * cmbSunday.getSelectionModel().select("-");
+			 * 
+			 * List<String> list = new ArrayList<String>(); list.add("-");
+			 * 
+			 * for (int i = 0; i <= 24; i++) { String hour = Integer.toString(i); if
+			 * (hour.length() < 2) { hour = "0" + hour; } for (int j = 0; j <= 46; j = j +
+			 * 15) { String minute = Integer.toString(j); if (minute.length() < 2) { minute
+			 * = "0" + minute; } list.add(hour + ":" + minute); } }
+			 * 
+			 * List<String> activeUsers = adminDB.listActiveUsers();
+			 */
 
-			cmbMonday.getItems().removeAll(fieldRole.getItems());
-			cmbMonday.getItems().addAll(schedules);
-			cmbMonday.getSelectionModel().select("-");
-
-			cmbTuesday.getItems().removeAll(fieldRole.getItems());
-			cmbTuesday.getItems().addAll(schedules);
-			cmbTuesday.getSelectionModel().select("-");
-
-			cmbWednesday.getItems().removeAll(fieldRole.getItems());
-			cmbWednesday.getItems().addAll(schedules);
-			cmbWednesday.getSelectionModel().select("-");
-
-			cmbThursday.getItems().removeAll(fieldRole.getItems());
-			cmbThursday.getItems().addAll(schedules);
-			cmbThursday.getSelectionModel().select("-");
-
-			cmbFriday.getItems().removeAll(fieldRole.getItems());
-			cmbFriday.getItems().addAll(schedules);
-			cmbFriday.getSelectionModel().select("-");
-
-			cmbSaturday.getItems().removeAll(fieldRole.getItems());
-			cmbSaturday.getItems().addAll(schedules);
-			cmbSaturday.getSelectionModel().select("-");
-
-			cmbSunday.getItems().removeAll(fieldRole.getItems());
-			cmbSunday.getItems().addAll(schedules);
-			cmbSunday.getSelectionModel().select("-");
-
-			List<String> list = new ArrayList<String>();
-			list.add("-");
-
-			for (int i = 0; i <= 24; i++) {
-				String hour = Integer.toString(i);
-				if (hour.length() < 2) {
-					hour = "0" + hour;
-				}
-				for (int j = 0; j <= 46; j = j + 15) {
-					String minute = Integer.toString(j);
-					if (minute.length() < 2) {
-						minute = "0" + minute;
-					}
-					list.add(hour + ":" + minute);
-				}
-			}
-
-			List<String> activeUsers = adminDB.listActiveUsers();
-
-			cmbUserDelete.getItems().removeAll(cmbUserDelete.getItems());
-			cmbUserDelete.getItems().addAll(activeUsers);
-			cmbUserDelete.getSelectionModel().select("-");
+			/*
+			 * cmbUserDelete.getItems().removeAll(cmbUserDelete.getItems());
+			 * cmbUserDelete.getItems().addAll(activeUsers);
+			 * cmbUserDelete.getSelectionModel().select("-");
+			 */
 
 		} catch (Exception e) {
-			System.out.println("ERROR: controller_administrator.java - initialize() - " + e.toString());
+			System.out.println("ERROR: controller_administrator.java - initialize() - " + e.toString() + "\n");
+			e.printStackTrace();
 		}
 
 	}
@@ -493,6 +576,46 @@ public class controller_administrator {
 			drawer.setPrefWidth(190);
 			isExpanded = true;
 		}
+
+	}
+
+	@FXML
+	void addUser(ActionEvent event) {
+
+	}
+
+	@FXML
+	void editUser(ActionEvent event) {
+
+	}
+
+	@FXML
+	void addRole(ActionEvent event) {
+
+	}
+
+	@FXML
+	void addSchedule(ActionEvent event) {
+
+	}
+
+	@FXML
+	void deleteRole(ActionEvent event) {
+
+	}
+
+	@FXML
+	void deleteSchedule(ActionEvent event) {
+
+	}
+
+	@FXML
+	void editRole(ActionEvent event) {
+
+	}
+
+	@FXML
+	void editSchedule(ActionEvent event) {
 
 	}
 
