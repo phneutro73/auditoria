@@ -1,5 +1,6 @@
 package application;
 
+import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
@@ -18,7 +19,10 @@ import com.jfoenix.controls.JFXTextField;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
@@ -36,7 +40,8 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import db.AdministratorPageConnection;
 
 public class controller_administrator {
@@ -553,12 +558,6 @@ public class controller_administrator {
 			 * List<String> activeUsers = adminDB.listActiveUsers();
 			 */
 
-			/*
-			 * cmbUserDelete.getItems().removeAll(cmbUserDelete.getItems());
-			 * cmbUserDelete.getItems().addAll(activeUsers);
-			 * cmbUserDelete.getSelectionModel().select("-");
-			 */
-
 		} catch (Exception e) {
 			System.out.println("ERROR: controller_administrator.java - initialize() - " + e.toString() + "\n");
 			e.printStackTrace();
@@ -580,7 +579,16 @@ public class controller_administrator {
 	}
 
 	@FXML
-	void addUser(ActionEvent event) {
+	void addUser(ActionEvent event) throws IOException {
+
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AddNewUserPage.fxml"));
+		ControllerAddNewUser control = new ControllerAddNewUser();
+		loader.setController(control);
+		Parent root = loader.load();
+
+		Stage stage = new Stage();
+		stage.setScene(new Scene(root));
+		stage.show();
 
 	}
 
@@ -590,12 +598,30 @@ public class controller_administrator {
 	}
 
 	@FXML
-	void addRole(ActionEvent event) {
+	void addRole(ActionEvent event) throws IOException {
+
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AddNewRolePage.fxml"));
+		ControllerAddNewRole control = new ControllerAddNewRole();
+		loader.setController(control);
+		Parent root = loader.load();
+
+		Stage stage = new Stage();
+		stage.setScene(new Scene(root));
+		stage.show();
 
 	}
 
 	@FXML
-	void addSchedule(ActionEvent event) {
+	void addSchedule(ActionEvent event) throws IOException {
+
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AddNewSchedulePage.fxml"));
+		ControllerAddNewSchedule control = new ControllerAddNewSchedule();
+		loader.setController(control);
+		Parent root = loader.load();
+
+		Stage stage = new Stage();
+		stage.setScene(new Scene(root));
+		stage.show();
 
 	}
 

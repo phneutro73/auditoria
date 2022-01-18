@@ -163,7 +163,8 @@
 				</VBox>
 				<VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
 					<children>
-						<AnchorPane prefHeight="125.0" prefWidth="100.0">
+						<AnchorPane maxHeight="-Infinity" minHeight="-Infinity"
+							prefHeight="80.0" prefWidth="100.0" VBox.vgrow="NEVER">
 							<children>
 								<AnchorPane layoutX="29.0" prefHeight="55.0"
 									prefWidth="200.0" styleClass="pageTitle"
@@ -208,29 +209,6 @@
 																	AnchorPane.leftAnchor="0.0"
 																	AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 																	<children>
-																		<!-- <AnchorPane prefHeight="313.0" prefWidth="895.0" styleClass="card"> 
-																			<VBox.margin> <Insets bottom="7.5" left="15.0" right="15.0" top="17.0" /> 
-																			</VBox.margin> <children> <VBox alignment="TOP_CENTER" prefHeight="324.0" 
-																			prefWidth="895.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"> 
-																			<children> <Label styleClass="cardTitle" text="ELIMINAR USUARIO"> <VBox.margin> 
-																			<Insets bottom="30.0" left="30.0" right="30.0" top="30.0" /> </VBox.margin> 
-																			</Label> <HBox alignment="CENTER_LEFT" maxWidth="550.0" prefHeight="43.0" 
-																			prefWidth="550.0" spacing="20.0"> <VBox.margin> <Insets left="60.0" right="60.0" 
-																			/> </VBox.margin> <children> <Label fx:id="lblUserDelete" text="USUARIO" 
-																			/> <ComboBox fx:id="cmbUserDelete" prefHeight="25.0" prefWidth="465.0" /> 
-																			</children> </HBox> <Label fx:id="txtWarningDelete1" prefHeight="28.0" prefWidth="566.0" 
-																			text="Esta acción no es reversible. Al eliminar este usuario se perderán 
-																			todos los datos. Revise los campos." wrapText="true" /> <Label fx:id="txtWarningDelete2" 
-																			prefHeight="25.0" prefWidth="566.0" text="Para asegurar que no hay errores, 
-																			debe introducir el DNI de la persona que desea eliminar." wrapText="true" 
-																			/> <HBox alignment="CENTER_LEFT" maxWidth="550.0" prefHeight="43.0" prefWidth="550.0" 
-																			spacing="50.0"> <children> <Label fx:id="lblDniDelete" text="DNI" /> <TextField 
-																			fx:id="fieldDniDelete" prefHeight="25.0" prefWidth="190.0" /> </children> 
-																			</HBox> <Button fx:id="btnDeleteUser" mnemonicParsing="false" onAction="#deleteUser" 
-																			styleClass="buttonMainColor" stylesheets="@application.css" text="ELIMINAR" 
-																			BorderPane.alignment="CENTER"> <VBox.margin> <Insets top="30.0" /> </VBox.margin> 
-																			</Button> </children> <padding> <Insets left="60.0" right="60.0" /> </padding> 
-																			</VBox> </children> </AnchorPane> -->
 																		<AnchorPane prefHeight="492.0"
 																			prefWidth="895.0" styleClass="card">
 																			<VBox.margin>
@@ -373,108 +351,6 @@
 																				</VBox>
 																			</children>
 																		</AnchorPane>
-																		<!--<AnchorPane prefHeight="440.0" prefWidth="895.0" styleClass="card"> 
-																			<VBox.margin> <Insets bottom="7.5" left="15.0" right="15.0" top="17.0" /> 
-																			</VBox.margin> <children> <VBox alignment="TOP_CENTER" prefHeight="410.0" 
-																			prefWidth="529.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"> 
-																			<children> <Label styleClass="cardTitle" text="AÑADIR USUARIO"> <VBox.margin> 
-																			<Insets bottom="20.0" top="20.0" /> </VBox.margin> </Label> <Label fx:id="txtResult" 
-																			layoutX="219.0" layoutY="14.0" prefHeight="17.0" prefWidth="410.0" /> <HBox 
-																			prefHeight="265.0" prefWidth="449.0"> <children> <GridPane HBox.hgrow="ALWAYS"> 
-																			<columnConstraints> <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" 
-																			minWidth="-Infinity" prefWidth="145.0" /> <ColumnConstraints hgrow="SOMETIMES" 
-																			maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="68.333251953125" 
-																			/> </columnConstraints> <rowConstraints> <RowConstraints minHeight="10.0" 
-																			prefHeight="30.0" vgrow="SOMETIMES" /> <RowConstraints minHeight="10.0" prefHeight="30.0" 
-																			vgrow="SOMETIMES" /> <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" 
-																			/> <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" /> 
-																			<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" /> <RowConstraints 
-																			minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" /> <RowConstraints minHeight="10.0" 
-																			prefHeight="30.0" vgrow="SOMETIMES" /> <RowConstraints minHeight="10.0" prefHeight="30.0" 
-																			vgrow="SOMETIMES" /> <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" 
-																			/> <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" /> 
-																			</rowConstraints> <children> <Label fx:id="lblName" text="NOMBRE" /> <TextField 
-																			fx:id="fieldName" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" 
-																			minWidth="95.0" prefHeight="26.0" prefWidth="95.0" GridPane.columnIndex="1"> 
-																			<GridPane.margin> <Insets /> </GridPane.margin> </TextField> <Label fx:id="lblSurname" 
-																			text="APELLIDOS" GridPane.rowIndex="1" /> <Label fx:id="lblDni" prefWidth="59.0" 
-																			text="DNI" GridPane.rowIndex="2" /> <Label fx:id="lblDat" text="FECHA DE 
-																			NACIMIENTO" GridPane.rowIndex="3" /> <TextField fx:id="fieldSurname" maxHeight="-Infinity" 
-																			maxWidth="1.7976931348623157E308" minWidth="95.0" prefHeight="25.0" prefWidth="95.0" 
-																			GridPane.columnIndex="1" GridPane.rowIndex="1" /> <TextField fx:id="fieldDNI" 
-																			maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minWidth="95.0" prefHeight="25.0" 
-																			prefWidth="95.0" GridPane.columnIndex="1" GridPane.rowIndex="2" /> <DatePicker 
-																			fx:id="fieldDat" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" 
-																			minWidth="95.0" prefHeight="25.0" prefWidth="95.0" GridPane.columnIndex="1" 
-																			GridPane.rowIndex="3" /> <Label fx:id="lblEmail" prefWidth="59.0" text="EMAIL" 
-																			GridPane.rowIndex="4" /> <TextField fx:id="fieldEmail" maxHeight="-Infinity" 
-																			maxWidth="1.7976931348623157E308" minWidth="95.0" prefHeight="25.0" prefWidth="95.0" 
-																			GridPane.columnIndex="1" GridPane.rowIndex="4" /> <Label fx:id="lblEmail2" 
-																			prefHeight="17.0" prefWidth="95.0" text="REPITA EL EMAIL" GridPane.rowIndex="5" 
-																			/> <TextField fx:id="fieldEmail2" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" 
-																			minWidth="95.0" prefHeight="25.0" prefWidth="95.0" GridPane.columnIndex="1" 
-																			GridPane.rowIndex="5" /> <Label fx:id="lblUser" prefWidth="59.0" text="USUARIO" 
-																			GridPane.rowIndex="6" /> <TextField fx:id="fieldUser" maxHeight="-Infinity" 
-																			maxWidth="1.7976931348623157E308" minWidth="95.0" prefHeight="25.0" prefWidth="95.0" 
-																			GridPane.columnIndex="1" GridPane.rowIndex="6" /> <Label fx:id="lblPassword" 
-																			prefHeight="17.0" prefWidth="95.0" text="CONTRASEÑA" GridPane.rowIndex="7" 
-																			/> <Label fx:id="lblPassword2" prefHeight="17.0" prefWidth="148.0" text="REPILTA 
-																			LA CONTRASEÑA" GridPane.rowIndex="8" /> <Label fx:id="lblRole" prefHeight="17.0" 
-																			prefWidth="95.0" text="PUESTO" GridPane.rowIndex="9" /> <PasswordField fx:id="fieldPassword" 
-																			maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minWidth="95.0" prefHeight="25.0" 
-																			prefWidth="95.0" GridPane.columnIndex="1" GridPane.rowIndex="7" /> <PasswordField 
-																			fx:id="fieldPassword2" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" 
-																			minWidth="95.0" prefHeight="25.0" prefWidth="95.0" GridPane.columnIndex="1" 
-																			GridPane.rowIndex="8" /> <ComboBox fx:id="fieldRole" maxHeight="-Infinity" 
-																			maxWidth="1.7976931348623157E308" prefHeight="25.0" prefWidth="95.0" GridPane.columnIndex="1" 
-																			GridPane.rowIndex="9" /> </children> </GridPane> <JFXTogglePane prefHeight="265.0" 
-																			prefWidth="127.0" /> <GridPane maxWidth="-Infinity" prefHeight="265.0" prefWidth="225.0" 
-																			HBox.hgrow="ALWAYS"> <columnConstraints> <ColumnConstraints hgrow="SOMETIMES" 
-																			maxWidth="-Infinity" minWidth="-Infinity" prefWidth="75.0" /> <ColumnConstraints 
-																			hgrow="SOMETIMES" maxWidth="150.0" minWidth="-Infinity" prefWidth="100.0" 
-																			/> </columnConstraints> <rowConstraints> <RowConstraints minHeight="10.0" 
-																			prefHeight="30.0" vgrow="SOMETIMES" /> <RowConstraints minHeight="10.0" prefHeight="30.0" 
-																			vgrow="SOMETIMES" /> <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" 
-																			/> <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" /> 
-																			<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" /> <RowConstraints 
-																			minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" /> <RowConstraints minHeight="10.0" 
-																			prefHeight="30.0" vgrow="SOMETIMES" /> <RowConstraints minHeight="10.0" prefHeight="30.0" 
-																			vgrow="SOMETIMES" /> <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" 
-																			/> <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" /> 
-																			</rowConstraints> <children> <Label fx:id="lblMonday" prefHeight="17.0" prefWidth="60.0" 
-																			text="LUNES" /> <Label fx:id="lblTuesday" prefHeight="17.0" prefWidth="60.0" 
-																			text="MARTES" GridPane.rowIndex="1" /> <Label fx:id="lblWednesday" prefHeight="17.0" 
-																			prefWidth="70.0" text="MIÉRCOLES" GridPane.rowIndex="2" /> <Label fx:id="lblThursday" 
-																			prefHeight="17.0" prefWidth="49.0" text="JUEVES" GridPane.rowIndex="3" /> 
-																			<Label fx:id="lblFriday" prefHeight="17.0" prefWidth="60.0" text="VIERNES" 
-																			GridPane.rowIndex="4" /> <Label fx:id="lblSunday" prefHeight="17.0" prefWidth="60.0" 
-																			text="DOMINGO" GridPane.rowIndex="6" /> <Label fx:id="lblSaturday" prefHeight="17.0" 
-																			prefWidth="60.0" text="SÁBADO" GridPane.rowIndex="5" /> <ComboBox fx:id="cmbMonday" 
-																			maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="100.0" 
-																			prefHeight="25.0" prefWidth="150.0" GridPane.columnIndex="1" /> <ComboBox 
-																			fx:id="cmbTuesday" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" 
-																			minWidth="100.0" prefHeight="25.0" prefWidth="150.0" GridPane.columnIndex="1" 
-																			GridPane.rowIndex="1" /> <ComboBox fx:id="cmbWednesday" maxHeight="-Infinity" 
-																			maxWidth="-Infinity" minHeight="-Infinity" minWidth="100.0" prefHeight="25.0" 
-																			prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2" /> <ComboBox 
-																			fx:id="cmbThursday" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" 
-																			minWidth="100.0" prefHeight="25.0" prefWidth="150.0" GridPane.columnIndex="1" 
-																			GridPane.rowIndex="3" /> <ComboBox fx:id="cmbFriday" maxHeight="-Infinity" 
-																			maxWidth="-Infinity" minHeight="-Infinity" minWidth="100.0" prefHeight="25.0" 
-																			prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="4" /> <ComboBox 
-																			fx:id="cmbSaturday" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" 
-																			minWidth="100.0" prefHeight="25.0" prefWidth="150.0" GridPane.columnIndex="1" 
-																			GridPane.rowIndex="5" /> <ComboBox fx:id="cmbSunday" maxHeight="-Infinity" 
-																			maxWidth="-Infinity" minHeight="-Infinity" minWidth="100.0" prefHeight="25.0" 
-																			prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="6" /> </children> 
-																			</GridPane> </children> <VBox.margin> <Insets left="60.0" right="60.0" /> 
-																			</VBox.margin> </HBox> <Button fx:id="btnSave" mnemonicParsing="false" onAction="#saveUser" 
-																			styleClass="buttonMainColor" stylesheets="@application.css" text="GUARDAR" 
-																			BorderPane.alignment="CENTER"> <VBox.margin> <Insets top="30.0" /> </VBox.margin> 
-																			</Button> </children> </VBox> </children> </AnchorPane> -->
-
-
-
 																	</children>
 																</VBox>
 															</children>
