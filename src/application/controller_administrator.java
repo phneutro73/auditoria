@@ -18,6 +18,8 @@ import javax.crypto.spec.PBEKeySpec;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -44,6 +46,9 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import models.ModelRoleTable;
+import models.ModelScheduleTable;
+import models.ModelUserTable;
 import db.AdministratorPageConnection;
 
 public class controller_administrator {
@@ -83,25 +88,25 @@ public class controller_administrator {
 	private JFXTextField txtUserSearch;
 
 	@FXML
-	private TableView<String> userTable;
+	private TableView<ModelUserTable> userTable;
 
 	@FXML
-	private TableColumn<String, String> id_userTable;
+	private TableColumn<ModelUserTable, String> idUserTable;
 
 	@FXML
-	private TableColumn<String, String> name_userTable;
+	private TableColumn<ModelUserTable, String> nameUserTable;
 
 	@FXML
-	private TableColumn<String, String> surname_userTable;
+	private TableColumn<ModelUserTable, String> surnameUserTable;
 
 	@FXML
-	private TableColumn<String, String> dni_userTable;
+	private TableColumn<ModelUserTable, String> dniUserTable;
 
 	@FXML
-	private TableColumn<String, String> date_userTable;
+	private TableColumn<ModelUserTable, String> dateUserTable;
 
 	@FXML
-	private TableColumn<String, String> role_userTable;
+	private TableColumn<ModelUserTable, String> roleUserTable;
 
 	@FXML
 	private JFXButton btnAddUser;
@@ -114,19 +119,19 @@ public class controller_administrator {
 
 	// tab schedules
 	@FXML
-	private TableView<String> scheduleTable;
+	private TableView<ModelScheduleTable> scheduleTable;
 
 	@FXML
-	private TableColumn<String, String> id_scheduleTable;
+	private TableColumn<ModelScheduleTable, String> idScheduleTable;
 
 	@FXML
-	private TableColumn<String, String> name_scheduleTable;
+	private TableColumn<ModelScheduleTable, String> nameScheduleTable;
 
 	@FXML
-	private TableColumn<String, String> checkIn_scheduleTable;
+	private TableColumn<ModelScheduleTable, String> checkInScheduleTable;
 
 	@FXML
-	private TableColumn<String, String> checkOut_scheduleTable;
+	private TableColumn<ModelScheduleTable, String> checkOutScheduleTable;
 
 	@FXML
 	private JFXButton btnAddSchedule;
@@ -139,16 +144,16 @@ public class controller_administrator {
 
 	// tab role
 	@FXML
-	private TableView<String> roleTable;
+	private TableView<ModelRoleTable> roleTable;
 
 	@FXML
-	private TableColumn<String, String> id_roleTable;
+	private TableColumn<ModelRoleTable, String> idRoleTable;
 
 	@FXML
-	private TableColumn<String, String> name_roleTable;
+	private TableColumn<ModelRoleTable, String> nameRoleTable;
 
 	@FXML
-	private TableColumn<String, String> numUsers_roleTable;
+	private TableColumn<ModelRoleTable, String> numUsersRoleTable;
 
 	@FXML
 	private JFXButton btnAddRole;
@@ -167,6 +172,9 @@ public class controller_administrator {
 		try {
 
 			AdministratorPageConnection adminDB = new AdministratorPageConnection();
+			getTableActiveUsers(adminDB);
+			getTableSchedules(adminDB);
+			getTableRoles(adminDB);
 
 		} catch (Exception e) {
 			System.out.println("ERROR: controller_administrator.java - initialize() - " + e.toString() + "\n");
@@ -280,6 +288,46 @@ public class controller_administrator {
 
 	@FXML
 	void editSchedule(ActionEvent event) {
+
+	}
+
+	void getTableActiveUsers(AdministratorPageConnection adminDB) {
+
+		ObservableList<ModelUserTable> obList = adminDB.getUsersTable();
+
+		idUserTable.setCellValueFactory(new PropertyValueFactory<>("id"));
+		nameUserTable.setCellValueFactory(new PropertyValueFactory<>("name"));
+		surnameUserTable.setCellValueFactory(new PropertyValueFactory<>("surname"));
+		dniUserTable.setCellValueFactory(new PropertyValueFactory<>("dni"));
+		dateUserTable.setCellValueFactory(new PropertyValueFactory<>("dob"));
+		roleUserTable.setCellValueFactory(new PropertyValueFactory<>("roleId"));
+
+		userTable.setItems(obList);
+
+	}
+
+	void getTableSchedules(AdministratorPageConnection adminDB) {
+
+		ObservableList<ModelScheduleTable> obList = adminDB.getSchedulesTable();
+
+		idScheduleTable.setCellValueFactory(new PropertyValueFactory<>("id"));
+		nameScheduleTable.setCellValueFactory(new PropertyValueFactory<>("scheduleName"));
+		checkInScheduleTable.setCellValueFactory(new PropertyValueFactory<>("checkInTime"));
+		checkOutScheduleTable.setCellValueFactory(new PropertyValueFactory<>("checkOutTime"));
+
+		scheduleTable.setItems(obList);
+
+	}
+
+	void getTableRoles(AdministratorPageConnection adminDB) {
+
+		ObservableList<ModelRoleTable> obList = adminDB.getRolesTable();
+
+		idRoleTable.setCellValueFactory(new PropertyValueFactory<>("id"));
+		nameRoleTable.setCellValueFactory(new PropertyValueFactory<>("roleName"));
+		numUsersRoleTable.setCellValueFactory(new PropertyValueFactory<>("numUsersRole"));
+
+		roleTable.setItems(obList);
 
 	}
 

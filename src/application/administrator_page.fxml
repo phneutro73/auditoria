@@ -265,27 +265,24 @@
 																									prefHeight="292.0" prefWidth="692.0"
 																									HBox.hgrow="ALWAYS">
 																									<columns>
-																										<TableColumn fx:id="id_userTable"
+																										<TableColumn fx:id="idUserTable"
 																											maxWidth="80.0" minWidth="40.0" text="ID" />
+																										<TableColumn fx:id="nameUserTable"
+																											maxWidth="300.0" minWidth="100.0"
+																											prefWidth="150.0" text="Nombre" />
 																										<TableColumn
-																											fx:id="name_userTable" maxWidth="300.0"
-																											minWidth="100.0" prefWidth="150.0"
-																											text="Nombre" />
-																										<TableColumn
-																											fx:id="surname_userTable" maxWidth="400.0"
+																											fx:id="surnameUserTable" maxWidth="400.0"
 																											minWidth="100.0" prefWidth="150.0"
 																											text="Apellidos" />
-																										<TableColumn fx:id="dni_userTable"
+																										<TableColumn fx:id="dniUserTable"
 																											maxWidth="300.0" minWidth="100.0"
 																											prefWidth="150.0" text="DNI" />
-																										<TableColumn
-																											fx:id="date_userTable" maxWidth="150.0"
-																											minWidth="100.0" prefWidth="150.0"
-																											text="Fch. nacimiento" />
-																										<TableColumn
-																											fx:id="role_userTable" maxWidth="300.0"
-																											minWidth="100.0" prefWidth="150.0"
-																											text="Puesto" />
+																										<TableColumn fx:id="dateUserTable"
+																											maxWidth="150.0" minWidth="100.0"
+																											prefWidth="150.0" text="Fch. nacimiento" />
+																										<TableColumn fx:id="roleUserTable"
+																											maxWidth="300.0" minWidth="100.0"
+																											prefWidth="150.0" text="Puesto" />
 																									</columns>
 																									<columnResizePolicy>
 																										<TableView
@@ -435,18 +432,18 @@
 																									HBox.hgrow="ALWAYS">
 																									<columns>
 																										<TableColumn
-																											fx:id="id_scheduleTable" maxWidth="80.0"
+																											fx:id="idScheduleTable" maxWidth="80.0"
 																											minWidth="40.0" text="ID" />
 																										<TableColumn
-																											fx:id="name_scheduleTable" maxWidth="1000.0"
+																											fx:id="nameScheduleTable" maxWidth="1000.0"
 																											minWidth="100.0" prefWidth="200.0"
 																											text="Nombre" />
 																										<TableColumn
-																											fx:id="checkIn_scheduleTable"
-																											maxWidth="400.0" minWidth="100.0"
-																											prefWidth="200.0" text="Entrada" />
+																											fx:id="checkInScheduleTable" maxWidth="400.0"
+																											minWidth="100.0" prefWidth="200.0"
+																											text="Entrada" />
 																										<TableColumn
-																											fx:id="checkOut_scheduleTable" maxWidth="400"
+																											fx:id="checkOutScheduleTable" maxWidth="400"
 																											minWidth="100.0" prefWidth="200"
 																											text="Salida" />
 																									</columns>
@@ -511,20 +508,6 @@
 																				</VBox>
 																			</children>
 																		</AnchorPane>
-
-																		<!-- <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="card" 
-																			stylesheets="@application.css"> <VBox.margin> <Insets bottom="7.5" left="15.0" 
-																			right="15.0" top="17.0" /> </VBox.margin> <children> <VBox alignment="TOP_CENTER" 
-																			prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" 
-																			AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"> <children> <Label 
-																			styleClass="cardTitle" text="ELIMINAR HORARIO"> <VBox.margin> <Insets bottom="20.0" 
-																			top="20.0" /> </VBox.margin> </Label> </children> </VBox> </children> </AnchorPane> 
-																			<AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="card" stylesheets="@application.css"> 
-																			<VBox.margin> <Insets bottom="7.5" left="15.0" right="15.0" top="17.0" /> 
-																			</VBox.margin> </AnchorPane> <AnchorPane layoutX="25.0" layoutY="259.0" prefHeight="200.0" 
-																			prefWidth="200.0" styleClass="card" stylesheets="@application.css"> <VBox.margin> 
-																			<Insets bottom="7.5" left="15.0" right="15.0" top="17.0" /> </VBox.margin> 
-																			</AnchorPane> -->
 																	</children>
 																</VBox>
 															</children>
@@ -611,14 +594,13 @@
 																								<TableView fx:id="roleTable"
 																									prefHeight="352.0" prefWidth="691.0">
 																									<columns>
-																										<TableColumn fx:id="id_roleTable"
+																										<TableColumn fx:id="idRoleTable"
 																											maxWidth="80.0" minWidth="40.0" text="ID" />
+																										<TableColumn fx:id="nameRoleTable"
+																											maxWidth="500.0" minWidth="100.0"
+																											prefWidth="200.0" text="Nombre" />
 																										<TableColumn
-																											fx:id="name_roleTable" maxWidth="500.0"
-																											minWidth="100.0" prefWidth="200.0"
-																											text="Nombre" />
-																										<TableColumn
-																											fx:id="numUsers_roleTable" maxWidth="300.0"
+																											fx:id="numUsersRoleTable" maxWidth="300.0"
 																											minWidth="100.0" prefWidth="150.0"
 																											text="Nº usuarios" />
 																									</columns>
