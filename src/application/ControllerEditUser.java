@@ -25,11 +25,20 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-public class ControllerAddNewUser {
+public class ControllerEditUser {
+
+	double height;
+	double width;
+	int userId;
+
+	public ControllerEditUser(double height, double width, int userId) {
+		this.height = height;
+		this.width = width;
+		this.userId = userId;
+	}
 
 	@FXML
 	private Label lblPersonalInfo;
@@ -182,8 +191,8 @@ public class ControllerAddNewUser {
 							numScedule[6]);
 
 					FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
-					ControllerAlertDialog control = new ControllerAlertDialog(0, 0, "Guardado correcto",
-							"Los datos del usuario se han guardado correctamente");
+					ControllerAlertDialog control = new ControllerAlertDialog(0, 0, "Actualización correcta",
+							"Los datos del usuario se ha actualizado correctamente");
 					loader.setController(control);
 					Parent root = loader.load();
 
@@ -232,8 +241,6 @@ public class ControllerAddNewUser {
 		try {
 
 			AdministratorPageConnection adminDB = new AdministratorPageConnection();
-
-			// TODO: Get user + rellenar datos
 
 			List<String> schedules = adminDB.listSchedules();
 			cmbRole.getItems().removeAll(cmbRole.getItems());
@@ -315,14 +322,6 @@ public class ControllerAddNewUser {
 			numeric_schedule[i] = scheduleMap.get(schedule[i]);
 		}
 		return numeric_schedule;
-	}
-
-	int parseActiveUsers(String user, AdministratorPageConnection adminDB) {
-
-		int userID;
-		Hashtable<String, Integer> usersMap = adminDB.usersMap();
-		userID = usersMap.get(user);
-		return userID;
 	}
 
 	boolean checkAllFields() {

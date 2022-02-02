@@ -21,7 +21,7 @@
 				<HBox alignment="CENTER_LEFT" prefHeight="25.0"
 					prefWidth="54.0" HBox.hgrow="ALWAYS">
 					<children>
-						<Label text="Error">
+						<Label fx:id="dialogTitle" text="Title">
 							<HBox.margin>
 								<Insets left="10.0" />
 							</HBox.margin>
@@ -48,8 +48,7 @@
 			<children>
 				<HBox prefHeight="39.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
 					<children>
-						<Label text="El usuario y/o contraseña son incorrectos."
-							wrapText="true" />
+						<Label fx:id="dialogText" text="Text" wrapText="true" />
 					</children>
 				</HBox>
 				<JFXButton fx:id="btnAccept" onMouseClicked="#closeScreen"

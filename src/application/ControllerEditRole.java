@@ -3,13 +3,25 @@ package application;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 
+import db.AdministratorPageConnection;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
-public class ControllerAddNewRole {
+public class ControllerEditRole {
+
+	double height;
+	double width;
+	int roleId;
+
+	public ControllerEditRole(double height, double width, int roleId) {
+		super();
+		this.height = height;
+		this.width = width;
+		this.roleId = roleId;
+	}
 
 	@FXML
 	private Label title;
@@ -39,7 +51,7 @@ public class ControllerAddNewRole {
 	void saveNewUser(ActionEvent event) {
 
 		if (checkAllFields()) {
-			// Guardar
+			// Update
 
 			Stage stage = (Stage) btnCancel.getScene().getWindow();
 			stage.close();
@@ -52,6 +64,18 @@ public class ControllerAddNewRole {
 
 	@FXML
 	void initialize() {
+
+		try {
+
+			title.setText("Modificar usuario");
+			AdministratorPageConnection adminDB = new AdministratorPageConnection();
+			// TODO: Obtener los datos dado el ID del rol
+
+			fieldName.setText("");
+
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 
 	}
 

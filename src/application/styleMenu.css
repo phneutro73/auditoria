@@ -1,0 +1,56 @@
+/* lateral menu */
+
+* {
+	-main-color: '#02B6CD';
+  	-soft-color: '#E2F2F5';
+  	-soft-color2: '#DDEDF0';
+  	-soft-color2-selected: '#CAE1E6';
+  	-almost-black-color: '#434345';
+  	-hover-almost-black-color: '#313333';
+  	-black-color: '#231F20';
+  	-hover-black-color: '#000000';
+  	-red-color: '#E81123';
+  	-almost-white-color: '#EFFCFF';
+}
+
+.menu {
+	-fx-background-color: -almost-black-color;
+	-fx-pref-width: 60.0;
+	
+}
+
+.menuButton {
+	-fx-pref-width: 300.0;
+	-fx-pref-height: 60.0;
+	-fx-background-radius: 0.0px 0.0px 0.0px 0.0px;
+}
+
+.menuButton:hover {
+	-fx-background-color: -hover-almost-black-color;
+	-fx-border-width: 0.0px 0.0px 0.0px 3.0px;
+	-fx-border-color: -soft-color;
+	-fx-border-style: solid;
+}
+
+.selectedMenuButton {
+	-fx-pref-width: 300.0;
+	-fx-pref-height: 60.0;
+	-fx-background-color: -black-color;
+	-fx-border-width: 0.0px 0.0px 0.0px 3.0px;
+	-fx-border-color: -main-color;
+	-fx-border-style: solid;
+}
+
+.selectedMenuButton:hover {
+	-fx-background-color: -hover-black-color;
+}
+
+.labelMenuButtons {
+	-fx-text-fill: -soft-color;
+	-fx-ellipsis-string: '';
+}
+
+.labelMenuSelectedButton {
+	-fx-text-fill: white;
+	-fx-ellipsis-string: '';
+}

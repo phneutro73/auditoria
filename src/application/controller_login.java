@@ -115,8 +115,9 @@ public class controller_login {
 
 			} else {
 
-				FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/LoginAlertDialog.fxml"));
-				Controller_LoginAlertDialog control = new Controller_LoginAlertDialog();
+				FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
+				ControllerAlertDialog control = new ControllerAlertDialog(0, 0, "Error",
+						"El usuario y/o contraseña son incorrectos.");
 				loader.setController(control);
 				Parent root = loader.load();
 
@@ -129,8 +130,9 @@ public class controller_login {
 			// SOLO SI EL USUARIO EXISTE Y LA CONTRASEÃ‘A ES CORRECTA
 
 		} catch (Exception e) {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/LoginAlertDialog.fxml"));
-			Controller_LoginAlertDialog control = new Controller_LoginAlertDialog();
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
+			ControllerAlertDialog control = new ControllerAlertDialog(111, 200, "Error en el inicio de sesión",
+					"El usuario y/o contraseña no son correctos, inténtelo de nuevo");
 			loader.setController(control);
 			Parent root = loader.load();
 

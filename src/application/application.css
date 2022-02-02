@@ -40,48 +40,6 @@
 	-fx-tab-min-width: 100.0;
 }
 
-/* lateral menu */
-.menu {
-	-fx-background-color: -almost-black-color;
-	-fx-pref-width: 60.0;
-	
-}
-
-.menuButton {
-	-fx-pref-width: 300.0;
-	-fx-pref-height: 60.0;
-	-fx-background-radius: 0.0px 0.0px 0.0px 0.0px;
-}
-
-.menuButton:hover {
-	-fx-background-color: -hover-almost-black-color;
-	-fx-border-width: 0.0px 0.0px 0.0px 3.0px;
-	-fx-border-color: -soft-color;
-	-fx-border-style: solid;
-}
-
-.selectedMenuButton {
-	-fx-pref-width: 300.0;
-	-fx-pref-height: 60.0;
-	-fx-background-color: -black-color;
-	-fx-border-width: 0.0px 0.0px 0.0px 3.0px;
-	-fx-border-color: -main-color;
-	-fx-border-style: solid;
-}
-
-.selectedMenuButton:hover {
-	-fx-background-color: -hover-black-color;
-}
-
-.labelMenuButtons {
-	-fx-text-fill: -soft-color;
-	-fx-ellipsis-string: '';
-}
-
-.labelMenuSelectedButton {
-	-fx-text-fill: white;
-	-fx-ellipsis-string: '';
-}
 
 /* title on top of each page */
 .pageTitle {
@@ -94,6 +52,7 @@
 	-fx-background-radius: 1.0px 3.0px 15.0px 3.0px;
     -fx-background-insets: 0.0px 0.0px 20.0px 0.0px;
 }
+
 
 /* Administrator page cards (tab's organization) */
 .card {

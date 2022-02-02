@@ -17,8 +17,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane minWidth="1000.0" prefHeight="650.0"
-	prefWidth="941.0" style="-fx-background-color: #F0FBFD;"
+<AnchorPane fx:id="parent" minWidth="1000.0"
+	prefHeight="650.0" prefWidth="941.0"
+	style="-fx-background-color: #F0FBFD;"
 	xmlns="http://javafx.com/javafx/8.0.171"
 	xmlns:fx="http://javafx.com/fxml/1"
 	fx:controller="application.controller_administrator">
@@ -29,11 +30,11 @@
 			AnchorPane.topAnchor="0.0">
 			<children>
 				<VBox fx:id="drawer" fillWidth="false" prefHeight="650.0"
-					prefWidth="49.0" styleClass="menu" stylesheets="@application.css">
+					prefWidth="49.0" styleClass="menu" stylesheets="@styleMenu.css">
 					<children>
 						<HBox fx:id="btnMenu" alignment="CENTER_LEFT"
 							onMouseClicked="#expandMenu" prefHeight="43.0" prefWidth="60.0"
-							styleClass="menuButton" stylesheets="@application.css">
+							styleClass="menuButton" stylesheets="@styleMenu.css">
 							<children>
 								<Label prefHeight="1.0" prefWidth="48.0" text=" ">
 									<graphic>
@@ -52,10 +53,10 @@
 						<Pane prefHeight="56.0" prefWidth="60.0" />
 						<HBox fx:id="btnSales" alignment="CENTER_LEFT"
 							prefHeight="60.0" prefWidth="60.0" styleClass="menuButton"
-							stylesheets="@application.css">
+							stylesheets="@styleMenu.css">
 							<children>
 								<Label styleClass="labelMenuButtons"
-									stylesheets="@application.css" text="   VENTAS">
+									stylesheets="@styleMenu.css" text="   VENTAS">
 									<graphic>
 										<ImageView fitHeight="40.0" fitWidth="40.0">
 											<image>
@@ -74,7 +75,7 @@
 						</HBox>
 						<HBox fx:id="btnConsultation" alignment="CENTER_LEFT"
 							prefHeight="60.0" styleClass="menuButton"
-							stylesheets="@application.css">
+							stylesheets="@styleMenu.css">
 							<children>
 								<Label styleClass="labelMenuButtons" text="   CONSULTA">
 									<graphic>
@@ -93,11 +94,11 @@
 								<Insets left="10.0" />
 							</padding>
 						</HBox>
-						<HBox fx:id="btnAddArticle" alignment="CENTER_LEFT"
+						<HBox fx:id="btnAddItem" alignment="CENTER_LEFT"
 							styleClass="menuButton" stylesheets="@application.css">
 							<children>
 								<Label styleClass="labelMenuButtons"
-									stylesheets="@application.css" text="   AÑADIR ARTÍCULOS">
+									stylesheets="@styleMenu.css" text="   AÑADIR ARTÍCULOS">
 									<graphic>
 										<ImageView fitHeight="40.0" fitWidth="40.0">
 											<image>
@@ -118,7 +119,7 @@
 							styleClass="menuButton" stylesheets="@application.css">
 							<children>
 								<Label styleClass="labelMenuButtons"
-									stylesheets="@application.css" text="   ESTADÍSTICAS">
+									stylesheets="@styleMenu.css" text="   ESTADÍSTICAS">
 									<graphic>
 										<ImageView fitHeight="40.0" fitWidth="40.0">
 											<image>
@@ -139,7 +140,7 @@
 							styleClass="selectedMenuButton" stylesheets="@application.css">
 							<children>
 								<Label styleClass="labelMenuSelectedButton"
-									stylesheets="@application.css" text="   ADMINISTRADOR">
+									stylesheets="@styleMenu.css" text="   ADMINISTRADOR">
 									<graphic>
 										<ImageView fitHeight="40.0" fitWidth="40.0">
 											<image>
@@ -285,10 +286,6 @@
 																											fx:id="role_userTable" maxWidth="300.0"
 																											minWidth="100.0" prefWidth="150.0"
 																											text="Puesto" />
-																										<TableColumn
-																											fx:id="schedule_userTable" maxWidth="1000.0"
-																											minWidth="150.0" prefWidth="200.0"
-																											text="Horario" />
 																									</columns>
 																									<columnResizePolicy>
 																										<TableView

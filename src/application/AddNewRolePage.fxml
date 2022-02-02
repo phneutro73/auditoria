@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="234.0" prefWidth="600.0"
+<AnchorPane prefHeight="194.0" prefWidth="600.0"
 	styleClass="softBackgroundParent" stylesheets="@application.css"
 	xmlns="http://javafx.com/javafx/8.0.171"
 	xmlns:fx="http://javafx.com/fxml/1">
@@ -36,8 +36,8 @@
 										<Image url="@../resources/assets/admin_high_icon.png" />
 									</image>
 								</ImageView>
-								<Label layoutX="62.0" layoutY="16.0" text="Administrador"
-									textFill="#f0fbfd">
+								<Label fx:id="title" layoutX="62.0" layoutY="16.0"
+									text="Administrador" textFill="#f0fbfd">
 									<font>
 										<Font name="System Bold" size="15.0" />
 									</font>
@@ -81,28 +81,15 @@
 									<rowConstraints>
 										<RowConstraints minHeight="10.0"
 											prefHeight="30.0" vgrow="SOMETIMES" />
-										<RowConstraints minHeight="10.0"
-											prefHeight="30.0" vgrow="SOMETIMES" />
 									</rowConstraints>
 									<children>
 										<Label fx:id="lblName" text="NOMBRE" />
-										<Label fx:id="lblGrossSalary" text="SUELDO BRUTO"
-											GridPane.rowIndex="1" />
 										<JFXTextField fx:id="fieldName"
 											maxWidth="1.7976931348623157E308" prefWidth="1000.0"
 											GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" />
-										<HBox alignment="CENTER_LEFT" prefHeight="100.0"
-											prefWidth="200.0" spacing="10.0" GridPane.columnIndex="1"
-											GridPane.rowIndex="1">
-											<children>
-												<JFXTextField fx:id="fieldGrossSalary"
-													HBox.hgrow="ALWAYS" />
-												<Label fx:id="lblGrossSalary2" text="€ anuales" />
-											</children>
-										</HBox>
 									</children>
 									<VBox.margin>
-										<Insets left="10.0" />
+										<Insets left="10.0" top="10.0" />
 									</VBox.margin>
 								</GridPane>
 								<HBox alignment="CENTER" prefHeight="73.0"
