@@ -50,7 +50,7 @@
 								<Image url="@../resources/assets/NextIcon.png" />
 							</image>
 						</ImageView>
-						<Label layoutX="282.0" layoutY="18.0"
+						<Label fx:id="subtitle" layoutX="282.0" layoutY="18.0"
 							text="Añadir un puesto" textFill="#434345">
 							<font>
 								<Font name="System Bold" size="13.0" />
@@ -97,7 +97,7 @@
 									<children>
 										<JFXButton fx:id="btnCancel" onAction="#cancelExit"
 											styleClass="buttonMainColor" text="CANCELAR" />
-										<JFXButton fx:id="btnAccept" onAction="#saveNewUser"
+										<JFXButton fx:id="btnAccept" onAction="#saveRole"
 											styleClass="buttonMainColor" text="ACEPTAR" />
 									</children>
 									<padding>

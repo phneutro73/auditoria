@@ -262,6 +262,7 @@
 																							</VBox.margin>
 																							<children>
 																								<TableView fx:id="userTable"
+																									onMousePressed="#userSelection"
 																									prefHeight="292.0" prefWidth="692.0"
 																									HBox.hgrow="ALWAYS">
 																									<columns>
@@ -428,6 +429,7 @@
 																							</VBox.margin>
 																							<children>
 																								<TableView fx:id="scheduleTable"
+																									onMousePressed="#scheduleSelection"
 																									prefHeight="292.0" prefWidth="692.0"
 																									HBox.hgrow="ALWAYS">
 																									<columns>
@@ -518,7 +520,7 @@
 										</AnchorPane>
 									</content>
 								</Tab>
-								<Tab text="Roles">
+								<Tab text="Puestos">
 									<content>
 										<AnchorPane minHeight="0.0" minWidth="0.0"
 											prefHeight="180.0" prefWidth="200.0">
@@ -576,7 +578,7 @@
 																								<JFXTextField fx:id="txtUserSearch"
 																									labelFloat="true" prefHeight="25.0"
 																									prefWidth="664.0"
-																									promptText="Introduzca el nombre del horario..."
+																									promptText="Introduzca el nombre del puesto..."
 																									styleClass="searchTextField"
 																									stylesheets="@application.css"
 																									HBox.hgrow="ALWAYS" />
@@ -592,6 +594,7 @@
 																							</VBox.margin>
 																							<children>
 																								<TableView fx:id="roleTable"
+																									onMousePressed="#roleSelection"
 																									prefHeight="352.0" prefWidth="691.0">
 																									<columns>
 																										<TableColumn fx:id="idRoleTable"

@@ -198,7 +198,7 @@ public class ControllerAddNewUser {
 				} else {
 					FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
 					ControllerAlertDialog control = new ControllerAlertDialog(0, 0, "Error",
-							"Se ha producido un error. Por favor, revise los campos, y tenga en cuenta que los campos de repetición (email y contraseña), deben ser iguales");
+							"Se ha producido un error. Por favor, revise los campos, y tenga en cuenta que los campos de repetición (email y contraseña), deben ser iguales.");
 					loader.setController(control);
 					Parent root = loader.load();
 

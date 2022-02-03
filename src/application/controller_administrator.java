@@ -165,6 +165,9 @@ public class controller_administrator {
 	private JFXButton btnDeleteRole;
 
 	boolean isExpanded = false;
+	int idUserSelected;
+	int idScheduleSelected;
+	int idRoleSelected;
 
 	@FXML
 	void initialize() {
@@ -172,9 +175,17 @@ public class controller_administrator {
 		try {
 
 			AdministratorPageConnection adminDB = new AdministratorPageConnection();
+
 			getTableActiveUsers(adminDB);
 			getTableSchedules(adminDB);
 			getTableRoles(adminDB);
+
+			btnEditUser.setDisable(true);
+			btnDeleteUser.setDisable(true);
+			btnEditSchedule.setDisable(true);
+			btnDeleteSchedule.setDisable(true);
+			btnEditRole.setDisable(true);
+			btnDeleteRole.setDisable(true);
 
 		} catch (Exception e) {
 			System.out.println("ERROR: controller_administrator.java - initialize() - " + e.toString() + "\n");
@@ -208,6 +219,12 @@ public class controller_administrator {
 		stage.setScene(new Scene(root));
 		stage.show();
 
+		AdministratorPageConnection adminDB = new AdministratorPageConnection();
+		getTableActiveUsers(adminDB);
+
+		btnEditUser.setDisable(true);
+		btnDeleteUser.setDisable(true);
+
 	}
 
 	@FXML
@@ -222,15 +239,23 @@ public class controller_administrator {
 		stage.setScene(new Scene(root));
 		stage.show();
 
+		AdministratorPageConnection adminDB = new AdministratorPageConnection();
+		getTableActiveUsers(adminDB);
+
+		btnEditUser.setDisable(true);
+		btnDeleteUser.setDisable(true);
+
 	}
 
 	@FXML
 	void deleteUser(ActionEvent event) {
 
-	}
+		AdministratorPageConnection adminDB = new AdministratorPageConnection();
+		getTableActiveUsers(adminDB);
 
-	boolean checkAllFieldsDelete() {
-		return false;
+		btnEditUser.setDisable(true);
+		btnDeleteUser.setDisable(true);
+
 	}
 
 	@FXML
@@ -244,6 +269,12 @@ public class controller_administrator {
 		Stage stage = new Stage();
 		stage.setScene(new Scene(root));
 		stage.show();
+
+		AdministratorPageConnection adminDB = new AdministratorPageConnection();
+		getTableRoles(adminDB);
+
+		btnEditRole.setDisable(true);
+		btnDeleteRole.setDisable(true);
 
 	}
 
@@ -259,15 +290,33 @@ public class controller_administrator {
 		stage.setScene(new Scene(root));
 		stage.show();
 
+		AdministratorPageConnection adminDB = new AdministratorPageConnection();
+		getTableSchedules(adminDB);
+
+		btnEditSchedule.setDisable(true);
+		btnDeleteSchedule.setDisable(true);
+
 	}
 
 	@FXML
 	void deleteRole(ActionEvent event) {
 
+		AdministratorPageConnection adminDB = new AdministratorPageConnection();
+		getTableRoles(adminDB);
+
+		btnEditRole.setDisable(true);
+		btnDeleteRole.setDisable(true);
+
 	}
 
 	@FXML
 	void deleteSchedule(ActionEvent event) {
+
+		AdministratorPageConnection adminDB = new AdministratorPageConnection();
+		getTableSchedules(adminDB);
+
+		btnEditSchedule.setDisable(true);
+		btnDeleteSchedule.setDisable(true);
 
 	}
 
@@ -275,8 +324,7 @@ public class controller_administrator {
 	void editRole(ActionEvent event) throws IOException {
 
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AddNewRolePage.fxml"));
-		// TODO: cambiar el último parámetro con el id del rol que se quiere modificar
-		ControllerEditRole control = new ControllerEditRole(parent.getHeight(), parent.getWidth(), 0);
+		ControllerEditRole control = new ControllerEditRole(parent.getHeight(), parent.getWidth(), idRoleSelected);
 		loader.setController(control);
 		Parent root = loader.load();
 
@@ -284,10 +332,60 @@ public class controller_administrator {
 		stage.setScene(new Scene(root));
 		stage.show();
 
+		AdministratorPageConnection adminDB = new AdministratorPageConnection();
+		getTableRoles(adminDB);
+
+		btnEditRole.setDisable(true);
+		btnDeleteRole.setDisable(true);
+
 	}
 
 	@FXML
 	void editSchedule(ActionEvent event) {
+
+		AdministratorPageConnection adminDB = new AdministratorPageConnection();
+		getTableSchedules(adminDB);
+
+		btnEditSchedule.setDisable(true);
+		btnDeleteSchedule.setDisable(true);
+
+	}
+
+	@FXML
+	void userSelection(MouseEvent event) {
+		try {
+			idUserSelected = userTable.getSelectionModel().getSelectedItem().getId();
+			btnEditUser.setDisable(false);
+			btnDeleteUser.setDisable(false);
+		} catch (Exception e) {
+			btnEditUser.setDisable(true);
+			btnDeleteUser.setDisable(true);
+		}
+
+	}
+
+	@FXML
+	void scheduleSelection(MouseEvent event) {
+		try {
+			idScheduleSelected = scheduleTable.getSelectionModel().getSelectedItem().getId();
+			btnEditSchedule.setDisable(false);
+			btnDeleteSchedule.setDisable(false);
+		} catch (Exception e) {
+			btnEditSchedule.setDisable(true);
+			btnDeleteSchedule.setDisable(true);
+		}
+	}
+
+	@FXML
+	void roleSelection(MouseEvent event) {
+		try {
+			idRoleSelected = roleTable.getSelectionModel().getSelectedItem().getId();
+			btnEditRole.setDisable(false);
+			btnDeleteRole.setDisable(false);
+		} catch (Exception e) {
+			btnEditSchedule.setDisable(true);
+			btnDeleteSchedule.setDisable(true);
+		}
 
 	}
 

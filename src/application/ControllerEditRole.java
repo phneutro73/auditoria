@@ -1,14 +1,20 @@
 package application;
 
+import java.util.Hashtable;
+
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 
 import db.AdministratorPageConnection;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class ControllerEditRole {
 
@@ -25,6 +31,9 @@ public class ControllerEditRole {
 
 	@FXML
 	private Label title;
+
+	@FXML
+	private Label subtitle;
 
 	@FXML
 	private GridPane grdAddRole;
@@ -48,16 +57,54 @@ public class ControllerEditRole {
 	}
 
 	@FXML
-	void saveNewUser(ActionEvent event) {
+	void saveRole(ActionEvent event) {
 
-		if (checkAllFields()) {
-			// Update
+		try {
+			if (checkAllFields()) {
 
-			Stage stage = (Stage) btnCancel.getScene().getWindow();
-			stage.close();
+				AdministratorPageConnection adminDB = new AdministratorPageConnection();
+				boolean succes = adminDB.addRole(roleId, fieldName.getText());
 
-		} else {
-			// No se han rellenado todos los campos
+				if (succes) {
+					FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
+					ControllerAlertDialog control = new ControllerAlertDialog(0, 0, "Guardado correcto",
+							"Los datos se han guardado correctamente");
+					loader.setController(control);
+					Parent root = loader.load();
+
+					Stage stage = new Stage();
+					stage.initStyle(StageStyle.UNDECORATED);
+					stage.setScene(new Scene(root));
+					stage.show();
+				} else {
+					FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
+					ControllerAlertDialog control = new ControllerAlertDialog(0, 0, "Error",
+							"Se ha producido un error. Por favor, asegúrese de que los datos son correctos.");
+					loader.setController(control);
+					Parent root = loader.load();
+
+					Stage stage = new Stage();
+					stage.initStyle(StageStyle.UNDECORATED);
+					stage.setScene(new Scene(root));
+					stage.show();
+				}
+				Stage stage = (Stage) btnCancel.getScene().getWindow();
+				stage.close();
+
+			} else {
+				FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
+				ControllerAlertDialog control = new ControllerAlertDialog(0, 0, "Error",
+						"Es necesario que rellene todos los campos.");
+				loader.setController(control);
+				Parent root = loader.load();
+
+				Stage stage = new Stage();
+				stage.initStyle(StageStyle.UNDECORATED);
+				stage.setScene(new Scene(root));
+				stage.show();
+			}
+		} catch (Exception e) {
+			System.out.println(e.toString());
 		}
 
 	}
@@ -67,11 +114,9 @@ public class ControllerEditRole {
 
 		try {
 
-			title.setText("Modificar usuario");
+			subtitle.setText("Modificar puesto");
 			AdministratorPageConnection adminDB = new AdministratorPageConnection();
-			// TODO: Obtener los datos dado el ID del rol
-
-			fieldName.setText("");
+			getRole(adminDB);
 
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -96,4 +141,9 @@ public class ControllerEditRole {
 
 	}
 
+	void getRole(AdministratorPageConnection adminDB) {
+		Hashtable<String, String> role = adminDB.getRole(roleId);
+		String roleName = role.get("name");
+		fieldName.setText(roleName);
+	}
 }

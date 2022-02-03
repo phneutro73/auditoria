@@ -345,4 +345,63 @@ public class AdministratorPageConnection {
 		return obList;
 
 	}
+
+	public Hashtable<String, String> getRole(int roleId) {
+		Connection conn = null;
+		Hashtable<String, String> role = new Hashtable<String, String>();
+
+		try {
+			conn = DriverManager.getConnection(connectionUrl);
+			System.out.println("Connected to DB");
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery("[sp_search_role] " + roleId);
+
+			while (rs.next()) {
+				int id = rs.getInt("id");
+				String name = rs.getString("role_name");
+				role.put("id", String.valueOf(id));
+				role.put("name", name);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException ex) {
+					ex.printStackTrace();
+				}
+			}
+		}
+		return role;
+	}
+
+	public boolean addRole(int roleId, String roleName) {
+		boolean succes = false;
+		Connection conn = null;
+		try {
+			conn = DriverManager.getConnection(connectionUrl);
+			System.out.println("Connected to DB");
+			String query = ("[sp_edit_role]" + "		@ID = " + roleId + "," + "		@NAME = '" + roleName + "'");
+
+			PreparedStatement statement = conn.prepareStatement(query);
+			statement.executeUpdate();
+			succes = true;
+		}
+
+		catch (SQLException e) {
+			e.printStackTrace();
+
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException ex) {
+					ex.printStackTrace();
+				}
+			}
+		}
+		return succes;
+	}
 }

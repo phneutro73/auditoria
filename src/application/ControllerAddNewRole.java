@@ -36,7 +36,7 @@ public class ControllerAddNewRole {
 	}
 
 	@FXML
-	void saveNewUser(ActionEvent event) {
+	void saveRole(ActionEvent event) {
 
 		if (checkAllFields()) {
 			// Guardar
