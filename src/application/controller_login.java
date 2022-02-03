@@ -3,6 +3,7 @@ package application;
 
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
+import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
@@ -14,6 +15,9 @@ import javax.crypto.spec.PBEKeySpec;
 
 import com.jfoenix.controls.JFXButton;
 
+import javafx.animation.Animation;
+import javafx.animation.Interpolator;
+import javafx.animation.RotateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -27,14 +31,18 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
-
+import javafx.stage.StageStyle;
+import javafx.util.Duration;
 import db.LoginPageConnection;
 
 public class controller_login {
 
 	@FXML
-	private AnchorPane loginPage;
+	private AnchorPane parent;
 
 	@FXML
 	private Button btnLogin;
@@ -52,12 +60,34 @@ public class controller_login {
 	private ImageView imgLogo;
 
 	@FXML
-	void forgetFunction(ActionEvent event) {
+	private Label btnMinimize;
 
+	@FXML
+	private Label btnClose;
+
+	@FXML
+	private ImageView loadingIcon;
+
+	private double xOffSet = 0;
+	private double yOffSet = 0;
+
+	@FXML
+	void closeScreen(MouseEvent event) {
+		System.exit(0);
 	}
 
 	@FXML
-	void loginFunction(ActionEvent event) {
+	void minimizeScreen(MouseEvent event) {
+		Main.stage.setIconified(true);
+	}
+
+	@FXML
+	void forgetFunction(ActionEvent event) {
+		// TODO
+	}
+
+	@FXML
+	void loginFunction(ActionEvent event) throws IOException {
 		try {
 
 			GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
@@ -66,27 +96,50 @@ public class controller_login {
 
 			LoginPageConnection loginDB = new LoginPageConnection();
 
-			byte[] salt= loginDB.getSalt(fieldUser.getText());
-			byte[] hash= loginDB.getHash(fieldUser.getText());
-			byte[] calculatedHash = calculateHash(fieldPassword.getText(),salt);
-			System.out.println(salt[salt.length-1]);
-			System.out.println(hash[hash.length-1]);
-			System.out.println(hash[hash.length-1]);
-			System.out.println(calculatedHash[calculatedHash.length-1]);
-			if(Arrays.equals(hash,calculatedHash)) {
+			byte[] salt = loginDB.getSalt(fieldUser.getText());
+			byte[] hash = loginDB.getHash(fieldUser.getText());
+			byte[] calculatedHash = calculateHash(fieldPassword.getText(), salt);
+			System.out.println(salt[salt.length - 1]);
+			System.out.println(hash[hash.length - 1]);
+			System.out.println(hash[hash.length - 1]);
+			System.out.println(calculatedHash[calculatedHash.length - 1]);
+			if (Arrays.equals(hash, calculatedHash)) {
 
 				FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/administrator_page.fxml"));
 				Parent root = loader.load();
 
 				Stage stage = new Stage();
 				stage.setScene(new Scene(root));
-				stage.setTitle("AplicaciÃ³n de escritorio");
 				stage.show();
 				((Node) (event.getSource())).getScene().getWindow().hide();
+
+			} else {
+
+				FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
+				ControllerAlertDialog control = new ControllerAlertDialog(0, 0, "Error",
+						"El usuario y/o contraseña son incorrectos.");
+				loader.setController(control);
+				Parent root = loader.load();
+
+				Stage stage = new Stage();
+				stage.initStyle(StageStyle.UNDECORATED);
+				stage.setScene(new Scene(root));
+				stage.show();
+
 			}
 			// SOLO SI EL USUARIO EXISTE Y LA CONTRASEÃ‘A ES CORRECTA
 
 		} catch (Exception e) {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
+			ControllerAlertDialog control = new ControllerAlertDialog(111, 200, "Error en el inicio de sesión",
+					"El usuario y/o contraseña no son correctos, inténtelo de nuevo");
+			loader.setController(control);
+			Parent root = loader.load();
+
+			Stage stage = new Stage();
+			stage.setScene(new Scene(root));
+			stage.initStyle(StageStyle.UNDECORATED);
+			stage.show();
 			System.out.println(e.toString());
 		}
 
@@ -105,12 +158,44 @@ public class controller_login {
 
 		try {
 
-			loginPage.setStyle("-fx-background-color: #E2F2F5");
-			// b.setStyle("-fx-background-color: #02B6CD; -fx-background-radius: 0");
+			makeStageDragable();
 
 		} catch (Exception e) {
 			System.out.println("ERROR: controllerLogin.java - initialize() - " + e.toString());
 		}
+	}
+
+	private void makeStageDragable() {
+
+		parent.setOnMousePressed((event) -> {
+			xOffSet = event.getSceneX();
+			yOffSet = event.getSceneY();
+		});
+
+		parent.setOnMouseDragged((event) -> {
+			Main.stage.setX(event.getScreenX() - xOffSet);
+			Main.stage.setY(event.getScreenY() - yOffSet);
+			Main.stage.setOpacity(0.8f);
+		});
+
+		parent.setOnDragDone((event) -> {
+			Main.stage.setOpacity(1.0f);
+		});
+
+		parent.setOnMouseReleased((event) -> {
+			Main.stage.setOpacity(1.0f);
+		});
+
+	}
+
+	private void setRotation() {
+
+		loadingIcon.setVisible(true);
+		RotateTransition rotateTransition = new RotateTransition(Duration.millis(3000), loadingIcon);
+		rotateTransition.setByAngle(360);
+		rotateTransition.setCycleCount(Animation.INDEFINITE);
+		rotateTransition.setInterpolator(Interpolator.LINEAR);
+		rotateTransition.play();
 	}
 
 }

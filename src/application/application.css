@@ -1,30 +1,157 @@
 /* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
 
+* {
+	-main-color: '#02B6CD';
+  	-soft-color: '#E2F2F5';
+  	-soft-color2: '#DDEDF0';
+  	-soft-color2-selected: '#CAE1E6';
+  	-almost-black-color: '#434345';
+  	-hover-almost-black-color: '#313333';
+  	-black-color: '#231F20';
+  	-hover-black-color: '#000000';
+  	-red-color: '#E81123';
+  	-almost-white-color: '#EFFCFF';
+}
+
+.softBackgroundParent {
+	-fx-background-color: -soft-color;
+}
+
+.witeBackgroundParent {
+	-fx-background-color: white;
+}
+
+/* top bar of login page */
+.topBar {
+	-fx-background-color: -soft-color2;
+}
+
+.closeButton:hover {
+	-fx-background-color: -red-color;
+	-fx-background-radius: 2.0px 2.0px 2.0px 2.0px;
+}
+
+.minimizeButton:hover {
+	-fx-background-color: -soft-color2-selected;
+	-fx-background-radius: 2.0px 2.0px 2.0px 2.0px;
+}
+
 .tab {
 	-fx-tab-min-width: 100.0;
 }
 
-.menu {
-	-fx-background-color: '#434345';
-	-fx-pref-width: 60.0;
-}
 
-.menuButton {
-	-fx-pref-width: 300.0;
-	-fx-background-radius: 0.0px 0.0px 0.0px 0.0px;
-}
-
-.menuButton:hover {
-	-fx-background-color: '#313333';
-}
-
-.selectedMenuButton {
-	-fx-background-color: '#231F20';
-}
-
+/* title on top of each page */
 .pageTitle {
-	-fx-background-color: '#434345';
+	-fx-background-color: -almost-black-color;
 	-fx-background-radius: 0.0px 0.0px 30.0px 30.0px;
-	-fx-border-radius: 0.0px 0.0px 30.0px 30.0px
 }
+
+.subpageTitle {
+	-fx-background-color: -subpage-title-color;
+	-fx-background-radius: 1.0px 3.0px 15.0px 3.0px;
+    -fx-background-insets: 0.0px 0.0px 20.0px 0.0px;
+}
+
+
+/* Administrator page cards (tab's organization) */
+.card {
+	-fx-background-radius: 20.0px 20.0px 20.0px 20.0px;
+	-fx-background-color: white;
+}
+
+.cardTitle {
+	-fx-text-fill: -main-color;
+	-fx-font-size: 20.0px;
+	-fx-font-weight: bold;
+}
+
+.cardSubtitle {
+	-fx-text-fill: -main-color;
+	-fx-font-size: 16.0px;
+	-fx-font-weight: bold;
+	-fx-label-padding: 5.0px 0.0px 10.0px 0.0px;
+}
+
+.searchTextField {
+	-jfx-focus-color: -main-color;
+	-fx-font-style: italic;
+}
+
+
+.buttonMainColor {
+	-fx-background-color: -main-color;
+	-fx-background-radius: 5.0px 5.0px 5.0px 5.0px;
+	-fx-pref-width: 100.0;
+	-fx-text-fill: white;
+	-fx-font-weight: bold;
+}
+
+.buttonSoftColor {
+	-fx-background-color: -soft-color;
+	-fx-background-radius: 5.0px 5.0px 5.0px 5.0px;
+	-fx-text-fill: black;
+}
+
+/* tables */
+.table-view .column-header,
+.table-view .column-header-background .filler {
+	-fx-background-color: -main-color;
+}
+
+.table-view .column-header .label {
+	-fx-text-fill: white;
+	-fx-font-weight: bold;
+}
+
+.table-view .cell {
+	-fx-cell-sieze: 35.0;
+	-fx-alignment: center-left;
+}
+
+.table-row-cell:selected {
+	-fx-bacground-color: -soft-color;
+	-fx-text-background-color: -almost-black-color;
+}
+
+/* table scroll */
+/* The increment and decrement button CSS class of scrollbar */
+/*.table-view .increment-button, 
+.table-view .decrement-button {
+	-fx-bacground-color: transparent;
+	-fx-background-radius: 2em;
+}*/
+
+
+/* TextField */
+.jfx-text-field,
+.jfx-combo-box,
+.jfx-password-field {
+    -fx-border-radius: 20.0px;
+    -fx-border-color: #CCCCCC;
+}
+
+.jfx-text-field,
+.jfx-password-field {
+    -fx-padding: 0.333333em 1.0em 0.333333em 1.0em;
+}
+
+.jfx-combo-box {
+    -fx-padding: 0.0em 1.0em 0.0em 1.0em;
+}
+
+.jfx-text-field > .input-line,
+.jfx-combo-box > .input-line,
+.jfx-password-field > .input-line {
+    -fx-background-color: transparent;
+    -fx-pref-height: 0.0px;
+    -fx-translate-y: 0.0px;
+}
+
+.jfx-text-field > .input-focused-line,
+.jfx-combo-box > .input-focused-line {
+    -fx-background-color: transparent;
+    -fx-pref-height: 0.0px;
+}
+
 

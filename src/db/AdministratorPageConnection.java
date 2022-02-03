@@ -4,6 +4,13 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import models.ModelRoleTable;
+import models.ModelScheduleTable;
+import models.ModelUserTable;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -45,7 +52,8 @@ public class AdministratorPageConnection {
 
 		return roles;
 	}
-	public List<String> listActiveUsers(){
+
+	public List<String> listActiveUsers() {
 		Connection conn = null;
 		List<String> activeUsers = new ArrayList<>();
 		try {
@@ -58,7 +66,7 @@ public class AdministratorPageConnection {
 				String name = rs.getString("name");
 				String surname = rs.getString("surname");
 				String idNumber = rs.getString("id_number");
-				String completeName = name + " " + surname + ", "+idNumber;
+				String completeName = name + " " + surname + ", " + idNumber;
 				activeUsers.add(completeName);
 			}
 		}
@@ -77,11 +85,11 @@ public class AdministratorPageConnection {
 
 		return activeUsers;
 	}
-	
+
 	public Hashtable<String, Integer> usersMap() {
 		Connection conn = null;
 		Hashtable<String, Integer> activeUsers = new Hashtable<String, Integer>();
-		
+
 		try {
 			conn = DriverManager.getConnection(connectionUrl);
 			System.out.println("Connected to DB");
@@ -93,7 +101,7 @@ public class AdministratorPageConnection {
 				String name = rs.getString("name");
 				String surname = rs.getString("surname");
 				String idNumber = rs.getString("id_number");
-				String completeName = name + " " + surname + ", "+idNumber;
+				String completeName = name + " " + surname + ", " + idNumber;
 				activeUsers.put(completeName, id);
 			}
 
@@ -111,17 +119,18 @@ public class AdministratorPageConnection {
 		return activeUsers;
 
 	}
+
 	public void deleteUser(int userId) {
 		Connection conn = null;
-		
+
 		try {
 			conn = DriverManager.getConnection(connectionUrl);
 			System.out.println("Connected to DB");
 			Statement stmt = conn.createStatement();
-			stmt.executeQuery("[sp_delete_user] "+userId);
+			stmt.executeQuery("[sp_delete_user] " + userId);
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally {
+		} finally {
 			if (conn != null) {
 				try {
 					conn.close();
@@ -130,9 +139,9 @@ public class AdministratorPageConnection {
 				}
 			}
 		}
-		
-		
+
 	}
+
 	public List<String> listSchedules() {
 		Connection conn = null;
 		List<String> schedules = new ArrayList<>();
@@ -213,6 +222,170 @@ public class AdministratorPageConnection {
 			PreparedStatement statement = conn.prepareStatement(query);
 			statement.setBytes(1, salt);
 			statement.setBytes(2, hash);
+			statement.executeUpdate();
+			succes = true;
+		}
+
+		catch (SQLException e) {
+			e.printStackTrace();
+
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException ex) {
+					ex.printStackTrace();
+				}
+			}
+		}
+		return succes;
+	}
+
+	public ObservableList<ModelUserTable> getUsersTable() {
+
+		Connection conn = null;
+		ResultSet rsUsers = null;
+		ObservableList<ModelUserTable> obList = FXCollections.observableArrayList();
+
+		try {
+			conn = DriverManager.getConnection(connectionUrl);
+			System.out.println("Connected to DB");
+			Statement stmt = conn.createStatement();
+			rsUsers = stmt.executeQuery("[sp_list_active_user]");
+
+			while (rsUsers.next()) {
+				obList.add(new ModelUserTable(rsUsers.getInt("id"), rsUsers.getString("name"),
+						rsUsers.getString("surname"), rsUsers.getString("id_number"), rsUsers.getString("dob"),
+						rsUsers.getString("role_name")));
+			}
+
+		}
+
+		catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException ex) {
+					ex.printStackTrace();
+				}
+			}
+		}
+
+		return obList;
+
+	}
+
+	public ObservableList<ModelScheduleTable> getSchedulesTable() {
+
+		Connection conn = null;
+		ResultSet rsSchedules = null;
+		ObservableList<ModelScheduleTable> obList = FXCollections.observableArrayList();
+
+		try {
+			conn = DriverManager.getConnection(connectionUrl);
+			System.out.println("Connected to DB");
+			Statement stmt = conn.createStatement();
+			rsSchedules = stmt.executeQuery("[sp_list_schedules]");
+
+			while (rsSchedules.next()) {
+				obList.add(new ModelScheduleTable(rsSchedules.getInt("id"), rsSchedules.getString("schedule_name"),
+						rsSchedules.getString("check_in_time"), rsSchedules.getString("check_in_time")));
+			}
+		}
+
+		catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException ex) {
+					ex.printStackTrace();
+				}
+			}
+		}
+
+		return obList;
+
+	}
+
+	public ObservableList<ModelRoleTable> getRolesTable() {
+
+		Connection conn = null;
+		ResultSet rsRoles = null;
+		ObservableList<ModelRoleTable> obList = FXCollections.observableArrayList();
+
+		try {
+			conn = DriverManager.getConnection(connectionUrl);
+			System.out.println("Connected to DB");
+			Statement stmt = conn.createStatement();
+			rsRoles = stmt.executeQuery("[sp_list_roles]");
+
+			while (rsRoles.next()) {
+				obList.add(new ModelRoleTable(rsRoles.getInt("id"), rsRoles.getString("role_name"),
+						rsRoles.getInt("count_users_role")));
+			}
+
+		}
+
+		catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException ex) {
+					ex.printStackTrace();
+				}
+			}
+		}
+
+		return obList;
+
+	}
+
+	public Hashtable<String, String> getRole(int roleId) {
+		Connection conn = null;
+		Hashtable<String, String> role = new Hashtable<String, String>();
+
+		try {
+			conn = DriverManager.getConnection(connectionUrl);
+			System.out.println("Connected to DB");
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery("[sp_search_role] " + roleId);
+
+			while (rs.next()) {
+				int id = rs.getInt("id");
+				String name = rs.getString("role_name");
+				role.put("id", String.valueOf(id));
+				role.put("name", name);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException ex) {
+					ex.printStackTrace();
+				}
+			}
+		}
+		return role;
+	}
+
+	public boolean addRole(int roleId, String roleName) {
+		boolean succes = false;
+		Connection conn = null;
+		try {
+			conn = DriverManager.getConnection(connectionUrl);
+			System.out.println("Connected to DB");
+			String query = ("[sp_edit_role]" + "		@ID = " + roleId + "," + "		@NAME = '" + roleName + "'");
+
+			PreparedStatement statement = conn.prepareStatement(query);
 			statement.executeUpdate();
 			succes = true;
 		}
