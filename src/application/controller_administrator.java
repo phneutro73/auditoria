@@ -283,13 +283,17 @@ public class controller_administrator {
 	}
 
 	@FXML
-	void editSchedule(ActionEvent event) {
+	void editSchedule(ActionEvent event) throws IOException {
 
-		AdministratorPageConnection adminDB = new AdministratorPageConnection();
-		getTableSchedules(adminDB);
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AddNewSchedulePage.fxml"));
+		ControllerEditSchedule control = new ControllerEditSchedule(idScheduleSelected);
+		loader.setController(control);
+		Parent root = loader.load();
 
-		btnEditSchedule.setDisable(true);
-		btnDeleteSchedule.setDisable(true);
+		Stage stage = new Stage();
+		stage.setScene(new Scene(root));
+		stage.showAndWait();
+		initialize();
 
 	}
 

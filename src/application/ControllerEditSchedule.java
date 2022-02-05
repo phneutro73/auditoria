@@ -1,5 +1,9 @@
 package application;
 
+import java.sql.Time;
+import java.time.LocalTime;
+import java.util.Hashtable;
+
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXTimePicker;
@@ -11,7 +15,16 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
-public class ControllerAddNewSchedule {
+public class ControllerEditSchedule {
+
+	int scheduleId;
+
+	public ControllerEditSchedule(int scheduleId) {
+		this.scheduleId = scheduleId;
+	}
+
+	@FXML
+	private Label subtitle;
 
 	@FXML
 	private GridPane grdAddSchedule;
@@ -57,7 +70,7 @@ public class ControllerAddNewSchedule {
 					String checkIn = String.valueOf(fieldCheckIn.getValue()) + ":00";
 					String checkOut = String.valueOf(fieldCheckOut.getValue()) + ":00";
 					AdministratorPageConnection adminDB = new AdministratorPageConnection();
-					boolean success = adminDB.addSchedule(fieldName.getText(), checkIn, checkOut);
+					boolean success = adminDB.updateSchedule(scheduleId, fieldName.getText(), checkIn, checkOut);
 
 					Stage stage = (Stage) btnCancel.getScene().getWindow();
 					stage.close();
@@ -77,7 +90,9 @@ public class ControllerAddNewSchedule {
 
 	@FXML
 	void initialize() {
-
+		subtitle.setText("Modificar horario");
+		AdministratorPageConnection adminDB = new AdministratorPageConnection();
+		getSchedule(adminDB);
 	}
 
 	boolean checkAllFields() {
@@ -112,6 +127,21 @@ public class ControllerAddNewSchedule {
 			// TODO: handle exception
 			return false;
 		}
+	}
+
+	void getSchedule(AdministratorPageConnection adminDB) {
+		Hashtable<String, String> schedule = adminDB.getSchedule(scheduleId);
+		String name = schedule.get("name");
+		String strCheckInTime = schedule.get("checkInTime");
+		String strCheckOutTime = schedule.get("checkOutTime");
+
+		LocalTime checkIn = LocalTime.parse(strCheckInTime);
+		LocalTime checkOut = LocalTime.parse(strCheckOutTime);
+
+		fieldName.setText(name);
+		fieldCheckIn.setValue(checkIn);
+		fieldCheckOut.setValue(checkOut);
+
 	}
 
 }
