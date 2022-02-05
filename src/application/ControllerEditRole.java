@@ -67,7 +67,7 @@ public class ControllerEditRole {
 			if (checkAllFields()) {
 
 				AdministratorPageConnection adminDB = new AdministratorPageConnection();
-				boolean succes = adminDB.addRole(roleId, fieldName.getText());
+				boolean succes = adminDB.updateRole(roleId, fieldName.getText());
 
 				if (succes) {
 					FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));

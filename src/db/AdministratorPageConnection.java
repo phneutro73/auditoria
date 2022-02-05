@@ -380,7 +380,7 @@ public class AdministratorPageConnection {
 		return role;
 	}
 
-	public boolean addRole(int roleId, String roleName) {
+	public boolean updateRole(int roleId, String roleName) {
 		boolean success = false;
 		Connection conn = null;
 		try {
@@ -633,6 +633,37 @@ public class AdministratorPageConnection {
 			}
 		}
 
+	}
+	
+	public boolean addRole(String name) {
+
+		boolean success = true;
+		Connection conn = null;
+
+		try {
+
+			conn = DriverManager.getConnection(connectionUrl);
+			System.out.println("Connected to DB");
+			String query = "[sp_create_role]" + "		@NAME = '" + name + "'";
+			PreparedStatement statement = conn.prepareStatement(query);
+			statement.executeUpdate();
+			success = true;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			success = false;
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException ex) {
+					ex.printStackTrace();
+				}
+			}
+			success = true;
+		}
+
+		return success;
 	}
 
 }

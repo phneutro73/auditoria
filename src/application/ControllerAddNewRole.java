@@ -1,14 +1,21 @@
 package application;
 
+import java.io.IOException;
+
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 
+import db.AdministratorPageConnection;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class ControllerAddNewRole {
 
@@ -49,11 +56,35 @@ public class ControllerAddNewRole {
 	}
 
 	@FXML
-	void saveRole(ActionEvent event) {
+	void saveRole(ActionEvent event) throws IOException {
 
 		if (checkAllFields()) {
-			// Guardar
+			AdministratorPageConnection adminDB = new AdministratorPageConnection();
+			boolean succes = adminDB.addRole(fieldName.getText());
 
+			if (succes) {
+				FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
+				ControllerAlertDialog control = new ControllerAlertDialog(0, 0, "Guardado correcto",
+						"Los datos se han guardado correctamente");
+				loader.setController(control);
+				Parent root = loader.load();
+
+				Stage stage = new Stage();
+				stage.initStyle(StageStyle.UNDECORATED);
+				stage.setScene(new Scene(root));
+				stage.show();
+			} else {
+				FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
+				ControllerAlertDialog control = new ControllerAlertDialog(0, 0, "Error",
+						"Por favor, asegúrese de que los datos son correctos.");
+				loader.setController(control);
+				Parent root = loader.load();
+
+				Stage stage = new Stage();
+				stage.initStyle(StageStyle.UNDECORATED);
+				stage.setScene(new Scene(root));
+				stage.show();
+			}
 			Stage stage = (Stage) btnCancel.getScene().getWindow();
 			stage.close();
 
