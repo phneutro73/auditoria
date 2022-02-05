@@ -79,6 +79,8 @@ public class ControllerYesNoAlertDialog {
 		case "adminDeleteSchedule":
 			adminDeleteSchedule();
 			break;
+		case "adminDeleteRole":
+			adminDeleteRole();
 		default:
 			break;
 		}
@@ -160,6 +162,46 @@ public class ControllerYesNoAlertDialog {
 
 			AdministratorPageConnection adminDB = new AdministratorPageConnection();
 			adminDB.deleteSchedule(Integer.parseInt(params[0]));
+			success = true;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			success = false;
+		}
+
+		if (success) {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
+			ControllerAlertDialog control = new ControllerAlertDialog(0, 0, "Eliminado correctamente",
+					"El horario ha sido eliminado correctamente correctamente.");
+			loader.setController(control);
+			Parent root = loader.load();
+
+			Stage stage = new Stage();
+			stage.initStyle(StageStyle.UNDECORATED);
+			stage.setScene(new Scene(root));
+			stage.show();
+		} else {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
+			ControllerAlertDialog control = new ControllerAlertDialog(0, 0, "Error",
+					"Ha habido un error, el horario no ha sido eliminado.");
+			loader.setController(control);
+			Parent root = loader.load();
+
+			Stage stage = new Stage();
+			stage.initStyle(StageStyle.UNDECORATED);
+			stage.setScene(new Scene(root));
+			stage.show();
+		}
+	}
+	
+	void adminDeleteRole() throws IOException {
+
+		boolean success = true;
+
+		try {
+
+			AdministratorPageConnection adminDB = new AdministratorPageConnection();
+			adminDB.deleteRole(Integer.parseInt(params[0]));
 			success = true;
 
 		} catch (Exception e) {

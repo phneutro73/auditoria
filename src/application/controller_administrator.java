@@ -347,13 +347,22 @@ public class controller_administrator {
 	}
 
 	@FXML
-	void deleteRole(ActionEvent event) {
+	void deleteRole(ActionEvent event) throws IOException {
 
 		AdministratorPageConnection adminDB = new AdministratorPageConnection();
-		getTableRoles(adminDB);
 
-		btnEditRole.setDisable(true);
-		btnDeleteRole.setDisable(true);
+		String[] params = { String.valueOf(idRoleSelected) };
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/YesNoAlertDialog.fxml"));
+		ControllerYesNoAlertDialog control = new ControllerYesNoAlertDialog(0, 0, "Error",
+				"Es necesario que rellene todos los campos.", "pregunta", "SÍ", "No", "adminDeleteRole", params);
+		loader.setController(control);
+		Parent root = loader.load();
+
+		Stage stage = new Stage();
+		stage.initStyle(StageStyle.UNDECORATED);
+		stage.setScene(new Scene(root));
+		stage.showAndWait();
+		initialize();
 
 	}
 
