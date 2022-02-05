@@ -95,14 +95,17 @@ public class ControllerYesNoAlertDialog {
 		try {
 
 			if (height == 0) {
-				height = 194;
+				height = 173;
 			}
 			if (width == 0) {
-				width = 600;
+				width = 280;
 			}
 
 			dialogTitle.setText(title);
 			dialogText.setText(text);
+			dialogQuestion.setText(question);
+			btnYes.setText(noButtonTxt);
+			btnNo.setText(yesButtonTxt);
 
 			parent.setPrefSize(width, height);
 			parent.setMinSize(width, height);
@@ -131,8 +134,8 @@ public class ControllerYesNoAlertDialog {
 
 		if (success) {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
-			ControllerAlertDialog control = new ControllerAlertDialog(0, 0, "Eliminado correctamente",
-					"El usuario ha sido eliminado correctamente correctamente.");
+			ControllerAlertDialog control = new ControllerAlertDialog(120, 210, "Eliminado correctamente",
+					"El usuario ha sido eliminado correctamente.");
 			loader.setController(control);
 			Parent root = loader.load();
 
@@ -142,8 +145,8 @@ public class ControllerYesNoAlertDialog {
 			stage.show();
 		} else {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
-			ControllerAlertDialog control = new ControllerAlertDialog(0, 0, "Error",
-					"Ha habido un error, el usuario no ha sido eliminado.");
+			ControllerAlertDialog control = new ControllerAlertDialog(120, 210, "Error",
+					"Ha habido un error. El usuario no ha sido eliminado.");
 			loader.setController(control);
 			Parent root = loader.load();
 
@@ -171,8 +174,8 @@ public class ControllerYesNoAlertDialog {
 
 		if (success) {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
-			ControllerAlertDialog control = new ControllerAlertDialog(0, 0, "Eliminado correctamente",
-					"El horario ha sido eliminado correctamente correctamente.");
+			ControllerAlertDialog control = new ControllerAlertDialog(120, 210, "Eliminado correctamente",
+					"El horario ha sido eliminado correctamente.");
 			loader.setController(control);
 			Parent root = loader.load();
 
@@ -182,7 +185,7 @@ public class ControllerYesNoAlertDialog {
 			stage.show();
 		} else {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
-			ControllerAlertDialog control = new ControllerAlertDialog(0, 0, "Error",
+			ControllerAlertDialog control = new ControllerAlertDialog(120, 210, "Error",
 					"Ha habido un error, el horario no ha sido eliminado.");
 			loader.setController(control);
 			Parent root = loader.load();
@@ -193,7 +196,7 @@ public class ControllerYesNoAlertDialog {
 			stage.show();
 		}
 	}
-	
+
 	void adminDeleteRole() throws IOException {
 
 		boolean success = true;
@@ -211,8 +214,8 @@ public class ControllerYesNoAlertDialog {
 
 		if (success) {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
-			ControllerAlertDialog control = new ControllerAlertDialog(0, 0, "Eliminado correctamente",
-					"El horario ha sido eliminado correctamente correctamente.");
+			ControllerAlertDialog control = new ControllerAlertDialog(120, 210, "Eliminado correctamente",
+					"El puesto ha sido eliminado correctamente.");
 			loader.setController(control);
 			Parent root = loader.load();
 
@@ -222,8 +225,8 @@ public class ControllerYesNoAlertDialog {
 			stage.show();
 		} else {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
-			ControllerAlertDialog control = new ControllerAlertDialog(0, 0, "Error",
-					"Ha habido un error, el horario no ha sido eliminado.");
+			ControllerAlertDialog control = new ControllerAlertDialog(120, 210, "Error",
+					"Ha habido un error, el puesto no ha sido eliminado.");
 			loader.setController(control);
 			Parent root = loader.load();
 

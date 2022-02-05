@@ -106,7 +106,7 @@ public class controller_login {
 			if (Arrays.equals(hash, calculatedHash)) {
 
 				FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/administrator_page.fxml"));
-				controller_administrator control = new controller_administrator(0.0, 0.0, 0);
+				controller_administrator control = new controller_administrator(0, 0, 0);
 				loader.setController(control);
 				Parent root = loader.load();
 
@@ -118,8 +118,8 @@ public class controller_login {
 			} else {
 
 				FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
-				ControllerAlertDialog control = new ControllerAlertDialog(0, 0, "Error",
-						"El usuario y/o contraseña son incorrectos.");
+				ControllerAlertDialog control = new ControllerAlertDialog(120, 210, "Error",
+						"El usuario y/o contraseña no son correctos, inténtelo de nuevo.");
 				loader.setController(control);
 				Parent root = loader.load();
 
@@ -133,8 +133,8 @@ public class controller_login {
 
 		} catch (Exception e) {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
-			ControllerAlertDialog control = new ControllerAlertDialog(111, 200, "Error en el inicio de sesión",
-					"El usuario y/o contraseña no son correctos, inténtelo de nuevo");
+			ControllerAlertDialog control = new ControllerAlertDialog(120, 210, "Error en el inicio de sesión",
+					"El usuario y/o contraseña no son correctos, inténtelo de nuevo.");
 			loader.setController(control);
 			Parent root = loader.load();
 

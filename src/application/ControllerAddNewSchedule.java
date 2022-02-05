@@ -7,9 +7,13 @@ import com.jfoenix.controls.JFXTimePicker;
 import db.AdministratorPageConnection;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class ControllerAddNewSchedule {
 
@@ -59,18 +63,47 @@ public class ControllerAddNewSchedule {
 					AdministratorPageConnection adminDB = new AdministratorPageConnection();
 					boolean success = adminDB.addSchedule(fieldName.getText(), checkIn, checkOut);
 
-					Stage stage = (Stage) btnCancel.getScene().getWindow();
+					FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
+					ControllerAlertDialog control = new ControllerAlertDialog(120, 210, "Guardado correcto",
+							"Los datos del horario se han guardado correctamente");
+					loader.setController(control);
+					Parent root = loader.load();
+
+					Stage stage = new Stage();
+					stage.initStyle(StageStyle.UNDECORATED);
+					stage.setScene(new Scene(root));
+					stage.show();
+
+					stage = (Stage) btnCancel.getScene().getWindow();
 					stage.close();
 
 				} else {
-					// Horario inválido (entrada > salida)
+					FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
+					ControllerAlertDialog control = new ControllerAlertDialog(140, 230, "Error",
+							"Los horarios introducidos no son válidos: la hora de entrada es posterior a la de salida.");
+					loader.setController(control);
+					Parent root = loader.load();
+
+					Stage stage = new Stage();
+					stage.initStyle(StageStyle.UNDECORATED);
+					stage.setScene(new Scene(root));
+					stage.show();
 				}
 			} else {
-				// No ha rellenado todos los campos
+				FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
+				ControllerAlertDialog control = new ControllerAlertDialog(120, 210, "Error",
+						"Es necesario que rellene todos los campos.");
+				loader.setController(control);
+				Parent root = loader.load();
+
+				Stage stage = new Stage();
+				stage.initStyle(StageStyle.UNDECORATED);
+				stage.setScene(new Scene(root));
+				stage.show();
 			}
 
 		} catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
 		}
 
 	}

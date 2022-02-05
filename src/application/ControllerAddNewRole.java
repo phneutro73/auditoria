@@ -64,8 +64,8 @@ public class ControllerAddNewRole {
 
 			if (succes) {
 				FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
-				ControllerAlertDialog control = new ControllerAlertDialog(0, 0, "Guardado correcto",
-						"Los datos se han guardado correctamente");
+				ControllerAlertDialog control = new ControllerAlertDialog(120, 210, "Guardado correcto",
+						"Los datos se han guardado correctamente.");
 				loader.setController(control);
 				Parent root = loader.load();
 
@@ -73,10 +73,14 @@ public class ControllerAddNewRole {
 				stage.initStyle(StageStyle.UNDECORATED);
 				stage.setScene(new Scene(root));
 				stage.show();
+
+				stage = (Stage) btnAccept.getScene().getWindow();
+				stage.close();
+
 			} else {
 				FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
-				ControllerAlertDialog control = new ControllerAlertDialog(0, 0, "Error",
-						"Por favor, asegúrese de que los datos son correctos.");
+				ControllerAlertDialog control = new ControllerAlertDialog(140, 210, "Error",
+						"Se ha producido un error. Por favor, inténtelo de nuevo.");
 				loader.setController(control);
 				Parent root = loader.load();
 
@@ -89,7 +93,16 @@ public class ControllerAddNewRole {
 			stage.close();
 
 		} else {
-			// No se han rellenado todos los campos
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
+			ControllerAlertDialog control = new ControllerAlertDialog(120, 210, "Error",
+					"Es necesario que rellene todos los campos.");
+			loader.setController(control);
+			Parent root = loader.load();
+
+			Stage stage = new Stage();
+			stage.initStyle(StageStyle.UNDECORATED);
+			stage.setScene(new Scene(root));
+			stage.show();
 		}
 
 	}

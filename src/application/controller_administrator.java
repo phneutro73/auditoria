@@ -255,8 +255,11 @@ public class controller_administrator {
 
 		String[] params = { String.valueOf(idUserSelected) };
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/YesNoAlertDialog.fxml"));
-		ControllerYesNoAlertDialog control = new ControllerYesNoAlertDialog(0, 0, "Error",
-				"Es necesario que rellene todos los campos.", "pregunta", "SÍ", "No", "adminDeleteUser", params);
+		ControllerYesNoAlertDialog control = new ControllerYesNoAlertDialog(0, 0, "Atención",
+				"Esta acción es permanente, no se podrá deshacer. Preste atención y revise los datos.",
+				"¿Está seguro de que desea eliminar al usuario con el siguiente ID: " + String.valueOf(idUserSelected)
+						+ "?",
+				"SÍ", "No", "adminDeleteUser", params);
 		loader.setController(control);
 		Parent root = loader.load();
 
@@ -304,8 +307,11 @@ public class controller_administrator {
 
 		String[] params = { String.valueOf(idScheduleSelected) };
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/YesNoAlertDialog.fxml"));
-		ControllerYesNoAlertDialog control = new ControllerYesNoAlertDialog(0, 0, "Error",
-				"Es necesario que rellene todos los campos.", "pregunta", "SÍ", "No", "adminDeleteSchedule", params);
+		ControllerYesNoAlertDialog control = new ControllerYesNoAlertDialog(0, 0, "Atención",
+				"Esta acción es permanente, no se podrá deshacer. Preste atención y revise los datos.",
+				"¿Está seguro de que desea eliminar el horario con el siguiente ID: "
+						+ String.valueOf(idScheduleSelected) + "?",
+				"SÍ", "No", "adminDeleteSchedule", params);
 		loader.setController(control);
 		Parent root = loader.load();
 
@@ -353,8 +359,11 @@ public class controller_administrator {
 
 		String[] params = { String.valueOf(idRoleSelected) };
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/YesNoAlertDialog.fxml"));
-		ControllerYesNoAlertDialog control = new ControllerYesNoAlertDialog(0, 0, "Error",
-				"Es necesario que rellene todos los campos.", "pregunta", "SÍ", "No", "adminDeleteRole", params);
+		ControllerYesNoAlertDialog control = new ControllerYesNoAlertDialog(0, 0, "Atención",
+				"Esta acción es permanente, no se podrá deshacer. Preste atención y revise los datos.",
+				"¿Está seguro de que desea eliminar el puesto con el siguiente ID: " + String.valueOf(idRoleSelected)
+						+ "?",
+				"SÍ", "No", "adminDeleteRole", params);
 		loader.setController(control);
 		Parent root = loader.load();
 

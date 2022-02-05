@@ -71,7 +71,7 @@ public class ControllerEditRole {
 
 				if (succes) {
 					FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
-					ControllerAlertDialog control = new ControllerAlertDialog(0, 0, "Guardado correcto",
+					ControllerAlertDialog control = new ControllerAlertDialog(120, 210, "Guardado correcto",
 							"Los datos se han guardado correctamente");
 					loader.setController(control);
 					Parent root = loader.load();
@@ -82,8 +82,8 @@ public class ControllerEditRole {
 					stage.show();
 				} else {
 					FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
-					ControllerAlertDialog control = new ControllerAlertDialog(0, 0, "Error",
-							"Por favor, asegúrese de que los datos son correctos.");
+					ControllerAlertDialog control = new ControllerAlertDialog(140, 210, "Error",
+							"Se ha producido un error. Por favor, inténtelo de nuevo.");
 					loader.setController(control);
 					Parent root = loader.load();
 
@@ -97,7 +97,7 @@ public class ControllerEditRole {
 
 			} else {
 				FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
-				ControllerAlertDialog control = new ControllerAlertDialog(0, 0, "Error",
+				ControllerAlertDialog control = new ControllerAlertDialog(120, 210, "Error",
 						"Es necesario que rellene todos los campos.");
 				loader.setController(control);
 				Parent root = loader.load();

@@ -21,6 +21,12 @@
 	-fx-background-color: white;
 }
 
+.witeBackgroundDialogParent {
+	-fx-background-color: white;
+	-fx-border-width: 2.0px;
+	-fx-border-color: -soft-color2;
+}
+
 /* top bar of login page */
 .topBar {
 	-fx-background-color: -soft-color2;

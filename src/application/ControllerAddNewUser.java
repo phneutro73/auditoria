@@ -189,8 +189,8 @@ public class ControllerAddNewUser {
 							numScedule[6], cmbRole.getSelectionModel().getSelectedIndex());
 
 					FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
-					ControllerAlertDialog control = new ControllerAlertDialog(0, 0, "Guardado correcto",
-							"Los datos del usuario se han guardado correctamente");
+					ControllerAlertDialog control = new ControllerAlertDialog(120, 210, "Guardado correcto",
+							"Los datos del usuario se han guardado correctamente.");
 					loader.setController(control);
 					Parent root = loader.load();
 
@@ -204,7 +204,7 @@ public class ControllerAddNewUser {
 
 				} else {
 					FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
-					ControllerAlertDialog control = new ControllerAlertDialog(150, 0, "Error",
+					ControllerAlertDialog control = new ControllerAlertDialog(155, 230, "Error",
 							"Por favor, revise los campos, y tenga en cuenta que los campos de repetición (email y contraseña), deben ser iguales.");
 					loader.setController(control);
 					Parent root = loader.load();
@@ -216,7 +216,7 @@ public class ControllerAddNewUser {
 				}
 			} else {
 				FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
-				ControllerAlertDialog control = new ControllerAlertDialog(0, 0, "Error",
+				ControllerAlertDialog control = new ControllerAlertDialog(120, 210, "Error",
 						"Es necesario que rellene todos los campos.");
 				loader.setController(control);
 				Parent root = loader.load();
