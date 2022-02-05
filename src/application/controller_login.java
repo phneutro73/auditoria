@@ -106,6 +106,8 @@ public class controller_login {
 			if (Arrays.equals(hash, calculatedHash)) {
 
 				FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/administrator_page.fxml"));
+				controller_administrator control = new controller_administrator(0.0, 0.0, 0);
+				loader.setController(control);
 				Parent root = loader.load();
 
 				Stage stage = new Stage();

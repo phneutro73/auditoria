@@ -24,12 +24,19 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 public class ControllerAddNewUser {
+	
+	@FXML
+	private AnchorPane parent;
+	
+	@FXML
+	private Label subtitle;
 
 	@FXML
 	private Label lblPersonalInfo;
@@ -179,7 +186,7 @@ public class ControllerAddNewUser {
 					adminDB.addUser(fieldName.getText(), fieldSurname.getText(), fieldDob.getValue().toString(),
 							fieldUser.getText(), fieldDNI.getText(), fieldEmail.getText(), pass[0], pass[1],
 							numScedule[0], numScedule[1], numScedule[2], numScedule[3], numScedule[4], numScedule[5],
-							numScedule[6]);
+							numScedule[6], cmbRole.getSelectionModel().getSelectedIndex());
 
 					FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
 					ControllerAlertDialog control = new ControllerAlertDialog(0, 0, "Guardado correcto",
@@ -197,8 +204,8 @@ public class ControllerAddNewUser {
 
 				} else {
 					FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
-					ControllerAlertDialog control = new ControllerAlertDialog(0, 0, "Error",
-							"Se ha producido un error. Por favor, revise los campos, y tenga en cuenta que los campos de repetición (email y contraseña), deben ser iguales.");
+					ControllerAlertDialog control = new ControllerAlertDialog(150, 0, "Error",
+							"Por favor, revise los campos, y tenga en cuenta que los campos de repetición (email y contraseña), deben ser iguales.");
 					loader.setController(control);
 					Parent root = loader.load();
 
@@ -285,7 +292,7 @@ public class ControllerAddNewUser {
 				}
 			}
 
-			List<String> activeUsers = adminDB.listActiveUsers();
+			//List<String> activeUsers = adminDB.listActiveUsers();
 
 		} catch (Exception e) {
 			// TODO: handle exception

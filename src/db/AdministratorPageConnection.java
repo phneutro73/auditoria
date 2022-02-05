@@ -2,6 +2,7 @@ package db;
 
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Hashtable;
 import java.util.List;
 
@@ -60,7 +61,7 @@ public class AdministratorPageConnection {
 			conn = DriverManager.getConnection(connectionUrl);
 			System.out.println("Connected to DB");
 			Statement stmt = conn.createStatement();
-			ResultSet rs = stmt.executeQuery("[sp_list_active_user]");
+			ResultSet rs = stmt.executeQuery("[sp_list_active_users]");
 
 			while (rs.next()) {
 				String name = rs.getString("name");
@@ -94,7 +95,7 @@ public class AdministratorPageConnection {
 			conn = DriverManager.getConnection(connectionUrl);
 			System.out.println("Connected to DB");
 			Statement stmt = conn.createStatement();
-			ResultSet rs = stmt.executeQuery("[sp_list_active_user]");
+			ResultSet rs = stmt.executeQuery("[sp_list_active_users]");
 
 			while (rs.next()) {
 				int id = rs.getInt("id");
@@ -205,7 +206,7 @@ public class AdministratorPageConnection {
 	}
 
 	public boolean addUser(String name, String surname, String dob, String username, String idNumber, String email,
-			byte[] salt, byte[] hash, int mon, int tue, int wed, int thu, int fri, int sat, int sun) {
+			byte[] salt, byte[] hash, int mon, int tue, int wed, int thu, int fri, int sat, int sun, int roleId) {
 		boolean succes = false;
 		Connection conn = null;
 		try {
@@ -217,7 +218,7 @@ public class AdministratorPageConnection {
 					+ "		@PASSWORD_SALT = ?," + "		@PASSWORD_HASH = ?," + "		@Mon_SCHEDULE = " + mon
 					+ "," + "		@Tue_SCHEDULE = " + tue + "," + "		@Wed_SCHEDULE = " + wed + ","
 					+ "		@Thu_SCHEDULE = " + thu + "," + "		@Fri_SCHEDULE = " + fri + ","
-					+ "		@Sat_SCHEDULE = " + sat + "," + "		@Sun_SCHEDULE = " + sun + "");
+					+ "		@Sat_SCHEDULE = " + sat + "," + "		@Sun_SCHEDULE = " + sun + ",		@ROLE_ID = " + roleId);
 
 			PreparedStatement statement = conn.prepareStatement(query);
 			statement.setBytes(1, salt);
@@ -251,7 +252,7 @@ public class AdministratorPageConnection {
 			conn = DriverManager.getConnection(connectionUrl);
 			System.out.println("Connected to DB");
 			Statement stmt = conn.createStatement();
-			rsUsers = stmt.executeQuery("[sp_list_active_user]");
+			rsUsers = stmt.executeQuery("[sp_list_active_users]");
 
 			while (rsUsers.next()) {
 				obList.add(new ModelUserTable(rsUsers.getInt("id"), rsUsers.getString("name"),
@@ -403,5 +404,115 @@ public class AdministratorPageConnection {
 			}
 		}
 		return succes;
+	}
+	
+	public Hashtable<String, Object> getUser(int userId) {
+		Connection conn = null;
+		Hashtable<String, Object> user = new Hashtable<String, Object>();
+		Hashtable<Integer, Integer> schedule = new Hashtable<Integer, Integer>();
+
+		try {
+			conn = DriverManager.getConnection(connectionUrl);
+			System.out.println("Connected to DB");
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery("[sp_search_user] " + userId);
+
+			int id = 0;
+			String name = null;
+			String surname = null;
+			Date dob = null;
+			String idNumber = null;
+			int scheduleId = 0;
+			int weekday = 0;
+			int roleId = 0;
+			String email = null;
+			String userName = null;
+			
+			while (rs.next()) {
+				id = rs.getInt("id");
+				name = rs.getString("name");
+				surname = rs.getString("surname");
+				dob = rs.getDate("dob");
+				idNumber = rs.getString("id_number");
+				scheduleId= rs.getInt("schedule_id");
+				weekday = rs.getInt("weekday");
+				roleId = rs.getInt("role_id");
+				schedule.put(weekday, scheduleId);
+				email = rs.getString("email");
+				userName = rs.getString("user_name");
+			}
+
+			user.put("id", String.valueOf(id));
+			user.put("name", name);
+			user.put("surname", surname);
+			user.put("dob", dob);
+			user.put("idNumber", idNumber);
+			user.put("schedule", schedule);
+			user.put("roleId", roleId);
+			user.put("email", email);
+			user.put("userName", userName);
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException ex) {
+					ex.printStackTrace();
+				}
+			}
+		}
+		
+		return user;
+		
+	}
+	
+	public boolean updateUser(int userId, String name, String surname, String dob, String username, String idNumber, String email,
+			byte[] salt, byte[] hash, int mon, int tue, int wed, int thu, int fri, int sat, int sun, int roleId) {
+		boolean succes = false;
+		Connection conn = null;
+		
+		try {
+			
+			conn = DriverManager.getConnection(connectionUrl);
+			System.out.println("Connected to DB");
+			String query = ("[sp_update_user]" + "		@ID = " + userId + "," 
+											+ "		@NAME = '" + name + "'," 
+											+ "		@SURNAME = '" + surname + "'," 
+											+ "		@DOB = '" + dob + "'," 
+											+ "		@USERNAME = '" + username + "',"
+											+ "		@ID_NUMBER = '" + idNumber + "'," 
+											+ "		@EMAIL = '" + email + "',"
+											+ "		@PASSWORD_SALT = ?," 
+											+ "		@PASSWORD_HASH = ?," 
+											+ "		@Mon_SCHEDULE = " + mon + "," 
+											+ "		@Tue_SCHEDULE = " + tue + "," 
+											+ "		@Wed_SCHEDULE = " + wed + ","
+											+ "		@Thu_SCHEDULE = " + thu + "," 
+											+ "		@Fri_SCHEDULE = " + fri + ","
+											+ "		@Sat_SCHEDULE = " + sat + "," 
+											+ "		@Sun_SCHEDULE = " + sun + "," 
+											+ "		@ROLE_ID = " + roleId);
+
+			PreparedStatement statement = conn.prepareStatement(query);
+			statement.setBytes(1, salt);
+			statement.setBytes(2, hash);
+			statement.executeUpdate();
+			succes = true;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException ex) {
+					ex.printStackTrace();
+				}
+			}
+		}
+		
+		return true;
 	}
 }

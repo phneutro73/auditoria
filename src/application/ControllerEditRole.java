@@ -12,6 +12,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -28,7 +29,10 @@ public class ControllerEditRole {
 		this.width = width;
 		this.roleId = roleId;
 	}
-
+	
+	@FXML
+	private AnchorPane parent;
+	
 	@FXML
 	private Label title;
 
@@ -114,6 +118,14 @@ public class ControllerEditRole {
 
 		try {
 
+			if (height == 0) {
+				height = 194;
+			} 
+			if (width == 0) {
+				width = 600;
+			}
+			parent.setPrefSize(width, height);
+			
 			subtitle.setText("Modificar puesto");
 			AdministratorPageConnection adminDB = new AdministratorPageConnection();
 			getRole(adminDB);

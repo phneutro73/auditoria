@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="900.0"
+<AnchorPane fx:id="parent" prefHeight="600.0" prefWidth="900.0"
 	styleClass="softBackgroundParent" stylesheets="@application.css"
 	xmlns="http://javafx.com/javafx/8.0.171"
 	xmlns:fx="http://javafx.com/fxml/1">
@@ -53,7 +53,7 @@
 								<Image url="@../resources/assets/NextIcon.png" />
 							</image>
 						</ImageView>
-						<Label layoutX="282.0" layoutY="18.0"
+						<Label fx:id="subtitle" layoutX="282.0" layoutY="18.0"
 							text="Añadir un usuario" textFill="#434345">
 							<font>
 								<Font name="System Bold" size="13.0" />

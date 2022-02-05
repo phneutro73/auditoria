@@ -10,16 +10,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="parent" prefHeight="111.0"
-	prefWidth="200.0" styleClass="witeBackgroundParent"
-	stylesheets="@application.css" xmlns="http://javafx.com/javafx/8.0.171"
-	xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="parent" prefHeight="111.0" prefWidth="200.0" styleClass="witeBackgroundParent" stylesheets="@application.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
 	<children>
-		<HBox alignment="CENTER_RIGHT" prefHeight="25.0"
-			prefWidth="200.0" styleClass="topBar" stylesheets="@application.css">
+		<HBox alignment="CENTER_RIGHT" prefHeight="25.0" prefWidth="200.0" styleClass="topBar" stylesheets="@application.css">
 			<children>
-				<HBox alignment="CENTER_LEFT" prefHeight="25.0"
-					prefWidth="54.0" HBox.hgrow="ALWAYS">
+				<HBox alignment="CENTER_LEFT" prefHeight="25.0" prefWidth="54.0" HBox.hgrow="ALWAYS">
 					<children>
 						<Label fx:id="dialogTitle" text="Title">
 							<HBox.margin>
@@ -28,11 +23,7 @@
 						</Label>
 					</children>
 				</HBox>
-				<Label fx:id="btnClose" alignment="CENTER"
-					maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
-					minWidth="-Infinity" onMouseClicked="#closeScreen"
-					prefHeight="25.0" prefWidth="25.0" styleClass="closeButton"
-					stylesheets="@application.css">
+				<Label fx:id="btnClose" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#closeScreen" prefHeight="25.0" prefWidth="25.0" styleClass="closeButton" stylesheets="@application.css">
 					<graphic>
 						<ImageView fitHeight="24.0" fitWidth="24.0">
 							<image>
@@ -43,17 +34,14 @@
 				</Label>
 			</children>
 		</HBox>
-		<VBox alignment="CENTER" layoutY="25.0" prefHeight="91.0"
-			prefWidth="200.0" spacing="10.0">
+		<VBox alignment="CENTER" layoutY="24.0" prefHeight="87.0" prefWidth="200.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="24.0">
 			<children>
 				<HBox prefHeight="39.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
 					<children>
 						<Label fx:id="dialogText" text="Text" wrapText="true" />
 					</children>
 				</HBox>
-				<JFXButton fx:id="btnAccept" onMouseClicked="#closeScreen"
-					styleClass="buttonMainColor" stylesheets="@application.css"
-					text="ACEPTAR">
+				<JFXButton fx:id="btnAccept" onMouseClicked="#closeScreen" styleClass="buttonMainColor" stylesheets="@application.css" text="ACEPTAR">
 					<font>
 						<Font name="System Bold" size="12.0" />
 					</font>

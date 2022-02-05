@@ -52,6 +52,16 @@ import models.ModelUserTable;
 import db.AdministratorPageConnection;
 
 public class controller_administrator {
+	
+	double height;
+	double width;
+	int currentUser;
+	
+	public controller_administrator(double height, double width, int currentUser) {
+		this.height = height;
+		this.width = width;
+		this.currentUser = currentUser;
+	}
 
 	@FXML
 	private AnchorPane parent;
@@ -71,6 +81,7 @@ public class controller_administrator {
 
 	@FXML
 	private HBox btnAddItem;
+	
 	@FXML
 	private HBox btnStatistics;
 
@@ -173,6 +184,7 @@ public class controller_administrator {
 	void initialize() {
 
 		try {
+			
 
 			AdministratorPageConnection adminDB = new AdministratorPageConnection();
 
@@ -217,13 +229,8 @@ public class controller_administrator {
 
 		Stage stage = new Stage();
 		stage.setScene(new Scene(root));
-		stage.show();
-
-		AdministratorPageConnection adminDB = new AdministratorPageConnection();
-		getTableActiveUsers(adminDB);
-
-		btnEditUser.setDisable(true);
-		btnDeleteUser.setDisable(true);
+		stage.showAndWait();
+		initialize();
 
 	}
 
@@ -231,19 +238,14 @@ public class controller_administrator {
 	void editUser(ActionEvent event) throws IOException {
 
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AddNewUserPage.fxml"));
-		ControllerEditUser control = new ControllerEditUser(600.0, 900.0, 1);
+		ControllerEditUser control = new ControllerEditUser(600.0, 900.0, idUserSelected);
 		loader.setController(control);
 		Parent root = loader.load();
 
 		Stage stage = new Stage();
 		stage.setScene(new Scene(root));
-		stage.show();
-
-		AdministratorPageConnection adminDB = new AdministratorPageConnection();
-		getTableActiveUsers(adminDB);
-
-		btnEditUser.setDisable(true);
-		btnDeleteUser.setDisable(true);
+		stage.showAndWait();
+		initialize();
 
 	}
 
@@ -262,20 +264,14 @@ public class controller_administrator {
 	void addRole(ActionEvent event) throws IOException {
 
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AddNewRolePage.fxml"));
-		ControllerAddNewRole control = new ControllerAddNewRole();
+		ControllerAddNewRole control = new ControllerAddNewRole(0, 0);
 		loader.setController(control);
 		Parent root = loader.load();
 
 		Stage stage = new Stage();
 		stage.setScene(new Scene(root));
-		stage.show();
-
-		AdministratorPageConnection adminDB = new AdministratorPageConnection();
-		getTableRoles(adminDB);
-
-		btnEditRole.setDisable(true);
-		btnDeleteRole.setDisable(true);
-
+		stage.showAndWait();
+		initialize();
 	}
 
 	@FXML
@@ -288,14 +284,8 @@ public class controller_administrator {
 
 		Stage stage = new Stage();
 		stage.setScene(new Scene(root));
-		stage.show();
-
-		AdministratorPageConnection adminDB = new AdministratorPageConnection();
-		getTableSchedules(adminDB);
-
-		btnEditSchedule.setDisable(true);
-		btnDeleteSchedule.setDisable(true);
-
+		stage.showAndWait();
+		initialize();
 	}
 
 	@FXML
@@ -324,19 +314,14 @@ public class controller_administrator {
 	void editRole(ActionEvent event) throws IOException {
 
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AddNewRolePage.fxml"));
-		ControllerEditRole control = new ControllerEditRole(parent.getHeight(), parent.getWidth(), idRoleSelected);
+		ControllerEditRole control = new ControllerEditRole(0, 0, idRoleSelected);
 		loader.setController(control);
 		Parent root = loader.load();
 
 		Stage stage = new Stage();
 		stage.setScene(new Scene(root));
-		stage.show();
-
-		AdministratorPageConnection adminDB = new AdministratorPageConnection();
-		getTableRoles(adminDB);
-
-		btnEditRole.setDisable(true);
-		btnDeleteRole.setDisable(true);
+		stage.showAndWait();
+		initialize();
 
 	}
 

@@ -6,11 +6,24 @@ import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 public class ControllerAddNewRole {
+	
+	double height;
+	double width;
 
+	public ControllerAddNewRole(double height, double width) {
+		super();
+		this.height = height;
+		this.width = width;
+	}
+
+	@FXML
+	private AnchorPane parent;
+	
 	@FXML
 	private Label title;
 
@@ -52,6 +65,14 @@ public class ControllerAddNewRole {
 
 	@FXML
 	void initialize() {
+		
+		if (height == 0) {
+			height = 194;
+		} 
+		if (width == 0) {
+			width = 600;
+		}
+		parent.setPrefSize(width, height);
 
 	}
 
