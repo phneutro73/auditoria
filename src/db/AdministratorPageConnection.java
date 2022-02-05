@@ -128,7 +128,8 @@ public class AdministratorPageConnection {
 			conn = DriverManager.getConnection(connectionUrl);
 			System.out.println("Connected to DB");
 			Statement stmt = conn.createStatement();
-			stmt.executeQuery("[sp_delete_user] " + userId);
+			stmt.executeUpdate("[sp_delete_user] " + userId);
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -207,7 +208,7 @@ public class AdministratorPageConnection {
 
 	public boolean addUser(String name, String surname, String dob, String username, String idNumber, String email,
 			byte[] salt, byte[] hash, int mon, int tue, int wed, int thu, int fri, int sat, int sun, int roleId) {
-		boolean succes = false;
+		boolean success = false;
 		Connection conn = null;
 		try {
 			conn = DriverManager.getConnection(connectionUrl);
@@ -224,7 +225,7 @@ public class AdministratorPageConnection {
 			statement.setBytes(1, salt);
 			statement.setBytes(2, hash);
 			statement.executeUpdate();
-			succes = true;
+			success = true;
 		}
 
 		catch (SQLException e) {
@@ -239,7 +240,7 @@ public class AdministratorPageConnection {
 				}
 			}
 		}
-		return succes;
+		return success;
 	}
 
 	public ObservableList<ModelUserTable> getUsersTable() {
@@ -379,7 +380,7 @@ public class AdministratorPageConnection {
 	}
 
 	public boolean addRole(int roleId, String roleName) {
-		boolean succes = false;
+		boolean success = false;
 		Connection conn = null;
 		try {
 			conn = DriverManager.getConnection(connectionUrl);
@@ -388,11 +389,12 @@ public class AdministratorPageConnection {
 
 			PreparedStatement statement = conn.prepareStatement(query);
 			statement.executeUpdate();
-			succes = true;
+			success = true;
 		}
 
 		catch (SQLException e) {
 			e.printStackTrace();
+			success = false;
 
 		} finally {
 			if (conn != null) {
@@ -402,8 +404,9 @@ public class AdministratorPageConnection {
 					ex.printStackTrace();
 				}
 			}
+			success = true;
 		}
-		return succes;
+		return success;
 	}
 	
 	public Hashtable<String, Object> getUser(int userId) {
@@ -470,7 +473,7 @@ public class AdministratorPageConnection {
 	
 	public boolean updateUser(int userId, String name, String surname, String dob, String username, String idNumber, String email,
 			byte[] salt, byte[] hash, int mon, int tue, int wed, int thu, int fri, int sat, int sun, int roleId) {
-		boolean succes = false;
+		boolean success = false;
 		Connection conn = null;
 		
 		try {
@@ -499,10 +502,11 @@ public class AdministratorPageConnection {
 			statement.setBytes(1, salt);
 			statement.setBytes(2, hash);
 			statement.executeUpdate();
-			succes = true;
+			success= true;
 
 		} catch (SQLException e) {
 			e.printStackTrace();
+			success = false;
 		} finally {
 			if (conn != null) {
 				try {
@@ -511,8 +515,8 @@ public class AdministratorPageConnection {
 					ex.printStackTrace();
 				}
 			}
+			success = true;
 		}
-		
-		return true;
+		return success;
 	}
 }

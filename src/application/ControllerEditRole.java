@@ -83,7 +83,7 @@ public class ControllerEditRole {
 				} else {
 					FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
 					ControllerAlertDialog control = new ControllerAlertDialog(0, 0, "Error",
-							"Se ha producido un error. Por favor, asegúrese de que los datos son correctos.");
+							"Por favor, asegúrese de que los datos son correctos.");
 					loader.setController(control);
 					Parent root = loader.load();
 
