@@ -31,10 +31,10 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 public class ControllerAddNewUser {
-	
+
 	@FXML
 	private AnchorPane parent;
-	
+
 	@FXML
 	private Label subtitle;
 
@@ -292,7 +292,7 @@ public class ControllerAddNewUser {
 				}
 			}
 
-			//List<String> activeUsers = adminDB.listActiveUsers();
+			// List<String> activeUsers = adminDB.listActiveUsers();
 
 		} catch (Exception e) {
 			// TODO: handle exception

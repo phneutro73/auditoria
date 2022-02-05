@@ -11,7 +11,7 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 public class ControllerAddNewRole {
-	
+
 	double height;
 	double width;
 
@@ -23,7 +23,7 @@ public class ControllerAddNewRole {
 
 	@FXML
 	private AnchorPane parent;
-	
+
 	@FXML
 	private Label title;
 
@@ -65,10 +65,10 @@ public class ControllerAddNewRole {
 
 	@FXML
 	void initialize() {
-		
+
 		if (height == 0) {
 			height = 194;
-		} 
+		}
 		if (width == 0) {
 			width = 600;
 		}

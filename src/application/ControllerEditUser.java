@@ -196,10 +196,11 @@ public class ControllerEditUser {
 							cmbWednesday.getValue(), cmbThursday.getValue(), cmbFriday.getValue(),
 							cmbSaturday.getValue(), cmbSunday.getValue() };
 					int[] numScedule = parseSchedule(schedule, adminDB);
-					boolean success = adminDB.updateUser(userId, fieldName.getText(), fieldSurname.getText(), fieldDob.getValue().toString(),
-							fieldUser.getText(), fieldDNI.getText(), fieldEmail.getText(), pass[0], pass[1],
-							numScedule[0], numScedule[1], numScedule[2], numScedule[3], numScedule[4], numScedule[5],
-							numScedule[6], cmbRole.getSelectionModel().getSelectedIndex());
+					boolean success = adminDB.updateUser(userId, fieldName.getText(), fieldSurname.getText(),
+							fieldDob.getValue().toString(), fieldUser.getText(), fieldDNI.getText(),
+							fieldEmail.getText(), pass[0], pass[1], numScedule[0], numScedule[1], numScedule[2],
+							numScedule[3], numScedule[4], numScedule[5], numScedule[6],
+							cmbRole.getSelectionModel().getSelectedIndex());
 
 					FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
 					ControllerAlertDialog control = new ControllerAlertDialog(0, 0, "Actualización correcta",
@@ -322,7 +323,7 @@ public class ControllerEditUser {
 
 	byte[][] encryptPassword(String password) throws NoSuchAlgorithmException, InvalidKeySpecException {
 		byte[][] pass = new byte[2][];
-		
+
 		if (!fieldPassword.getText().isEmpty() && !fieldPassword2.getText().isEmpty()) {
 			SecureRandom random = new SecureRandom();
 			byte[] salt = new byte[16];
@@ -338,7 +339,7 @@ public class ControllerEditUser {
 			pass[0] = null;
 			pass[1] = null;
 		}
-		
+
 		return pass;
 	}
 

@@ -29,10 +29,10 @@ public class ControllerEditRole {
 		this.width = width;
 		this.roleId = roleId;
 	}
-	
+
 	@FXML
 	private AnchorPane parent;
-	
+
 	@FXML
 	private Label title;
 
@@ -120,12 +120,12 @@ public class ControllerEditRole {
 
 			if (height == 0) {
 				height = 194;
-			} 
+			}
 			if (width == 0) {
 				width = 600;
 			}
 			parent.setPrefSize(width, height);
-			
+
 			subtitle.setText("Modificar puesto");
 			AdministratorPageConnection adminDB = new AdministratorPageConnection();
 			getRole(adminDB);

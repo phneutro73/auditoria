@@ -27,8 +27,9 @@ public class ControllerYesNoAlertDialog {
 	String noButtonTxt;
 	String yesAction;
 	String[] params;
-	
-	public ControllerYesNoAlertDialog(double height, double width, String title, String text, String question, String yesButtonTxt, String noButtonTxt, String yesAction, String[] params) {
+
+	public ControllerYesNoAlertDialog(double height, double width, String title, String text, String question,
+			String yesButtonTxt, String noButtonTxt, String yesAction, String[] params) {
 		super();
 		this.height = height;
 		this.width = width;
@@ -40,90 +41,89 @@ public class ControllerYesNoAlertDialog {
 		this.yesAction = yesAction;
 		this.params = params;
 	}
-	
-	 @FXML
-    private AnchorPane parent;
 
-    @FXML
-    private Label dialogTitle;
+	@FXML
+	private AnchorPane parent;
 
-    @FXML
-    private Label btnClose;
+	@FXML
+	private Label dialogTitle;
 
-    @FXML
-    private Label dialogText;
+	@FXML
+	private Label btnClose;
 
-    @FXML
-    private Label dialogQuestion;
+	@FXML
+	private Label dialogText;
 
-    @FXML
-    private JFXButton btnYes;
+	@FXML
+	private Label dialogQuestion;
 
-    @FXML
-    private JFXButton btnNo;
+	@FXML
+	private JFXButton btnYes;
 
-    @FXML
-    void closeScreen(MouseEvent event) {
+	@FXML
+	private JFXButton btnNo;
+
+	@FXML
+	void closeScreen(MouseEvent event) {
 		Stage stage = (Stage) btnNo.getScene().getWindow();
 		stage.close();
-    }
+	}
 
-    @FXML
-    void yesButtonPressed(MouseEvent event) throws IOException {
+	@FXML
+	void yesButtonPressed(MouseEvent event) throws IOException {
 
-    	switch (yesAction) {
-    	case "adminDeleteUser":
-    		adminDeleteUser();
-    		break;
-    	default:
-    		break;
-    	}
+		switch (yesAction) {
+		case "adminDeleteUser":
+			adminDeleteUser();
+			break;
+		default:
+			break;
+		}
 
 		Stage stage = (Stage) btnNo.getScene().getWindow();
 		stage.close();
-    }
-	
+	}
+
 	@FXML
 	void initialize() {
-		
+
 		try {
-			
+
 			if (height == 0) {
 				height = 194;
-			} 
+			}
 			if (width == 0) {
 				width = 600;
 			}
-			
+
 			dialogTitle.setText(title);
 			dialogText.setText(text);
 
 			parent.setPrefSize(width, height);
 			parent.setMinSize(width, height);
 			parent.setMaxSize(width, height);
-			
+
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-		
+
 	}
-	
-	
+
 	void adminDeleteUser() throws IOException {
-		
+
 		boolean success = true;
-		
+
 		try {
-			
+
 			AdministratorPageConnection adminDB = new AdministratorPageConnection();
 			adminDB.deleteUser(Integer.parseInt(params[0]));
 			success = true;
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			success = false;
 		}
-		
+
 		if (success) {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
 			ControllerAlertDialog control = new ControllerAlertDialog(0, 0, "Eliminado correctamente",
@@ -137,6 +137,5 @@ public class ControllerYesNoAlertDialog {
 			stage.show();
 		}
 	}
-	
-	
+
 }

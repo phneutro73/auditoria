@@ -52,11 +52,11 @@ import models.ModelUserTable;
 import db.AdministratorPageConnection;
 
 public class controller_administrator {
-	
+
 	double height;
 	double width;
 	int currentUser;
-	
+
 	public controller_administrator(double height, double width, int currentUser) {
 		this.height = height;
 		this.width = width;
@@ -81,7 +81,7 @@ public class controller_administrator {
 
 	@FXML
 	private HBox btnAddItem;
-	
+
 	@FXML
 	private HBox btnStatistics;
 
@@ -184,7 +184,6 @@ public class controller_administrator {
 	void initialize() {
 
 		try {
-			
 
 			AdministratorPageConnection adminDB = new AdministratorPageConnection();
 
@@ -221,7 +220,7 @@ public class controller_administrator {
 
 	@FXML
 	void addUser(ActionEvent event) throws IOException {
-		
+
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AddNewUserPage.fxml"));
 		ControllerAddNewUser control = new ControllerAddNewUser();
 		loader.setController(control);
@@ -254,9 +253,7 @@ public class controller_administrator {
 
 		AdministratorPageConnection adminDB = new AdministratorPageConnection();
 
-		String[] params = {
-				String.valueOf(idUserSelected)
-		};
+		String[] params = { String.valueOf(idUserSelected) };
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/YesNoAlertDialog.fxml"));
 		ControllerYesNoAlertDialog control = new ControllerYesNoAlertDialog(0, 0, "Error",
 				"Es necesario que rellene todos los campos.", "pregunta", "SÍ", "No", "adminDeleteUser", params);
@@ -270,7 +267,7 @@ public class controller_administrator {
 		initialize();
 
 	}
-	
+
 	@FXML
 	void addSchedule(ActionEvent event) throws IOException {
 
@@ -295,7 +292,7 @@ public class controller_administrator {
 		btnDeleteSchedule.setDisable(true);
 
 	}
-	
+
 	@FXML
 	void deleteSchedule(ActionEvent event) {
 
@@ -335,7 +332,7 @@ public class controller_administrator {
 		initialize();
 
 	}
-	
+
 	@FXML
 	void deleteRole(ActionEvent event) {
 
