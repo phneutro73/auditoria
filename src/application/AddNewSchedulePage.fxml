@@ -113,7 +113,7 @@
 									<children>
 										<JFXButton fx:id="btnCancel" onAction="#cancelExit"
 											styleClass="buttonMainColor" text="CANCELAR" />
-										<JFXButton fx:id="btnAccept" onAction="#saveNewUser"
+										<JFXButton fx:id="btnAccept" onAction="#saveNewSchedule"
 											styleClass="buttonMainColor" text="ACEPTAR" />
 									</children>
 									<padding>

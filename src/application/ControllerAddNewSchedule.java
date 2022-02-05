@@ -47,13 +47,17 @@ public class ControllerAddNewSchedule {
 	}
 
 	@FXML
-	void saveNewUser(ActionEvent event) {
+	void saveNewSchedule(ActionEvent event) {
 
 		try {
 
 			if (checkAllFields()) {
 				if (isValidTime()) {
-					// Guardar
+					
+					String checkIn = String.valueOf(fieldCheckIn.getValue()) + ":00";
+					String checkOut = String.valueOf(fieldCheckOut.getValue()) + ":00";
+					AdministratorPageConnection adminDB = new AdministratorPageConnection();
+					boolean success = adminDB.addSchedule(fieldName.getText(), checkIn, checkOut);
 
 					Stage stage = (Stage) btnCancel.getScene().getWindow();
 					stage.close();
