@@ -298,13 +298,22 @@ public class controller_administrator {
 	}
 
 	@FXML
-	void deleteSchedule(ActionEvent event) {
+	void deleteSchedule(ActionEvent event) throws IOException {
 
 		AdministratorPageConnection adminDB = new AdministratorPageConnection();
-		getTableSchedules(adminDB);
 
-		btnEditSchedule.setDisable(true);
-		btnDeleteSchedule.setDisable(true);
+		String[] params = { String.valueOf(idScheduleSelected) };
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/YesNoAlertDialog.fxml"));
+		ControllerYesNoAlertDialog control = new ControllerYesNoAlertDialog(0, 0, "Error",
+				"Es necesario que rellene todos los campos.", "pregunta", "SÍ", "No", "adminDeleteSchedule", params);
+		loader.setController(control);
+		Parent root = loader.load();
+
+		Stage stage = new Stage();
+		stage.initStyle(StageStyle.UNDECORATED);
+		stage.setScene(new Scene(root));
+		stage.showAndWait();
+		initialize();
 
 	}
 

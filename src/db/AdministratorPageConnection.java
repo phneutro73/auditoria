@@ -612,4 +612,27 @@ public class AdministratorPageConnection {
 		return success;
 	}
 
+	public void deleteSchedule(int scheduleId) {
+		Connection conn = null;
+
+		try {
+			conn = DriverManager.getConnection(connectionUrl);
+			System.out.println("Connected to DB");
+			Statement stmt = conn.createStatement();
+			stmt.executeUpdate("[sp_delete_schedule] " + scheduleId);
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException ex) {
+					ex.printStackTrace();
+				}
+			}
+		}
+
+	}
+
 }

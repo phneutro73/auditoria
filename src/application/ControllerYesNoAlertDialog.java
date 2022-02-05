@@ -76,6 +76,9 @@ public class ControllerYesNoAlertDialog {
 		case "adminDeleteUser":
 			adminDeleteUser();
 			break;
+		case "adminDeleteSchedule":
+			adminDeleteSchedule();
+			break;
 		default:
 			break;
 		}
@@ -127,7 +130,58 @@ public class ControllerYesNoAlertDialog {
 		if (success) {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
 			ControllerAlertDialog control = new ControllerAlertDialog(0, 0, "Eliminado correctamente",
-					"El usuario ha sido eliminado correctamente correctamente");
+					"El usuario ha sido eliminado correctamente correctamente.");
+			loader.setController(control);
+			Parent root = loader.load();
+
+			Stage stage = new Stage();
+			stage.initStyle(StageStyle.UNDECORATED);
+			stage.setScene(new Scene(root));
+			stage.show();
+		} else {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
+			ControllerAlertDialog control = new ControllerAlertDialog(0, 0, "Error",
+					"Ha habido un error, el usuario no ha sido eliminado.");
+			loader.setController(control);
+			Parent root = loader.load();
+
+			Stage stage = new Stage();
+			stage.initStyle(StageStyle.UNDECORATED);
+			stage.setScene(new Scene(root));
+			stage.show();
+		}
+	}
+
+	void adminDeleteSchedule() throws IOException {
+
+		boolean success = true;
+
+		try {
+
+			AdministratorPageConnection adminDB = new AdministratorPageConnection();
+			adminDB.deleteSchedule(Integer.parseInt(params[0]));
+			success = true;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			success = false;
+		}
+
+		if (success) {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
+			ControllerAlertDialog control = new ControllerAlertDialog(0, 0, "Eliminado correctamente",
+					"El horario ha sido eliminado correctamente correctamente.");
+			loader.setController(control);
+			Parent root = loader.load();
+
+			Stage stage = new Stage();
+			stage.initStyle(StageStyle.UNDECORATED);
+			stage.setScene(new Scene(root));
+			stage.show();
+		} else {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
+			ControllerAlertDialog control = new ControllerAlertDialog(0, 0, "Error",
+					"Ha habido un error, el horario no ha sido eliminado.");
 			loader.setController(control);
 			Parent root = loader.load();
 
