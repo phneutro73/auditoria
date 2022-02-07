@@ -53,6 +53,16 @@ import db.AdministratorPageConnection;
 
 public class controller_administrator {
 
+	double height;
+	double width;
+	int currentUser;
+
+	public controller_administrator(double height, double width, int currentUser) {
+		this.height = height;
+		this.width = width;
+		this.currentUser = currentUser;
+	}
+
 	@FXML
 	private AnchorPane parent;
 
@@ -71,6 +81,7 @@ public class controller_administrator {
 
 	@FXML
 	private HBox btnAddItem;
+
 	@FXML
 	private HBox btnStatistics;
 
@@ -217,13 +228,8 @@ public class controller_administrator {
 
 		Stage stage = new Stage();
 		stage.setScene(new Scene(root));
-		stage.show();
-
-		AdministratorPageConnection adminDB = new AdministratorPageConnection();
-		getTableActiveUsers(adminDB);
-
-		btnEditUser.setDisable(true);
-		btnDeleteUser.setDisable(true);
+		stage.showAndWait();
+		initialize();
 
 	}
 
@@ -231,50 +237,37 @@ public class controller_administrator {
 	void editUser(ActionEvent event) throws IOException {
 
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AddNewUserPage.fxml"));
-		ControllerEditUser control = new ControllerEditUser(600.0, 900.0, 1);
+		ControllerEditUser control = new ControllerEditUser(600.0, 900.0, idUserSelected);
 		loader.setController(control);
 		Parent root = loader.load();
 
 		Stage stage = new Stage();
 		stage.setScene(new Scene(root));
-		stage.show();
-
-		AdministratorPageConnection adminDB = new AdministratorPageConnection();
-		getTableActiveUsers(adminDB);
-
-		btnEditUser.setDisable(true);
-		btnDeleteUser.setDisable(true);
+		stage.showAndWait();
+		initialize();
 
 	}
 
 	@FXML
-	void deleteUser(ActionEvent event) {
+	void deleteUser(ActionEvent event) throws IOException {
 
 		AdministratorPageConnection adminDB = new AdministratorPageConnection();
-		getTableActiveUsers(adminDB);
 
-		btnEditUser.setDisable(true);
-		btnDeleteUser.setDisable(true);
-
-	}
-
-	@FXML
-	void addRole(ActionEvent event) throws IOException {
-
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AddNewRolePage.fxml"));
-		ControllerAddNewRole control = new ControllerAddNewRole();
+		String[] params = { String.valueOf(idUserSelected) };
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/YesNoAlertDialog.fxml"));
+		ControllerYesNoAlertDialog control = new ControllerYesNoAlertDialog(0, 0, "Atención",
+				"Esta acción es permanente, no se podrá deshacer. Preste atención y revise los datos.",
+				"¿Está seguro de que desea eliminar al usuario con el siguiente ID: " + String.valueOf(idUserSelected)
+						+ "?",
+				"SÍ", "No", "adminDeleteUser", params);
 		loader.setController(control);
 		Parent root = loader.load();
 
 		Stage stage = new Stage();
+		stage.initStyle(StageStyle.UNDECORATED);
 		stage.setScene(new Scene(root));
-		stage.show();
-
-		AdministratorPageConnection adminDB = new AdministratorPageConnection();
-		getTableRoles(adminDB);
-
-		btnEditRole.setDisable(true);
-		btnDeleteRole.setDisable(true);
+		stage.showAndWait();
+		initialize();
 
 	}
 
@@ -288,66 +281,97 @@ public class controller_administrator {
 
 		Stage stage = new Stage();
 		stage.setScene(new Scene(root));
-		stage.show();
+		stage.showAndWait();
+		initialize();
+	}
 
-		AdministratorPageConnection adminDB = new AdministratorPageConnection();
-		getTableSchedules(adminDB);
+	@FXML
+	void editSchedule(ActionEvent event) throws IOException {
 
-		btnEditSchedule.setDisable(true);
-		btnDeleteSchedule.setDisable(true);
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AddNewSchedulePage.fxml"));
+		ControllerEditSchedule control = new ControllerEditSchedule(idScheduleSelected);
+		loader.setController(control);
+		Parent root = loader.load();
+
+		Stage stage = new Stage();
+		stage.setScene(new Scene(root));
+		stage.showAndWait();
+		initialize();
 
 	}
 
 	@FXML
-	void deleteRole(ActionEvent event) {
+	void deleteSchedule(ActionEvent event) throws IOException {
 
 		AdministratorPageConnection adminDB = new AdministratorPageConnection();
-		getTableRoles(adminDB);
 
-		btnEditRole.setDisable(true);
-		btnDeleteRole.setDisable(true);
+		String[] params = { String.valueOf(idScheduleSelected) };
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/YesNoAlertDialog.fxml"));
+		ControllerYesNoAlertDialog control = new ControllerYesNoAlertDialog(0, 0, "Atención",
+				"Esta acción es permanente, no se podrá deshacer. Preste atención y revise los datos.",
+				"¿Está seguro de que desea eliminar el horario con el siguiente ID: "
+						+ String.valueOf(idScheduleSelected) + "?",
+				"SÍ", "No", "adminDeleteSchedule", params);
+		loader.setController(control);
+		Parent root = loader.load();
+
+		Stage stage = new Stage();
+		stage.initStyle(StageStyle.UNDECORATED);
+		stage.setScene(new Scene(root));
+		stage.showAndWait();
+		initialize();
 
 	}
 
 	@FXML
-	void deleteSchedule(ActionEvent event) {
+	void addRole(ActionEvent event) throws IOException {
 
-		AdministratorPageConnection adminDB = new AdministratorPageConnection();
-		getTableSchedules(adminDB);
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AddNewRolePage.fxml"));
+		ControllerAddNewRole control = new ControllerAddNewRole(0, 0);
+		loader.setController(control);
+		Parent root = loader.load();
 
-		btnEditSchedule.setDisable(true);
-		btnDeleteSchedule.setDisable(true);
-
+		Stage stage = new Stage();
+		stage.setScene(new Scene(root));
+		stage.showAndWait();
+		initialize();
 	}
 
 	@FXML
 	void editRole(ActionEvent event) throws IOException {
 
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AddNewRolePage.fxml"));
-		ControllerEditRole control = new ControllerEditRole(parent.getHeight(), parent.getWidth(), idRoleSelected);
+		ControllerEditRole control = new ControllerEditRole(0, 0, idRoleSelected);
 		loader.setController(control);
 		Parent root = loader.load();
 
 		Stage stage = new Stage();
 		stage.setScene(new Scene(root));
-		stage.show();
-
-		AdministratorPageConnection adminDB = new AdministratorPageConnection();
-		getTableRoles(adminDB);
-
-		btnEditRole.setDisable(true);
-		btnDeleteRole.setDisable(true);
+		stage.showAndWait();
+		initialize();
 
 	}
 
 	@FXML
-	void editSchedule(ActionEvent event) {
+	void deleteRole(ActionEvent event) throws IOException {
 
 		AdministratorPageConnection adminDB = new AdministratorPageConnection();
-		getTableSchedules(adminDB);
 
-		btnEditSchedule.setDisable(true);
-		btnDeleteSchedule.setDisable(true);
+		String[] params = { String.valueOf(idRoleSelected) };
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/YesNoAlertDialog.fxml"));
+		ControllerYesNoAlertDialog control = new ControllerYesNoAlertDialog(0, 0, "Atención",
+				"Esta acción es permanente, no se podrá deshacer. Preste atención y revise los datos.",
+				"¿Está seguro de que desea eliminar el puesto con el siguiente ID: " + String.valueOf(idRoleSelected)
+						+ "?",
+				"SÍ", "No", "adminDeleteRole", params);
+		loader.setController(control);
+		Parent root = loader.load();
+
+		Stage stage = new Stage();
+		stage.initStyle(StageStyle.UNDECORATED);
+		stage.setScene(new Scene(root));
+		stage.showAndWait();
+		initialize();
 
 	}
 

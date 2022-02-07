@@ -12,6 +12,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -28,6 +29,9 @@ public class ControllerEditRole {
 		this.width = width;
 		this.roleId = roleId;
 	}
+
+	@FXML
+	private AnchorPane parent;
 
 	@FXML
 	private Label title;
@@ -63,11 +67,11 @@ public class ControllerEditRole {
 			if (checkAllFields()) {
 
 				AdministratorPageConnection adminDB = new AdministratorPageConnection();
-				boolean succes = adminDB.addRole(roleId, fieldName.getText());
+				boolean succes = adminDB.updateRole(roleId, fieldName.getText());
 
 				if (succes) {
 					FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
-					ControllerAlertDialog control = new ControllerAlertDialog(0, 0, "Guardado correcto",
+					ControllerAlertDialog control = new ControllerAlertDialog(120, 210, "Guardado correcto",
 							"Los datos se han guardado correctamente");
 					loader.setController(control);
 					Parent root = loader.load();
@@ -78,8 +82,8 @@ public class ControllerEditRole {
 					stage.show();
 				} else {
 					FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
-					ControllerAlertDialog control = new ControllerAlertDialog(0, 0, "Error",
-							"Se ha producido un error. Por favor, asegúrese de que los datos son correctos.");
+					ControllerAlertDialog control = new ControllerAlertDialog(140, 210, "Error",
+							"Se ha producido un error. Por favor, inténtelo de nuevo.");
 					loader.setController(control);
 					Parent root = loader.load();
 
@@ -93,7 +97,7 @@ public class ControllerEditRole {
 
 			} else {
 				FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
-				ControllerAlertDialog control = new ControllerAlertDialog(0, 0, "Error",
+				ControllerAlertDialog control = new ControllerAlertDialog(120, 210, "Error",
 						"Es necesario que rellene todos los campos.");
 				loader.setController(control);
 				Parent root = loader.load();
@@ -113,6 +117,14 @@ public class ControllerEditRole {
 	void initialize() {
 
 		try {
+
+			if (height == 0) {
+				height = 194;
+			}
+			if (width == 0) {
+				width = 600;
+			}
+			parent.setPrefSize(width, height);
 
 			subtitle.setText("Modificar puesto");
 			AdministratorPageConnection adminDB = new AdministratorPageConnection();

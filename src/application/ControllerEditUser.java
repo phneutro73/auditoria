@@ -4,7 +4,11 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.KeySpec;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Hashtable;
 import java.util.List;
 
@@ -24,6 +28,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -39,6 +44,12 @@ public class ControllerEditUser {
 		this.width = width;
 		this.userId = userId;
 	}
+
+	@FXML
+	private AnchorPane parent;
+
+	@FXML
+	private Label subtitle;
 
 	@FXML
 	private Label lblPersonalInfo;
@@ -185,14 +196,15 @@ public class ControllerEditUser {
 							cmbWednesday.getValue(), cmbThursday.getValue(), cmbFriday.getValue(),
 							cmbSaturday.getValue(), cmbSunday.getValue() };
 					int[] numScedule = parseSchedule(schedule, adminDB);
-					adminDB.addUser(fieldName.getText(), fieldSurname.getText(), fieldDob.getValue().toString(),
-							fieldUser.getText(), fieldDNI.getText(), fieldEmail.getText(), pass[0], pass[1],
-							numScedule[0], numScedule[1], numScedule[2], numScedule[3], numScedule[4], numScedule[5],
-							numScedule[6]);
+					boolean success = adminDB.updateUser(userId, fieldName.getText(), fieldSurname.getText(),
+							fieldDob.getValue().toString(), fieldUser.getText(), fieldDNI.getText(),
+							fieldEmail.getText(), pass[0], pass[1], numScedule[0], numScedule[1], numScedule[2],
+							numScedule[3], numScedule[4], numScedule[5], numScedule[6],
+							cmbRole.getSelectionModel().getSelectedIndex());
 
 					FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
-					ControllerAlertDialog control = new ControllerAlertDialog(0, 0, "Actualización correcta",
-							"Los datos del usuario se ha actualizado correctamente");
+					ControllerAlertDialog control = new ControllerAlertDialog(120, 210, "Guardado correcto",
+							"Los datos del usuario se han actualizado correctamente.");
 					loader.setController(control);
 					Parent root = loader.load();
 
@@ -206,8 +218,8 @@ public class ControllerEditUser {
 
 				} else {
 					FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
-					ControllerAlertDialog control = new ControllerAlertDialog(0, 0, "Error",
-							"Se ha producido un error. Por favor, revise los campos, y tenga en cuenta que los campos de repetición (email y contraseña), deben ser iguales");
+					ControllerAlertDialog control = new ControllerAlertDialog(155, 230, "Error",
+							"Por favor, revise los campos, y tenga en cuenta que los campos de repetición (email y contraseña), deben ser iguales.");
 					loader.setController(control);
 					Parent root = loader.load();
 
@@ -218,7 +230,7 @@ public class ControllerEditUser {
 				}
 			} else {
 				FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
-				ControllerAlertDialog control = new ControllerAlertDialog(0, 0, "Error",
+				ControllerAlertDialog control = new ControllerAlertDialog(120, 210, "Error",
 						"Es necesario que rellene todos los campos.");
 				loader.setController(control);
 				Parent root = loader.load();
@@ -239,6 +251,15 @@ public class ControllerEditUser {
 	void initialize() {
 
 		try {
+
+			if (height == 0) {
+				height = 194;
+			}
+			if (width == 0) {
+				width = 600;
+			}
+			parent.setPrefSize(width, height);
+			subtitle.setText("Modificar usuario");
 
 			AdministratorPageConnection adminDB = new AdministratorPageConnection();
 
@@ -292,7 +313,7 @@ public class ControllerEditUser {
 				}
 			}
 
-			List<String> activeUsers = adminDB.listActiveUsers();
+			getUser(adminDB);
 
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -302,16 +323,23 @@ public class ControllerEditUser {
 
 	byte[][] encryptPassword(String password) throws NoSuchAlgorithmException, InvalidKeySpecException {
 		byte[][] pass = new byte[2][];
-		SecureRandom random = new SecureRandom();
-		byte[] salt = new byte[16];
-		random.nextBytes(salt);
-		KeySpec spec = new PBEKeySpec(password.toCharArray(), salt, 65536, 128);
-		SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
-		byte[] hash = factory.generateSecret(spec).getEncoded();
-		System.out.println(salt[0]);
-		System.out.println(hash[0]);
-		pass[0] = salt;
-		pass[1] = hash;
+
+		if (!fieldPassword.getText().isEmpty() && !fieldPassword2.getText().isEmpty()) {
+			SecureRandom random = new SecureRandom();
+			byte[] salt = new byte[16];
+			random.nextBytes(salt);
+			KeySpec spec = new PBEKeySpec(password.toCharArray(), salt, 65536, 128);
+			SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
+			byte[] hash = factory.generateSecret(spec).getEncoded();
+			System.out.println(salt[0]);
+			System.out.println(hash[0]);
+			pass[0] = salt;
+			pass[1] = hash;
+		} else {
+			pass[0] = null;
+			pass[1] = null;
+		}
+
 		return pass;
 	}
 
@@ -338,13 +366,17 @@ public class ControllerEditUser {
 					&& (!fieldEmail2.getText().isEmpty() && fieldEmail2.getText() != null
 							&& fieldEmail2.getText() != "")
 					&& (!fieldUser.getText().isEmpty() && fieldUser.getText() != null && fieldUser.getText() != "")
-					&& (!fieldPassword.getText().isEmpty() && fieldPassword.getText() != null
-							&& fieldPassword.getText() != "")
-					&& (!fieldPassword2.getText().isEmpty() && fieldPassword2.getText() != null
-							&& fieldPassword2.getText() != "")
 					&& (!cmbRole.getValue().toString().isEmpty() && cmbRole.getValue() != null
 							&& cmbRole.getValue() != "" && cmbRole.getValue() != "-")) {
-				return true;
+				if ((fieldPassword.getText().isEmpty() && fieldPassword2.getText().isEmpty())
+						|| (!fieldPassword.getText().isEmpty() && fieldPassword.getText() != null
+								&& fieldPassword.getText() != "")
+								&& (!fieldPassword2.getText().isEmpty() && fieldPassword2.getText() != null
+										&& fieldPassword2.getText() != "")) {
+					return true;
+				} else {
+					return false;
+				}
 			} else {
 				return false;
 			}
@@ -400,6 +432,37 @@ public class ControllerEditUser {
 			System.out.println("ERROR: controller_administrator.java - checkScheduleField() - " + e.toString());
 			return false;
 		}
+
+	}
+
+	void getUser(AdministratorPageConnection adminDB) {
+		Hashtable<String, Object> user = adminDB.getUser(userId);
+
+		String name = (String) user.get("name");
+		String surname = (String) user.get("surname");
+		Date dob = (Date) user.get("dob");
+		LocalDate dobLD = Instant.ofEpochMilli(dob.getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
+		String idNumber = (String) user.get("idNumber");
+		Hashtable<Integer, Integer> schedule = (Hashtable<Integer, Integer>) user.get("schedule");
+		int roleId = (int) user.get("roleId");
+		String email = (String) user.get("email");
+		String userName = (String) user.get("userName");
+
+		fieldName.setText(name);
+		fieldSurname.setText(surname);
+		fieldDNI.setText(idNumber);
+		fieldDob.setValue(dobLD);
+		fieldEmail.setText(email);
+		fieldEmail2.setText(email);
+		fieldUser.setText(userName);
+		cmbRole.getSelectionModel().select(roleId);
+		cmbMonday.getSelectionModel().select(schedule.get(0));
+		cmbTuesday.getSelectionModel().select(schedule.get(1));
+		cmbWednesday.getSelectionModel().select(schedule.get(2));
+		cmbThursday.getSelectionModel().select(schedule.get(3));
+		cmbFriday.getSelectionModel().select(schedule.get(4));
+		cmbSaturday.getSelectionModel().select(schedule.get(5));
+		cmbSunday.getSelectionModel().select(schedule.get(6));
 
 	}
 
