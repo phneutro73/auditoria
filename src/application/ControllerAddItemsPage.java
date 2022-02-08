@@ -76,25 +76,14 @@ public class ControllerAddItemsPage {
 
 	}
 
-    
-    @FXML
-    void onMouseDragEntered(MouseDragEvent event) {
-    	System.out.println("onMouseDragEntered");
-    }
+	@FXML
+	void onMouseEntered(MouseEvent event) {
+		// System.out.println("onMouseEntered");
+	}
 
-    @FXML
-    void onMouseDragExited(MouseDragEvent event) {
-    	System.out.println("onMouseDragExited");
-    }
-    
-    @FXML
-    void onMouseEntered(MouseEvent event) {
-    	System.out.println("onMouseEntered");
-    }
-
-    @FXML
-    void onMouseExited(MouseEvent event) {
-    	System.out.println("onMouseExited");
-    }
+	@FXML
+	void onMouseExited(MouseEvent event) {
+		// System.out.println("onMouseExited");
+	}
 
 }
