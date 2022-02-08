@@ -10,6 +10,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.input.DragEvent;
+import javafx.scene.input.MouseDragEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
@@ -73,5 +75,26 @@ public class ControllerAddItemsPage {
 	void saveNewItem(ActionEvent event) {
 
 	}
+
+    
+    @FXML
+    void onMouseDragEntered(MouseDragEvent event) {
+    	System.out.println("onMouseDragEntered");
+    }
+
+    @FXML
+    void onMouseDragExited(MouseDragEvent event) {
+    	System.out.println("onMouseDragExited");
+    }
+    
+    @FXML
+    void onMouseEntered(MouseEvent event) {
+    	System.out.println("onMouseEntered");
+    }
+
+    @FXML
+    void onMouseExited(MouseEvent event) {
+    	System.out.println("onMouseExited");
+    }
 
 }
