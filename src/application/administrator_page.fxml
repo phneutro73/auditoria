@@ -94,7 +94,8 @@
 							</padding>
 						</HBox>
 						<HBox fx:id="btnAddItem" alignment="CENTER_LEFT"
-							styleClass="menuButton" stylesheets="@application.css">
+							onMouseClicked="#goToAddItemsPage" styleClass="menuButton"
+							stylesheets="@application.css">
 							<children>
 								<Label styleClass="labelMenuButtons"
 									stylesheets="@styleMenu.css" text="   AÑADIR ARTÍCULOS">

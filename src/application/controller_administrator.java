@@ -24,6 +24,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -452,5 +453,18 @@ public class controller_administrator {
 		roleTable.setItems(obList);
 
 	}
+	
+	@FXML
+    void goToAddItemsPage(MouseEvent event) throws IOException {
+    	FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AddItemsPage.fxml"));
+		ControllerAddItemsPage control = new ControllerAddItemsPage(0, 0, 0);
+		loader.setController(control);
+		Parent root = loader.load();
+
+		Stage stage = new Stage();
+		stage.setScene(new Scene(root));
+		stage.show();
+		((Node) (event.getSource())).getScene().getWindow().hide();
+    }
 
 }
