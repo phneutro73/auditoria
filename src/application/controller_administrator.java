@@ -647,6 +647,36 @@ public class controller_administrator {
 		roleUserTable.setCellValueFactory(new PropertyValueFactory<>("roleId"));
 
 		userTable.setItems(obList);
+		
+		FilteredList<ModelUserTable> filteredUserData = new FilteredList<>(obList, b -> true);
+		txtUserSearch.textProperty().addListener((observable, oldValue, newValue) -> {
+			filteredUserData.setPredicate(userSearchModel ->  {
+				if (newValue.isEmpty() || newValue == null) {
+					return true;
+				}
+				String searchUserKewyword = newValue.toLowerCase();
+				
+				if (userSearchModel.getStrId() != null && userSearchModel.getStrId().toLowerCase().indexOf(idScheduleSelected) > -1) {
+					return true;
+				} else if (userSearchModel.getName() != null && userSearchModel.getName().toLowerCase().indexOf(searchUserKewyword) > -1) {
+					return true;
+				} else if (userSearchModel.getSurname() != null && userSearchModel.getSurname().toLowerCase().indexOf(idScheduleSelected) > -1) {
+					return true;
+				} else if (userSearchModel.getSurname() != null && userSearchModel.getDni().toLowerCase().indexOf(idScheduleSelected) > -1) {
+					return true;
+				} else if (userSearchModel.getDob() != null && userSearchModel.getDob().toLowerCase().indexOf(idScheduleSelected) > -1) {
+					return true;
+				} else if (userSearchModel.getRoleId() != null && userSearchModel.getRoleId().toLowerCase().indexOf(idScheduleSelected) > -1) {
+					return true;
+				} else {
+					return false;
+				}
+			});
+		});
+		
+		SortedList<ModelUserTable> sortedUserData = new SortedList<>(filteredUserData);
+		sortedUserData.comparatorProperty().bind(userTable.comparatorProperty());
+		userTable.setItems(sortedUserData);
 
 	}
 
