@@ -46,6 +46,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import models.ModelItemTypeTable;
 import models.ModelRoleTable;
 import models.ModelScheduleTable;
 import models.ModelShopTable;
@@ -210,11 +211,34 @@ public class controller_administrator {
 	@FXML
 	private JFXButton btnDeleteShop;
 
+	// tab item type
+	@FXML
+	private JFXTextField txtItemTypeSearch;
+
+	@FXML
+	private TableView<ModelItemTypeTable> itemTypeTable;
+
+	@FXML
+	private TableColumn<ModelItemTypeTable, String> idItemTypeTable;
+
+	@FXML
+	private TableColumn<ModelItemTypeTable, String> nameItemTypeTable;
+
+	@FXML
+	private JFXButton btnAddItemType;
+
+	@FXML
+	private JFXButton btnEditItemType;
+
+	@FXML
+	private JFXButton btnDeleteItemType;
+
 	boolean isExpanded = false;
 	int idUserSelected;
 	int idScheduleSelected;
 	int idRoleSelected;
 	int idShopSelected;
+	int idItemTypeSelected;
 
 	@FXML
 	void initialize() {
@@ -226,6 +250,8 @@ public class controller_administrator {
 			getTableActiveUsers(adminDB);
 			getTableSchedules(adminDB);
 			getTableRoles(adminDB);
+			getTableShops(adminDB);
+			getTableItemTypes(adminDB);
 
 			btnEditUser.setDisable(true);
 			btnDeleteUser.setDisable(true);
@@ -235,6 +261,8 @@ public class controller_administrator {
 			btnDeleteRole.setDisable(true);
 			btnEditShop.setDisable(true);
 			btnDeleteShop.setDisable(true);
+			btnEditItemType.setDisable(true);
+			btnDeleteItemType.setDisable(true);
 
 		} catch (Exception e) {
 			System.out.println("ERROR: controller_administrator.java - initialize() - " + e.toString() + "\n");
@@ -461,6 +489,59 @@ public class controller_administrator {
 	}
 
 	@FXML
+	void addItemType(ActionEvent event) throws IOException {
+
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AddNewItemType.fxml"));
+		ControllerAddNewItemType control = new ControllerAddNewItemType();
+		loader.setController(control);
+		Parent root = loader.load();
+
+		Stage stage = new Stage();
+		stage.setScene(new Scene(root));
+		stage.showAndWait();
+		initialize();
+
+	}
+
+	@FXML
+	void editItemType(ActionEvent event) throws IOException {
+
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AddNewItemType.fxml"));
+		ControllerEditItemType control = new ControllerEditItemType(0, 0, idItemTypeSelected);
+		loader.setController(control);
+		Parent root = loader.load();
+
+		Stage stage = new Stage();
+		stage.setScene(new Scene(root));
+		stage.showAndWait();
+		initialize();
+
+	}
+
+	@FXML
+	void deleteItemType(ActionEvent event) throws IOException {
+
+		AdministratorPageConnection adminDB = new AdministratorPageConnection();
+
+		String[] params = { String.valueOf(idShopSelected) };
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/YesNoAlertDialog.fxml"));
+		ControllerYesNoAlertDialog control = new ControllerYesNoAlertDialog(0, 0, "Atención",
+				"Esta acción es permanente, no se podrá deshacer. Preste atención y revise los datos.",
+				"¿Está seguro de que desea eliminar el tipo de artículo con el siguiente ID: "
+						+ String.valueOf(idShopSelected) + "?",
+				"SÍ", "No", "adminDeleteItemType", params);
+		loader.setController(control);
+		Parent root = loader.load();
+
+		Stage stage = new Stage();
+		stage.initStyle(StageStyle.UNDECORATED);
+		stage.setScene(new Scene(root));
+		stage.showAndWait();
+		initialize();
+
+	}
+
+	@FXML
 	void userSelection(MouseEvent event) {
 		try {
 			idUserSelected = userTable.getSelectionModel().getSelectedItem().getId();
@@ -508,6 +589,18 @@ public class controller_administrator {
 		}
 	}
 
+	@FXML
+	void itemTypeSelection(MouseEvent event) {
+		try {
+			idItemTypeSelected = itemTypeTable.getSelectionModel().getSelectedItem().getId();
+			btnEditItemType.setDisable(false);
+			btnDeleteItemType.setDisable(false);
+		} catch (Exception e) {
+			btnEditItemType.setDisable(true);
+			btnDeleteItemType.setDisable(true);
+		}
+	}
+
 	void getTableActiveUsers(AdministratorPageConnection adminDB) {
 
 		ObservableList<ModelUserTable> obList = adminDB.getUsersTable();
@@ -549,6 +642,10 @@ public class controller_administrator {
 	}
 
 	void getTableShops(AdministratorPageConnection adminDB) {
+		// TODO
+	}
+
+	void getTableItemTypes(AdministratorPageConnection adminDB) {
 		// TODO
 	}
 

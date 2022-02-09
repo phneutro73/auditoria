@@ -85,6 +85,9 @@ public class ControllerYesNoAlertDialog {
 		case "adminDeleteShop":
 			adminDeleteShop();
 			break;
+		case "adminDeleteItemType":
+			adminDeleteItemType();
+			break;
 		default:
 			break;
 		}
@@ -242,6 +245,10 @@ public class ControllerYesNoAlertDialog {
 	}
 
 	void adminDeleteShop() throws IOException {
+		// TODO
+	}
+
+	void adminDeleteItemType() throws IOException {
 		// TODO
 	}
 }
