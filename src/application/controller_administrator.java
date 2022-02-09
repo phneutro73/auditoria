@@ -662,7 +662,7 @@ public class controller_administrator {
 					return true;
 				} else if (userSearchModel.getSurname() != null && userSearchModel.getSurname().toLowerCase().indexOf(idScheduleSelected) > -1) {
 					return true;
-				} else if (userSearchModel.getSurname() != null && userSearchModel.getDni().toLowerCase().indexOf(idScheduleSelected) > -1) {
+				} else if (userSearchModel.getDni() != null && userSearchModel.getDni().toLowerCase().indexOf(idScheduleSelected) > -1) {
 					return true;
 				} else if (userSearchModel.getDob() != null && userSearchModel.getDob().toLowerCase().indexOf(idScheduleSelected) > -1) {
 					return true;
@@ -690,6 +690,32 @@ public class controller_administrator {
 		checkOutScheduleTable.setCellValueFactory(new PropertyValueFactory<>("checkOutTime"));
 
 		scheduleTable.setItems(obList);
+		
+		FilteredList<ModelScheduleTable> filteredScheduleData = new FilteredList<>(obList, b -> true);
+		txtScheduleSearch.textProperty().addListener((observable, oldValue, newValue) -> {
+			filteredScheduleData.setPredicate(scheduleSearchModel ->  {
+				if (newValue.isEmpty() || newValue == null) {
+					return true;
+				}
+				String searchUserKewyword = newValue.toLowerCase();
+				
+				if (scheduleSearchModel.getStrId() != null && scheduleSearchModel.getStrId().toLowerCase().indexOf(idScheduleSelected) > -1) {
+					return true;
+				} else if (scheduleSearchModel.getScheduleName() != null && scheduleSearchModel.getScheduleName().toLowerCase().indexOf(searchUserKewyword) > -1) {
+					return true;
+				} else if (scheduleSearchModel.getCheckInTime() != null && scheduleSearchModel.getCheckInTime().toLowerCase().indexOf(idScheduleSelected) > -1) {
+					return true;
+				} else if (scheduleSearchModel.getCheckOutTime() != null && scheduleSearchModel.getCheckOutTime().toLowerCase().indexOf(idScheduleSelected) > -1) {
+					return true;
+				} else {
+					return false;
+				}
+			});
+		});
+		
+		SortedList<ModelScheduleTable> sortedScheduleData = new SortedList<>(filteredScheduleData);
+		sortedScheduleData.comparatorProperty().bind(scheduleTable.comparatorProperty());
+		scheduleTable.setItems(sortedScheduleData);
 
 	}
 
