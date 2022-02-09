@@ -48,6 +48,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import models.ModelRoleTable;
 import models.ModelScheduleTable;
+import models.ModelShopTable;
 import models.ModelUserTable;
 import db.AdministratorPageConnection;
 
@@ -129,6 +130,9 @@ public class controller_administrator {
 	private JFXButton btnDeleteUser;
 
 	// tab schedules
+    @FXML
+    private JFXTextField txtScheduleSearch;
+    
 	@FXML
 	private TableView<ModelScheduleTable> scheduleTable;
 
@@ -154,6 +158,9 @@ public class controller_administrator {
 	private JFXButton btnDeleteSchedule;
 
 	// tab role
+    @FXML
+    private JFXTextField txtRoleSearch;
+    
 	@FXML
 	private TableView<ModelRoleTable> roleTable;
 
@@ -174,11 +181,40 @@ public class controller_administrator {
 
 	@FXML
 	private JFXButton btnDeleteRole;
+	
+	//tab shop
+	 @FXML
+    private JFXTextField txtShopSearch;
+
+    @FXML
+    private TableView<ModelShopTable> shopTable;
+
+    @FXML
+    private TableColumn<ModelShopTable, String> idShopTable;
+
+    @FXML
+    private TableColumn<ModelShopTable, String> nameShopTable;
+
+    @FXML
+    private TableColumn<ModelShopTable, String> directionShopTable;
+
+    @FXML
+    private TableColumn<ModelShopTable, String> numWorkersShopTable;
+
+    @FXML
+    private JFXButton btnAddShop;
+
+    @FXML
+    private JFXButton btnEditShop;
+
+    @FXML
+    private JFXButton btnDeleteShop;
 
 	boolean isExpanded = false;
 	int idUserSelected;
 	int idScheduleSelected;
 	int idRoleSelected;
+	int idShopSelected;
 
 	@FXML
 	void initialize() {
@@ -190,6 +226,7 @@ public class controller_administrator {
 			getTableActiveUsers(adminDB);
 			getTableSchedules(adminDB);
 			getTableRoles(adminDB);
+			
 
 			btnEditUser.setDisable(true);
 			btnDeleteUser.setDisable(true);
@@ -197,6 +234,8 @@ public class controller_administrator {
 			btnDeleteSchedule.setDisable(true);
 			btnEditRole.setDisable(true);
 			btnDeleteRole.setDisable(true);
+			btnEditShop.setDisable(true);
+			btnDeleteShop.setDisable(true);
 
 		} catch (Exception e) {
 			System.out.println("ERROR: controller_administrator.java - initialize() - " + e.toString() + "\n");
@@ -251,8 +290,6 @@ public class controller_administrator {
 	@FXML
 	void deleteUser(ActionEvent event) throws IOException {
 
-		AdministratorPageConnection adminDB = new AdministratorPageConnection();
-
 		String[] params = { String.valueOf(idUserSelected) };
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/YesNoAlertDialog.fxml"));
 		ControllerYesNoAlertDialog control = new ControllerYesNoAlertDialog(0, 0, "Atención",
@@ -302,8 +339,6 @@ public class controller_administrator {
 
 	@FXML
 	void deleteSchedule(ActionEvent event) throws IOException {
-
-		AdministratorPageConnection adminDB = new AdministratorPageConnection();
 
 		String[] params = { String.valueOf(idScheduleSelected) };
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/YesNoAlertDialog.fxml"));
@@ -355,8 +390,6 @@ public class controller_administrator {
 	@FXML
 	void deleteRole(ActionEvent event) throws IOException {
 
-		AdministratorPageConnection adminDB = new AdministratorPageConnection();
-
 		String[] params = { String.valueOf(idRoleSelected) };
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/YesNoAlertDialog.fxml"));
 		ControllerYesNoAlertDialog control = new ControllerYesNoAlertDialog(0, 0, "Atención",
@@ -374,6 +407,59 @@ public class controller_administrator {
 		initialize();
 
 	}
+	
+    @FXML
+    void addShop(ActionEvent event) throws IOException {
+    	
+    	FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AddNewShopPage.fxml"));
+		ControllerAddNewShop control = new ControllerAddNewShop();
+		loader.setController(control);
+		Parent root = loader.load();
+
+		Stage stage = new Stage();
+		stage.setScene(new Scene(root));
+		stage.showAndWait();
+		initialize();
+		
+    }
+	
+    @FXML
+    void editShop(ActionEvent event) throws IOException {
+    	
+    	FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AddNewShopPage.fxml"));
+		ControllerEditShop control = new ControllerEditShop(idShopSelected);
+		loader.setController(control);
+		Parent root = loader.load();
+
+		Stage stage = new Stage();
+		stage.setScene(new Scene(root));
+		stage.showAndWait();
+		initialize();
+
+    }
+    
+    @FXML
+    void deleteShop(ActionEvent event) throws IOException {
+
+    	AdministratorPageConnection adminDB = new AdministratorPageConnection();
+
+		String[] params = { String.valueOf(idShopSelected) };
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/YesNoAlertDialog.fxml"));
+		ControllerYesNoAlertDialog control = new ControllerYesNoAlertDialog(0, 0, "Atención",
+				"Esta acción es permanente, no se podrá deshacer. Preste atención y revise los datos.",
+				"¿Está seguro de que desea eliminar la tienda con el siguiente ID: " + String.valueOf(idShopSelected)
+						+ "?",
+				"SÍ", "No", "adminDeleteShop", params);
+		loader.setController(control);
+		Parent root = loader.load();
+
+		Stage stage = new Stage();
+		stage.initStyle(StageStyle.UNDECORATED);
+		stage.setScene(new Scene(root));
+		stage.showAndWait();
+		initialize();
+		
+    }
 
 	@FXML
 	void userSelection(MouseEvent event) {
@@ -385,7 +471,6 @@ public class controller_administrator {
 			btnEditUser.setDisable(true);
 			btnDeleteUser.setDisable(true);
 		}
-
 	}
 
 	@FXML
@@ -407,11 +492,22 @@ public class controller_administrator {
 			btnEditRole.setDisable(false);
 			btnDeleteRole.setDisable(false);
 		} catch (Exception e) {
-			btnEditSchedule.setDisable(true);
-			btnDeleteSchedule.setDisable(true);
+			btnEditRole.setDisable(true);
+			btnDeleteRole.setDisable(true);
 		}
-
 	}
+
+    @FXML
+    void shopSelection(MouseEvent event) {
+    	try {
+			idShopSelected = shopTable.getSelectionModel().getSelectedItem().getId();
+			btnEditShop.setDisable(false);
+			btnDeleteShop.setDisable(false);
+		} catch (Exception e) {
+			btnEditShop.setDisable(true);
+			btnDeleteShop.setDisable(true);
+		}
+    }
 
 	void getTableActiveUsers(AdministratorPageConnection adminDB) {
 
@@ -451,6 +547,10 @@ public class controller_administrator {
 
 		roleTable.setItems(obList);
 
+	}
+	
+	void getTableShops(AdministratorPageConnection adminDB) {
+		// TODO
 	}
 
 }

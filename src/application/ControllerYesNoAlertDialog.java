@@ -81,6 +81,10 @@ public class ControllerYesNoAlertDialog {
 			break;
 		case "adminDeleteRole":
 			adminDeleteRole();
+			break;
+		case "adminDeleteShop":
+			adminDeleteShop();
+			break;
 		default:
 			break;
 		}
@@ -236,5 +240,8 @@ public class ControllerYesNoAlertDialog {
 			stage.show();
 		}
 	}
-
+	
+	void adminDeleteShop() throws IOException {
+		// TODO
+	}
 }
