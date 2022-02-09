@@ -16,6 +16,10 @@ public class ModelRoleTable {
 	public int getId() {
 		return id;
 	}
+	
+	public String getStrId() {
+		return String.valueOf(id);
+	}
 
 	public void setId(int id) {
 		this.id = id;

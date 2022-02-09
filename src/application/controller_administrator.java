@@ -644,7 +644,7 @@ public class controller_administrator {
 		surnameUserTable.setCellValueFactory(new PropertyValueFactory<>("surname"));
 		dniUserTable.setCellValueFactory(new PropertyValueFactory<>("dni"));
 		dateUserTable.setCellValueFactory(new PropertyValueFactory<>("dob"));
-		roleUserTable.setCellValueFactory(new PropertyValueFactory<>("roleId"));
+		roleUserTable.setCellValueFactory(new PropertyValueFactory<>("roleName"));
 
 		userTable.setItems(obList);
 		
@@ -654,19 +654,19 @@ public class controller_administrator {
 				if (newValue.isEmpty() || newValue == null) {
 					return true;
 				}
-				String searchUserKewyword = newValue.toLowerCase();
+				String searchUserKeyword = newValue.toLowerCase();
 				
-				if (userSearchModel.getStrId() != null && userSearchModel.getStrId().toLowerCase().indexOf(idScheduleSelected) > -1) {
+				if (userSearchModel.getStrId() != null && userSearchModel.getStrId().toLowerCase().indexOf(searchUserKeyword) > -1) {
 					return true;
-				} else if (userSearchModel.getName() != null && userSearchModel.getName().toLowerCase().indexOf(searchUserKewyword) > -1) {
+				} else if (userSearchModel.getName() != null && userSearchModel.getName().toLowerCase().indexOf(searchUserKeyword) > -1) {
 					return true;
-				} else if (userSearchModel.getSurname() != null && userSearchModel.getSurname().toLowerCase().indexOf(idScheduleSelected) > -1) {
+				} else if (userSearchModel.getSurname() != null && userSearchModel.getSurname().toLowerCase().indexOf(searchUserKeyword) > -1) {
 					return true;
-				} else if (userSearchModel.getDni() != null && userSearchModel.getDni().toLowerCase().indexOf(idScheduleSelected) > -1) {
+				} else if (userSearchModel.getDni() != null && userSearchModel.getDni().toLowerCase().indexOf(searchUserKeyword) > -1) {
 					return true;
-				} else if (userSearchModel.getDob() != null && userSearchModel.getDob().toLowerCase().indexOf(idScheduleSelected) > -1) {
+				} else if (userSearchModel.getDob() != null && userSearchModel.getDob().toLowerCase().indexOf(searchUserKeyword) > -1) {
 					return true;
-				} else if (userSearchModel.getRoleId() != null && userSearchModel.getRoleId().toLowerCase().indexOf(idScheduleSelected) > -1) {
+				} else if (userSearchModel.getRoleName() != null && userSearchModel.getRoleName().toLowerCase().indexOf(searchUserKeyword) > -1) {
 					return true;
 				} else {
 					return false;
@@ -697,15 +697,15 @@ public class controller_administrator {
 				if (newValue.isEmpty() || newValue == null) {
 					return true;
 				}
-				String searchUserKewyword = newValue.toLowerCase();
+				String searchScheduleKeyword = newValue.toLowerCase();
 				
-				if (scheduleSearchModel.getStrId() != null && scheduleSearchModel.getStrId().toLowerCase().indexOf(idScheduleSelected) > -1) {
+				if (scheduleSearchModel.getStrId() != null && scheduleSearchModel.getStrId().toLowerCase().indexOf(searchScheduleKeyword) > -1) {
 					return true;
-				} else if (scheduleSearchModel.getScheduleName() != null && scheduleSearchModel.getScheduleName().toLowerCase().indexOf(searchUserKewyword) > -1) {
+				} else if (scheduleSearchModel.getScheduleName() != null && scheduleSearchModel.getScheduleName().toLowerCase().indexOf(searchScheduleKeyword) > -1) {
 					return true;
-				} else if (scheduleSearchModel.getCheckInTime() != null && scheduleSearchModel.getCheckInTime().toLowerCase().indexOf(idScheduleSelected) > -1) {
+				} else if (scheduleSearchModel.getCheckInTime() != null && scheduleSearchModel.getCheckInTime().toLowerCase().indexOf(searchScheduleKeyword) > -1) {
 					return true;
-				} else if (scheduleSearchModel.getCheckOutTime() != null && scheduleSearchModel.getCheckOutTime().toLowerCase().indexOf(idScheduleSelected) > -1) {
+				} else if (scheduleSearchModel.getCheckOutTime() != null && scheduleSearchModel.getCheckOutTime().toLowerCase().indexOf(searchScheduleKeyword) > -1) {
 					return true;
 				} else {
 					return false;
@@ -728,6 +728,28 @@ public class controller_administrator {
 		numUsersRoleTable.setCellValueFactory(new PropertyValueFactory<>("numUsersRole"));
 
 		roleTable.setItems(obList);
+		
+		FilteredList<ModelRoleTable> filteredRolesData = new FilteredList<>(obList, b -> true);
+		txtRoleSearch.textProperty().addListener((observable, oldValue, newValue) -> {
+			filteredRolesData.setPredicate(roleSearchModel ->  {
+				if (newValue.isEmpty() || newValue == null) {
+					return true;
+				}
+				String searchRoleKeyword = newValue.toLowerCase();
+				
+				if (roleSearchModel.getStrId() != null && roleSearchModel.getStrId().toLowerCase().indexOf(searchRoleKeyword) > -1) {
+					return true;
+				} else if (roleSearchModel.getRoleName() != null && roleSearchModel.getRoleName().toLowerCase().indexOf(searchRoleKeyword) > -1) {
+					return true;
+				} else {
+					return false;
+				}
+			});
+		});
+		
+		SortedList<ModelRoleTable> sortedRoleData = new SortedList<>(filteredRolesData);
+		sortedRoleData.comparatorProperty().bind(roleTable.comparatorProperty());
+		roleTable.setItems(sortedRoleData);
 
 	}
 
