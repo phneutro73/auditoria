@@ -20,6 +20,8 @@ import com.jfoenix.controls.JFXTextField;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -70,6 +72,12 @@ public class controller_administrator {
 
 	@FXML
 	private VBox drawer;
+
+    @FXML
+    private VBox body;
+    
+    @FXML
+    private VBox vBoxButtons;
 
 	// Menu buttons
 	@FXML
@@ -277,12 +285,33 @@ public class controller_administrator {
 		if (isExpanded) {
 			drawer.setPrefWidth(60);
 			isExpanded = false;
+			
+			vBoxButtons.setMinWidth(108);
+			vBoxButtons.setMaxWidth(108);
+			vBoxButtons.prefWidth(108);
 		} else {
 			drawer.setPrefWidth(190);
 			isExpanded = true;
+
+			vBoxButtons.setMinWidth(108);
+			vBoxButtons.setMaxWidth(108);
+			vBoxButtons.prefWidth(108);
 		}
 
 	}
+	
+    @FXML
+    void hideMenu(MouseEvent event) {
+    	if (isExpanded) {
+    		drawer.setPrefWidth(60);
+    		isExpanded = false;
+
+			vBoxButtons.setMinWidth(108);
+			vBoxButtons.setMaxWidth(108);
+			vBoxButtons.prefWidth(108);
+    		
+    	}
+    }
 
 	@FXML
 	void addUser(ActionEvent event) throws IOException {
@@ -544,6 +573,7 @@ public class controller_administrator {
 	@FXML
 	void userSelection(MouseEvent event) {
 		try {
+			hideMenu(event);
 			idUserSelected = userTable.getSelectionModel().getSelectedItem().getId();
 			btnEditUser.setDisable(false);
 			btnDeleteUser.setDisable(false);
@@ -556,6 +586,7 @@ public class controller_administrator {
 	@FXML
 	void scheduleSelection(MouseEvent event) {
 		try {
+			hideMenu(event);
 			idScheduleSelected = scheduleTable.getSelectionModel().getSelectedItem().getId();
 			btnEditSchedule.setDisable(false);
 			btnDeleteSchedule.setDisable(false);
@@ -568,6 +599,7 @@ public class controller_administrator {
 	@FXML
 	void roleSelection(MouseEvent event) {
 		try {
+			hideMenu(event);
 			idRoleSelected = roleTable.getSelectionModel().getSelectedItem().getId();
 			btnEditRole.setDisable(false);
 			btnDeleteRole.setDisable(false);
@@ -580,6 +612,7 @@ public class controller_administrator {
 	@FXML
 	void shopSelection(MouseEvent event) {
 		try {
+			hideMenu(event);
 			idShopSelected = shopTable.getSelectionModel().getSelectedItem().getId();
 			btnEditShop.setDisable(false);
 			btnDeleteShop.setDisable(false);
@@ -592,6 +625,7 @@ public class controller_administrator {
 	@FXML
 	void itemTypeSelection(MouseEvent event) {
 		try {
+			hideMenu(event);
 			idItemTypeSelected = itemTypeTable.getSelectionModel().getSelectedItem().getId();
 			btnEditItemType.setDisable(false);
 			btnDeleteItemType.setDisable(false);
