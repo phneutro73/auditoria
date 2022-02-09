@@ -18,7 +18,7 @@ public class ModelScheduleTable {
 	public int getId() {
 		return id;
 	}
-	
+
 	public String getStrId() {
 		return String.valueOf(id);
 	}

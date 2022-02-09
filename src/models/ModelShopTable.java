@@ -1,11 +1,11 @@
 package models;
 
 public class ModelShopTable {
-	
+
 	int id;
 	String shopName;
 	String shopDirection;
-	
+
 	public ModelShopTable(int id, String shopName, String shopDirection) {
 		super();
 		this.id = id;
@@ -36,7 +36,5 @@ public class ModelShopTable {
 	public void setShopDirection(String shopDirection) {
 		this.shopDirection = shopDirection;
 	}
-	
-	
 
 }

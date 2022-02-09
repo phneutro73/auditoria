@@ -4,7 +4,7 @@ public class ModelItemTypeTable {
 
 	int id;
 	String name;
-	
+
 	public ModelItemTypeTable(int id, String name) {
 		super();
 		this.id = id;
@@ -26,5 +26,5 @@ public class ModelItemTypeTable {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+
 }
