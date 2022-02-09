@@ -66,7 +66,7 @@ public class ControllerAddNewSchedule {
 					if (checkOut.length() < 8) {
 						checkOut = "0" + checkOut;
 					}
-					
+
 					AdministratorPageConnection adminDB = new AdministratorPageConnection();
 					boolean success = adminDB.addSchedule(fieldName.getText(), checkIn, checkOut);
 

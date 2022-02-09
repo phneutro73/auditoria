@@ -240,7 +240,7 @@ public class ControllerYesNoAlertDialog {
 			stage.show();
 		}
 	}
-	
+
 	void adminDeleteShop() throws IOException {
 		// TODO
 	}

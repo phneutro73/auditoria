@@ -130,9 +130,9 @@ public class controller_administrator {
 	private JFXButton btnDeleteUser;
 
 	// tab schedules
-    @FXML
-    private JFXTextField txtScheduleSearch;
-    
+	@FXML
+	private JFXTextField txtScheduleSearch;
+
 	@FXML
 	private TableView<ModelScheduleTable> scheduleTable;
 
@@ -158,9 +158,9 @@ public class controller_administrator {
 	private JFXButton btnDeleteSchedule;
 
 	// tab role
-    @FXML
-    private JFXTextField txtRoleSearch;
-    
+	@FXML
+	private JFXTextField txtRoleSearch;
+
 	@FXML
 	private TableView<ModelRoleTable> roleTable;
 
@@ -181,34 +181,34 @@ public class controller_administrator {
 
 	@FXML
 	private JFXButton btnDeleteRole;
-	
-	//tab shop
-	 @FXML
-    private JFXTextField txtShopSearch;
 
-    @FXML
-    private TableView<ModelShopTable> shopTable;
+	// tab shop
+	@FXML
+	private JFXTextField txtShopSearch;
 
-    @FXML
-    private TableColumn<ModelShopTable, String> idShopTable;
+	@FXML
+	private TableView<ModelShopTable> shopTable;
 
-    @FXML
-    private TableColumn<ModelShopTable, String> nameShopTable;
+	@FXML
+	private TableColumn<ModelShopTable, String> idShopTable;
 
-    @FXML
-    private TableColumn<ModelShopTable, String> directionShopTable;
+	@FXML
+	private TableColumn<ModelShopTable, String> nameShopTable;
 
-    @FXML
-    private TableColumn<ModelShopTable, String> numWorkersShopTable;
+	@FXML
+	private TableColumn<ModelShopTable, String> directionShopTable;
 
-    @FXML
-    private JFXButton btnAddShop;
+	@FXML
+	private TableColumn<ModelShopTable, String> numWorkersShopTable;
 
-    @FXML
-    private JFXButton btnEditShop;
+	@FXML
+	private JFXButton btnAddShop;
 
-    @FXML
-    private JFXButton btnDeleteShop;
+	@FXML
+	private JFXButton btnEditShop;
+
+	@FXML
+	private JFXButton btnDeleteShop;
 
 	boolean isExpanded = false;
 	int idUserSelected;
@@ -226,7 +226,6 @@ public class controller_administrator {
 			getTableActiveUsers(adminDB);
 			getTableSchedules(adminDB);
 			getTableRoles(adminDB);
-			
 
 			btnEditUser.setDisable(true);
 			btnDeleteUser.setDisable(true);
@@ -407,11 +406,11 @@ public class controller_administrator {
 		initialize();
 
 	}
-	
-    @FXML
-    void addShop(ActionEvent event) throws IOException {
-    	
-    	FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AddNewShopPage.fxml"));
+
+	@FXML
+	void addShop(ActionEvent event) throws IOException {
+
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AddNewShopPage.fxml"));
 		ControllerAddNewShop control = new ControllerAddNewShop();
 		loader.setController(control);
 		Parent root = loader.load();
@@ -420,13 +419,13 @@ public class controller_administrator {
 		stage.setScene(new Scene(root));
 		stage.showAndWait();
 		initialize();
-		
-    }
-	
-    @FXML
-    void editShop(ActionEvent event) throws IOException {
-    	
-    	FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AddNewShopPage.fxml"));
+
+	}
+
+	@FXML
+	void editShop(ActionEvent event) throws IOException {
+
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AddNewShopPage.fxml"));
 		ControllerEditShop control = new ControllerEditShop(idShopSelected);
 		loader.setController(control);
 		Parent root = loader.load();
@@ -436,12 +435,12 @@ public class controller_administrator {
 		stage.showAndWait();
 		initialize();
 
-    }
-    
-    @FXML
-    void deleteShop(ActionEvent event) throws IOException {
+	}
 
-    	AdministratorPageConnection adminDB = new AdministratorPageConnection();
+	@FXML
+	void deleteShop(ActionEvent event) throws IOException {
+
+		AdministratorPageConnection adminDB = new AdministratorPageConnection();
 
 		String[] params = { String.valueOf(idShopSelected) };
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/YesNoAlertDialog.fxml"));
@@ -458,8 +457,8 @@ public class controller_administrator {
 		stage.setScene(new Scene(root));
 		stage.showAndWait();
 		initialize();
-		
-    }
+
+	}
 
 	@FXML
 	void userSelection(MouseEvent event) {
@@ -497,9 +496,9 @@ public class controller_administrator {
 		}
 	}
 
-    @FXML
-    void shopSelection(MouseEvent event) {
-    	try {
+	@FXML
+	void shopSelection(MouseEvent event) {
+		try {
 			idShopSelected = shopTable.getSelectionModel().getSelectedItem().getId();
 			btnEditShop.setDisable(false);
 			btnDeleteShop.setDisable(false);
@@ -507,7 +506,7 @@ public class controller_administrator {
 			btnEditShop.setDisable(true);
 			btnDeleteShop.setDisable(true);
 		}
-    }
+	}
 
 	void getTableActiveUsers(AdministratorPageConnection adminDB) {
 
@@ -548,7 +547,7 @@ public class controller_administrator {
 		roleTable.setItems(obList);
 
 	}
-	
+
 	void getTableShops(AdministratorPageConnection adminDB) {
 		// TODO
 	}

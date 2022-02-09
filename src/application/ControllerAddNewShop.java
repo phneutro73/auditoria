@@ -10,52 +10,53 @@ import javafx.stage.Stage;
 
 public class ControllerAddNewShop {
 
-    @FXML
-    private Label subtitle;
+	@FXML
+	private Label subtitle;
 
-    @FXML
-    private GridPane grdAddSchedule;
+	@FXML
+	private GridPane grdAddSchedule;
 
-    @FXML
-    private Label lblName;
+	@FXML
+	private Label lblName;
 
-    @FXML
-    private Label lblDirection;
+	@FXML
+	private Label lblDirection;
 
-    @FXML
-    private JFXTextField fieldName;
+	@FXML
+	private JFXTextField fieldName;
 
-    @FXML
-    private JFXTextField fieldDirection;
+	@FXML
+	private JFXTextField fieldDirection;
 
-    @FXML
-    private JFXButton btnCancel;
+	@FXML
+	private JFXButton btnCancel;
 
-    @FXML
-    private JFXButton btnAccept;
+	@FXML
+	private JFXButton btnAccept;
 
-    @FXML
-    void cancelExit(ActionEvent event) {
-    	Stage stage = (Stage) btnCancel.getScene().getWindow();
+	@FXML
+	void cancelExit(ActionEvent event) {
+		Stage stage = (Stage) btnCancel.getScene().getWindow();
 		stage.close();
-    }
+	}
 
-    @FXML
-    void saveNewShop(ActionEvent event) {
-    	// TODO
-    }
-    
-    @FXML
-    void initialize() {
-    	
-    }
+	@FXML
+	void saveNewShop(ActionEvent event) {
+		// TODO
+	}
 
-    boolean checkAllFields() {
+	@FXML
+	void initialize() {
+
+	}
+
+	boolean checkAllFields() {
 
 		try {
 
 			if ((!fieldName.getText().isEmpty() && fieldName.getText() != null && fieldName.getText() != "")
-					&& (!fieldDirection.getText().isEmpty() && fieldDirection.getText() != null && fieldDirection.getText() != "")) {
+					&& (!fieldDirection.getText().isEmpty() && fieldDirection.getText() != null
+							&& fieldDirection.getText() != "")) {
 				return true;
 			} else {
 				return false;
