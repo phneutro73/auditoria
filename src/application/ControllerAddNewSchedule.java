@@ -59,7 +59,14 @@ public class ControllerAddNewSchedule {
 				if (isValidTime()) {
 
 					String checkIn = String.valueOf(fieldCheckIn.getValue()) + ":00";
+					if (checkIn.length() < 8) {
+						checkIn = "0" + checkIn;
+					}
 					String checkOut = String.valueOf(fieldCheckOut.getValue()) + ":00";
+					if (checkOut.length() < 8) {
+						checkOut = "0" + checkOut;
+					}
+					
 					AdministratorPageConnection adminDB = new AdministratorPageConnection();
 					boolean success = adminDB.addSchedule(fieldName.getText(), checkIn, checkOut);
 
@@ -136,7 +143,7 @@ public class ControllerAddNewSchedule {
 	boolean isValidTime() {
 
 		try {
-			if (fieldCheckOut.getValue().isAfter(fieldCheckIn.getValue())) {
+			if (!fieldCheckOut.getValue().isBefore(fieldCheckIn.getValue())) {
 				return true;
 			} else {
 				return false;
