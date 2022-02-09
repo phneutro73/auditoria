@@ -20,6 +20,8 @@ import com.jfoenix.controls.JFXTextField;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -47,8 +49,10 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import models.ModelItemTypeTable;
 import models.ModelRoleTable;
 import models.ModelScheduleTable;
+import models.ModelShopTable;
 import models.ModelUserTable;
 import db.AdministratorPageConnection;
 
@@ -69,6 +73,12 @@ public class controller_administrator {
 
 	@FXML
 	private VBox drawer;
+
+    @FXML
+    private VBox body;
+    
+    @FXML
+    private VBox vBoxButtons;
 
 	// Menu buttons
 	@FXML
@@ -131,6 +141,9 @@ public class controller_administrator {
 
 	// tab schedules
 	@FXML
+	private JFXTextField txtScheduleSearch;
+
+	@FXML
 	private TableView<ModelScheduleTable> scheduleTable;
 
 	@FXML
@@ -156,6 +169,9 @@ public class controller_administrator {
 
 	// tab role
 	@FXML
+	private JFXTextField txtRoleSearch;
+
+	@FXML
 	private TableView<ModelRoleTable> roleTable;
 
 	@FXML
@@ -176,10 +192,62 @@ public class controller_administrator {
 	@FXML
 	private JFXButton btnDeleteRole;
 
+	// tab shop
+	@FXML
+	private JFXTextField txtShopSearch;
+
+	@FXML
+	private TableView<ModelShopTable> shopTable;
+
+	@FXML
+	private TableColumn<ModelShopTable, String> idShopTable;
+
+	@FXML
+	private TableColumn<ModelShopTable, String> nameShopTable;
+
+	@FXML
+	private TableColumn<ModelShopTable, String> directionShopTable;
+
+	@FXML
+	private TableColumn<ModelShopTable, String> numWorkersShopTable;
+
+	@FXML
+	private JFXButton btnAddShop;
+
+	@FXML
+	private JFXButton btnEditShop;
+
+	@FXML
+	private JFXButton btnDeleteShop;
+
+	// tab item type
+	@FXML
+	private JFXTextField txtItemTypeSearch;
+
+	@FXML
+	private TableView<ModelItemTypeTable> itemTypeTable;
+
+	@FXML
+	private TableColumn<ModelItemTypeTable, String> idItemTypeTable;
+
+	@FXML
+	private TableColumn<ModelItemTypeTable, String> nameItemTypeTable;
+
+	@FXML
+	private JFXButton btnAddItemType;
+
+	@FXML
+	private JFXButton btnEditItemType;
+
+	@FXML
+	private JFXButton btnDeleteItemType;
+
 	boolean isExpanded = false;
 	int idUserSelected;
 	int idScheduleSelected;
 	int idRoleSelected;
+	int idShopSelected;
+	int idItemTypeSelected;
 
 	@FXML
 	void initialize() {
@@ -191,6 +259,8 @@ public class controller_administrator {
 			getTableActiveUsers(adminDB);
 			getTableSchedules(adminDB);
 			getTableRoles(adminDB);
+			getTableShops(adminDB);
+			getTableItemTypes(adminDB);
 
 			btnEditUser.setDisable(true);
 			btnDeleteUser.setDisable(true);
@@ -198,6 +268,10 @@ public class controller_administrator {
 			btnDeleteSchedule.setDisable(true);
 			btnEditRole.setDisable(true);
 			btnDeleteRole.setDisable(true);
+			btnEditShop.setDisable(true);
+			btnDeleteShop.setDisable(true);
+			btnEditItemType.setDisable(true);
+			btnDeleteItemType.setDisable(true);
 
 		} catch (Exception e) {
 			System.out.println("ERROR: controller_administrator.java - initialize() - " + e.toString() + "\n");
@@ -212,12 +286,33 @@ public class controller_administrator {
 		if (isExpanded) {
 			drawer.setPrefWidth(60);
 			isExpanded = false;
+			
+			vBoxButtons.setMinWidth(108);
+			vBoxButtons.setMaxWidth(108);
+			vBoxButtons.prefWidth(108);
 		} else {
 			drawer.setPrefWidth(190);
 			isExpanded = true;
+
+			vBoxButtons.setMinWidth(108);
+			vBoxButtons.setMaxWidth(108);
+			vBoxButtons.prefWidth(108);
 		}
 
 	}
+	
+    @FXML
+    void hideMenu(MouseEvent event) {
+    	if (isExpanded) {
+    		drawer.setPrefWidth(60);
+    		isExpanded = false;
+
+			vBoxButtons.setMinWidth(108);
+			vBoxButtons.setMaxWidth(108);
+			vBoxButtons.prefWidth(108);
+    		
+    	}
+    }
 
 	@FXML
 	void addUser(ActionEvent event) throws IOException {
@@ -251,8 +346,6 @@ public class controller_administrator {
 
 	@FXML
 	void deleteUser(ActionEvent event) throws IOException {
-
-		AdministratorPageConnection adminDB = new AdministratorPageConnection();
 
 		String[] params = { String.valueOf(idUserSelected) };
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/YesNoAlertDialog.fxml"));
@@ -304,8 +397,6 @@ public class controller_administrator {
 	@FXML
 	void deleteSchedule(ActionEvent event) throws IOException {
 
-		AdministratorPageConnection adminDB = new AdministratorPageConnection();
-
 		String[] params = { String.valueOf(idScheduleSelected) };
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/YesNoAlertDialog.fxml"));
 		ControllerYesNoAlertDialog control = new ControllerYesNoAlertDialog(0, 0, "Atención",
@@ -356,8 +447,6 @@ public class controller_administrator {
 	@FXML
 	void deleteRole(ActionEvent event) throws IOException {
 
-		AdministratorPageConnection adminDB = new AdministratorPageConnection();
-
 		String[] params = { String.valueOf(idRoleSelected) };
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/YesNoAlertDialog.fxml"));
 		ControllerYesNoAlertDialog control = new ControllerYesNoAlertDialog(0, 0, "Atención",
@@ -377,8 +466,115 @@ public class controller_administrator {
 	}
 
 	@FXML
+	void addShop(ActionEvent event) throws IOException {
+
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AddNewShopPage.fxml"));
+		ControllerAddNewShop control = new ControllerAddNewShop();
+		loader.setController(control);
+		Parent root = loader.load();
+
+		Stage stage = new Stage();
+		stage.setScene(new Scene(root));
+		stage.showAndWait();
+		initialize();
+
+	}
+
+	@FXML
+	void editShop(ActionEvent event) throws IOException {
+
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AddNewShopPage.fxml"));
+		ControllerEditShop control = new ControllerEditShop(idShopSelected);
+		loader.setController(control);
+		Parent root = loader.load();
+
+		Stage stage = new Stage();
+		stage.setScene(new Scene(root));
+		stage.showAndWait();
+		initialize();
+
+	}
+
+	@FXML
+	void deleteShop(ActionEvent event) throws IOException {
+
+		AdministratorPageConnection adminDB = new AdministratorPageConnection();
+
+		String[] params = { String.valueOf(idShopSelected) };
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/YesNoAlertDialog.fxml"));
+		ControllerYesNoAlertDialog control = new ControllerYesNoAlertDialog(0, 0, "Atención",
+				"Esta acción es permanente, no se podrá deshacer. Preste atención y revise los datos.",
+				"¿Está seguro de que desea eliminar la tienda con el siguiente ID: " + String.valueOf(idShopSelected)
+						+ "?",
+				"SÍ", "No", "adminDeleteShop", params);
+		loader.setController(control);
+		Parent root = loader.load();
+
+		Stage stage = new Stage();
+		stage.initStyle(StageStyle.UNDECORATED);
+		stage.setScene(new Scene(root));
+		stage.showAndWait();
+		initialize();
+
+	}
+
+	@FXML
+	void addItemType(ActionEvent event) throws IOException {
+
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AddNewItemType.fxml"));
+		ControllerAddNewItemType control = new ControllerAddNewItemType();
+		loader.setController(control);
+		Parent root = loader.load();
+
+		Stage stage = new Stage();
+		stage.setScene(new Scene(root));
+		stage.showAndWait();
+		initialize();
+
+	}
+
+	@FXML
+	void editItemType(ActionEvent event) throws IOException {
+
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AddNewItemType.fxml"));
+		ControllerEditItemType control = new ControllerEditItemType(0, 0, idItemTypeSelected);
+		loader.setController(control);
+		Parent root = loader.load();
+
+		Stage stage = new Stage();
+		stage.setScene(new Scene(root));
+		stage.showAndWait();
+		initialize();
+
+	}
+
+	@FXML
+	void deleteItemType(ActionEvent event) throws IOException {
+
+		AdministratorPageConnection adminDB = new AdministratorPageConnection();
+
+		String[] params = { String.valueOf(idShopSelected) };
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/YesNoAlertDialog.fxml"));
+		ControllerYesNoAlertDialog control = new ControllerYesNoAlertDialog(0, 0, "Atención",
+				"Esta acción es permanente, no se podrá deshacer. Preste atención y revise los datos.",
+				"¿Está seguro de que desea eliminar el tipo de artículo con el siguiente ID: "
+						+ String.valueOf(idShopSelected) + "?",
+				"SÍ", "No", "adminDeleteItemType", params);
+		loader.setController(control);
+		Parent root = loader.load();
+
+		Stage stage = new Stage();
+		stage.initStyle(StageStyle.UNDECORATED);
+		stage.setScene(new Scene(root));
+		stage.showAndWait();
+		initialize();
+
+	}
+
+	@FXML
 	void userSelection(MouseEvent event) {
 		try {
+			hideMenu(event);
 			idUserSelected = userTable.getSelectionModel().getSelectedItem().getId();
 			btnEditUser.setDisable(false);
 			btnDeleteUser.setDisable(false);
@@ -386,12 +582,12 @@ public class controller_administrator {
 			btnEditUser.setDisable(true);
 			btnDeleteUser.setDisable(true);
 		}
-
 	}
 
 	@FXML
 	void scheduleSelection(MouseEvent event) {
 		try {
+			hideMenu(event);
 			idScheduleSelected = scheduleTable.getSelectionModel().getSelectedItem().getId();
 			btnEditSchedule.setDisable(false);
 			btnDeleteSchedule.setDisable(false);
@@ -404,14 +600,40 @@ public class controller_administrator {
 	@FXML
 	void roleSelection(MouseEvent event) {
 		try {
+			hideMenu(event);
 			idRoleSelected = roleTable.getSelectionModel().getSelectedItem().getId();
 			btnEditRole.setDisable(false);
 			btnDeleteRole.setDisable(false);
 		} catch (Exception e) {
-			btnEditSchedule.setDisable(true);
-			btnDeleteSchedule.setDisable(true);
+			btnEditRole.setDisable(true);
+			btnDeleteRole.setDisable(true);
 		}
+	}
 
+	@FXML
+	void shopSelection(MouseEvent event) {
+		try {
+			hideMenu(event);
+			idShopSelected = shopTable.getSelectionModel().getSelectedItem().getId();
+			btnEditShop.setDisable(false);
+			btnDeleteShop.setDisable(false);
+		} catch (Exception e) {
+			btnEditShop.setDisable(true);
+			btnDeleteShop.setDisable(true);
+		}
+	}
+
+	@FXML
+	void itemTypeSelection(MouseEvent event) {
+		try {
+			hideMenu(event);
+			idItemTypeSelected = itemTypeTable.getSelectionModel().getSelectedItem().getId();
+			btnEditItemType.setDisable(false);
+			btnDeleteItemType.setDisable(false);
+		} catch (Exception e) {
+			btnEditItemType.setDisable(true);
+			btnDeleteItemType.setDisable(true);
+		}
 	}
 
 	void getTableActiveUsers(AdministratorPageConnection adminDB) {
@@ -423,9 +645,39 @@ public class controller_administrator {
 		surnameUserTable.setCellValueFactory(new PropertyValueFactory<>("surname"));
 		dniUserTable.setCellValueFactory(new PropertyValueFactory<>("dni"));
 		dateUserTable.setCellValueFactory(new PropertyValueFactory<>("dob"));
-		roleUserTable.setCellValueFactory(new PropertyValueFactory<>("roleId"));
+		roleUserTable.setCellValueFactory(new PropertyValueFactory<>("roleName"));
 
 		userTable.setItems(obList);
+		
+		FilteredList<ModelUserTable> filteredUserData = new FilteredList<>(obList, b -> true);
+		txtUserSearch.textProperty().addListener((observable, oldValue, newValue) -> {
+			filteredUserData.setPredicate(userSearchModel ->  {
+				if (newValue.isEmpty() || newValue == null) {
+					return true;
+				}
+				String searchUserKeyword = newValue.toLowerCase();
+				
+				if (userSearchModel.getStrId() != null && userSearchModel.getStrId().toLowerCase().indexOf(searchUserKeyword) > -1) {
+					return true;
+				} else if (userSearchModel.getName() != null && userSearchModel.getName().toLowerCase().indexOf(searchUserKeyword) > -1) {
+					return true;
+				} else if (userSearchModel.getSurname() != null && userSearchModel.getSurname().toLowerCase().indexOf(searchUserKeyword) > -1) {
+					return true;
+				} else if (userSearchModel.getDni() != null && userSearchModel.getDni().toLowerCase().indexOf(searchUserKeyword) > -1) {
+					return true;
+				} else if (userSearchModel.getDob() != null && userSearchModel.getDob().toLowerCase().indexOf(searchUserKeyword) > -1) {
+					return true;
+				} else if (userSearchModel.getRoleName() != null && userSearchModel.getRoleName().toLowerCase().indexOf(searchUserKeyword) > -1) {
+					return true;
+				} else {
+					return false;
+				}
+			});
+		});
+		
+		SortedList<ModelUserTable> sortedUserData = new SortedList<>(filteredUserData);
+		sortedUserData.comparatorProperty().bind(userTable.comparatorProperty());
+		userTable.setItems(sortedUserData);
 
 	}
 
@@ -439,6 +691,32 @@ public class controller_administrator {
 		checkOutScheduleTable.setCellValueFactory(new PropertyValueFactory<>("checkOutTime"));
 
 		scheduleTable.setItems(obList);
+		
+		FilteredList<ModelScheduleTable> filteredScheduleData = new FilteredList<>(obList, b -> true);
+		txtScheduleSearch.textProperty().addListener((observable, oldValue, newValue) -> {
+			filteredScheduleData.setPredicate(scheduleSearchModel ->  {
+				if (newValue.isEmpty() || newValue == null) {
+					return true;
+				}
+				String searchScheduleKeyword = newValue.toLowerCase();
+				
+				if (scheduleSearchModel.getStrId() != null && scheduleSearchModel.getStrId().toLowerCase().indexOf(searchScheduleKeyword) > -1) {
+					return true;
+				} else if (scheduleSearchModel.getScheduleName() != null && scheduleSearchModel.getScheduleName().toLowerCase().indexOf(searchScheduleKeyword) > -1) {
+					return true;
+				} else if (scheduleSearchModel.getCheckInTime() != null && scheduleSearchModel.getCheckInTime().toLowerCase().indexOf(searchScheduleKeyword) > -1) {
+					return true;
+				} else if (scheduleSearchModel.getCheckOutTime() != null && scheduleSearchModel.getCheckOutTime().toLowerCase().indexOf(searchScheduleKeyword) > -1) {
+					return true;
+				} else {
+					return false;
+				}
+			});
+		});
+		
+		SortedList<ModelScheduleTable> sortedScheduleData = new SortedList<>(filteredScheduleData);
+		sortedScheduleData.comparatorProperty().bind(scheduleTable.comparatorProperty());
+		scheduleTable.setItems(sortedScheduleData);
 
 	}
 
@@ -451,7 +729,37 @@ public class controller_administrator {
 		numUsersRoleTable.setCellValueFactory(new PropertyValueFactory<>("numUsersRole"));
 
 		roleTable.setItems(obList);
+		
+		FilteredList<ModelRoleTable> filteredRolesData = new FilteredList<>(obList, b -> true);
+		txtRoleSearch.textProperty().addListener((observable, oldValue, newValue) -> {
+			filteredRolesData.setPredicate(roleSearchModel ->  {
+				if (newValue.isEmpty() || newValue == null) {
+					return true;
+				}
+				String searchRoleKeyword = newValue.toLowerCase();
+				
+				if (roleSearchModel.getStrId() != null && roleSearchModel.getStrId().toLowerCase().indexOf(searchRoleKeyword) > -1) {
+					return true;
+				} else if (roleSearchModel.getRoleName() != null && roleSearchModel.getRoleName().toLowerCase().indexOf(searchRoleKeyword) > -1) {
+					return true;
+				} else {
+					return false;
+				}
+			});
+		});
+		
+		SortedList<ModelRoleTable> sortedRoleData = new SortedList<>(filteredRolesData);
+		sortedRoleData.comparatorProperty().bind(roleTable.comparatorProperty());
+		roleTable.setItems(sortedRoleData);
 
+	}
+
+	void getTableShops(AdministratorPageConnection adminDB) {
+		// TODO
+	}
+
+	void getTableItemTypes(AdministratorPageConnection adminDB) {
+		// TODO
 	}
 	
 	@FXML

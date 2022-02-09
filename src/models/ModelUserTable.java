@@ -7,19 +7,23 @@ public class ModelUserTable {
 	String surname;
 	String dni;
 	String dob;
-	String roleId;
+	String roleName;
 
-	public ModelUserTable(int id, String name, String surname, String dni, String dob, String roleId) {
+	public ModelUserTable(int id, String name, String surname, String dni, String dob, String roleName) {
 		this.id = id;
 		this.name = name;
 		this.surname = surname;
 		this.dni = dni;
 		this.dob = dob;
-		this.roleId = roleId;
+		this.roleName = roleName;
 	}
 
 	public int getId() {
 		return id;
+	}
+
+	public String getStrId() {
+		return String.valueOf(id);
 	}
 
 	public void setId(int id) {
@@ -58,12 +62,12 @@ public class ModelUserTable {
 		this.dob = dob;
 	}
 
-	public String getRoleId() {
-		return roleId;
+	public String getRoleName() {
+		return roleName;
 	}
 
-	public void setRoleId(String roleId) {
-		this.roleId = roleId;
+	public void setRoleName(String roleName) {
+		this.roleName = roleName;
 	}
 
 }

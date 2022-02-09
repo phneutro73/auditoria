@@ -151,7 +151,7 @@ public class ControllerEditSchedule {
 	boolean isValidTime() {
 
 		try {
-			if (fieldCheckOut.getValue().isAfter(fieldCheckIn.getValue())) {
+			if (!fieldCheckOut.getValue().isBefore(fieldCheckIn.getValue())) {
 				return true;
 			} else {
 				return false;

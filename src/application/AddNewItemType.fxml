@@ -51,7 +51,7 @@
 							</image>
 						</ImageView>
 						<Label fx:id="subtitle" layoutX="282.0" layoutY="18.0"
-							text="Añadir un puesto" textFill="#434345">
+							text="Añadir un tipo de artículo" textFill="#434345">
 							<font>
 								<Font name="System Bold" size="13.0" />
 							</font>
@@ -68,7 +68,7 @@
 							AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0"
 							AnchorPane.topAnchor="15.0">
 							<children>
-								<GridPane fx:id="grdAddRole" prefHeight="336.0"
+								<GridPane fx:id="grdAddItemType" prefHeight="336.0"
 									prefWidth="870.0" VBox.vgrow="ALWAYS">
 									<columnConstraints>
 										<ColumnConstraints hgrow="SOMETIMES"
@@ -97,8 +97,9 @@
 									<children>
 										<JFXButton fx:id="btnCancel" onAction="#cancelExit"
 											styleClass="buttonMainColor" text="CANCELAR" />
-										<JFXButton fx:id="btnAccept" onAction="#saveRole"
-											styleClass="buttonMainColor" text="ACEPTAR" />
+										<JFXButton fx:id="btnAccept"
+											onAction="#saveItemType" styleClass="buttonMainColor"
+											text="ACEPTAR" />
 									</children>
 									<padding>
 										<Insets top="20.0" />

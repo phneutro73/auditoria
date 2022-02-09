@@ -15,12 +15,12 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="288.0" prefWidth="600.0"
+<AnchorPane prefHeight="259.0" prefWidth="600.0"
 	styleClass="softBackgroundParent" stylesheets="@application.css"
 	xmlns="http://javafx.com/javafx/8.0.171"
 	xmlns:fx="http://javafx.com/fxml/1">
 	<children>
-		<VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0"
+		<VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="600.0"
 			AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
 			AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 			<children>
@@ -109,7 +109,7 @@
 									</VBox.margin>
 								</GridPane>
 								<HBox alignment="CENTER" prefHeight="73.0"
-									prefWidth="810.0" spacing="150.0" VBox.vgrow="NEVER">
+									prefWidth="810.0" spacing="75.0" VBox.vgrow="NEVER">
 									<children>
 										<JFXButton fx:id="btnCancel" onAction="#cancelExit"
 											styleClass="buttonMainColor" text="CANCELAR" />
@@ -118,7 +118,7 @@
 											text="ACEPTAR" />
 									</children>
 									<padding>
-										<Insets top="30.0" />
+										<Insets top="20.0" />
 									</padding>
 								</HBox>
 							</children>
