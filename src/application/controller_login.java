@@ -119,7 +119,7 @@ public class controller_login {
 
 				FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
 				ControllerAlertDialog control = new ControllerAlertDialog(120, 210, "Error",
-						"El usuario y/o contraseña no son correctos, inténtelo de nuevo.");
+						"Las credenciales no son correctas, pruebe de nuevo.");
 				loader.setController(control);
 				Parent root = loader.load();
 
@@ -133,8 +133,8 @@ public class controller_login {
 
 		} catch (Exception e) {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
-			ControllerAlertDialog control = new ControllerAlertDialog(120, 210, "Error en el inicio de sesión",
-					"El usuario y/o contraseña no son correctos, inténtelo de nuevo.");
+			ControllerAlertDialog control = new ControllerAlertDialog(120, 210, "Error",
+					"Su IP se encuentra fuera de rango, hable con el administrador.");
 			loader.setController(control);
 			Parent root = loader.load();
 
