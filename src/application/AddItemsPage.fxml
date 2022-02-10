@@ -17,9 +17,8 @@
 <?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="parent" minWidth="1000.0"
-	prefHeight="650.0" prefWidth="941.0"
-	style="-fx-background-color: #F0FBFD;"
-	xmlns="http://javafx.com/javafx/8.0.171"
+	prefHeight="650.0" prefWidth="941.0" styleClass="softBackgroundParent"
+	stylesheets="@application.css" xmlns="http://javafx.com/javafx/8.0.171"
 	xmlns:fx="http://javafx.com/fxml/1">
 	<children>
 		<HBox prefHeight="100.0" prefWidth="200.0"
@@ -30,8 +29,8 @@
 					prefWidth="100.0" styleClass="menu" stylesheets="@styleMenu.css">
 					<children>
 						<HBox fx:id="btnMenu" alignment="CENTER_LEFT"
-							prefHeight="100.0" prefWidth="52.0" styleClass="menuButton"
-							stylesheets="@styleMenu.css">
+							onMouseClicked="#expandMenu" prefHeight="100.0" prefWidth="52.0"
+							styleClass="menuButton" stylesheets="@styleMenu.css">
 							<children>
 								<Label prefHeight="1.0" prefWidth="48.0" text=" ">
 									<graphic>
@@ -52,7 +51,8 @@
 							prefHeight="100.0" prefWidth="52.0" styleClass="menuButton"
 							stylesheets="@styleMenu.css">
 							<children>
-								<Label prefHeight="1.0" prefWidth="48.0" text=" ">
+								<Label styleClass="labelMenuButtons"
+									stylesheets="@styleMenu.css" text="   VENTAS">
 									<graphic>
 										<ImageView fitHeight="40.0" fitWidth="40.0">
 											<image>
@@ -67,11 +67,13 @@
 							</padding>
 						</HBox>
 						<HBox fx:id="btnConsultation" alignment="CENTER_LEFT"
+							onMouseClicked="#goToConsultationPage"
 							onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExited"
 							prefHeight="100.0" prefWidth="52.0" styleClass="menuButton"
 							stylesheets="@styleMenu.css">
 							<children>
-								<Label prefHeight="1.0" prefWidth="48.0" text=" ">
+								<Label styleClass="labelMenuButtons"
+									stylesheets="@styleMenu.css" text="   CONSULTA">
 									<graphic>
 										<ImageView fitHeight="40.0" fitWidth="40.0">
 											<image>
@@ -89,7 +91,8 @@
 							prefHeight="100.0" prefWidth="52.0"
 							styleClass="selectedMenuButton" stylesheets="@styleMenu.css">
 							<children>
-								<Label prefHeight="1.0" prefWidth="48.0" text=" ">
+								<Label styleClass="labelMenuButtons"
+									stylesheets="@styleMenu.css" text="   AÑADIR ARTÍCULOS">
 									<graphic>
 										<ImageView fitHeight="40.0" fitWidth="40.0">
 											<image>
@@ -107,7 +110,8 @@
 							prefHeight="100.0" prefWidth="52.0" styleClass="menuButton"
 							stylesheets="@styleMenu.css">
 							<children>
-								<Label prefHeight="1.0" prefWidth="48.0" text=" ">
+								<Label styleClass="labelMenuButtons"
+									stylesheets="@styleMenu.css" text="   ESTADÍSTICAS">
 									<graphic>
 										<ImageView fitHeight="40.0" fitWidth="40.0">
 											<image>
@@ -126,7 +130,8 @@
 							prefWidth="52.0" styleClass="menuButton"
 							stylesheets="@styleMenu.css">
 							<children>
-								<Label prefHeight="1.0" prefWidth="48.0" text=" ">
+								<Label styleClass="labelMenuButtons"
+									stylesheets="@styleMenu.css" text="   ADMINISTRADOR">
 									<graphic>
 										<ImageView fitHeight="40.0" fitWidth="40.0">
 											<image>
@@ -145,7 +150,8 @@
 						<Insets top="15.0" />
 					</padding>
 				</VBox>
-				<VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+				<VBox fx:id="body" onMouseClicked="#hideMenu"
+					prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
 					<children>
 						<AnchorPane prefHeight="80.0" prefWidth="939.0">
 							<children>
@@ -176,16 +182,17 @@
 								<Insets bottom="15.0" left="15.0" right="15.0" top="7.5" />
 							</VBox.margin>
 							<children>
-								<VBox layoutX="122.0" layoutY="96.0" prefHeight="200.0"
-									prefWidth="100.0" AnchorPane.bottomAnchor="15.0"
-									AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0"
-									AnchorPane.topAnchor="15.0">
+								<VBox layoutX="122.0" layoutY="96.0"
+									onMouseClicked="#hideMenu" prefHeight="200.0" prefWidth="100.0"
+									AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+									AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 									<children>
-										<Label styleClass="cardSubtitle"
+										<Label styleClass="cardTitle"
 											stylesheets="@application.css"
-											text="Información de la prenda">
+											text="INFORMACIÓN DE LA PRENDA">
 											<VBox.margin>
-												<Insets bottom="10.0" left="30.0" />
+												<Insets bottom="20.0" left="30.0" right="30.0"
+													top="20.0" />
 											</VBox.margin>
 										</Label>
 										<Label

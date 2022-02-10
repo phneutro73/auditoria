@@ -71,7 +71,7 @@
 							</padding>
 						</HBox>
 						<HBox fx:id="btnConsultation" alignment="CENTER_LEFT"
-							prefHeight="60.0" styleClass="menuButton"
+							onMouseClicked="#goToConsultationPage" styleClass="menuButton"
 							stylesheets="@styleMenu.css">
 							<children>
 								<Label styleClass="labelMenuButtons" text="   CONSULTA">

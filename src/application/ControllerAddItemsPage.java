@@ -58,10 +58,30 @@ public class ControllerAddItemsPage {
 	@FXML
 	private JFXButton btnAccept;
 
+	boolean isExpanded;
+
+	@FXML
+	void initialize() {
+		isExpanded = false;
+	}
+
 	@FXML
 	void goToAdministratorPage(MouseEvent event) throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/administrator_page.fxml"));
 		controller_administrator control = new controller_administrator(0, 0, 0);
+		loader.setController(control);
+		Parent root = loader.load();
+
+		Stage stage = new Stage();
+		stage.setScene(new Scene(root));
+		stage.show();
+		((Node) (event.getSource())).getScene().getWindow().hide();
+	}
+
+	@FXML
+	void goToConsultationPage(MouseEvent event) throws IOException {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/ConsultationPage.fxml"));
+		ControllerConsultationPage control = new ControllerConsultationPage(0, 0, 0);
 		loader.setController(control);
 		Parent root = loader.load();
 
@@ -84,6 +104,28 @@ public class ControllerAddItemsPage {
 	@FXML
 	void onMouseExited(MouseEvent event) {
 		// System.out.println("onMouseExited");
+	}
+
+	@FXML
+	void expandMenu(MouseEvent event) {
+
+		if (isExpanded) {
+			drawer.setPrefWidth(60);
+			isExpanded = false;
+		} else {
+			drawer.setPrefWidth(190);
+			isExpanded = true;
+		}
+
+	}
+
+	@FXML
+	void hideMenu(MouseEvent event) {
+		if (isExpanded) {
+			drawer.setPrefWidth(60);
+			isExpanded = false;
+
+		}
 	}
 
 }
