@@ -774,5 +774,18 @@ public class controller_administrator {
 		stage.show();
 		((Node) (event.getSource())).getScene().getWindow().hide();
     }
+	
+	@FXML
+	void goToConsultationPage(MouseEvent event) throws IOException {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/ConsultationPage.fxml"));
+		ControllerConsultationPage control = new ControllerConsultationPage(0, 0, 0);
+		loader.setController(control);
+		Parent root = loader.load();
+
+		Stage stage = new Stage();
+		stage.setScene(new Scene(root));
+		stage.show();
+		((Node) (event.getSource())).getScene().getWindow().hide();
+	}
 
 }

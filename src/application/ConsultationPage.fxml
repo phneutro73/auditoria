@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -11,8 +15,8 @@
 <?import javafx.scene.text.Font?>
 
 <AnchorPane minWidth="1000.0" prefHeight="650.0"
-	prefWidth="941.0" style="-fx-background-color: #F0FBFD;"
-	xmlns="http://javafx.com/javafx/8.0.171"
+	prefWidth="941.0" styleClass="softBackgroundParent"
+	stylesheets="@application.css" xmlns="http://javafx.com/javafx/8.0.171"
 	xmlns:fx="http://javafx.com/fxml/1">
 	<children>
 		<HBox prefHeight="100.0" prefWidth="200.0"
@@ -23,8 +27,8 @@
 					prefWidth="100.0" styleClass="menu" stylesheets="@styleMenu.css">
 					<children>
 						<HBox fx:id="btnMenu" alignment="CENTER_LEFT"
-							prefHeight="100.0" prefWidth="52.0" styleClass="menuButton"
-							stylesheets="@styleMenu.css">
+							onMouseClicked="#expandMenu" prefHeight="100.0" prefWidth="52.0"
+							styleClass="menuButton" stylesheets="@styleMenu.css">
 							<children>
 								<Label prefHeight="1.0" prefWidth="48.0" text=" ">
 									<graphic>
@@ -45,7 +49,8 @@
 							prefHeight="100.0" prefWidth="52.0" styleClass="menuButton"
 							stylesheets="@styleMenu.css">
 							<children>
-								<Label prefHeight="1.0" prefWidth="48.0" text=" ">
+								<Label styleClass="labelMenuButtons"
+									stylesheets="@styleMenu.css" text="   VENTAS">
 									<graphic>
 										<ImageView fitHeight="40.0" fitWidth="40.0">
 											<image>
@@ -60,10 +65,11 @@
 							</padding>
 						</HBox>
 						<HBox fx:id="btnConsultation" alignment="CENTER_LEFT"
-							prefHeight="100.0" prefWidth="52.0" styleClass="menuButton"
-							stylesheets="@styleMenu.css">
+							prefHeight="100.0" prefWidth="52.0"
+							styleClass="selectedMenuButton" stylesheets="@styleMenu.css">
 							<children>
-								<Label prefHeight="1.0" prefWidth="48.0" text=" ">
+								<Label styleClass="labelMenuButtons"
+									stylesheets="@styleMenu.css" text="   CONSULTA">
 									<graphic>
 										<ImageView fitHeight="40.0" fitWidth="40.0">
 											<image>
@@ -78,10 +84,12 @@
 							</padding>
 						</HBox>
 						<HBox fx:id="btnAddItem" alignment="CENTER_LEFT"
-							prefHeight="100.0" prefWidth="52.0"
-							styleClass="selectedMenuButton" stylesheets="@styleMenu.css">
+							onMouseClicked="#goToAddItems" prefHeight="100.0"
+							prefWidth="52.0" styleClass="menuButton"
+							stylesheets="@styleMenu.css">
 							<children>
-								<Label prefHeight="1.0" prefWidth="48.0" text=" ">
+								<Label styleClass="labelMenuButtons"
+									stylesheets="@styleMenu.css" text="   AÑADIR ARTÍCULOS">
 									<graphic>
 										<ImageView fitHeight="40.0" fitWidth="40.0">
 											<image>
@@ -95,11 +103,12 @@
 								<Insets left="10.0" />
 							</padding>
 						</HBox>
-						<HBox fx:id="btnMenu13" alignment="CENTER_LEFT"
+						<HBox fx:id="btnStatistics" alignment="CENTER_LEFT"
 							prefHeight="100.0" prefWidth="52.0" styleClass="menuButton"
 							stylesheets="@styleMenu.css">
 							<children>
-								<Label prefHeight="1.0" prefWidth="48.0" text=" ">
+								<Label styleClass="labelMenuButtons"
+									stylesheets="@styleMenu.css" text="   ESTADÍSTICAS">
 									<graphic>
 										<ImageView fitHeight="40.0" fitWidth="40.0">
 											<image>
@@ -113,11 +122,13 @@
 								<Insets left="10.0" />
 							</padding>
 						</HBox>
-						<HBox fx:id="btnMenu14" alignment="CENTER_LEFT"
-							prefHeight="100.0" prefWidth="52.0" styleClass="menuButton"
+						<HBox fx:id="btnAdministrator" alignment="CENTER_LEFT"
+							onMouseClicked="#goToAdministratorPage" prefHeight="100.0"
+							prefWidth="52.0" styleClass="menuButton"
 							stylesheets="@styleMenu.css">
 							<children>
-								<Label prefHeight="1.0" prefWidth="48.0" text=" ">
+								<Label styleClass="labelMenuButtons"
+									stylesheets="@styleMenu.css" text="   ADMINISTRADOR">
 									<graphic>
 										<ImageView fitHeight="40.0" fitWidth="40.0">
 											<image>
@@ -136,7 +147,8 @@
 						<Insets top="15.0" />
 					</padding>
 				</VBox>
-				<VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+				<VBox fx:id="body" onMouseClicked="#hideMenu"
+					prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
 					<children>
 						<AnchorPane prefHeight="80.0" prefWidth="939.0">
 							<children>
@@ -168,10 +180,130 @@
 								<Insets bottom="15.0" left="15.0" right="15.0" top="7.5" />
 							</VBox.margin>
 							<children>
-								<VBox layoutX="122.0" layoutY="96.0" prefHeight="200.0"
-									prefWidth="100.0" AnchorPane.bottomAnchor="0.0"
-									AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-									AnchorPane.topAnchor="0.0" />
+								<VBox layoutX="122.0" layoutY="96.0"
+									onMouseClicked="#hideMenu" prefHeight="200.0" prefWidth="100.0"
+									AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+									AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+									<children>
+										<Label styleClass="cardTitle"
+											stylesheets="@application.css" text="ARTÍCULOS">
+											<VBox.margin>
+												<Insets bottom="20.0" left="30.0" right="30.0"
+													top="20.0" />
+											</VBox.margin>
+										</Label>
+										<HBox alignment="CENTER" prefHeight="25.0"
+											prefWidth="715.0" spacing="20.0">
+											<children>
+												<ImageView fitHeight="21.0" fitWidth="19.0">
+													<image>
+														<Image url="@../resources/assets/searchIcon.png" />
+													</image>
+												</ImageView>
+												<JFXTextField fx:id="txtItemSearch"
+													labelFloat="true" prefHeight="25.0" prefWidth="664.0"
+													promptText="Introduzca información de la prenda deseada..."
+													styleClass="searchTextField" stylesheets="@application.css"
+													HBox.hgrow="ALWAYS" />
+											</children>
+											<VBox.margin>
+												<Insets left="60.0" right="150.0" />
+											</VBox.margin>
+										</HBox>
+										<HBox prefHeight="100.0" prefWidth="200.0" spacing="15.0"
+											VBox.vgrow="ALWAYS">
+											<VBox.margin>
+												<Insets bottom="30.0" left="40.0" right="40.0"
+													top="15.0" />
+											</VBox.margin>
+											<children>
+												<TableView fx:id="itemTable"
+													onMousePressed="#itemSelected" prefHeight="200.0"
+													prefWidth="200.0" HBox.hgrow="ALWAYS">
+													<columns>
+														<TableColumn fx:id="idItemTable"
+															maxWidth="100.0" minWidth="35.0" prefWidth="60.0"
+															text="ID" />
+														<TableColumn fx:id="cbItemTable"
+															maxWidth="200.0" minWidth="65.0" prefWidth="115.0"
+															text="C. Barras" />
+														<TableColumn fx:id="nameItemTable"
+															maxWidth="1000.0" minWidth="200.0" prefWidth="210.0"
+															text="Nombre" />
+														<TableColumn fx:id="typeItemTable"
+															maxWidth="150.0" minWidth="100.0" prefWidth="110.0"
+															text="Tipo" />
+														<TableColumn fx:id="sizeItemTable"
+															maxWidth="100.0" minWidth="45.0" prefWidth="75.0"
+															text="Talla" />
+														<TableColumn fx:id="quantityItemTable"
+															maxWidth="200.0" minWidth="65.0" prefWidth="75.0"
+															text="Cantidad" />
+														<TableColumn fx:id="inShopItemTable"
+															maxWidth="100.0" minWidth="65.0" prefWidth="75.0"
+															text="En tienda" />
+														<TableColumn fx:id="reservationItemTable"
+															maxWidth="200.0" minWidth="65.0" prefWidth="75.0"
+															text="Reservas" />
+														<TableColumn fx:id="priceItemTable"
+															maxWidth="100.0" minWidth="60.0" prefWidth="75.0"
+															text="Precio" />
+													</columns>
+													<columnResizePolicy>
+														<TableView
+															fx:constant="CONSTRAINED_RESIZE_POLICY" />
+													</columnResizePolicy>
+												</TableView>
+												<VBox fx:id="vBoxButtons" minWidth="-Infinity"
+													prefHeight="245.0" prefWidth="108.0" spacing="10.0">
+													<children>
+														<JFXButton fx:id="btnEditItem"
+															onMouseClicked="#editItem" prefWidth="245.0"
+															styleClass="buttonSoftColor"
+															stylesheets="@application.css" text="MODIFICAR ARTÍCULO"
+															wrapText="true">
+															<graphic>
+																<ImageView fitHeight="25.0" fitWidth="25.0">
+																	<image>
+																		<Image
+																			url="@../resources/assets/editDarkIcon.png" />
+																	</image>
+																</ImageView>
+															</graphic>
+														</JFXButton>
+														<JFXButton fx:id="btnDeleteItem"
+															onMouseClicked="#deleteItem" prefWidth="245.0"
+															styleClass="buttonSoftColor"
+															stylesheets="@application.css" text="ELIMINAR ARTÍCULO"
+															wrapText="true">
+															<graphic>
+																<ImageView fitHeight="25.0" fitWidth="25.0">
+																	<image>
+																		<Image
+																			url="@../resources/assets/deleteDarkIcon.png" />
+																	</image>
+																</ImageView>
+															</graphic>
+														</JFXButton>
+														<JFXButton fx:id="btnDetailsItem"
+															onMouseClicked="#detailsItem" prefWidth="245.0"
+															styleClass="buttonSoftColor"
+															stylesheets="@application.css" text="VER MÁS DETALLES"
+															wrapText="true">
+															<graphic>
+																<ImageView fitHeight="25.0" fitWidth="25.0">
+																	<image>
+																		<Image url="@../resources/assets/ArrowIcon.png" />
+																	</image>
+																</ImageView>
+															</graphic>
+														</JFXButton>
+													</children>
+												</VBox>
+											</children>
+										</HBox>
+									</children>
+								</VBox>
 							</children>
 						</AnchorPane>
 					</children>
