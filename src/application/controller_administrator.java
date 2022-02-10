@@ -74,11 +74,11 @@ public class controller_administrator {
 	@FXML
 	private VBox drawer;
 
-    @FXML
-    private VBox body;
-    
-    @FXML
-    private VBox vBoxButtons;
+	@FXML
+	private VBox body;
+
+	@FXML
+	private VBox vBoxButtons;
 
 	// Menu buttons
 	@FXML
@@ -286,7 +286,7 @@ public class controller_administrator {
 		if (isExpanded) {
 			drawer.setPrefWidth(60);
 			isExpanded = false;
-			
+
 			vBoxButtons.setMinWidth(108);
 			vBoxButtons.setMaxWidth(108);
 			vBoxButtons.prefWidth(108);
@@ -300,19 +300,19 @@ public class controller_administrator {
 		}
 
 	}
-	
-    @FXML
-    void hideMenu(MouseEvent event) {
-    	if (isExpanded) {
-    		drawer.setPrefWidth(60);
-    		isExpanded = false;
+
+	@FXML
+	void hideMenu(MouseEvent event) {
+		if (isExpanded) {
+			drawer.setPrefWidth(60);
+			isExpanded = false;
 
 			vBoxButtons.setMinWidth(108);
 			vBoxButtons.setMaxWidth(108);
 			vBoxButtons.prefWidth(108);
-    		
-    	}
-    }
+
+		}
+	}
 
 	@FXML
 	void addUser(ActionEvent event) throws IOException {
@@ -648,33 +648,39 @@ public class controller_administrator {
 		roleUserTable.setCellValueFactory(new PropertyValueFactory<>("roleName"));
 
 		userTable.setItems(obList);
-		
+
 		FilteredList<ModelUserTable> filteredUserData = new FilteredList<>(obList, b -> true);
 		txtUserSearch.textProperty().addListener((observable, oldValue, newValue) -> {
-			filteredUserData.setPredicate(userSearchModel ->  {
+			filteredUserData.setPredicate(userSearchModel -> {
 				if (newValue.isEmpty() || newValue == null) {
 					return true;
 				}
 				String searchUserKeyword = newValue.toLowerCase();
-				
-				if (userSearchModel.getStrId() != null && userSearchModel.getStrId().toLowerCase().indexOf(searchUserKeyword) > -1) {
+
+				if (userSearchModel.getStrId() != null
+						&& userSearchModel.getStrId().toLowerCase().indexOf(searchUserKeyword) > -1) {
 					return true;
-				} else if (userSearchModel.getName() != null && userSearchModel.getName().toLowerCase().indexOf(searchUserKeyword) > -1) {
+				} else if (userSearchModel.getName() != null
+						&& userSearchModel.getName().toLowerCase().indexOf(searchUserKeyword) > -1) {
 					return true;
-				} else if (userSearchModel.getSurname() != null && userSearchModel.getSurname().toLowerCase().indexOf(searchUserKeyword) > -1) {
+				} else if (userSearchModel.getSurname() != null
+						&& userSearchModel.getSurname().toLowerCase().indexOf(searchUserKeyword) > -1) {
 					return true;
-				} else if (userSearchModel.getDni() != null && userSearchModel.getDni().toLowerCase().indexOf(searchUserKeyword) > -1) {
+				} else if (userSearchModel.getDni() != null
+						&& userSearchModel.getDni().toLowerCase().indexOf(searchUserKeyword) > -1) {
 					return true;
-				} else if (userSearchModel.getDob() != null && userSearchModel.getDob().toLowerCase().indexOf(searchUserKeyword) > -1) {
+				} else if (userSearchModel.getDob() != null
+						&& userSearchModel.getDob().toLowerCase().indexOf(searchUserKeyword) > -1) {
 					return true;
-				} else if (userSearchModel.getRoleName() != null && userSearchModel.getRoleName().toLowerCase().indexOf(searchUserKeyword) > -1) {
+				} else if (userSearchModel.getRoleName() != null
+						&& userSearchModel.getRoleName().toLowerCase().indexOf(searchUserKeyword) > -1) {
 					return true;
 				} else {
 					return false;
 				}
 			});
 		});
-		
+
 		SortedList<ModelUserTable> sortedUserData = new SortedList<>(filteredUserData);
 		sortedUserData.comparatorProperty().bind(userTable.comparatorProperty());
 		userTable.setItems(sortedUserData);
@@ -691,29 +697,33 @@ public class controller_administrator {
 		checkOutScheduleTable.setCellValueFactory(new PropertyValueFactory<>("checkOutTime"));
 
 		scheduleTable.setItems(obList);
-		
+
 		FilteredList<ModelScheduleTable> filteredScheduleData = new FilteredList<>(obList, b -> true);
 		txtScheduleSearch.textProperty().addListener((observable, oldValue, newValue) -> {
-			filteredScheduleData.setPredicate(scheduleSearchModel ->  {
+			filteredScheduleData.setPredicate(scheduleSearchModel -> {
 				if (newValue.isEmpty() || newValue == null) {
 					return true;
 				}
 				String searchScheduleKeyword = newValue.toLowerCase();
-				
-				if (scheduleSearchModel.getStrId() != null && scheduleSearchModel.getStrId().toLowerCase().indexOf(searchScheduleKeyword) > -1) {
+
+				if (scheduleSearchModel.getStrId() != null
+						&& scheduleSearchModel.getStrId().toLowerCase().indexOf(searchScheduleKeyword) > -1) {
 					return true;
-				} else if (scheduleSearchModel.getScheduleName() != null && scheduleSearchModel.getScheduleName().toLowerCase().indexOf(searchScheduleKeyword) > -1) {
+				} else if (scheduleSearchModel.getScheduleName() != null
+						&& scheduleSearchModel.getScheduleName().toLowerCase().indexOf(searchScheduleKeyword) > -1) {
 					return true;
-				} else if (scheduleSearchModel.getCheckInTime() != null && scheduleSearchModel.getCheckInTime().toLowerCase().indexOf(searchScheduleKeyword) > -1) {
+				} else if (scheduleSearchModel.getCheckInTime() != null
+						&& scheduleSearchModel.getCheckInTime().toLowerCase().indexOf(searchScheduleKeyword) > -1) {
 					return true;
-				} else if (scheduleSearchModel.getCheckOutTime() != null && scheduleSearchModel.getCheckOutTime().toLowerCase().indexOf(searchScheduleKeyword) > -1) {
+				} else if (scheduleSearchModel.getCheckOutTime() != null
+						&& scheduleSearchModel.getCheckOutTime().toLowerCase().indexOf(searchScheduleKeyword) > -1) {
 					return true;
 				} else {
 					return false;
 				}
 			});
 		});
-		
+
 		SortedList<ModelScheduleTable> sortedScheduleData = new SortedList<>(filteredScheduleData);
 		sortedScheduleData.comparatorProperty().bind(scheduleTable.comparatorProperty());
 		scheduleTable.setItems(sortedScheduleData);
@@ -729,25 +739,27 @@ public class controller_administrator {
 		numUsersRoleTable.setCellValueFactory(new PropertyValueFactory<>("numUsersRole"));
 
 		roleTable.setItems(obList);
-		
+
 		FilteredList<ModelRoleTable> filteredRolesData = new FilteredList<>(obList, b -> true);
 		txtRoleSearch.textProperty().addListener((observable, oldValue, newValue) -> {
-			filteredRolesData.setPredicate(roleSearchModel ->  {
+			filteredRolesData.setPredicate(roleSearchModel -> {
 				if (newValue.isEmpty() || newValue == null) {
 					return true;
 				}
 				String searchRoleKeyword = newValue.toLowerCase();
-				
-				if (roleSearchModel.getStrId() != null && roleSearchModel.getStrId().toLowerCase().indexOf(searchRoleKeyword) > -1) {
+
+				if (roleSearchModel.getStrId() != null
+						&& roleSearchModel.getStrId().toLowerCase().indexOf(searchRoleKeyword) > -1) {
 					return true;
-				} else if (roleSearchModel.getRoleName() != null && roleSearchModel.getRoleName().toLowerCase().indexOf(searchRoleKeyword) > -1) {
+				} else if (roleSearchModel.getRoleName() != null
+						&& roleSearchModel.getRoleName().toLowerCase().indexOf(searchRoleKeyword) > -1) {
 					return true;
 				} else {
 					return false;
 				}
 			});
 		});
-		
+
 		SortedList<ModelRoleTable> sortedRoleData = new SortedList<>(filteredRolesData);
 		sortedRoleData.comparatorProperty().bind(roleTable.comparatorProperty());
 		roleTable.setItems(sortedRoleData);
@@ -761,10 +773,10 @@ public class controller_administrator {
 	void getTableItemTypes(AdministratorPageConnection adminDB) {
 		// TODO
 	}
-	
+
 	@FXML
-    void goToAddItemsPage(MouseEvent event) throws IOException {
-    	FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AddItemsPage.fxml"));
+	void goToAddItemsPage(MouseEvent event) throws IOException {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AddItemsPage.fxml"));
 		ControllerAddItemsPage control = new ControllerAddItemsPage(0, 0, 0);
 		loader.setController(control);
 		Parent root = loader.load();
@@ -773,8 +785,8 @@ public class controller_administrator {
 		stage.setScene(new Scene(root));
 		stage.show();
 		((Node) (event.getSource())).getScene().getWindow().hide();
-    }
-	
+	}
+
 	@FXML
 	void goToConsultationPage(MouseEvent event) throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/ConsultationPage.fxml"));
