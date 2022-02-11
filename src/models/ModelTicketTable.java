@@ -7,20 +7,16 @@ public class ModelTicketTable {
 	String itemName;
 	String itemType;
 	String size;
-	double itemQuantity;
-	double itemUtPrice;
 	double itemPrice;
 	
 	public ModelTicketTable(int itemId, String itemBarCode, String itemName, String itemType, String size,
-			double itemQuantity, double itemUtPrice, double itemPrice) {
+			double itemPrice) {
 		super();
 		this.itemId = itemId;
 		this.itemBarCode = itemBarCode;
 		this.itemName = itemName;
 		this.itemType = itemType;
 		this.size = size;
-		this.itemQuantity = itemQuantity;
-		this.itemUtPrice = itemUtPrice;
 		this.itemPrice = itemPrice;
 	}
 
@@ -66,29 +62,6 @@ public class ModelTicketTable {
 
 	public void setSize(String size) {
 		this.size = size;
-	}
-
-	public double getItemQuantity() {
-		return itemQuantity;
-	}
-
-	public String getStrItemQuantity() {
-		return String.valueOf(itemQuantity);
-	}
-	public void setItemQuantity(double itemQuantity) {
-		this.itemQuantity = itemQuantity;
-	}
-
-	public double getItemUtPrice() {
-		return itemUtPrice;
-	}
-	
-	public String getStrItemUtPrice() {
-		return String.valueOf(itemUtPrice);
-	}
-
-	public void setItemUtPrice(double itemUtPrice) {
-		this.itemUtPrice = itemUtPrice;
 	}
 
 	public double getItemPrice() {
