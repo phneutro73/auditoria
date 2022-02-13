@@ -8,8 +8,10 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import models.ModelItemTypeTable;
 import models.ModelRoleTable;
 import models.ModelScheduleTable;
+import models.ModelShopTable;
 import models.ModelUserTable;
 
 import java.sql.Connection;
@@ -667,6 +669,7 @@ public class AdministratorPageConnection {
 	}
 	
 	public void deleteRole(int roleId) {
+		
 		Connection conn = null;
 
 		try {
@@ -686,6 +689,72 @@ public class AdministratorPageConnection {
 				}
 			}
 		}
+	}
+	
+	public ObservableList<ModelShopTable> getShopsTable() {
+
+		Connection conn = null;
+		ResultSet rsShops = null;
+		ObservableList<ModelShopTable> obList = FXCollections.observableArrayList();
+
+		try {
+			conn = DriverManager.getConnection(connectionUrl);
+			System.out.println("Connected to DB");
+			Statement stmt = conn.createStatement();
+			rsShops = stmt.executeQuery("[sp_list_shops]");
+
+			while (rsShops.next()) {
+				obList.add(new ModelShopTable(rsShops.getInt("id"), rsShops.getString("nombre_tienda"),
+						rsShops.getString("direccion_tienda"), rsShops.getInt("count_users_shop")));
+			}
+		}
+
+		catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException ex) {
+					ex.printStackTrace();
+				}
+			}
+		}
+
+		return obList;
+
+	}
+	
+	public ObservableList<ModelItemTypeTable> getItemTypesTable() {
+
+		Connection conn = null;
+		ResultSet rsItemTypes = null;
+		ObservableList<ModelItemTypeTable> obList = FXCollections.observableArrayList();
+
+		try {
+			conn = DriverManager.getConnection(connectionUrl);
+			System.out.println("Connected to DB");
+			Statement stmt = conn.createStatement();
+			rsItemTypes = stmt.executeQuery("[sp_list_shops]");
+
+			while (rsItemTypes.next()) {
+				obList.add(new ModelItemTypeTable(rsItemTypes.getInt("id"), rsItemTypes.getString("nombre")));
+			}
+		}
+
+		catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException ex) {
+					ex.printStackTrace();
+				}
+			}
+		}
+
+		return obList;
 
 	}
 

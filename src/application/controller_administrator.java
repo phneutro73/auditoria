@@ -209,7 +209,7 @@ public class controller_administrator {
 	private TableColumn<ModelShopTable, String> directionShopTable;
 
 	@FXML
-	private TableColumn<ModelShopTable, String> numWorkersShopTable;
+	private TableColumn<ModelShopTable, String> numUsersShopTable;
 
 	@FXML
 	private JFXButton btnAddShop;
@@ -767,11 +767,74 @@ public class controller_administrator {
 	}
 
 	void getTableShops(AdministratorPageConnection adminDB) {
-		// TODO
+		ObservableList<ModelShopTable> obList = adminDB.getShopsTable();
+
+		idShopTable.setCellValueFactory(new PropertyValueFactory<>("id"));
+		nameShopTable.setCellValueFactory(new PropertyValueFactory<>("shopName"));
+		directionShopTable.setCellValueFactory(new PropertyValueFactory<>("shopDirection"));
+		numUsersShopTable.setCellValueFactory(new PropertyValueFactory<>("numUsersShop"));
+
+		shopTable.setItems(obList);
+
+		FilteredList<ModelShopTable> filteredShopsData = new FilteredList<>(obList, b -> true);
+		txtShopSearch.textProperty().addListener((observable, oldValue, newValue) -> {
+			filteredShopsData.setPredicate(shopSearchModel -> {
+				if (newValue.isEmpty() || newValue == null) {
+					return true;
+				}
+				String searchShopKeyword = newValue.toLowerCase();
+
+				if (shopSearchModel.getStrId() != null
+						&& shopSearchModel.getStrId().toLowerCase().indexOf(searchShopKeyword) > -1) {
+					return true;
+				} else if (shopSearchModel.getShopName() != null
+						&& shopSearchModel.getShopName().toLowerCase().indexOf(searchShopKeyword) > -1) {
+					return true;
+				} else if (shopSearchModel.getShopDirection() != null
+						&& shopSearchModel.getShopDirection().toLowerCase().indexOf(searchShopKeyword) > -1) {
+					return true;
+				} else {
+					return false;
+				}
+			});
+		});
+
+		SortedList<ModelShopTable> sortedShopData = new SortedList<>(filteredShopsData);
+		sortedShopData.comparatorProperty().bind(shopTable.comparatorProperty());
+		shopTable.setItems(sortedShopData);
 	}
 
 	void getTableItemTypes(AdministratorPageConnection adminDB) {
-		// TODO
+		ObservableList<ModelItemTypeTable> obList = adminDB.getItemTypesTable();
+
+		idItemTypeTable.setCellValueFactory(new PropertyValueFactory<>("id"));
+		nameItemTypeTable.setCellValueFactory(new PropertyValueFactory<>("name"));
+
+		itemTypeTable.setItems(obList);
+
+		FilteredList<ModelItemTypeTable> filteredItemTypeData = new FilteredList<>(obList, b -> true);
+		txtItemTypeSearch.textProperty().addListener((observable, oldValue, newValue) -> {
+			filteredItemTypeData.setPredicate(itemTypeSearchModel -> {
+				if (newValue.isEmpty() || newValue == null) {
+					return true;
+				}
+				String searchShopKeyword = newValue.toLowerCase();
+
+				if (itemTypeSearchModel.getStrId() != null
+						&& itemTypeSearchModel.getStrId().toLowerCase().indexOf(searchShopKeyword) > -1) {
+					return true;
+				} else if (itemTypeSearchModel.getName() != null
+						&& itemTypeSearchModel.getName().toLowerCase().indexOf(searchShopKeyword) > -1) {
+					return true;
+				} else {
+					return false;
+				}
+			});
+		});
+
+		SortedList<ModelItemTypeTable> sortedItemTypeData = new SortedList<>(filteredItemTypeData);
+		sortedItemTypeData.comparatorProperty().bind(itemTypeTable.comparatorProperty());
+		itemTypeTable.setItems(sortedItemTypeData);
 	}
 
 	@FXML
