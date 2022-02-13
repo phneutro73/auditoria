@@ -3,31 +3,39 @@ package application;
 import java.io.IOException;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
+
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import models.ModelItemTable;
+import models.ModelTicketTable;
 
-public class ControllerConsultationPage {
+public class ControllerSalesPage {
 
 	double height;
 	double width;
 	int currentUser;
 
-	public ControllerConsultationPage(double height, double width, int currentUser) {
+	public ControllerSalesPage(double height, double width, int currentUser) {
 		this.height = height;
 		this.width = width;
 		this.currentUser = currentUser;
 	}
+
+	@FXML
+	private AnchorPane parent;
 
 	@FXML
 	private VBox drawer;
@@ -54,80 +62,90 @@ public class ControllerConsultationPage {
 	private VBox body;
 
 	@FXML
+	private JFXButton historicalSales;
+
+	@FXML
+	private JFXTextField fieldBarCode;
+
+	@FXML
+	private JFXTextField fieldQuantity;
+
+	@FXML
+	private JFXTextField fieldName;
+
+	@FXML
+	private JFXTextField fieldPrice;
+
+	@FXML
+	private JFXTextField fieldSize;
+
+	@FXML
+	private JFXComboBox<String> fieldItemType;
+
+	@FXML
+	private JFXButton btnAcceptSearch;
+
+	@FXML
+	private TableView<ModelTicketTable> shoppingTable;
+
+	@FXML
+	private TableColumn<ModelTicketTable, String> idItemShoppingTable;
+
+	@FXML
+	private TableColumn<ModelTicketTable, String> barCodeShoppingTable;
+
+	@FXML
+	private TableColumn<ModelTicketTable, String> nameShoppingTable;
+
+	@FXML
+	private TableColumn<ModelTicketTable, String> itemTypeShoppingTable;
+
+	@FXML
+	private TableColumn<ModelTicketTable, String> sizeShoppingTable;
+
+	@FXML
+	private TableColumn<ModelTicketTable, String> priceShoppingTable;
+
+	@FXML
 	private VBox vBoxButtons;
-
-	@FXML
-	private JFXTextField txtItemSearch;
-
-	@FXML
-	private TableView<ModelItemTable> itemTable;
-
-	@FXML
-	private TableColumn<ModelItemTable, String> idItemTable;
-
-	@FXML
-	private TableColumn<ModelItemTable, String> cbItemTable;
-
-	@FXML
-	private TableColumn<ModelItemTable, String> nameItemTable;
-
-	@FXML
-	private TableColumn<ModelItemTable, String> typeItemTable;
-
-	@FXML
-	private TableColumn<ModelItemTable, String> sizeItemTable;
-
-	@FXML
-	private TableColumn<ModelItemTable, String> quantityItemTable;
-
-	@FXML
-	private TableColumn<ModelItemTable, String> inShopItemTable;
-
-	@FXML
-	private TableColumn<ModelItemTable, String> reservationItemTable;
-
-	@FXML
-	private TableColumn<ModelItemTable, String> priceItemTable;
-
-	@FXML
-	private JFXButton btnEditItem;
 
 	@FXML
 	private JFXButton btnDeleteItem;
 
 	@FXML
-	private JFXButton btnDetailsItem;
+	private Label lblTotal;
+
+	@FXML
+	private JFXButton btnAccept;
+
+	@FXML
+	private JFXButton btnCancel;
 
 	boolean isExpanded;
-	int idItem;
 
 	@FXML
 	void initialize() {
-
-		getItems();
-
-		isExpanded = false;
-		txtItemSearch.setFocusTraversable(false);
-		itemTable.setFocusTraversable(false);
-
-		btnEditItem.setDisable(true);
 		btnDeleteItem.setDisable(true);
-		btnDetailsItem.setDisable(true);
+		isExpanded = false;
+	}
+
+	@FXML
+	void accept(ActionEvent event) {
+
+	}
+
+	@FXML
+	void addItem(ActionEvent event) {
+
+	}
+
+	@FXML
+	void cancel(ActionEvent event) {
 
 	}
 
 	@FXML
 	void deleteItem(MouseEvent event) {
-
-	}
-
-	@FXML
-	void detailsItem(MouseEvent event) {
-
-	}
-
-	@FXML
-	void editItem(MouseEvent event) {
 
 	}
 
@@ -151,7 +169,7 @@ public class ControllerConsultationPage {
 	}
 
 	@FXML
-	void goToAddItems(MouseEvent event) throws IOException {
+	void goToAddItemsPage(MouseEvent event) throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AddItemsPage.fxml"));
 		ControllerAddItemsPage control = new ControllerAddItemsPage(0, 0, 0);
 		loader.setController(control);
@@ -177,9 +195,9 @@ public class ControllerConsultationPage {
 	}
 
 	@FXML
-	void goToSalesPage(MouseEvent event) throws IOException {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/SalesPage.fxml"));
-		ControllerSalesPage control = new ControllerSalesPage(0, 0, 0);
+	void goToConsultationPage(MouseEvent event) throws IOException {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/ConsultationPage.fxml"));
+		ControllerConsultationPage control = new ControllerConsultationPage(0, 0, 0);
 		loader.setController(control);
 		Parent root = loader.load();
 
@@ -187,6 +205,18 @@ public class ControllerConsultationPage {
 		stage.setScene(new Scene(root));
 		stage.show();
 		((Node) (event.getSource())).getScene().getWindow().hide();
+	}
+
+	@FXML
+	void goToHistoricalSales(ActionEvent event) throws IOException {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/HistoricalSalesDataPage.fxml"));
+		ControllerHistoricalSalesData control = new ControllerHistoricalSalesData();
+		loader.setController(control);
+		Parent root = loader.load();
+
+		Stage stage = new Stage();
+		stage.setScene(new Scene(root));
+		stage.show();
 	}
 
 	@FXML
@@ -203,12 +233,17 @@ public class ControllerConsultationPage {
 	}
 
 	@FXML
-	void itemSelected(MouseEvent event) {
+	void onMouseEntered(MouseEvent event) {
+
+	}
+
+	@FXML
+	void onMouseExited(MouseEvent event) {
+
+	}
+
+	@FXML
+	void selectItem(MouseEvent event) {
 		hideMenu(event);
 	}
-
-	void getItems() {
-
-	}
-
 }
