@@ -202,18 +202,32 @@ public class ControllerEditUser {
 							numScedule[3], numScedule[4], numScedule[5], numScedule[6],
 							cmbRole.getSelectionModel().getSelectedIndex());
 
-					FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
-					ControllerAlertDialog control = new ControllerAlertDialog(120, 210, "Guardado correcto",
-							"Los datos del usuario se han actualizado correctamente.");
-					loader.setController(control);
-					Parent root = loader.load();
+					if (success) {
+						FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
+						ControllerAlertDialog control = new ControllerAlertDialog(120, 210, "Guardado correcto",
+								"Los datos del usuario se han actualizado correctamente.");
+						loader.setController(control);
+						Parent root = loader.load();
 
-					Stage stage = new Stage();
-					stage.initStyle(StageStyle.UNDECORATED);
-					stage.setScene(new Scene(root));
-					stage.show();
+						Stage stage = new Stage();
+						stage.initStyle(StageStyle.UNDECORATED);
+						stage.setScene(new Scene(root));
+						stage.show();
+					} else {
+						FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
+						ControllerAlertDialog control = new ControllerAlertDialog(140, 210, "Error",
+								"Se ha producido un error. Por favor, inténtelo de nuevo.");
+						loader.setController(control);
+						Parent root = loader.load();
 
-					stage = (Stage) btnAccept.getScene().getWindow();
+						Stage stage = new Stage();
+						stage.initStyle(StageStyle.UNDECORATED);
+						stage.setScene(new Scene(root));
+						stage.show();
+					}
+					
+
+					Stage stage = (Stage) btnAccept.getScene().getWindow();
 					stage.close();
 
 				} else {

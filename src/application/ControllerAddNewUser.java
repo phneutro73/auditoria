@@ -177,7 +177,9 @@ public class ControllerAddNewUser {
 
 			boolean noEmptyFields = checkAllFields();
 			boolean noEmptySchedule = checkScheduleField();
+			
 			if (noEmptyFields && noEmptySchedule) {
+				
 				boolean checkEmail = checkSecondField("email");
 				boolean checkPassword = checkSecondField("password");
 
@@ -189,23 +191,36 @@ public class ControllerAddNewUser {
 							cmbWednesday.getValue(), cmbThursday.getValue(), cmbFriday.getValue(),
 							cmbSaturday.getValue(), cmbSunday.getValue() };
 					int[] numScedule = parseSchedule(schedule, adminDB);
-					adminDB.addUser(fieldName.getText(), fieldSurname.getText(), fieldDob.getValue().toString(),
+					boolean success = adminDB.addUser(fieldName.getText(), fieldSurname.getText(), fieldDob.getValue().toString(),
 							fieldUser.getText(), fieldDNI.getText(), fieldEmail.getText(), pass[0], pass[1],
 							numScedule[0], numScedule[1], numScedule[2], numScedule[3], numScedule[4], numScedule[5],
 							numScedule[6], cmbRole.getSelectionModel().getSelectedIndex());
 
-					FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
-					ControllerAlertDialog control = new ControllerAlertDialog(120, 210, "Guardado correcto",
-							"Los datos del usuario se han guardado correctamente.");
-					loader.setController(control);
-					Parent root = loader.load();
+					if (success) {
+						FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
+						ControllerAlertDialog control = new ControllerAlertDialog(120, 210, "Guardado correcto",
+								"Los datos del usuario se han guardado correctamente.");
+						loader.setController(control);
+						Parent root = loader.load();
 
-					Stage stage = new Stage();
-					stage.initStyle(StageStyle.UNDECORATED);
-					stage.setScene(new Scene(root));
-					stage.show();
+						Stage stage = new Stage();
+						stage.initStyle(StageStyle.UNDECORATED);
+						stage.setScene(new Scene(root));
+						stage.show();
+					} else {
+						FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
+						ControllerAlertDialog control = new ControllerAlertDialog(140, 210, "Error",
+								"Se ha producido un error. Por favor, inténtelo de nuevo.");
+						loader.setController(control);
+						Parent root = loader.load();
 
-					stage = (Stage) btnAccept.getScene().getWindow();
+						Stage stage = new Stage();
+						stage.initStyle(StageStyle.UNDECORATED);
+						stage.setScene(new Scene(root));
+						stage.show();
+					}
+					
+					Stage stage = (Stage) btnAccept.getScene().getWindow();
 					stage.close();
 
 				} else {
@@ -245,8 +260,6 @@ public class ControllerAddNewUser {
 		try {
 
 			AdministratorPageConnection adminDB = new AdministratorPageConnection();
-
-			// TODO: Get user + rellenar datos
 
 			List<String> schedules = adminDB.listSchedules();
 			cmbRole.getItems().removeAll(cmbRole.getItems());
@@ -300,10 +313,8 @@ public class ControllerAddNewUser {
 
 			getShops();
 
-			// List<String> activeUsers = adminDB.listActiveUsers();
-
 		} catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
 		}
 
 	}

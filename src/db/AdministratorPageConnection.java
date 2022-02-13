@@ -123,7 +123,9 @@ public class AdministratorPageConnection {
 
 	}
 
-	public void deleteUser(int userId) {
+	public boolean deleteUser(int userId) {
+		
+		boolean success = false;
 		Connection conn = null;
 
 		try {
@@ -131,8 +133,10 @@ public class AdministratorPageConnection {
 			System.out.println("Connected to DB");
 			Statement stmt = conn.createStatement();
 			stmt.executeUpdate("[sp_delete_user] " + userId);
-
+			success = true;
+			
 		} catch (SQLException e) {
+			success = false;
 			e.printStackTrace();
 		} finally {
 			if (conn != null) {
@@ -142,8 +146,9 @@ public class AdministratorPageConnection {
 					ex.printStackTrace();
 				}
 			}
+			success = true;
 		}
-
+		return success;
 	}
 
 	public List<String> listSchedules() {
@@ -614,7 +619,9 @@ public class AdministratorPageConnection {
 		return success;
 	}
 
-	public void deleteSchedule(int scheduleId) {
+	public boolean deleteSchedule(int scheduleId) {
+		
+		boolean success = false;
 		Connection conn = null;
 
 		try {
@@ -622,8 +629,10 @@ public class AdministratorPageConnection {
 			System.out.println("Connected to DB");
 			Statement stmt = conn.createStatement();
 			stmt.executeUpdate("[sp_delete_schedule] " + scheduleId);
+			success = true;
 
 		} catch (SQLException e) {
+			success = false;
 			e.printStackTrace();
 		} finally {
 			if (conn != null) {
@@ -633,8 +642,9 @@ public class AdministratorPageConnection {
 					ex.printStackTrace();
 				}
 			}
+			success = true;
 		}
-
+		return success;
 	}
 	
 	public boolean addRole(String name) {
@@ -668,8 +678,9 @@ public class AdministratorPageConnection {
 		return success;
 	}
 	
-	public void deleteRole(int roleId) {
+	public boolean deleteRole(int roleId) {
 		
+		boolean success = false;
 		Connection conn = null;
 
 		try {
@@ -677,8 +688,10 @@ public class AdministratorPageConnection {
 			System.out.println("Connected to DB");
 			Statement stmt = conn.createStatement();
 			stmt.executeUpdate("[sp_delete_role] " + roleId);
-
+			success = true;
+			
 		} catch (SQLException e) {
+			success = false;
 			e.printStackTrace();
 		} finally {
 			if (conn != null) {
@@ -688,7 +701,9 @@ public class AdministratorPageConnection {
 					ex.printStackTrace();
 				}
 			}
+			success = true;
 		}
+		return success;
 	}
 	
 	public ObservableList<ModelShopTable> getShopsTable() {
@@ -853,8 +868,9 @@ public class AdministratorPageConnection {
 		return success;
 	}
 	
-	public void deleteShop(int shopId) {
+	public boolean deleteShop(int shopId) {
 		
+		boolean success = false;
 		Connection conn = null;
 
 		try {
@@ -862,8 +878,10 @@ public class AdministratorPageConnection {
 			System.out.println("Connected to DB");
 			Statement stmt = conn.createStatement();
 			stmt.executeUpdate("[sp_delete_shop] " + shopId);
+			success = true;
 
 		} catch (SQLException e) {
+			success = false;
 			e.printStackTrace();
 		} finally {
 			if (conn != null) {
@@ -873,9 +891,11 @@ public class AdministratorPageConnection {
 					ex.printStackTrace();
 				}
 			}
+			success = true;
 		}
+		return success;
 	}
-	
+ 	
 	public boolean addItemType(String name) {
 
 		boolean success = true;
@@ -968,8 +988,9 @@ public class AdministratorPageConnection {
 		return success;
 	}
 	
-	public void deleteItemType(int itemTypeId) {
+	public boolean deleteItemType(int itemTypeId) {
 		
+		boolean success = false;
 		Connection conn = null;
 
 		try {
@@ -977,8 +998,10 @@ public class AdministratorPageConnection {
 			System.out.println("Connected to DB");
 			Statement stmt = conn.createStatement();
 			stmt.executeUpdate("[sp_delete_item_type] " + itemTypeId);
+			success = true;
 
 		} catch (SQLException e) {
+			success = false;
 			e.printStackTrace();
 		} finally {
 			if (conn != null) {
@@ -988,7 +1011,10 @@ public class AdministratorPageConnection {
 					ex.printStackTrace();
 				}
 			}
+			success = true;
 		}
+		
+		return success;
 	}
 
 }

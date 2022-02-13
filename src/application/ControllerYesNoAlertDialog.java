@@ -126,18 +126,8 @@ public class ControllerYesNoAlertDialog {
 
 	void adminDeleteUser() throws IOException {
 
-		boolean success = true;
-
-		try {
-
-			AdministratorPageConnection adminDB = new AdministratorPageConnection();
-			adminDB.deleteUser(Integer.parseInt(params[0]));
-			success = true;
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			success = false;
-		}
+		AdministratorPageConnection adminDB = new AdministratorPageConnection();
+		boolean success = adminDB.deleteUser(Integer.parseInt(params[0]));
 
 		if (success) {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
@@ -166,18 +156,8 @@ public class ControllerYesNoAlertDialog {
 
 	void adminDeleteSchedule() throws IOException {
 
-		boolean success = true;
-
-		try {
-
-			AdministratorPageConnection adminDB = new AdministratorPageConnection();
-			adminDB.deleteSchedule(Integer.parseInt(params[0]));
-			success = true;
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			success = false;
-		}
+		AdministratorPageConnection adminDB = new AdministratorPageConnection();
+		boolean success = adminDB.deleteSchedule(Integer.parseInt(params[0]));
 
 		if (success) {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
@@ -206,18 +186,8 @@ public class ControllerYesNoAlertDialog {
 
 	void adminDeleteRole() throws IOException {
 
-		boolean success = true;
-
-		try {
-
-			AdministratorPageConnection adminDB = new AdministratorPageConnection();
-			adminDB.deleteRole(Integer.parseInt(params[0]));
-			success = true;
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			success = false;
-		}
+		AdministratorPageConnection adminDB = new AdministratorPageConnection();
+		boolean success = adminDB.deleteRole(Integer.parseInt(params[0]));
 
 		if (success) {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
@@ -245,18 +215,9 @@ public class ControllerYesNoAlertDialog {
 	}
 
 	void adminDeleteShop() throws IOException {
-		boolean success = true;
 
-		try {
-
-			AdministratorPageConnection adminDB = new AdministratorPageConnection();
-			adminDB.deleteShop(Integer.parseInt(params[0]));
-			success = true;
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			success = false;
-		}
+		AdministratorPageConnection adminDB = new AdministratorPageConnection();
+		boolean success = adminDB.deleteShop(Integer.parseInt(params[0]));
 
 		if (success) {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
@@ -284,19 +245,9 @@ public class ControllerYesNoAlertDialog {
 	}
 
 	void adminDeleteItemType() throws IOException {
-		
-		boolean success = true;
 
-		try {
-
-			AdministratorPageConnection adminDB = new AdministratorPageConnection();
-			adminDB.deleteItemType(Integer.parseInt(params[0]));
-			success = true;
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			success = false;
-		}
+		AdministratorPageConnection adminDB = new AdministratorPageConnection();
+		boolean success = adminDB.deleteItemType(Integer.parseInt(params[0]));
 
 		if (success) {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));

@@ -70,18 +70,31 @@ public class ControllerAddNewSchedule {
 					AdministratorPageConnection adminDB = new AdministratorPageConnection();
 					boolean success = adminDB.addSchedule(fieldName.getText(), checkIn, checkOut);
 
-					FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
-					ControllerAlertDialog control = new ControllerAlertDialog(120, 210, "Guardado correcto",
-							"Los datos del horario se han guardado correctamente");
-					loader.setController(control);
-					Parent root = loader.load();
+					if (success) {
+						FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
+						ControllerAlertDialog control = new ControllerAlertDialog(120, 210, "Guardado correcto",
+								"Los datos del horario se han guardado correctamente");
+						loader.setController(control);
+						Parent root = loader.load();
 
-					Stage stage = new Stage();
-					stage.initStyle(StageStyle.UNDECORATED);
-					stage.setScene(new Scene(root));
-					stage.show();
+						Stage stage = new Stage();
+						stage.initStyle(StageStyle.UNDECORATED);
+						stage.setScene(new Scene(root));
+						stage.show();
+					} else {
+						FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
+						ControllerAlertDialog control = new ControllerAlertDialog(140, 210, "Error",
+								"Se ha producido un error. Por favor, inténtelo de nuevo.");
+						loader.setController(control);
+						Parent root = loader.load();
 
-					stage = (Stage) btnCancel.getScene().getWindow();
+						Stage stage = new Stage();
+						stage.initStyle(StageStyle.UNDECORATED);
+						stage.setScene(new Scene(root));
+						stage.show();
+					}					
+
+					Stage stage = (Stage) btnCancel.getScene().getWindow();
 					stage.close();
 
 				} else {

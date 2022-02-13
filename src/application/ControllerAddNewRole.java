@@ -60,9 +60,9 @@ public class ControllerAddNewRole {
 
 		if (checkAllFields()) {
 			AdministratorPageConnection adminDB = new AdministratorPageConnection();
-			boolean succes = adminDB.addRole(fieldName.getText());
+			boolean success = adminDB.addRole(fieldName.getText());
 
-			if (succes) {
+			if (success) {
 				FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
 				ControllerAlertDialog control = new ControllerAlertDialog(120, 210, "Guardado correcto",
 						"Los datos se han guardado correctamente.");
