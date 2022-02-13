@@ -259,6 +259,9 @@
 																				<TableColumn fx:id="roleUserTable"
 																					maxWidth="300.0" minWidth="100.0" prefWidth="150.0"
 																					text="Puesto" />
+																				<TableColumn fx:id="shopUserTable"
+																					maxWidth="300.0" minWidth="100.0" prefWidth="150.0"
+																					text="Tienda" />
 																			</columns>
 																			<columnResizePolicy>
 																				<TableView

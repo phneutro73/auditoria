@@ -153,6 +153,12 @@ public class ControllerAddNewUser {
 	private JFXComboBox<String> cmbSunday;
 
 	@FXML
+	private Label lblShop;
+
+	@FXML
+	private JFXComboBox<String> cmbShop;
+
+	@FXML
 	private JFXButton btnAccept;
 
 	@FXML
@@ -292,6 +298,8 @@ public class ControllerAddNewUser {
 				}
 			}
 
+			getShops();
+
 			// List<String> activeUsers = adminDB.listActiveUsers();
 
 		} catch (Exception e) {
@@ -408,6 +416,10 @@ public class ControllerAddNewUser {
 			System.out.println("ERROR: controller_administrator.java - checkScheduleField() - " + e.toString());
 			return false;
 		}
+
+	}
+
+	void getShops() {
 
 	}
 
