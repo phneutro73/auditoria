@@ -7,7 +7,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
 import models.ModelHistoricalSalesDataTable;
 
-public class ControllerHistoricalDataSales {
+public class ControllerHistoricalSalesData {
 
 	@FXML
 	private AnchorPane parent;
@@ -38,6 +38,7 @@ public class ControllerHistoricalDataSales {
 
 	void initialize() {
 		getData();
+		historicalSalesTable.setFocusTraversable(false);
 	}
 
 	void getData() {

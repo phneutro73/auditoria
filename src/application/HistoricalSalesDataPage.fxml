@@ -30,12 +30,12 @@
 								</Label>
 							</children>
 						</AnchorPane>
-						<ImageView fitHeight="15.0" fitWidth="9.0" layoutX="207.0" layoutY="20.0">
+						<ImageView fitHeight="15.0" fitWidth="9.0" layoutX="204.0" layoutY="20.0">
 							<image>
 								<Image url="@../resources/assets/NextIcon.png" />
 							</image>
 						</ImageView>
-						<Label fx:id="subtitle" layoutX="236.0" layoutY="18.0" text="Historial de ventas" textFill="#434345">
+						<Label fx:id="subtitle" layoutX="233.0" layoutY="18.0" text="Historial de ventas" textFill="#434345">
 							<font>
 								<Font name="System Bold" size="13.0" />
 							</font>
@@ -47,19 +47,19 @@
 						<Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
 					</VBox.margin>
 					<children>
-						<TableView fx:id="historicalSalesTable" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="30.0">
-							<columns>
-								<TableColumn fx:id="itemIdHistoricalSalesTable" maxWidth="100.0" minWidth="70.0" prefWidth="75.0" text="ID artículo" />
-								<TableColumn fx:id="barCodeHistoricalSalesTable" maxWidth="100.0" minWidth="70.0" prefWidth="75.0" text="C. Barras" />
-								<TableColumn fx:id="userHistoricalSalesTable" minWidth="150.0" prefWidth="75.0" text="Usuario" />
-								<TableColumn fx:id="shopHistoricalSalesTable" minWidth="150.0" prefWidth="75.0" text="Tienda" />
-								<TableColumn fx:id="priceHistoricalSalesTable" maxWidth="150.0" minWidth="50.0" prefWidth="75.0" text="Precio" />
-								<TableColumn fx:id="dateHistoricalSalesTable" maxWidth="150.0" minWidth="50.0" prefWidth="75.0" text="Fecha" />
-							</columns>
-							<columnResizePolicy>
-								<TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-							</columnResizePolicy>
-						</TableView>
+                  <TableView fx:id="historicalSalesTable" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="30.0">
+                    <columns>
+                      <TableColumn fx:id="itemIdHistoricalSalesTable" maxWidth="100.0" minWidth="70.0" prefWidth="75.0" text="ID artículo" />
+                      <TableColumn fx:id="barCodeHistoricalSalesTable" maxWidth="100.0" minWidth="70.0" prefWidth="75.0" text="C. Barras" />
+                        <TableColumn fx:id="userHistoricalSalesTable" minWidth="150.0" prefWidth="75.0" text="Usuario" />
+                        <TableColumn fx:id="shopHistoricalSalesTable" minWidth="150.0" prefWidth="75.0" text="Tienda" />
+                        <TableColumn fx:id="priceHistoricalSalesTable" maxWidth="150.0" minWidth="50.0" prefWidth="75.0" text="Precio" />
+                        <TableColumn fx:id="dateHistoricalSalesTable" maxWidth="150.0" minWidth="100.0" prefWidth="100.0" text="Fecha" />
+                    </columns>
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
+                  </TableView>
 					</children>
 				</AnchorPane>
 			</children>

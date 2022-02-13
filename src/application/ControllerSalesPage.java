@@ -210,7 +210,7 @@ public class ControllerSalesPage {
 	@FXML
 	void goToHistoricalSales(ActionEvent event) throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/HistoricalDataSalesPage.fxml"));
-		ControllerHistoricalDataSales control = new ControllerHistoricalDataSales();
+		ControllerHistoricalSalesData control = new ControllerHistoricalSalesData();
 		loader.setController(control);
 		Parent root = loader.load();
 
