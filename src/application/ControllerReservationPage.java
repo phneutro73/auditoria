@@ -25,107 +25,107 @@ import models.ModelReservationTable;
 
 public class ControllerReservationPage {
 
-    @FXML
-    private VBox drawer;
+	@FXML
+	private VBox drawer;
 
-    @FXML
-    private HBox btnMenu;
+	@FXML
+	private HBox btnMenu;
 
-    @FXML
-    private HBox btnSales;
+	@FXML
+	private HBox btnSales;
 
-    @FXML
-    private HBox btnConsultation;
+	@FXML
+	private HBox btnConsultation;
 
-    @FXML
-    private HBox btnAddItem;
+	@FXML
+	private HBox btnAddItem;
 
-    @FXML
-    private HBox btnStatistics;
+	@FXML
+	private HBox btnStatistics;
 
-    @FXML
-    private HBox btnAdministrator;
+	@FXML
+	private HBox btnAdministrator;
 
-    @FXML
-    private VBox body;
+	@FXML
+	private VBox body;
 
-    @FXML
-    private Label subtitle;
+	@FXML
+	private Label subtitle;
 
-    @FXML
-    private AnchorPane btnBack;
+	@FXML
+	private AnchorPane btnBack;
 
-    @FXML
-    private TableView<ModelReservationTable> itemTable;
+	@FXML
+	private TableView<ModelReservationTable> itemTable;
 
-    @FXML
-    private TableColumn<ModelReservationTable, String> idItemTable;
+	@FXML
+	private TableColumn<ModelReservationTable, String> idItemTable;
 
-    @FXML
-    private TableColumn<ModelReservationTable, String> cbItemTable;
+	@FXML
+	private TableColumn<ModelReservationTable, String> cbItemTable;
 
-    @FXML
-    private TableColumn<ModelReservationTable, String> nameItemTable;
+	@FXML
+	private TableColumn<ModelReservationTable, String> nameItemTable;
 
-    @FXML
-    private TableColumn<ModelReservationTable, String> typeItemTable;
+	@FXML
+	private TableColumn<ModelReservationTable, String> typeItemTable;
 
-    @FXML
-    private TableColumn<ModelReservationTable, String> sizeItemTable;
+	@FXML
+	private TableColumn<ModelReservationTable, String> sizeItemTable;
 
-    @FXML
-    private TableColumn<ModelReservationTable, String> quantityItemTable;
+	@FXML
+	private TableColumn<ModelReservationTable, String> quantityItemTable;
 
-    @FXML
-    private TableColumn<ModelReservationTable, String> inShopItemTable;
+	@FXML
+	private TableColumn<ModelReservationTable, String> inShopItemTable;
 
-    @FXML
-    private TableColumn<ModelReservationTable, String> reservationItemTable;
+	@FXML
+	private TableColumn<ModelReservationTable, String> reservationItemTable;
 
-    @FXML
-    private TableColumn<ModelReservationTable, String> priceItemTable;
+	@FXML
+	private TableColumn<ModelReservationTable, String> priceItemTable;
 
-    @FXML
-    private JFXTextField fieldEmail;
+	@FXML
+	private JFXTextField fieldEmail;
 
-    @FXML
-    private JFXTextField fieldDni;
+	@FXML
+	private JFXTextField fieldDni;
 
-    @FXML
-    private JFXComboBox<?> fieldShopName;
+	@FXML
+	private JFXComboBox<?> fieldShopName;
 
-    @FXML
-    private JFXCheckBox chkPrivacy;
+	@FXML
+	private JFXCheckBox chkPrivacy;
 
-    @FXML
-    private JFXButton btnReservation;
-    
-    boolean isExpanded;
-    
-    @FXML
-    void initialize() {
-    	isExpanded = false;
-    }
+	@FXML
+	private JFXButton btnReservation;
 
-    @FXML
-    void expandMenu(MouseEvent event) {
-    	if (isExpanded) {
+	boolean isExpanded;
+
+	@FXML
+	void initialize() {
+		isExpanded = false;
+	}
+
+	@FXML
+	void expandMenu(MouseEvent event) {
+		if (isExpanded) {
 			drawer.setPrefWidth(60);
 			isExpanded = false;
 		} else {
 			drawer.setPrefWidth(190);
 			isExpanded = true;
 		}
-    }
+	}
 
-    @FXML
-    void goBack(MouseEvent event) throws IOException {
-    	goToConsultationPage(event);
-    }
+	@FXML
+	void goBack(MouseEvent event) throws IOException {
+		goToConsultationPage(event);
+	}
 
-    @FXML
-    void goToAddItemsPage(MouseEvent event) throws IOException {
-    	FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AddItemsPage.fxml"));
+	@FXML
+	void goToAddItemsPage(MouseEvent event) throws IOException {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AddItemsPage.fxml"));
 		ControllerAddItemsPage control = new ControllerAddItemsPage(0, 0, 0);
 		loader.setController(control);
 		Parent root = loader.load();
@@ -134,11 +134,11 @@ public class ControllerReservationPage {
 		stage.setScene(new Scene(root));
 		stage.show();
 		((Node) (event.getSource())).getScene().getWindow().hide();
-    }
+	}
 
-    @FXML
-    void goToAdministratorPage(MouseEvent event) throws IOException {
-    	FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/administrator_page.fxml"));
+	@FXML
+	void goToAdministratorPage(MouseEvent event) throws IOException {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/administrator_page.fxml"));
 		controller_administrator control = new controller_administrator(0, 0, 0);
 		loader.setController(control);
 		Parent root = loader.load();
@@ -147,11 +147,11 @@ public class ControllerReservationPage {
 		stage.setScene(new Scene(root));
 		stage.show();
 		((Node) (event.getSource())).getScene().getWindow().hide();
-    }
+	}
 
-    @FXML
-    void goToConsultationPage(MouseEvent event) throws IOException {
-    	FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/ConsultationPage.fxml"));
+	@FXML
+	void goToConsultationPage(MouseEvent event) throws IOException {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/ConsultationPage.fxml"));
 		ControllerConsultationPage control = new ControllerConsultationPage(0, 0, 0);
 		loader.setController(control);
 		Parent root = loader.load();
@@ -160,11 +160,11 @@ public class ControllerReservationPage {
 		stage.setScene(new Scene(root));
 		stage.show();
 		((Node) (event.getSource())).getScene().getWindow().hide();
-    }
+	}
 
-    @FXML
-    void goToSalesPage(MouseEvent event) throws IOException {
-    	FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/SalesPage.fxml"));
+	@FXML
+	void goToSalesPage(MouseEvent event) throws IOException {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/SalesPage.fxml"));
 		ControllerSalesPage control = new ControllerSalesPage(0, 0, 0);
 		loader.setController(control);
 		Parent root = loader.load();
@@ -173,35 +173,34 @@ public class ControllerReservationPage {
 		stage.setScene(new Scene(root));
 		stage.show();
 		((Node) (event.getSource())).getScene().getWindow().hide();
-    }
+	}
 
-    @FXML
-    void hideMenu(MouseEvent event) {
-    	if (isExpanded) {
+	@FXML
+	void hideMenu(MouseEvent event) {
+		if (isExpanded) {
 			drawer.setPrefWidth(60);
 			isExpanded = false;
 		}
-    }
+	}
 
-    @FXML
-    void itemSelected(MouseEvent event) {
-    	hideMenu(event);
-    }
-    
-    @FXML
-    void reservation(ActionEvent event) {
-    	
-    }
-    
-    boolean checkAllFields() {
-    	if ((!fieldDni.getText().isEmpty() && fieldDni.getText() != null && fieldDni.getText() != "") &&
-    			(!fieldEmail.getText().isEmpty() && fieldEmail.getText() != null && fieldEmail.getText() != "") &&
-    			(fieldShopName.getValue().toString() != "")) {
-    				return true;
-    			}
-    	else {
-    		return false;
-    	}
-    }
+	@FXML
+	void itemSelected(MouseEvent event) {
+		hideMenu(event);
+	}
+
+	@FXML
+	void reservation(ActionEvent event) {
+
+	}
+
+	boolean checkAllFields() {
+		if ((!fieldDni.getText().isEmpty() && fieldDni.getText() != null && fieldDni.getText() != "")
+				&& (!fieldEmail.getText().isEmpty() && fieldEmail.getText() != null && fieldEmail.getText() != "")
+				&& (fieldShopName.getValue().toString() != "")) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 
 }
