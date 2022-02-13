@@ -272,7 +272,7 @@ public class ControllerYesNoAlertDialog {
 		} else {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
 			ControllerAlertDialog control = new ControllerAlertDialog(120, 210, "Error",
-					"Ha habido un error, la tienda no ha sido eliminado.");
+					"Ha habido un error, la tienda no ha sido eliminada.");
 			loader.setController(control);
 			Parent root = loader.load();
 
@@ -284,6 +284,42 @@ public class ControllerYesNoAlertDialog {
 	}
 
 	void adminDeleteItemType() throws IOException {
-		// TODO
+		
+		boolean success = true;
+
+		try {
+
+			AdministratorPageConnection adminDB = new AdministratorPageConnection();
+			adminDB.deleteItemType(Integer.parseInt(params[0]));
+			success = true;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			success = false;
+		}
+
+		if (success) {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
+			ControllerAlertDialog control = new ControllerAlertDialog(120, 210, "Eliminado correctamente",
+					"El tipo de prenda ha sido eliminado correctamente.");
+			loader.setController(control);
+			Parent root = loader.load();
+
+			Stage stage = new Stage();
+			stage.initStyle(StageStyle.UNDECORATED);
+			stage.setScene(new Scene(root));
+			stage.show();
+		} else {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
+			ControllerAlertDialog control = new ControllerAlertDialog(120, 210, "Error",
+					"Ha habido un error, el tipo de prenda no ha sido eliminado.");
+			loader.setController(control);
+			Parent root = loader.load();
+
+			Stage stage = new Stage();
+			stage.initStyle(StageStyle.UNDECORATED);
+			stage.setScene(new Scene(root));
+			stage.show();
+		}
 	}
 }

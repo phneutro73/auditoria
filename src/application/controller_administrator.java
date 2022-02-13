@@ -303,6 +303,7 @@ public class controller_administrator {
 
 	@FXML
 	void hideMenu(MouseEvent event) {
+		
 		if (isExpanded) {
 			drawer.setPrefWidth(60);
 			isExpanded = false;
@@ -532,7 +533,7 @@ public class controller_administrator {
 		initialize();
 
 	}
-
+	
 	@FXML
 	void editItemType(ActionEvent event) throws IOException {
 
@@ -553,12 +554,12 @@ public class controller_administrator {
 
 		AdministratorPageConnection adminDB = new AdministratorPageConnection();
 
-		String[] params = { String.valueOf(idShopSelected) };
+		String[] params = { String.valueOf(idItemTypeSelected) };
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/YesNoAlertDialog.fxml"));
 		ControllerYesNoAlertDialog control = new ControllerYesNoAlertDialog(0, 0, "Atención",
 				"Esta acción es permanente, no se podrá deshacer. Preste atención y revise los datos.",
 				"¿Está seguro de que desea eliminar el tipo de artículo con el siguiente ID: "
-						+ String.valueOf(idShopSelected) + "?",
+						+ String.valueOf(idItemTypeSelected) + "?",
 				"SÍ", "No", "adminDeleteItemType", params);
 		loader.setController(control);
 		Parent root = loader.load();

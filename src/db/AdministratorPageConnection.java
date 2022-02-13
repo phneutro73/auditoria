@@ -875,5 +875,120 @@ public class AdministratorPageConnection {
 			}
 		}
 	}
+	
+	public boolean addItemType(String name) {
+
+		boolean success = true;
+		Connection conn = null;
+
+		try {
+
+			conn = DriverManager.getConnection(connectionUrl);
+			System.out.println("Connected to DB");
+			String query = "[sp_create_item_type]" + "		@NAME = '" + name + "'";
+			PreparedStatement statement = conn.prepareStatement(query);
+			statement.executeUpdate();
+			success = true;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			success = false;
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException ex) {
+					ex.printStackTrace();
+				}
+			}
+			success = true;
+		}
+
+		return success;
+	}
+	
+	public Hashtable<String, String> getItemType(int itemTypeId) {
+		Connection conn = null;
+		Hashtable<String, String> itemType = new Hashtable<String, String>();
+
+		try {
+			conn = DriverManager.getConnection(connectionUrl);
+			System.out.println("Connected to DB");
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery("[sp_search_item_type] " + itemTypeId);
+
+			while (rs.next()) {
+				int id = rs.getInt("id");
+				String name = rs.getString("nombre");
+				itemType.put("id", String.valueOf(id));
+				itemType.put("itemTypeName", name);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException ex) {
+					ex.printStackTrace();
+				}
+			}
+		}
+		return itemType;
+	}
+	
+	public boolean updateItemType(int itemTypeId, String name) {
+		boolean success = false;
+		Connection conn = null;
+
+		try {
+
+			conn = DriverManager.getConnection(connectionUrl);
+			System.out.println("Connected to DB");
+			String query = "[sp_update_item_type]" + "		@ID = " + itemTypeId + "," + "		@NAME = '" + name + "'"; 
+					
+			PreparedStatement statement = conn.prepareStatement(query);
+			statement.executeUpdate();
+			success = true;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			success = false;
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException ex) {
+					ex.printStackTrace();
+				}
+			}
+			success = true;
+		}
+		return success;
+	}
+	
+	public void deleteItemType(int itemTypeId) {
+		
+		Connection conn = null;
+
+		try {
+			conn = DriverManager.getConnection(connectionUrl);
+			System.out.println("Connected to DB");
+			Statement stmt = conn.createStatement();
+			stmt.executeUpdate("[sp_delete_item_type] " + itemTypeId);
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException ex) {
+					ex.printStackTrace();
+				}
+			}
+		}
+	}
 
 }

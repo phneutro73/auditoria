@@ -58,8 +58,8 @@ public class ControllerEditShop {
 	@FXML
 	void saveNewShop(ActionEvent event) {
 		
-		
 		try {
+			
 			if (checkAllFields()) {
 				AdministratorPageConnection adminDB = new AdministratorPageConnection();
 				boolean success = adminDB.updateShop(shopId, fieldName.getText(), fieldDirection.getText());
