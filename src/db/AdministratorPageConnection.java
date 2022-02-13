@@ -705,7 +705,7 @@ public class AdministratorPageConnection {
 
 			while (rsShops.next()) {
 				obList.add(new ModelShopTable(rsShops.getInt("id"), rsShops.getString("nombre_tienda"),
-						rsShops.getString("direccion_tienda"), rsShops.getInt("count_users_shop")));
+						rsShops.getString("dirección"), rsShops.getInt("count_users_shop")));
 			}
 		}
 
@@ -735,7 +735,7 @@ public class AdministratorPageConnection {
 			conn = DriverManager.getConnection(connectionUrl);
 			System.out.println("Connected to DB");
 			Statement stmt = conn.createStatement();
-			rsItemTypes = stmt.executeQuery("[sp_list_shops]");
+			rsItemTypes = stmt.executeQuery("[sp_list_item_types]");
 
 			while (rsItemTypes.next()) {
 				obList.add(new ModelItemTypeTable(rsItemTypes.getInt("id"), rsItemTypes.getString("nombre")));
@@ -756,6 +756,124 @@ public class AdministratorPageConnection {
 
 		return obList;
 
+	}
+	
+	public boolean addShop(String name, String direction) {
+
+		boolean success = true;
+		Connection conn = null;
+
+		try {
+
+			conn = DriverManager.getConnection(connectionUrl);
+			System.out.println("Connected to DB");
+			String query = "[sp_create_shop]" + "		@NAME = '" + name + "',		@DIRECTION = '" + direction + "'";
+			PreparedStatement statement = conn.prepareStatement(query);
+			statement.executeUpdate();
+			success = true;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			success = false;
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException ex) {
+					ex.printStackTrace();
+				}
+			}
+			success = true;
+		}
+
+		return success;
+	}
+	
+	public Hashtable<String, String> getShop(int scheduleId) {
+		Connection conn = null;
+		Hashtable<String, String> shop = new Hashtable<String, String>();
+
+		try {
+			conn = DriverManager.getConnection(connectionUrl);
+			System.out.println("Connected to DB");
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery("[sp_search_shop] " + scheduleId);
+
+			while (rs.next()) {
+				int id = rs.getInt("id");
+				String name = rs.getString("nombre_tienda");
+				String direction = rs.getString("dirección");
+				shop.put("id", String.valueOf(id));
+				shop.put("shopName", name);
+				shop.put("shopDirection", direction);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException ex) {
+					ex.printStackTrace();
+				}
+			}
+		}
+		return shop;
+	}
+	
+	public boolean updateShop(int shopId, String name, String direction) {
+		boolean success = false;
+		Connection conn = null;
+
+		try {
+
+			conn = DriverManager.getConnection(connectionUrl);
+			System.out.println("Connected to DB");
+			String query = "[sp_update_shop]" + "		@ID = " + shopId + "," + "		@NOMBRE_TIENDA = '" + name + "',"
+					+ "		@DIRECCIÓN = '" + direction + "'"; 
+					
+			PreparedStatement statement = conn.prepareStatement(query);
+			statement.executeUpdate();
+			success = true;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			success = false;
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException ex) {
+					ex.printStackTrace();
+				}
+			}
+			success = true;
+		}
+		return success;
+	}
+	
+	public void deleteShop(int shopId) {
+		
+		Connection conn = null;
+
+		try {
+			conn = DriverManager.getConnection(connectionUrl);
+			System.out.println("Connected to DB");
+			Statement stmt = conn.createStatement();
+			stmt.executeUpdate("[sp_delete_shop] " + shopId);
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException ex) {
+					ex.printStackTrace();
+				}
+			}
+		}
 	}
 
 }

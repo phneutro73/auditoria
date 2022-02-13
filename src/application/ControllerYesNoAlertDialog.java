@@ -111,8 +111,8 @@ public class ControllerYesNoAlertDialog {
 			dialogTitle.setText(title);
 			dialogText.setText(text);
 			dialogQuestion.setText(question);
-			btnYes.setText(noButtonTxt);
-			btnNo.setText(yesButtonTxt);
+			btnYes.setText(yesButtonTxt);
+			btnNo.setText(noButtonTxt);
 
 			parent.setPrefSize(width, height);
 			parent.setMinSize(width, height);
@@ -245,7 +245,42 @@ public class ControllerYesNoAlertDialog {
 	}
 
 	void adminDeleteShop() throws IOException {
-		// TODO
+		boolean success = true;
+
+		try {
+
+			AdministratorPageConnection adminDB = new AdministratorPageConnection();
+			adminDB.deleteShop(Integer.parseInt(params[0]));
+			success = true;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			success = false;
+		}
+
+		if (success) {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
+			ControllerAlertDialog control = new ControllerAlertDialog(120, 210, "Eliminado correctamente",
+					"La tienda ha sido eliminada correctamente.");
+			loader.setController(control);
+			Parent root = loader.load();
+
+			Stage stage = new Stage();
+			stage.initStyle(StageStyle.UNDECORATED);
+			stage.setScene(new Scene(root));
+			stage.show();
+		} else {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
+			ControllerAlertDialog control = new ControllerAlertDialog(120, 210, "Error",
+					"Ha habido un error, la tienda no ha sido eliminado.");
+			loader.setController(control);
+			Parent root = loader.load();
+
+			Stage stage = new Stage();
+			stage.initStyle(StageStyle.UNDECORATED);
+			stage.setScene(new Scene(root));
+			stage.show();
+		}
 	}
 
 	void adminDeleteItemType() throws IOException {
