@@ -130,8 +130,8 @@ public class controller_administrator {
 	@FXML
 	private TableColumn<ModelUserTable, String> roleUserTable;
 
-    @FXML
-    private TableColumn<ModelUserTable, String> shopUserTable;
+	@FXML
+	private TableColumn<ModelUserTable, String> shopUserTable;
 
 	@FXML
 	private JFXButton btnAddUser;
@@ -306,7 +306,7 @@ public class controller_administrator {
 
 	@FXML
 	void hideMenu(MouseEvent event) {
-		
+
 		if (isExpanded) {
 			drawer.setPrefWidth(60);
 			isExpanded = false;
@@ -536,7 +536,7 @@ public class controller_administrator {
 		initialize();
 
 	}
-	
+
 	@FXML
 	void editItemType(ActionEvent event) throws IOException {
 
