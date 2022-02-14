@@ -214,12 +214,25 @@ public class AdministratorPageConnection {
 	}
 
 	public boolean addUser(String name, String surname, String dob, String username, String idNumber, String email,
-			byte[] salt, byte[] hash, int mon, int tue, int wed, int thu, int fri, int sat, int sun, int roleId) {
+			byte[] salt, byte[] hash, int mon, int tue, int wed, int thu, int fri, int sat, int sun, String role, String shop) {
 		boolean success = false;
 		Connection conn = null;
 		try {
 			conn = DriverManager.getConnection(connectionUrl);
 			System.out.println("Connected to DB");
+			
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT TOP 1 id FROM tiendas WHERE nombre_tienda = '" + shop + "'");
+			int shopId = -1;
+			while (rs.next()) {
+				shopId = rs.getInt("id");
+			}
+			rs = stmt.executeQuery("SELECT TOP 1 id FROM roles WHERE role_name = '" + role + "'");
+			int roleId = -1;
+			while (rs.next()) {
+				roleId = rs.getInt("id");
+			}
+			
 			String query = ("[sp_create_user]" + "		@NAME = '" + name + "'," + "		@SURNAME = '" + surname
 					+ "'," + "		@DOB = '" + dob + "'," + "		@USERNAME = '" + username + "',"
 					+ "		@ID_NUMBER = '" + idNumber + "'," + "		@EMAIL = '" + email + "',"
@@ -227,7 +240,7 @@ public class AdministratorPageConnection {
 					+ "," + "		@Tue_SCHEDULE = " + tue + "," + "		@Wed_SCHEDULE = " + wed + ","
 					+ "		@Thu_SCHEDULE = " + thu + "," + "		@Fri_SCHEDULE = " + fri + ","
 					+ "		@Sat_SCHEDULE = " + sat + "," + "		@Sun_SCHEDULE = " + sun + ",		@ROLE_ID = "
-					+ roleId);
+					+ roleId + ",		@SHOP_ID = " + shopId);
 
 			PreparedStatement statement = conn.prepareStatement(query);
 			statement.setBytes(1, salt);
@@ -266,7 +279,7 @@ public class AdministratorPageConnection {
 			while (rsUsers.next()) {
 				obList.add(new ModelUserTable(rsUsers.getInt("id"), rsUsers.getString("name"),
 						rsUsers.getString("surname"), rsUsers.getString("id_number"), rsUsers.getString("dob"),
-						rsUsers.getString("role_name")));
+						rsUsers.getString("role_name"), rsUsers.getString("nombre_tienda")));
 			}
 
 		}
@@ -420,7 +433,7 @@ public class AdministratorPageConnection {
 	public Hashtable<String, Object> getUser(int userId) {
 		Connection conn = null;
 		Hashtable<String, Object> user = new Hashtable<String, Object>();
-		Hashtable<Integer, Integer> schedule = new Hashtable<Integer, Integer>();
+		Hashtable<Integer, String> schedule = new Hashtable<Integer, String>();
 
 		try {
 			conn = DriverManager.getConnection(connectionUrl);
@@ -438,6 +451,10 @@ public class AdministratorPageConnection {
 			int roleId = 0;
 			String email = null;
 			String userName = null;
+			int shopId = 0;
+			String roleName = null;
+			String shopName = null; 
+			String scheduleName = null;
 
 			while (rs.next()) {
 				id = rs.getInt("id");
@@ -448,9 +465,25 @@ public class AdministratorPageConnection {
 				scheduleId = rs.getInt("schedule_id");
 				weekday = rs.getInt("weekday");
 				roleId = rs.getInt("role_id");
-				schedule.put(weekday, scheduleId);
 				email = rs.getString("email");
 				userName = rs.getString("user_name");
+				shopId = rs.getInt("tienda_id");
+				
+				Statement stmt2 = conn.createStatement();
+				ResultSet rsSchedule = stmt2.executeQuery("SELECT TOP 1 schedule_name FROM schedules WHERE id = " + scheduleId);
+				scheduleName = "-";
+				while (rsSchedule.next()) {
+					scheduleName = rsSchedule.getString("schedule_name");
+				}
+				schedule.put(weekday, scheduleName);
+				ResultSet rsRole = stmt2.executeQuery("SELECT TOP 1 role_name FROM roles WHERE id = " + roleId);
+				while (rsRole.next()) {
+					roleName = rsRole.getString("role_name");
+				}
+				ResultSet rsShop = stmt2.executeQuery("SELECT TOP 1 nombre_tienda FROM tiendas WHERE id = " + shopId);
+				while (rsShop.next()) {
+					shopName = rsShop.getString("nombre_tienda");
+				}
 			}
 
 			user.put("id", String.valueOf(id));
@@ -459,9 +492,10 @@ public class AdministratorPageConnection {
 			user.put("dob", dob);
 			user.put("idNumber", idNumber);
 			user.put("schedule", schedule);
-			user.put("roleId", roleId);
+			user.put("roleName", roleName);
 			user.put("email", email);
 			user.put("userName", userName);
+			user.put("shopName", shopName);
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -481,7 +515,7 @@ public class AdministratorPageConnection {
 
 	public boolean updateUser(int userId, String name, String surname, String dob, String username, String idNumber,
 			String email, byte[] salt, byte[] hash, int mon, int tue, int wed, int thu, int fri, int sat, int sun,
-			int roleId) {
+			String role, String shop) {
 		boolean success = false;
 		Connection conn = null;
 
@@ -489,6 +523,17 @@ public class AdministratorPageConnection {
 
 			conn = DriverManager.getConnection(connectionUrl);
 			System.out.println("Connected to DB");
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT TOP 1 id FROM tiendas WHERE nombre_tienda = '" + shop + "'");
+			int shopId = -1;
+			while (rs.next()) {
+				shopId = rs.getInt("id");
+			}
+			rs = stmt.executeQuery("SELECT TOP 1 id FROM roles WHERE role_name = '" + role + "'");
+			int roleId = -1;
+			while (rs.next()) {
+				roleId = rs.getInt("id");
+			}
 			String query = ("[sp_update_user]" + "		@ID = " + userId + "," + "		@NAME = '" + name + "',"
 					+ "		@SURNAME = '" + surname + "'," + "		@DOB = '" + dob + "'," + "		@USERNAME = '"
 					+ username + "'," + "		@ID_NUMBER = '" + idNumber + "'," + "		@EMAIL = '" + email + "',"
@@ -496,7 +541,7 @@ public class AdministratorPageConnection {
 					+ "," + "		@Tue_SCHEDULE = " + tue + "," + "		@Wed_SCHEDULE = " + wed + ","
 					+ "		@Thu_SCHEDULE = " + thu + "," + "		@Fri_SCHEDULE = " + fri + ","
 					+ "		@Sat_SCHEDULE = " + sat + "," + "		@Sun_SCHEDULE = " + sun + "," + "		@ROLE_ID = "
-					+ roleId);
+					+ roleId + "		@SHOP_ID = " + shopId);
 
 			PreparedStatement statement = conn.prepareStatement(query);
 			statement.setBytes(1, salt);
@@ -1015,6 +1060,38 @@ public class AdministratorPageConnection {
 		}
 		
 		return success;
+	}
+	
+	public List<String> listShops() {
+		Connection conn = null;
+		List<String> shops = new ArrayList<>();
+		shops.add("-");
+		try {
+			conn = DriverManager.getConnection(connectionUrl);
+			System.out.println("Connected to DB");
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT nombre_tienda FROM tiendas");
+
+			while (rs.next()) {
+				String shop = rs.getString("nombre_tienda");
+				shops.add(shop);
+			}
+		}
+
+		catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException ex) {
+					ex.printStackTrace();
+				}
+			}
+		}
+
+		return shops;
+
 	}
 
 }

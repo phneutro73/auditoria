@@ -8,14 +8,16 @@ public class ModelUserTable {
 	String dni;
 	String dob;
 	String roleName;
+	String shopName;
 
-	public ModelUserTable(int id, String name, String surname, String dni, String dob, String roleName) {
+	public ModelUserTable(int id, String name, String surname, String dni, String dob, String roleName, String shopName) {
 		this.id = id;
 		this.name = name;
 		this.surname = surname;
 		this.dni = dni;
 		this.dob = dob;
 		this.roleName = roleName;
+		this.shopName = shopName;
 	}
 
 	public int getId() {
@@ -68,6 +70,14 @@ public class ModelUserTable {
 
 	public void setRoleName(String roleName) {
 		this.roleName = roleName;
+	}
+	
+	public String getShopName() {
+		return shopName;
+	}
+	
+	public void setShopName(String shopName) {
+		this.shopName = shopName;
 	}
 
 }

@@ -155,7 +155,9 @@ public class ControllerEditRole {
 
 	void getRole(AdministratorPageConnection adminDB) {
 		Hashtable<String, String> role = adminDB.getRole(roleId);
-		String roleName = role.get("name");
-		fieldName.setText(roleName);
+		if (role.containsKey("name")) {
+			String roleName = role.get("name");
+			fieldName.setText(roleName);
+		}
 	}
 }

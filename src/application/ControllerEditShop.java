@@ -135,11 +135,18 @@ public class ControllerEditShop {
 	void getShop(AdministratorPageConnection adminDB) {
 		
 		try {
+			
 			Hashtable<String, String> shop = adminDB.getShop(shopId);
-			String shopName = shop.get("shopName");
-			String shopDirection = shop.get("shopDirection");
-			fieldName.setText(shopName);
-			fieldDirection.setText(shopDirection);
+			
+			if (shop.containsKey("shopName")) {
+				String shopName = shop.get("shopName");
+				fieldName.setText(shopName);
+			}
+			if (shop.containsKey("shopName")) {
+				String shopDirection = shop.get("shopDirection");
+				fieldDirection.setText(shopDirection);
+			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

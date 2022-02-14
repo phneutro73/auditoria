@@ -181,16 +181,21 @@ public class ControllerEditSchedule {
 	void getSchedule(AdministratorPageConnection adminDB) {
 		
 		Hashtable<String, String> schedule = adminDB.getSchedule(scheduleId);
-		String name = schedule.get("name");
-		String strCheckInTime = schedule.get("checkInTime");
-		String strCheckOutTime = schedule.get("checkOutTime");
-
-		LocalTime checkIn = LocalTime.parse(strCheckInTime);
-		LocalTime checkOut = LocalTime.parse(strCheckOutTime);
-
-		fieldName.setText(name);
-		fieldCheckIn.setValue(checkIn);
-		fieldCheckOut.setValue(checkOut);
+		
+		if (schedule.containsKey("name")) {
+			String name = schedule.get("name");
+			fieldName.setText(name);
+		}
+		if (schedule.containsKey("checkInTime")) {
+			String strCheckInTime = schedule.get("checkInTime");
+			LocalTime checkIn = LocalTime.parse(strCheckInTime);
+			fieldCheckIn.setValue(checkIn);
+		}
+		if (schedule.containsKey("checkInTime")) {
+			String strCheckOutTime = schedule.get("checkOutTime");
+			LocalTime checkOut = LocalTime.parse(strCheckOutTime);
+			fieldCheckOut.setValue(checkOut);
+		}
 
 	}
 

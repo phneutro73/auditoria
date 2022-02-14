@@ -140,7 +140,9 @@ public class ControllerEditItemType {
 
 	void getItemType(AdministratorPageConnection adminDB) {
 		Hashtable<String, String> itemType = adminDB.getItemType(itemTypeId);
-		String itemTypeName = itemType.get("itemTypeName");
-		fieldName.setText(itemTypeName);
+		if (itemType.containsKey("itemTypeName")) {
+			String itemTypeName = itemType.get("itemTypeName");
+			fieldName.setText(itemTypeName);
+		}
 	}
 }

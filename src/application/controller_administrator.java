@@ -130,6 +130,9 @@ public class controller_administrator {
 	@FXML
 	private TableColumn<ModelUserTable, String> roleUserTable;
 
+    @FXML
+    private TableColumn<ModelUserTable, String> shopUserTable;
+
 	@FXML
 	private JFXButton btnAddUser;
 
@@ -647,6 +650,7 @@ public class controller_administrator {
 		dniUserTable.setCellValueFactory(new PropertyValueFactory<>("dni"));
 		dateUserTable.setCellValueFactory(new PropertyValueFactory<>("dob"));
 		roleUserTable.setCellValueFactory(new PropertyValueFactory<>("roleName"));
+		shopUserTable.setCellValueFactory(new PropertyValueFactory<>("shopName"));
 
 		userTable.setItems(obList);
 
@@ -675,6 +679,9 @@ public class controller_administrator {
 					return true;
 				} else if (userSearchModel.getRoleName() != null
 						&& userSearchModel.getRoleName().toLowerCase().indexOf(searchUserKeyword) > -1) {
+					return true;
+				} else if (userSearchModel.getShopName() != null
+						&& userSearchModel.getShopName().toLowerCase().indexOf(searchUserKeyword) > -1) {
 					return true;
 				} else {
 					return false;

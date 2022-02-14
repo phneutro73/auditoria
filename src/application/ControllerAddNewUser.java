@@ -177,8 +177,9 @@ public class ControllerAddNewUser {
 
 			boolean noEmptyFields = checkAllFields();
 			boolean noEmptySchedule = checkScheduleField();
+			boolean noEmptyShop = checkShopField();
 			
-			if (noEmptyFields && noEmptySchedule) {
+			if (noEmptyFields && noEmptySchedule && noEmptyShop) {
 				
 				boolean checkEmail = checkSecondField("email");
 				boolean checkPassword = checkSecondField("password");
@@ -194,7 +195,7 @@ public class ControllerAddNewUser {
 					boolean success = adminDB.addUser(fieldName.getText(), fieldSurname.getText(), fieldDob.getValue().toString(),
 							fieldUser.getText(), fieldDNI.getText(), fieldEmail.getText(), pass[0], pass[1],
 							numScedule[0], numScedule[1], numScedule[2], numScedule[3], numScedule[4], numScedule[5],
-							numScedule[6], cmbRole.getSelectionModel().getSelectedIndex());
+							numScedule[6], cmbRole.getSelectionModel().getSelectedItem(), cmbShop.getSelectionModel().getSelectedItem());
 
 					if (success) {
 						FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
@@ -293,6 +294,11 @@ public class ControllerAddNewUser {
 			cmbSunday.getItems().removeAll(cmbSunday.getItems());
 			cmbSunday.getItems().addAll(schedules);
 			cmbSunday.getSelectionModel().select("-");
+			
+			List<String> tiendas = adminDB.listShops();
+			cmbShop.getItems().removeAll(cmbShop.getItems());
+			cmbShop.getItems().addAll(tiendas);
+			cmbShop.getSelectionModel().select("-");
 
 			List<String> list = new ArrayList<String>();
 			list.add("-");
@@ -310,8 +316,6 @@ public class ControllerAddNewUser {
 					list.add(hour + ":" + minute);
 				}
 			}
-
-			getShops();
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -430,8 +434,18 @@ public class ControllerAddNewUser {
 
 	}
 
-	void getShops() {
-
+	boolean checkShopField() {
+		
+		try {
+			if (cmbShop.getValue().toString() != "-") {
+				return true;
+			} else {
+				return false;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
-
+	
 }
