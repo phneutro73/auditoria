@@ -8,22 +8,26 @@ import com.jfoenix.controls.JFXTextField;
 import db.AdministratorPageConnection;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class ControllerEditItemType {
 
 	double height;
 	double width;
-	int roleId;
+	int itemTypeId;
 
-	public ControllerEditItemType(double height, double width, int roleId) {
+	public ControllerEditItemType(double height, double width, int itemTypeId) {
 		super();
 		this.height = height;
 		this.width = width;
-		this.roleId = roleId;
+		this.itemTypeId = itemTypeId;
 	}
 
 	@FXML
@@ -58,7 +62,56 @@ public class ControllerEditItemType {
 
 	@FXML
 	void saveItemType(ActionEvent event) {
-		// TODO
+
+		try {
+
+			if (checkAllFields()) {
+				AdministratorPageConnection adminDB = new AdministratorPageConnection();
+				boolean success = adminDB.updateItemType(itemTypeId, fieldName.getText());
+
+				if (success) {
+					FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
+					ControllerAlertDialog control = new ControllerAlertDialog(120, 210, "Guardado correcto",
+							"Los datos del tipo de artículo se han guardado correctamente");
+					loader.setController(control);
+					Parent root = loader.load();
+
+					Stage stage = new Stage();
+					stage.initStyle(StageStyle.UNDECORATED);
+					stage.setScene(new Scene(root));
+					stage.show();
+				} else {
+					FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
+					ControllerAlertDialog control = new ControllerAlertDialog(140, 210, "Error",
+							"Se ha producido un error. Por favor, inténtelo de nuevo.");
+					loader.setController(control);
+					Parent root = loader.load();
+
+					Stage stage = new Stage();
+					stage.initStyle(StageStyle.UNDECORATED);
+					stage.setScene(new Scene(root));
+					stage.show();
+				}
+
+				Stage stage = (Stage) btnCancel.getScene().getWindow();
+				stage.close();
+
+			} else {
+				FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
+				ControllerAlertDialog control = new ControllerAlertDialog(120, 210, "Error",
+						"Es necesario que rellene todos los campos.");
+				loader.setController(control);
+				Parent root = loader.load();
+
+				Stage stage = new Stage();
+				stage.initStyle(StageStyle.UNDECORATED);
+				stage.setScene(new Scene(root));
+				stage.show();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 	}
 
 	@FXML
@@ -86,10 +139,10 @@ public class ControllerEditItemType {
 	}
 
 	void getItemType(AdministratorPageConnection adminDB) {
-		// TODO
-		/*
-		 * Hashtable<String, String> role = adminDB.getRole(roleId); String roleName =
-		 * role.get("name"); fieldName.setText(roleName);
-		 */
+		Hashtable<String, String> itemType = adminDB.getItemType(itemTypeId);
+		if (itemType.containsKey("itemTypeName")) {
+			String itemTypeName = itemType.get("itemTypeName");
+			fieldName.setText(itemTypeName);
+		}
 	}
 }

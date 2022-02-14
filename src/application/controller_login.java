@@ -104,8 +104,8 @@ public class controller_login {
 			System.out.println(calculatedHash[calculatedHash.length - 1]);
 			if (Arrays.equals(hash, calculatedHash)) {
 
-				FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/administrator_page.fxml"));
-				controller_administrator control = new controller_administrator(0, 0, 0);
+				FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/SalesPage.fxml"));
+				ControllerSalesPage control = new ControllerSalesPage(0, 0, 0);
 				loader.setController(control);
 				Parent root = loader.load();
 

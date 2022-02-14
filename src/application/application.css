@@ -161,3 +161,11 @@
 }
 
 
+/* Notes */
+.smallNote {
+	-fx-background-radius: 15.0px 15.0px 15.0px 15.0px;
+	-fx-background-color: white;
+	-fx-boder-color: -main-color;
+}
+
+

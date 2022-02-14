@@ -131,6 +131,9 @@ public class controller_administrator {
 	private TableColumn<ModelUserTable, String> roleUserTable;
 
 	@FXML
+	private TableColumn<ModelUserTable, String> shopUserTable;
+
+	@FXML
 	private JFXButton btnAddUser;
 
 	@FXML
@@ -209,7 +212,7 @@ public class controller_administrator {
 	private TableColumn<ModelShopTable, String> directionShopTable;
 
 	@FXML
-	private TableColumn<ModelShopTable, String> numWorkersShopTable;
+	private TableColumn<ModelShopTable, String> numUsersShopTable;
 
 	@FXML
 	private JFXButton btnAddShop;
@@ -303,6 +306,7 @@ public class controller_administrator {
 
 	@FXML
 	void hideMenu(MouseEvent event) {
+
 		if (isExpanded) {
 			drawer.setPrefWidth(60);
 			isExpanded = false;
@@ -553,12 +557,12 @@ public class controller_administrator {
 
 		AdministratorPageConnection adminDB = new AdministratorPageConnection();
 
-		String[] params = { String.valueOf(idShopSelected) };
+		String[] params = { String.valueOf(idItemTypeSelected) };
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/YesNoAlertDialog.fxml"));
 		ControllerYesNoAlertDialog control = new ControllerYesNoAlertDialog(0, 0, "Atención",
 				"Esta acción es permanente, no se podrá deshacer. Preste atención y revise los datos.",
 				"¿Está seguro de que desea eliminar el tipo de artículo con el siguiente ID: "
-						+ String.valueOf(idShopSelected) + "?",
+						+ String.valueOf(idItemTypeSelected) + "?",
 				"SÍ", "No", "adminDeleteItemType", params);
 		loader.setController(control);
 		Parent root = loader.load();
@@ -646,6 +650,7 @@ public class controller_administrator {
 		dniUserTable.setCellValueFactory(new PropertyValueFactory<>("dni"));
 		dateUserTable.setCellValueFactory(new PropertyValueFactory<>("dob"));
 		roleUserTable.setCellValueFactory(new PropertyValueFactory<>("roleName"));
+		shopUserTable.setCellValueFactory(new PropertyValueFactory<>("shopName"));
 
 		userTable.setItems(obList);
 
@@ -674,6 +679,9 @@ public class controller_administrator {
 					return true;
 				} else if (userSearchModel.getRoleName() != null
 						&& userSearchModel.getRoleName().toLowerCase().indexOf(searchUserKeyword) > -1) {
+					return true;
+				} else if (userSearchModel.getShopName() != null
+						&& userSearchModel.getShopName().toLowerCase().indexOf(searchUserKeyword) > -1) {
 					return true;
 				} else {
 					return false;
@@ -767,11 +775,74 @@ public class controller_administrator {
 	}
 
 	void getTableShops(AdministratorPageConnection adminDB) {
-		// TODO
+		ObservableList<ModelShopTable> obList = adminDB.getShopsTable();
+
+		idShopTable.setCellValueFactory(new PropertyValueFactory<>("id"));
+		nameShopTable.setCellValueFactory(new PropertyValueFactory<>("shopName"));
+		directionShopTable.setCellValueFactory(new PropertyValueFactory<>("shopDirection"));
+		numUsersShopTable.setCellValueFactory(new PropertyValueFactory<>("numUsersShop"));
+
+		shopTable.setItems(obList);
+
+		FilteredList<ModelShopTable> filteredShopsData = new FilteredList<>(obList, b -> true);
+		txtShopSearch.textProperty().addListener((observable, oldValue, newValue) -> {
+			filteredShopsData.setPredicate(shopSearchModel -> {
+				if (newValue.isEmpty() || newValue == null) {
+					return true;
+				}
+				String searchShopKeyword = newValue.toLowerCase();
+
+				if (shopSearchModel.getStrId() != null
+						&& shopSearchModel.getStrId().toLowerCase().indexOf(searchShopKeyword) > -1) {
+					return true;
+				} else if (shopSearchModel.getShopName() != null
+						&& shopSearchModel.getShopName().toLowerCase().indexOf(searchShopKeyword) > -1) {
+					return true;
+				} else if (shopSearchModel.getShopDirection() != null
+						&& shopSearchModel.getShopDirection().toLowerCase().indexOf(searchShopKeyword) > -1) {
+					return true;
+				} else {
+					return false;
+				}
+			});
+		});
+
+		SortedList<ModelShopTable> sortedShopData = new SortedList<>(filteredShopsData);
+		sortedShopData.comparatorProperty().bind(shopTable.comparatorProperty());
+		shopTable.setItems(sortedShopData);
 	}
 
 	void getTableItemTypes(AdministratorPageConnection adminDB) {
-		// TODO
+		ObservableList<ModelItemTypeTable> obList = adminDB.getItemTypesTable();
+
+		idItemTypeTable.setCellValueFactory(new PropertyValueFactory<>("id"));
+		nameItemTypeTable.setCellValueFactory(new PropertyValueFactory<>("name"));
+
+		itemTypeTable.setItems(obList);
+
+		FilteredList<ModelItemTypeTable> filteredItemTypeData = new FilteredList<>(obList, b -> true);
+		txtItemTypeSearch.textProperty().addListener((observable, oldValue, newValue) -> {
+			filteredItemTypeData.setPredicate(itemTypeSearchModel -> {
+				if (newValue.isEmpty() || newValue == null) {
+					return true;
+				}
+				String searchShopKeyword = newValue.toLowerCase();
+
+				if (itemTypeSearchModel.getStrId() != null
+						&& itemTypeSearchModel.getStrId().toLowerCase().indexOf(searchShopKeyword) > -1) {
+					return true;
+				} else if (itemTypeSearchModel.getName() != null
+						&& itemTypeSearchModel.getName().toLowerCase().indexOf(searchShopKeyword) > -1) {
+					return true;
+				} else {
+					return false;
+				}
+			});
+		});
+
+		SortedList<ModelItemTypeTable> sortedItemTypeData = new SortedList<>(filteredItemTypeData);
+		sortedItemTypeData.comparatorProperty().bind(itemTypeTable.comparatorProperty());
+		itemTypeTable.setItems(sortedItemTypeData);
 	}
 
 	@FXML

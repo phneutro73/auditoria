@@ -153,6 +153,12 @@ public class ControllerAddNewUser {
 	private JFXComboBox<String> cmbSunday;
 
 	@FXML
+	private Label lblShop;
+
+	@FXML
+	private JFXComboBox<String> cmbShop;
+
+	@FXML
 	private JFXButton btnAccept;
 
 	@FXML
@@ -171,7 +177,10 @@ public class ControllerAddNewUser {
 
 			boolean noEmptyFields = checkAllFields();
 			boolean noEmptySchedule = checkScheduleField();
-			if (noEmptyFields && noEmptySchedule) {
+			boolean noEmptyShop = checkShopField();
+
+			if (noEmptyFields && noEmptySchedule && noEmptyShop) {
+
 				boolean checkEmail = checkSecondField("email");
 				boolean checkPassword = checkSecondField("password");
 
@@ -183,23 +192,38 @@ public class ControllerAddNewUser {
 							cmbWednesday.getValue(), cmbThursday.getValue(), cmbFriday.getValue(),
 							cmbSaturday.getValue(), cmbSunday.getValue() };
 					int[] numScedule = parseSchedule(schedule, adminDB);
-					adminDB.addUser(fieldName.getText(), fieldSurname.getText(), fieldDob.getValue().toString(),
-							fieldUser.getText(), fieldDNI.getText(), fieldEmail.getText(), pass[0], pass[1],
-							numScedule[0], numScedule[1], numScedule[2], numScedule[3], numScedule[4], numScedule[5],
-							numScedule[6], cmbRole.getSelectionModel().getSelectedIndex());
+					boolean success = adminDB.addUser(fieldName.getText(), fieldSurname.getText(),
+							fieldDob.getValue().toString(), fieldUser.getText(), fieldDNI.getText(),
+							fieldEmail.getText(), pass[0], pass[1], numScedule[0], numScedule[1], numScedule[2],
+							numScedule[3], numScedule[4], numScedule[5], numScedule[6],
+							cmbRole.getSelectionModel().getSelectedItem(),
+							cmbShop.getSelectionModel().getSelectedItem());
 
-					FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
-					ControllerAlertDialog control = new ControllerAlertDialog(120, 210, "Guardado correcto",
-							"Los datos del usuario se han guardado correctamente.");
-					loader.setController(control);
-					Parent root = loader.load();
+					if (success) {
+						FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
+						ControllerAlertDialog control = new ControllerAlertDialog(120, 210, "Guardado correcto",
+								"Los datos del usuario se han guardado correctamente.");
+						loader.setController(control);
+						Parent root = loader.load();
 
-					Stage stage = new Stage();
-					stage.initStyle(StageStyle.UNDECORATED);
-					stage.setScene(new Scene(root));
-					stage.show();
+						Stage stage = new Stage();
+						stage.initStyle(StageStyle.UNDECORATED);
+						stage.setScene(new Scene(root));
+						stage.show();
+					} else {
+						FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
+						ControllerAlertDialog control = new ControllerAlertDialog(140, 210, "Error",
+								"Se ha producido un error. Por favor, inténtelo de nuevo.");
+						loader.setController(control);
+						Parent root = loader.load();
 
-					stage = (Stage) btnAccept.getScene().getWindow();
+						Stage stage = new Stage();
+						stage.initStyle(StageStyle.UNDECORATED);
+						stage.setScene(new Scene(root));
+						stage.show();
+					}
+
+					Stage stage = (Stage) btnAccept.getScene().getWindow();
 					stage.close();
 
 				} else {
@@ -240,8 +264,6 @@ public class ControllerAddNewUser {
 
 			AdministratorPageConnection adminDB = new AdministratorPageConnection();
 
-			// TODO: Get user + rellenar datos
-
 			List<String> schedules = adminDB.listSchedules();
 			cmbRole.getItems().removeAll(cmbRole.getItems());
 			cmbRole.getItems().addAll(adminDB.listRoles());
@@ -275,6 +297,11 @@ public class ControllerAddNewUser {
 			cmbSunday.getItems().addAll(schedules);
 			cmbSunday.getSelectionModel().select("-");
 
+			List<String> tiendas = adminDB.listShops();
+			cmbShop.getItems().removeAll(cmbShop.getItems());
+			cmbShop.getItems().addAll(tiendas);
+			cmbShop.getSelectionModel().select("-");
+
 			List<String> list = new ArrayList<String>();
 			list.add("-");
 
@@ -292,10 +319,8 @@ public class ControllerAddNewUser {
 				}
 			}
 
-			// List<String> activeUsers = adminDB.listActiveUsers();
-
 		} catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
 		}
 
 	}
@@ -409,6 +434,20 @@ public class ControllerAddNewUser {
 			return false;
 		}
 
+	}
+
+	boolean checkShopField() {
+
+		try {
+			if (cmbShop.getValue().toString() != "-") {
+				return true;
+			} else {
+				return false;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
 
 }

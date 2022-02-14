@@ -67,9 +67,9 @@ public class ControllerEditRole {
 			if (checkAllFields()) {
 
 				AdministratorPageConnection adminDB = new AdministratorPageConnection();
-				boolean succes = adminDB.updateRole(roleId, fieldName.getText());
+				boolean success = adminDB.updateRole(roleId, fieldName.getText());
 
-				if (succes) {
+				if (success) {
 					FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
 					ControllerAlertDialog control = new ControllerAlertDialog(120, 210, "Guardado correcto",
 							"Los datos se han guardado correctamente");
@@ -155,7 +155,9 @@ public class ControllerEditRole {
 
 	void getRole(AdministratorPageConnection adminDB) {
 		Hashtable<String, String> role = adminDB.getRole(roleId);
-		String roleName = role.get("name");
-		fieldName.setText(roleName);
+		if (role.containsKey("name")) {
+			String roleName = role.get("name");
+			fieldName.setText(roleName);
+		}
 	}
 }

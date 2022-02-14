@@ -166,6 +166,12 @@ public class ControllerEditUser {
 	private JFXComboBox<String> cmbSunday;
 
 	@FXML
+	private Label lblShop;
+
+	@FXML
+	private JFXComboBox<String> cmbShop;
+
+	@FXML
 	private JFXButton btnAccept;
 
 	@FXML
@@ -200,20 +206,34 @@ public class ControllerEditUser {
 							fieldDob.getValue().toString(), fieldUser.getText(), fieldDNI.getText(),
 							fieldEmail.getText(), pass[0], pass[1], numScedule[0], numScedule[1], numScedule[2],
 							numScedule[3], numScedule[4], numScedule[5], numScedule[6],
-							cmbRole.getSelectionModel().getSelectedIndex());
+							cmbRole.getSelectionModel().getSelectedItem(),
+							cmbShop.getSelectionModel().getSelectedItem());
 
-					FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
-					ControllerAlertDialog control = new ControllerAlertDialog(120, 210, "Guardado correcto",
-							"Los datos del usuario se han actualizado correctamente.");
-					loader.setController(control);
-					Parent root = loader.load();
+					if (success) {
+						FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
+						ControllerAlertDialog control = new ControllerAlertDialog(120, 210, "Guardado correcto",
+								"Los datos del usuario se han actualizado correctamente.");
+						loader.setController(control);
+						Parent root = loader.load();
 
-					Stage stage = new Stage();
-					stage.initStyle(StageStyle.UNDECORATED);
-					stage.setScene(new Scene(root));
-					stage.show();
+						Stage stage = new Stage();
+						stage.initStyle(StageStyle.UNDECORATED);
+						stage.setScene(new Scene(root));
+						stage.show();
+					} else {
+						FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
+						ControllerAlertDialog control = new ControllerAlertDialog(140, 210, "Error",
+								"Se ha producido un error. Por favor, inténtelo de nuevo.");
+						loader.setController(control);
+						Parent root = loader.load();
 
-					stage = (Stage) btnAccept.getScene().getWindow();
+						Stage stage = new Stage();
+						stage.initStyle(StageStyle.UNDECORATED);
+						stage.setScene(new Scene(root));
+						stage.show();
+					}
+
+					Stage stage = (Stage) btnAccept.getScene().getWindow();
 					stage.close();
 
 				} else {
@@ -295,6 +315,11 @@ public class ControllerEditUser {
 			cmbSunday.getItems().removeAll(cmbSunday.getItems());
 			cmbSunday.getItems().addAll(schedules);
 			cmbSunday.getSelectionModel().select("-");
+
+			List<String> tiendas = adminDB.listShops();
+			cmbShop.getItems().removeAll(cmbShop.getItems());
+			cmbShop.getItems().addAll(tiendas);
+			cmbShop.getSelectionModel().select("-");
 
 			List<String> list = new ArrayList<String>();
 			list.add("-");
@@ -438,31 +463,61 @@ public class ControllerEditUser {
 	void getUser(AdministratorPageConnection adminDB) {
 		Hashtable<String, Object> user = adminDB.getUser(userId);
 
-		String name = (String) user.get("name");
-		String surname = (String) user.get("surname");
-		Date dob = (Date) user.get("dob");
-		LocalDate dobLD = Instant.ofEpochMilli(dob.getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
-		String idNumber = (String) user.get("idNumber");
-		Hashtable<Integer, Integer> schedule = (Hashtable<Integer, Integer>) user.get("schedule");
-		int roleId = (int) user.get("roleId");
-		String email = (String) user.get("email");
-		String userName = (String) user.get("userName");
+		String name;
+		String surname;
+		Date dob;
+		LocalDate dobLD;
+		String idNumber;
+		Hashtable<Integer, String> schedule;
+		String role;
+		String email;
+		String userName;
+		String shop;
 
-		fieldName.setText(name);
-		fieldSurname.setText(surname);
-		fieldDNI.setText(idNumber);
-		fieldDob.setValue(dobLD);
-		fieldEmail.setText(email);
-		fieldEmail2.setText(email);
-		fieldUser.setText(userName);
-		cmbRole.getSelectionModel().select(roleId);
-		cmbMonday.getSelectionModel().select(schedule.get(0));
-		cmbTuesday.getSelectionModel().select(schedule.get(1));
-		cmbWednesday.getSelectionModel().select(schedule.get(2));
-		cmbThursday.getSelectionModel().select(schedule.get(3));
-		cmbFriday.getSelectionModel().select(schedule.get(4));
-		cmbSaturday.getSelectionModel().select(schedule.get(5));
-		cmbSunday.getSelectionModel().select(schedule.get(6));
+		if (user.containsKey("name")) {
+			name = (String) user.get("name");
+			fieldName.setText(name);
+		}
+		if (user.containsKey("surname")) {
+			surname = (String) user.get("surname");
+			fieldSurname.setText(surname);
+		}
+		if (user.containsKey("dob")) {
+			dob = (Date) user.get("dob");
+			dobLD = Instant.ofEpochMilli(dob.getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
+			fieldDob.setValue(dobLD);
+		}
+		if (user.containsKey("idNumber")) {
+			idNumber = (String) user.get("idNumber");
+			fieldDNI.setText(idNumber);
+		}
+		if (user.containsKey("schedule")) {
+			schedule = (Hashtable<Integer, String>) user.get("schedule");
+			cmbMonday.getSelectionModel().select(schedule.get(0));
+			cmbTuesday.getSelectionModel().select(schedule.get(1));
+			cmbWednesday.getSelectionModel().select(schedule.get(2));
+			cmbThursday.getSelectionModel().select(schedule.get(3));
+			cmbFriday.getSelectionModel().select(schedule.get(4));
+			cmbSaturday.getSelectionModel().select(schedule.get(5));
+			cmbSunday.getSelectionModel().select(schedule.get(6));
+		}
+		if (user.containsKey("roleName")) {
+			role = (String) user.get("roleName");
+			cmbRole.getSelectionModel().select(role);
+		}
+		if (user.containsKey("email")) {
+			email = (String) user.get("email");
+			fieldEmail.setText(email);
+			fieldEmail2.setText(email);
+		}
+		if (user.containsKey("userName")) {
+			userName = (String) user.get("userName");
+			fieldUser.setText(userName);
+		}
+		if (user.containsKey("name")) {
+			shop = (String) user.get("shopName");
+			cmbShop.getSelectionModel().select(shop);
+		}
 
 	}
 
