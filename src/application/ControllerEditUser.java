@@ -206,7 +206,8 @@ public class ControllerEditUser {
 							fieldDob.getValue().toString(), fieldUser.getText(), fieldDNI.getText(),
 							fieldEmail.getText(), pass[0], pass[1], numScedule[0], numScedule[1], numScedule[2],
 							numScedule[3], numScedule[4], numScedule[5], numScedule[6],
-							cmbRole.getSelectionModel().getSelectedItem(), cmbShop.getSelectionModel().getSelectedItem());
+							cmbRole.getSelectionModel().getSelectedItem(),
+							cmbShop.getSelectionModel().getSelectedItem());
 
 					if (success) {
 						FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
@@ -231,7 +232,6 @@ public class ControllerEditUser {
 						stage.setScene(new Scene(root));
 						stage.show();
 					}
-					
 
 					Stage stage = (Stage) btnAccept.getScene().getWindow();
 					stage.close();
@@ -320,7 +320,7 @@ public class ControllerEditUser {
 			cmbShop.getItems().removeAll(cmbShop.getItems());
 			cmbShop.getItems().addAll(tiendas);
 			cmbShop.getSelectionModel().select("-");
-			
+
 			List<String> list = new ArrayList<String>();
 			list.add("-");
 
@@ -462,7 +462,7 @@ public class ControllerEditUser {
 
 	void getUser(AdministratorPageConnection adminDB) {
 		Hashtable<String, Object> user = adminDB.getUser(userId);
-		
+
 		String name;
 		String surname;
 		Date dob;
@@ -479,7 +479,7 @@ public class ControllerEditUser {
 			fieldName.setText(name);
 		}
 		if (user.containsKey("surname")) {
-			surname = (String) user.get("surname");	
+			surname = (String) user.get("surname");
 			fieldSurname.setText(surname);
 		}
 		if (user.containsKey("dob")) {
@@ -518,7 +518,6 @@ public class ControllerEditUser {
 			shop = (String) user.get("shopName");
 			cmbShop.getSelectionModel().select(shop);
 		}
-
 
 	}
 

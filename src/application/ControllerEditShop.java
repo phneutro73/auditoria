@@ -57,9 +57,9 @@ public class ControllerEditShop {
 
 	@FXML
 	void saveNewShop(ActionEvent event) {
-		
+
 		try {
-			
+
 			if (checkAllFields()) {
 				AdministratorPageConnection adminDB = new AdministratorPageConnection();
 				boolean success = adminDB.updateShop(shopId, fieldName.getText(), fieldDirection.getText());
@@ -87,7 +87,7 @@ public class ControllerEditShop {
 					stage.setScene(new Scene(root));
 					stage.show();
 				}
-				
+
 				Stage stage = (Stage) btnCancel.getScene().getWindow();
 				stage.close();
 			} else {
@@ -133,11 +133,11 @@ public class ControllerEditShop {
 	}
 
 	void getShop(AdministratorPageConnection adminDB) {
-		
+
 		try {
-			
+
 			Hashtable<String, String> shop = adminDB.getShop(shopId);
-			
+
 			if (shop.containsKey("shopName")) {
 				String shopName = shop.get("shopName");
 				fieldName.setText(shopName);
@@ -146,7 +146,7 @@ public class ControllerEditShop {
 				String shopDirection = shop.get("shopDirection");
 				fieldDirection.setText(shopDirection);
 			}
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

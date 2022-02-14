@@ -64,7 +64,7 @@ public class ControllerEditItemType {
 	void saveItemType(ActionEvent event) {
 
 		try {
-			
+
 			if (checkAllFields()) {
 				AdministratorPageConnection adminDB = new AdministratorPageConnection();
 				boolean success = adminDB.updateItemType(itemTypeId, fieldName.getText());
@@ -92,10 +92,10 @@ public class ControllerEditItemType {
 					stage.setScene(new Scene(root));
 					stage.show();
 				}
-				
+
 				Stage stage = (Stage) btnCancel.getScene().getWindow();
 				stage.close();
-				
+
 			} else {
 				FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
 				ControllerAlertDialog control = new ControllerAlertDialog(120, 210, "Error",

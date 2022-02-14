@@ -100,10 +100,9 @@ public class ControllerEditSchedule {
 						stage.setScene(new Scene(root));
 						stage.show();
 					}
-					
+
 					Stage stage = (Stage) btnCancel.getScene().getWindow();
 					stage.close();
-					
 
 				} else {
 					FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
@@ -117,7 +116,7 @@ public class ControllerEditSchedule {
 					stage.setScene(new Scene(root));
 					stage.show();
 				}
-				
+
 			} else {
 				FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
 				ControllerAlertDialog control = new ControllerAlertDialog(120, 210, "Error",
@@ -179,9 +178,9 @@ public class ControllerEditSchedule {
 	}
 
 	void getSchedule(AdministratorPageConnection adminDB) {
-		
+
 		Hashtable<String, String> schedule = adminDB.getSchedule(scheduleId);
-		
+
 		if (schedule.containsKey("name")) {
 			String name = schedule.get("name");
 			fieldName.setText(name);

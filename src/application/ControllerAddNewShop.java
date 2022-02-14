@@ -48,14 +48,14 @@ public class ControllerAddNewShop {
 
 	@FXML
 	void saveNewShop(ActionEvent event) {
-		
+
 		try {
-			
+
 			if (checkAllFields()) {
-				
+
 				AdministratorPageConnection adminDB = new AdministratorPageConnection();
 				boolean success = adminDB.addShop(fieldName.getText(), fieldDirection.getText());
-				
+
 				if (success) {
 					FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
 					ControllerAlertDialog control = new ControllerAlertDialog(120, 210, "Guardado correcto",
@@ -83,7 +83,7 @@ public class ControllerAddNewShop {
 				Stage stage = (Stage) btnCancel.getScene().getWindow();
 				stage.close();
 			}
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -178,9 +178,9 @@ public class ControllerAddNewUser {
 			boolean noEmptyFields = checkAllFields();
 			boolean noEmptySchedule = checkScheduleField();
 			boolean noEmptyShop = checkShopField();
-			
+
 			if (noEmptyFields && noEmptySchedule && noEmptyShop) {
-				
+
 				boolean checkEmail = checkSecondField("email");
 				boolean checkPassword = checkSecondField("password");
 
@@ -192,10 +192,12 @@ public class ControllerAddNewUser {
 							cmbWednesday.getValue(), cmbThursday.getValue(), cmbFriday.getValue(),
 							cmbSaturday.getValue(), cmbSunday.getValue() };
 					int[] numScedule = parseSchedule(schedule, adminDB);
-					boolean success = adminDB.addUser(fieldName.getText(), fieldSurname.getText(), fieldDob.getValue().toString(),
-							fieldUser.getText(), fieldDNI.getText(), fieldEmail.getText(), pass[0], pass[1],
-							numScedule[0], numScedule[1], numScedule[2], numScedule[3], numScedule[4], numScedule[5],
-							numScedule[6], cmbRole.getSelectionModel().getSelectedItem(), cmbShop.getSelectionModel().getSelectedItem());
+					boolean success = adminDB.addUser(fieldName.getText(), fieldSurname.getText(),
+							fieldDob.getValue().toString(), fieldUser.getText(), fieldDNI.getText(),
+							fieldEmail.getText(), pass[0], pass[1], numScedule[0], numScedule[1], numScedule[2],
+							numScedule[3], numScedule[4], numScedule[5], numScedule[6],
+							cmbRole.getSelectionModel().getSelectedItem(),
+							cmbShop.getSelectionModel().getSelectedItem());
 
 					if (success) {
 						FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
@@ -220,7 +222,7 @@ public class ControllerAddNewUser {
 						stage.setScene(new Scene(root));
 						stage.show();
 					}
-					
+
 					Stage stage = (Stage) btnAccept.getScene().getWindow();
 					stage.close();
 
@@ -294,7 +296,7 @@ public class ControllerAddNewUser {
 			cmbSunday.getItems().removeAll(cmbSunday.getItems());
 			cmbSunday.getItems().addAll(schedules);
 			cmbSunday.getSelectionModel().select("-");
-			
+
 			List<String> tiendas = adminDB.listShops();
 			cmbShop.getItems().removeAll(cmbShop.getItems());
 			cmbShop.getItems().addAll(tiendas);
@@ -435,7 +437,7 @@ public class ControllerAddNewUser {
 	}
 
 	boolean checkShopField() {
-		
+
 		try {
 			if (cmbShop.getValue().toString() != "-") {
 				return true;
@@ -447,5 +449,5 @@ public class ControllerAddNewUser {
 			return false;
 		}
 	}
-	
+
 }

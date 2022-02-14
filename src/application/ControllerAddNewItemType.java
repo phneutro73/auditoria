@@ -49,14 +49,14 @@ public class ControllerAddNewItemType {
 
 	@FXML
 	void saveItemType(ActionEvent event) {
-		
+
 		try {
-			
+
 			if (checkAllFields()) {
-				
+
 				AdministratorPageConnection adminDB = new AdministratorPageConnection();
 				boolean success = adminDB.addItemType(fieldName.getText());
-				
+
 				if (success) {
 					FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
 					ControllerAlertDialog control = new ControllerAlertDialog(120, 210, "Guardado correcto",
@@ -83,9 +83,9 @@ public class ControllerAddNewItemType {
 
 				Stage stage = (Stage) btnCancel.getScene().getWindow();
 				stage.close();
-				
+
 			}
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -94,7 +94,6 @@ public class ControllerAddNewItemType {
 	@FXML
 	void initialize() {
 
-		
 	}
 
 	boolean checkAllFields() {

@@ -92,7 +92,7 @@ public class ControllerAddNewSchedule {
 						stage.initStyle(StageStyle.UNDECORATED);
 						stage.setScene(new Scene(root));
 						stage.show();
-					}					
+					}
 
 					Stage stage = (Stage) btnCancel.getScene().getWindow();
 					stage.close();
