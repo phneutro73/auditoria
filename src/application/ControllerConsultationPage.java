@@ -15,15 +15,16 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import models.CurrentUser;
 import models.ModelItemTable;
 
 public class ControllerConsultationPage {
 
 	double height;
 	double width;
-	int currentUser;
+	CurrentUser currentUser;
 
-	public ControllerConsultationPage(double height, double width, int currentUser) {
+	public ControllerConsultationPage(double height, double width, CurrentUser currentUser) {
 		this.height = height;
 		this.width = width;
 		this.currentUser = currentUser;
@@ -153,7 +154,7 @@ public class ControllerConsultationPage {
 	@FXML
 	void goToAddItems(MouseEvent event) throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AddItemsPage.fxml"));
-		ControllerAddItemsPage control = new ControllerAddItemsPage(0, 0, 0);
+		ControllerAddItemsPage control = new ControllerAddItemsPage(0, 0, currentUser);
 		loader.setController(control);
 		Parent root = loader.load();
 
@@ -166,7 +167,7 @@ public class ControllerConsultationPage {
 	@FXML
 	void goToAdministratorPage(MouseEvent event) throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/administrator_page.fxml"));
-		controller_administrator control = new controller_administrator(0, 0, 0);
+		controller_administrator control = new controller_administrator(0, 0, currentUser);
 		loader.setController(control);
 		Parent root = loader.load();
 
@@ -179,7 +180,7 @@ public class ControllerConsultationPage {
 	@FXML
 	void goToSalesPage(MouseEvent event) throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/SalesPage.fxml"));
-		ControllerSalesPage control = new ControllerSalesPage(0, 0, 0);
+		ControllerSalesPage control = new ControllerSalesPage(0, 0, currentUser);
 		loader.setController(control);
 		Parent root = loader.load();
 

@@ -49,6 +49,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import models.CurrentUser;
 import models.ModelItemTypeTable;
 import models.ModelRoleTable;
 import models.ModelScheduleTable;
@@ -60,9 +61,9 @@ public class controller_administrator {
 
 	double height;
 	double width;
-	int currentUser;
+	CurrentUser currentUser;
 
-	public controller_administrator(double height, double width, int currentUser) {
+	public controller_administrator(double height, double width, CurrentUser currentUser) {
 		this.height = height;
 		this.width = width;
 		this.currentUser = currentUser;
@@ -848,7 +849,7 @@ public class controller_administrator {
 	@FXML
 	void goToAddItemsPage(MouseEvent event) throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AddItemsPage.fxml"));
-		ControllerAddItemsPage control = new ControllerAddItemsPage(0, 0, 0);
+		ControllerAddItemsPage control = new ControllerAddItemsPage(0, 0, currentUser);
 		loader.setController(control);
 		Parent root = loader.load();
 
@@ -861,7 +862,7 @@ public class controller_administrator {
 	@FXML
 	void goToConsultationPage(MouseEvent event) throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/ConsultationPage.fxml"));
-		ControllerConsultationPage control = new ControllerConsultationPage(0, 0, 0);
+		ControllerConsultationPage control = new ControllerConsultationPage(0, 0, currentUser);
 		loader.setController(control);
 		Parent root = loader.load();
 
@@ -874,7 +875,7 @@ public class controller_administrator {
 	@FXML
 	void goToSalesPage(MouseEvent event) throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/SalesPage.fxml"));
-		ControllerSalesPage control = new ControllerSalesPage(0, 0, 0);
+		ControllerSalesPage control = new ControllerSalesPage(0, 0, currentUser);
 		loader.setController(control);
 		Parent root = loader.load();
 
