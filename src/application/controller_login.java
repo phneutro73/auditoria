@@ -36,6 +36,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
+import models.CurrentUser;
 import db.LoginPageConnection;
 
 public class controller_login {
@@ -104,8 +105,9 @@ public class controller_login {
 			System.out.println(calculatedHash[calculatedHash.length - 1]);
 			if (Arrays.equals(hash, calculatedHash)) {
 
+				CurrentUser currentUser = loginDB.getCurrentUser(fieldUser.getText());
 				FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/SalesPage.fxml"));
-				ControllerSalesPage control = new ControllerSalesPage(0, 0, 0);
+				ControllerSalesPage control = new ControllerSalesPage(0, 0, currentUser);
 				loader.setController(control);
 				Parent root = loader.load();
 
