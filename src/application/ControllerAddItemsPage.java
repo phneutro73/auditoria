@@ -197,31 +197,30 @@ public class ControllerAddItemsPage {
 				} else {
 					// El código de barras introducido está en la base de datos. Analizamos si se
 					// está ampliando stock o si es un error.
-					
+
 					String price = itemWithBarCode.get("price").toString();
-					
+
 					if (price.indexOf(".") == -1) {
 						price = price + ".";
 					}
 					if (fieldPrice.getText().indexOf(".") == -1) {
 						fieldPrice.setText(fieldPrice.getText() + ".");
 					}
-					
+
 					while (price.substring(price.indexOf(".") + 1).length() < 2) {
 						price = price + "0";
 					}
 					while (fieldPrice.getText().substring(fieldPrice.getText().indexOf(".") + 1).length() < 2) {
-						fieldPrice.setText(fieldPrice.getText() +"0");
+						fieldPrice.setText(fieldPrice.getText() + "0");
 					}
 					int typeId = addItemsDB.getTypeId(fieldType.getSelectionModel().getSelectedItem());
-					
-					
+
 					if (fieldBarCode.getText().equals(itemWithBarCode.get("barCode"))
 							&& fieldName.getText().equals(itemWithBarCode.get("name"))
-							&& typeId == Integer.parseInt(itemWithBarCode.get("typeId").toString()) 
+							&& typeId == Integer.parseInt(itemWithBarCode.get("typeId").toString())
 							&& fieldSize.getText().equals(itemWithBarCode.get("size"))
 							&& fieldPrice.getText().equals(price)) {
-						
+
 						// Es el mismo artículo
 						// Preguntamos si se quiere añadir más stock
 						String[] params = { String.valueOf(itemWithBarCode.get("id")),

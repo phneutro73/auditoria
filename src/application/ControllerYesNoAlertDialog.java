@@ -281,8 +281,9 @@ public class ControllerYesNoAlertDialog {
 	void addItemsUpdateQuantity() throws IOException {
 
 		AddItemsPageConnection addItemsDB = new AddItemsPageConnection();
-		boolean success = addItemsDB.updateItemQuantity(Integer.parseInt(params[0]), params[1], Integer.parseInt(params[2]));
-		
+		boolean success = addItemsDB.updateItemQuantity(Integer.parseInt(params[0]), params[1],
+				Integer.parseInt(params[2]));
+
 		if (success) {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
 			ControllerAlertDialog control = new ControllerAlertDialog(120, 210, "Guardado correctamente",
