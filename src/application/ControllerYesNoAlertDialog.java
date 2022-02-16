@@ -5,6 +5,7 @@ import java.util.function.Function;
 
 import com.jfoenix.controls.JFXButton;
 
+import db.AddItemsPageConnection;
 import db.AdministratorPageConnection;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -87,6 +88,9 @@ public class ControllerYesNoAlertDialog {
 			break;
 		case "adminDeleteItemType":
 			adminDeleteItemType();
+			break;
+		case "addItemsUpdateQuantity":
+			addItemsUpdateQuantity();
 			break;
 		default:
 			break;
@@ -264,6 +268,25 @@ public class ControllerYesNoAlertDialog {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
 			ControllerAlertDialog control = new ControllerAlertDialog(120, 210, "Error",
 					"Ha habido un error, el tipo de prenda no ha sido eliminado.");
+			loader.setController(control);
+			Parent root = loader.load();
+
+			Stage stage = new Stage();
+			stage.initStyle(StageStyle.UNDECORATED);
+			stage.setScene(new Scene(root));
+			stage.show();
+		}
+	}
+
+	void addItemsUpdateQuantity() throws IOException {
+
+		AddItemsPageConnection addItemsDB = new AddItemsPageConnection();
+		boolean success = addItemsDB.updateItemQuantity(Integer.parseInt(params[0]), params[1], Integer.parseInt(params[2]));
+		
+		if (success) {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
+			ControllerAlertDialog control = new ControllerAlertDialog(120, 210, "Guardado correctamente",
+					"Artículos añadidos correctamente.");
 			loader.setController(control);
 			Parent root = loader.load();
 
