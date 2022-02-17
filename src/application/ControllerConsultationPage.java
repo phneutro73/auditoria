@@ -7,6 +7,8 @@ import com.jfoenix.controls.JFXTextField;
 
 import db.ConsultationPageConnection;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -230,6 +232,42 @@ public class ControllerConsultationPage {
 		priceItemTable.setCellValueFactory(new PropertyValueFactory<>("price"));
 		
 		itemTable.setItems(obList);
+		
+		FilteredList<ModelItemTable> filteredItemData = new FilteredList<>(obList, b -> true);
+		txtItemSearch.textProperty().addListener((observable, oldValue, newValue) -> {
+			filteredItemData.setPredicate(ItemSearchModel -> {
+				if (newValue.isEmpty() || newValue == null) {
+					return true;
+				}
+				String searcItemKeyword = newValue.toLowerCase();
+
+				if (ItemSearchModel.getStrId() != null
+						&& ItemSearchModel.getStrId().toLowerCase().indexOf(searcItemKeyword) > -1) {
+					return true;
+				} else if (ItemSearchModel.getBarCode() != null
+						&& ItemSearchModel.getBarCode().toLowerCase().indexOf(searcItemKeyword) > -1) {
+					return true;
+				} else if (ItemSearchModel.getItemName() != null
+						&& ItemSearchModel.getItemName().toLowerCase().indexOf(searcItemKeyword) > -1) {
+					return true;
+				} else if (ItemSearchModel.getItemType() != null
+						&& ItemSearchModel.getItemType().toLowerCase().indexOf(searcItemKeyword) > -1) {
+					return true;
+				} else if (ItemSearchModel.getItemSize() != null
+						&& ItemSearchModel.getItemSize().toLowerCase().indexOf(searcItemKeyword) > -1) {
+					return true;
+				} else if (ItemSearchModel.getStrPrice() != null
+						&& ItemSearchModel.getStrPrice().toLowerCase().indexOf(searcItemKeyword) > -1) {
+					return true;
+				} else {
+					return false;
+				}
+			});
+		});
+
+		SortedList<ModelItemTable> sortedItemData = new SortedList<>(filteredItemData);
+		sortedItemData.comparatorProperty().bind(itemTable.comparatorProperty());
+		itemTable.setItems(sortedItemData);
 		
 	}
 
