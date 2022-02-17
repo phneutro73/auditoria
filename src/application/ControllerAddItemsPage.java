@@ -229,7 +229,7 @@ public class ControllerAddItemsPage {
 
 						FXMLLoader loader = new FXMLLoader(
 								getClass().getResource("/application/YesNoAlertDialog.fxml"));
-						ControllerYesNoAlertDialog control = new ControllerYesNoAlertDialog(0, 0, "Atención",
+						ControllerYesNoAlertDialog control = new ControllerYesNoAlertDialog(165, 275, "Atención",
 								"Este artículo ya está registrado en la base de datos.",
 								"¿Está seguro de que quiere añadir " + fieldQuantity.getText() + " más?", "SÍ", "NO",
 								"addItemsUpdateQuantity", params);
@@ -246,7 +246,7 @@ public class ControllerAddItemsPage {
 					} else {
 						// Son artículos distintos. Mostramos un mensaje de error
 						FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
-						ControllerAlertDialog control = new ControllerAlertDialog(120, 210, "Error",
+						ControllerAlertDialog control = new ControllerAlertDialog(140, 220, "Error",
 								"El código de barras introducido está asignado a otro artículo diferente. Es necesario que añada uno distinto.");
 						loader.setController(control);
 						Parent root = loader.load();
@@ -273,7 +273,7 @@ public class ControllerAddItemsPage {
 
 		} else {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
-			ControllerAlertDialog control = new ControllerAlertDialog(120, 210, "Error",
+			ControllerAlertDialog control = new ControllerAlertDialog(140, 220, "Error",
 					"Es necesario que rellene todos los campos.");
 			loader.setController(control);
 			Parent root = loader.load();
@@ -282,6 +282,7 @@ public class ControllerAddItemsPage {
 			stage.initStyle(StageStyle.UNDECORATED);
 			stage.setScene(new Scene(root));
 			stage.show();
+			
 		}
 
 	}
