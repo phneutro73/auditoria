@@ -5,6 +5,7 @@ import java.io.IOException;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 
+import db.AdministratorPageConnection;
 import db.ConsultationPageConnection;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -21,6 +22,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import models.CurrentUser;
 import models.ModelItemTable;
 import models.ModelUserTable;
@@ -107,7 +109,7 @@ public class ControllerConsultationPage {
 	private JFXButton btnDetailsItem;
 
 	boolean isExpanded;
-	int idItem;
+	int idItemSelected;
 
 	@FXML
 	void initialize() {
@@ -127,13 +129,39 @@ public class ControllerConsultationPage {
 	}
 
 	@FXML
-	void deleteItem(MouseEvent event) {
+	void deleteItem(MouseEvent event) throws IOException {
 
+		AdministratorPageConnection adminDB = new AdministratorPageConnection();
+
+		String[] params = { String.valueOf(idItemSelected) };
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/YesNoAlertDialog.fxml"));
+		ControllerYesNoAlertDialog control = new ControllerYesNoAlertDialog(0, 0, "Atención",
+				"Esta acción es permanente, no se podrá deshacer. Preste atención y revise los datos.",
+				"¿Está seguro de que desea eliminar el artículo con el siguiente ID: "
+						+ String.valueOf(idItemSelected) + "?",
+				"SÍ", "No", "consultDeleteItem", params);
+		loader.setController(control);
+		Parent root = loader.load();
+
+		Stage stage = new Stage();
+		stage.initStyle(StageStyle.UNDECORATED);
+		stage.setScene(new Scene(root));
+		stage.showAndWait();
+		initialize();
+		
 	}
 
 	@FXML
-	void detailsItem(MouseEvent event) {
+	void detailsItem(MouseEvent event) throws IOException {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/ReservationPage.fxml"));
+		ControllerReservationPage control = new ControllerReservationPage(0, 0, idItemSelected, currentUser);
+		loader.setController(control);
+		Parent root = loader.load();
 
+		Stage stage = new Stage();
+		stage.setScene(new Scene(root));
+		stage.showAndWait();
+		initialize();
 	}
 
 	@FXML
@@ -214,7 +242,20 @@ public class ControllerConsultationPage {
 
 	@FXML
 	void itemSelected(MouseEvent event) {
-		hideMenu(event);
+		try {
+			hideMenu(event);
+			idItemSelected = itemTable.getSelectionModel().getSelectedItem().getId();
+			btnEditItem.setDisable(false);
+			btnEditItem.setFocusTraversable(false);
+			btnDeleteItem.setDisable(false);
+			btnDeleteItem.setFocusTraversable(false);
+			btnDetailsItem.setDisable(false);
+			btnDetailsItem.setFocusTraversable(false);
+		} catch (Exception e) {
+			btnEditItem.setDisable(true);
+			btnDeleteItem.setDisable(true);
+			btnDetailsItem.setDisable(true);
+		}
 	}
 
 	void getItems(ConsultationPageConnection consultDB) {

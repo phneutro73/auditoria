@@ -28,11 +28,13 @@ public class ControllerReservationPage {
 
 	double height;
 	double width;
+	int barCode;
 	CurrentUser currentUser;
 
-	public ControllerReservationPage(double height, double width, CurrentUser currentUser) {
+	public ControllerReservationPage(double height, double width, int barCode, CurrentUser currentUser) {
 		this.height = height;
 		this.width = width;
+		this.barCode = barCode;
 		this.currentUser = currentUser;
 	}
 

@@ -53,4 +53,33 @@ public class ConsultationPageConnection {
 		return obList;
 	}
 
+	public boolean deleteItem(int itemId) {
+		
+		boolean success = false;
+		Connection conn = null;
+
+		try {
+			conn = DriverManager.getConnection(connectionUrl);
+			System.out.println("Connected to DB");
+			Statement stmt = conn.createStatement();
+			stmt.executeUpdate("[sp_delete_item] " + itemId);
+			success = true;
+
+		} catch (SQLException e) {
+			success = false;
+			e.printStackTrace();
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException ex) {
+					ex.printStackTrace();
+				}
+			}
+			success = true;
+		}
+		
+		return success;
+	}
+	
 }
