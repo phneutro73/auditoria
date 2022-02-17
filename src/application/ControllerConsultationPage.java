@@ -4,6 +4,9 @@ import java.io.IOException;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
+
+import db.ConsultationPageConnection;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -11,12 +14,14 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import models.CurrentUser;
 import models.ModelItemTable;
+import models.ModelUserTable;
 
 public class ControllerConsultationPage {
 
@@ -104,8 +109,10 @@ public class ControllerConsultationPage {
 
 	@FXML
 	void initialize() {
+		
+		ConsultationPageConnection consultDB = new ConsultationPageConnection();
 
-		getItems();
+		getItems(consultDB);
 
 		isExpanded = false;
 		txtItemSearch.setFocusTraversable(false);
@@ -208,8 +215,22 @@ public class ControllerConsultationPage {
 		hideMenu(event);
 	}
 
-	void getItems() {
+	void getItems(ConsultationPageConnection consultDB) {
 
+		ObservableList<ModelItemTable> obList = consultDB.getItemsTable();
+		
+		idItemTable.setCellValueFactory(new PropertyValueFactory<>("id"));
+		cbItemTable.setCellValueFactory(new PropertyValueFactory<>("barCode"));
+		nameItemTable.setCellValueFactory(new PropertyValueFactory<>("itemName"));
+		typeItemTable.setCellValueFactory(new PropertyValueFactory<>("itemType"));
+		sizeItemTable.setCellValueFactory(new PropertyValueFactory<>("itemSize"));
+		quantityItemTable.setCellValueFactory(new PropertyValueFactory<>("quantity"));
+		inShopItemTable.setCellValueFactory(new PropertyValueFactory<>("inShop"));
+		reservationItemTable.setCellValueFactory(new PropertyValueFactory<>("reservations"));
+		priceItemTable.setCellValueFactory(new PropertyValueFactory<>("price"));
+		
+		itemTable.setItems(obList);
+		
 	}
 
 }
