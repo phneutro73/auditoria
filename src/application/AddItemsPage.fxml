@@ -68,9 +68,8 @@
 							</padding>
 						</HBox>
 						<HBox fx:id="btnConsultation" alignment="CENTER_LEFT"
-							onMouseClicked="#goToConsultationPage"
-							onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExited"
-							prefHeight="100.0" prefWidth="52.0" styleClass="menuButton"
+							onMouseClicked="#goToConsultationPage" prefHeight="100.0"
+							prefWidth="52.0" styleClass="menuButton"
 							stylesheets="@styleMenu.css">
 							<children>
 								<Label styleClass="labelMenuButtons"
@@ -202,14 +201,16 @@
 												<Insets bottom="20.0" left="30.0" />
 											</VBox.margin>
 										</Label>
-										<GridPane prefHeight="205.0" prefWidth="649.0">
+										<GridPane prefHeight="226.0" prefWidth="710.0">
 											<columnConstraints>
 												<ColumnConstraints hgrow="SOMETIMES"
-													maxWidth="450.0" minWidth="10.0" prefWidth="127.0" />
+													maxWidth="140.0" minWidth="10.0" prefWidth="127.0" />
 												<ColumnConstraints hgrow="SOMETIMES"
 													maxWidth="665.0" minWidth="10.0" prefWidth="522.0" />
 											</columnConstraints>
 											<rowConstraints>
+												<RowConstraints minHeight="10.0"
+													prefHeight="30.0" vgrow="SOMETIMES" />
 												<RowConstraints minHeight="10.0"
 													prefHeight="30.0" vgrow="SOMETIMES" />
 												<RowConstraints minHeight="10.0"
@@ -229,20 +230,24 @@
 												<Label text="TIPO" GridPane.rowIndex="2" />
 												<Label text="TALLA" GridPane.rowIndex="3" />
 												<Label text="PRECIO" GridPane.rowIndex="4" />
-												<JFXTextField GridPane.columnIndex="1" />
-												<JFXTextField GridPane.columnIndex="1"
-													GridPane.rowIndex="1" />
-												<JFXComboBox maxWidth="1.7976931348623157E308"
-													prefWidth="1000.0" GridPane.columnIndex="1"
-													GridPane.rowIndex="2" />
-												<JFXComboBox maxWidth="1.7976931348623157E308"
-													prefWidth="1000.0" GridPane.columnIndex="1"
-													GridPane.rowIndex="3" />
-												<JFXTextField GridPane.columnIndex="1"
-													GridPane.rowIndex="4" />
+												<JFXTextField fx:id="fieldBarCode"
+													GridPane.columnIndex="1" />
+												<JFXTextField fx:id="fieldName"
+													GridPane.columnIndex="1" GridPane.rowIndex="1" />
+												<JFXComboBox fx:id="fieldType"
+													maxWidth="1.7976931348623157E308" prefWidth="1000.0"
+													GridPane.columnIndex="1" GridPane.rowIndex="2" />
+												<JFXTextField fx:id="fieldPrice"
+													GridPane.columnIndex="1" GridPane.rowIndex="4" />
 												<Label text="CANTIDAD" GridPane.rowIndex="5" />
-												<JFXTextField GridPane.columnIndex="1"
-													GridPane.rowIndex="5" />
+												<JFXTextField fx:id="fieldQuantity"
+													GridPane.columnIndex="1" GridPane.rowIndex="5" />
+												<JFXTextField fx:id="fieldSize"
+													GridPane.columnIndex="1" GridPane.rowIndex="3" />
+												<Label text="TIENDA" GridPane.rowIndex="6" />
+												<JFXComboBox fx:id="fieldShop"
+													maxWidth="1.7976931348623157E308" prefWidth="1000.0"
+													GridPane.columnIndex="1" GridPane.rowIndex="6" />
 											</children>
 											<VBox.margin>
 												<Insets left="100.0" right="100.0" />
