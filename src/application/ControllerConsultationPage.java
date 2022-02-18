@@ -160,8 +160,8 @@ public class ControllerConsultationPage {
 
 		Stage stage = new Stage();
 		stage.setScene(new Scene(root));
-		stage.showAndWait();
-		initialize();
+		stage.show();
+		((Node) (event.getSource())).getScene().getWindow().hide();
 	}
 
 	@FXML
@@ -260,7 +260,7 @@ public class ControllerConsultationPage {
 
 	void getItems(ConsultationPageConnection consultDB) {
 
-		ObservableList<ModelItemTable> obList = consultDB.getItemsTable();
+		ObservableList<ModelItemTable> obList = consultDB.getItemsTable(currentUser.getShopId());
 		
 		idItemTable.setCellValueFactory(new PropertyValueFactory<>("id"));
 		cbItemTable.setCellValueFactory(new PropertyValueFactory<>("barCode"));
