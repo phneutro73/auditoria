@@ -223,7 +223,7 @@ public class ControllerReservationPage {
 		Object reservas = reservationItemTable.getCellData(0);
 		Object cant = quantityItemTable.getCellData(0);
 		
-		if (Integer.parseInt(reservas.toString())  < Integer.parseInt(cant.toString()) ) {
+		if (Integer.parseInt(reservas.toString()) < Integer.parseInt(cant.toString()) ) {
 			if(checkAllFields()) {
 				if(chkPrivacy.isSelected()) {
 					ConsultationPageConnection consultDB = new ConsultationPageConnection();
@@ -278,7 +278,7 @@ public class ControllerReservationPage {
 			}
 		} else {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
-			ControllerAlertDialog control = new ControllerAlertDialog(120, 210, "Error",
+			ControllerAlertDialog control = new ControllerAlertDialog(140, 230, "Error",
 					"Todos los artículos están reservados, tendrá que dejar que pase el tiempo de espera (20 mins).");
 			loader.setController(control);
 			Parent root = loader.load();
