@@ -107,17 +107,16 @@ public class ControllerConsultationPage {
 
 	@FXML
 	private JFXButton btnDetailsItem;
-	
-	@FXML
-    private JFXButton btnReservations;
 
+	@FXML
+	private JFXButton btnReservations;
 
 	boolean isExpanded;
 	int idItemSelected;
 
 	@FXML
 	void initialize() {
-		
+
 		ConsultationPageConnection consultDB = new ConsultationPageConnection();
 
 		getItems(consultDB);
@@ -142,8 +141,8 @@ public class ControllerConsultationPage {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/YesNoAlertDialog.fxml"));
 		ControllerYesNoAlertDialog control = new ControllerYesNoAlertDialog(0, 0, "Atención",
 				"Esta acción es permanente, no se podrá deshacer. Preste atención y revise los datos.",
-				"¿Está seguro de que desea eliminar el artículo con el siguiente ID: "
-						+ String.valueOf(idItemSelected) + "?",
+				"¿Está seguro de que desea eliminar el artículo con el siguiente ID: " + String.valueOf(idItemSelected)
+						+ "?",
 				"SÍ", "No", "consultDeleteItem", params);
 		loader.setController(control);
 		Parent root = loader.load();
@@ -153,7 +152,7 @@ public class ControllerConsultationPage {
 		stage.setScene(new Scene(root));
 		stage.showAndWait();
 		initialize();
-		
+
 	}
 
 	@FXML
@@ -270,12 +269,11 @@ public class ControllerConsultationPage {
 			btnDetailsItem.setDisable(true);
 		}
 	}
-	
 
-    @FXML
-    void seeAllReservations(MouseEvent event) throws IOException {
-    	FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/SeeAllReservations.fxml"));
-    	ControllerSeeAllReservations control = new ControllerSeeAllReservations(currentUser);
+	@FXML
+	void seeAllReservations(MouseEvent event) throws IOException {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/SeeAllReservations.fxml"));
+		ControllerSeeAllReservations control = new ControllerSeeAllReservations(currentUser);
 		loader.setController(control);
 		Parent root = loader.load();
 
@@ -283,12 +281,12 @@ public class ControllerConsultationPage {
 		stage.setScene(new Scene(root));
 		stage.showAndWait();
 		initialize();
-    }
+	}
 
 	void getItems(ConsultationPageConnection consultDB) {
 
 		ObservableList<ModelItemTable> obList = consultDB.getItemsTable(currentUser.getShopId());
-		
+
 		idItemTable.setCellValueFactory(new PropertyValueFactory<>("id"));
 		cbItemTable.setCellValueFactory(new PropertyValueFactory<>("barCode"));
 		nameItemTable.setCellValueFactory(new PropertyValueFactory<>("itemName"));
@@ -298,9 +296,9 @@ public class ControllerConsultationPage {
 		inShopItemTable.setCellValueFactory(new PropertyValueFactory<>("inShop"));
 		reservationItemTable.setCellValueFactory(new PropertyValueFactory<>("reservations"));
 		priceItemTable.setCellValueFactory(new PropertyValueFactory<>("price"));
-		
+
 		itemTable.setItems(obList);
-		
+
 		FilteredList<ModelItemTable> filteredItemData = new FilteredList<>(obList, b -> true);
 		txtItemSearch.textProperty().addListener((observable, oldValue, newValue) -> {
 			filteredItemData.setPredicate(ItemSearchModel -> {
@@ -336,9 +334,7 @@ public class ControllerConsultationPage {
 		SortedList<ModelItemTable> sortedItemData = new SortedList<>(filteredItemData);
 		sortedItemData.comparatorProperty().bind(itemTable.comparatorProperty());
 		itemTable.setItems(sortedItemData);
-		
+
 	}
-	
-	
 
 }

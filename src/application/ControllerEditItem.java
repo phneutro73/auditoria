@@ -101,7 +101,7 @@ public class ControllerEditItem {
 					boolean success = consultDB.updateItem(itemId, fieldBarCode.getText(), fieldName.getText(),
 							fieldType.getSelectionModel().getSelectedItem(), fieldSize.getText(),
 							Double.parseDouble(fieldPrice.getText()));
-					
+
 					if (success) {
 						FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
 						ControllerAlertDialog control = new ControllerAlertDialog(120, 210, "Guardado correcto",
@@ -128,13 +128,13 @@ public class ControllerEditItem {
 
 					Stage stage = (Stage) btnCancel.getScene().getWindow();
 					stage.close();
-					
+
 				} else {
 					if (oldBarCode.equals(fieldBarCode.getText())) {
 						boolean success = consultDB.updateItem(itemId, fieldBarCode.getText(), fieldName.getText(),
 								fieldType.getSelectionModel().getSelectedItem(), fieldSize.getText(),
 								Double.parseDouble(fieldPrice.getText()));
-						
+
 						if (success) {
 							FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
 							ControllerAlertDialog control = new ControllerAlertDialog(120, 210, "Guardado correcto",
@@ -159,10 +159,9 @@ public class ControllerEditItem {
 							stage.show();
 						}
 
-
 						Stage stage = (Stage) btnCancel.getScene().getWindow();
 						stage.close();
-						
+
 					} else {
 						FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
 						ControllerAlertDialog control = new ControllerAlertDialog(120, 210, "Error",

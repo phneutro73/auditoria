@@ -124,16 +124,16 @@ public class ControllerReservationPage {
 
 	@FXML
 	void initialize() {
-		
+
 		ConsultationPageConnection consultDB = new ConsultationPageConnection();
 		isExpanded = false;
 		getItemTable(consultDB);
-		
+
 		List<String> tiendas = consultDB.listShopsWithItem(itemId);
 		fieldShopName.getItems().removeAll(fieldShopName.getItems());
 		fieldShopName.getItems().addAll(tiendas);
-		fieldShopName.getSelectionModel().select("-");	
-		
+		fieldShopName.getSelectionModel().select("-");
+
 	}
 
 	@FXML
@@ -219,16 +219,17 @@ public class ControllerReservationPage {
 
 	@FXML
 	void reservation(ActionEvent event) throws IOException {
-		
+
 		Object reservas = reservationItemTable.getCellData(0);
 		Object cant = quantityItemTable.getCellData(0);
-		
-		if (Integer.parseInt(reservas.toString()) < Integer.parseInt(cant.toString()) ) {
-			if(checkAllFields()) {
-				if(chkPrivacy.isSelected()) {
+
+		if (Integer.parseInt(reservas.toString()) < Integer.parseInt(cant.toString())) {
+			if (checkAllFields()) {
+				if (chkPrivacy.isSelected()) {
 					ConsultationPageConnection consultDB = new ConsultationPageConnection();
-					boolean success = consultDB.createReservation(fieldShopName.getSelectionModel().getSelectedItem(), itemId, fieldDni.getText(), fieldEmail.getText());
-					
+					boolean success = consultDB.createReservation(fieldShopName.getSelectionModel().getSelectedItem(),
+							itemId, fieldDni.getText(), fieldEmail.getText());
+
 					if (success) {
 						FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
 						ControllerAlertDialog control = new ControllerAlertDialog(120, 210, "Guardado correcto",
@@ -299,11 +300,11 @@ public class ControllerReservationPage {
 			return false;
 		}
 	}
-	
+
 	void getItemTable(ConsultationPageConnection consultDB) {
-		
+
 		ObservableList<ModelItemTable> obList = consultDB.getItemDetailTable(itemId, currentUser.getShopId());
-		
+
 		idItemTable.setCellValueFactory(new PropertyValueFactory<ModelItemTable, String>("id"));
 		cbItemTable.setCellValueFactory(new PropertyValueFactory<ModelItemTable, String>("barCode"));
 		nameItemTable.setCellValueFactory(new PropertyValueFactory<ModelItemTable, String>("itemName"));
@@ -313,9 +314,9 @@ public class ControllerReservationPage {
 		inShopItemTable.setCellValueFactory(new PropertyValueFactory<ModelItemTable, String>("inShop"));
 		reservationItemTable.setCellValueFactory(new PropertyValueFactory<ModelItemTable, String>("reservations"));
 		priceItemTable.setCellValueFactory(new PropertyValueFactory<ModelItemTable, String>("price"));
-		
+
 		itemTable.setItems(obList);
-		
+
 	}
 
 }

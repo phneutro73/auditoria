@@ -301,9 +301,9 @@ public class ControllerYesNoAlertDialog {
 			stage.show();
 		}
 	}
-	
+
 	void consultDeleteItem() throws IOException {
-		
+
 		AdministratorPageConnection adminDB = new AdministratorPageConnection();
 		ConsultationPageConnection consultDB = new ConsultationPageConnection();
 		boolean success = consultDB.deleteItem(Integer.parseInt(params[0]));
@@ -332,5 +332,5 @@ public class ControllerYesNoAlertDialog {
 			stage.show();
 		}
 	}
-	
+
 }

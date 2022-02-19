@@ -282,7 +282,7 @@ public class ControllerAddItemsPage {
 			stage.initStyle(StageStyle.UNDECORATED);
 			stage.setScene(new Scene(root));
 			stage.show();
-			
+
 		}
 
 	}
@@ -317,8 +317,7 @@ public class ControllerAddItemsPage {
 				&& (!fieldPrice.getText().isEmpty() && fieldPrice.getText() != null && fieldPrice.getText() != "")
 				&& (!fieldQuantity.getText().isEmpty() && fieldQuantity.getText() != null
 						&& fieldQuantity.getText() != "")
-				&& (fieldShop.getValue().toString() != "-")
-		) {
+				&& (fieldShop.getValue().toString() != "-")) {
 			return true;
 		} else {
 			return false;
