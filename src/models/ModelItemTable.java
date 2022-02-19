@@ -54,7 +54,7 @@ public class ModelItemTable {
 		this.itemName = itemName;
 	}
 
-	public String getItmeType() {
+	public String getItemType() {
 		return itemType;
 	}
 
