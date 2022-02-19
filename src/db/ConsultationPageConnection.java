@@ -7,6 +7,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Hashtable;
 import java.util.List;
 
 import javafx.collections.FXCollections;
@@ -95,8 +97,8 @@ public class ConsultationPageConnection {
 			conn = DriverManager.getConnection(connectionUrl);
 			System.out.println("Connected to DB");
 			Statement stmt = conn.createStatement();
-			rsItems = stmt.executeQuery("[sp_list_item_detail]" + "		@ID = " + itemId + "," + "		@SHOP_ID = "
-					+ shopId);
+			rsItems = stmt.executeQuery(
+					"[sp_list_item_detail]" + "		@ID = " + itemId + "," + "		@SHOP_ID = " + shopId);
 
 			while (rsItems.next()) {
 				obList.add(new ModelItemTable(rsItems.getInt("id"), rsItems.getString("cb"),
@@ -121,7 +123,7 @@ public class ConsultationPageConnection {
 
 		return obList;
 	}
-	
+
 	public List<String> listShopsWithItem(int itemId) {
 		Connection conn = null;
 		List<String> shops = new ArrayList<>();
@@ -165,14 +167,14 @@ public class ConsultationPageConnection {
 
 			conn = DriverManager.getConnection(connectionUrl);
 			System.out.println("Connected to DB");
-			
+
 			Statement stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT TOP 1 id FROM tiendas WHERE nombre_tienda = '" + shop + "'");
 			int shopId = -1;
 			while (rs.next()) {
 				shopId = rs.getInt("id");
 			}
-			
+
 			String query = "[sp_create_reservation]" + "		@SHOP_ID = " + shopId + "," + "		@ITEM_ID = "
 					+ itemId + "," + "		@ID_NUMBER = '" + dni + "'," + "		@EMAIL = '" + email + "'";
 			PreparedStatement statement = conn.prepareStatement(query);
@@ -194,6 +196,101 @@ public class ConsultationPageConnection {
 		}
 
 		return success;
+	}
+
+	public List<String> listItemTypes() {
+		Connection conn = null;
+		List<String> types = new ArrayList<>();
+		types.add("-");
+		try {
+			conn = DriverManager.getConnection(connectionUrl);
+			System.out.println("Connected to DB");
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT nombre FROM tipo_prenda");
+
+			while (rs.next()) {
+				String type = rs.getString("nombre");
+				types.add(type);
+			}
+		}
+
+		catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException ex) {
+					ex.printStackTrace();
+				}
+			}
+		}
+
+		return types;
+
+	}
+
+	public Hashtable<String, Object> getItem(int itemId) {
+		Connection conn = null;
+		Hashtable<String, Object> item = new Hashtable<String, Object>();
+
+		try {
+			conn = DriverManager.getConnection(connectionUrl);
+			System.out.println("Connected to DB");
+			
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT TOP 1 CB FROM prendas WHERE id = " + itemId);
+			String itemBarCode = "";
+			while (rs.next()) {
+				itemBarCode = rs.getString("CB");
+			}
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery("[sp_search_item] '" + itemBarCode + "'");
+
+			int id = 0;
+			String name = null;
+			int typeId = 0;
+			String strType = null;
+			String size = null;
+			Double price = 0.0;
+
+			while (rs.next()) {
+				id = rs.getInt("id");
+				name = rs.getString("nombre");
+				typeId = rs.getInt("tipo_id");
+				size = rs.getString("talla");
+				price = rs.getDouble("precio");
+
+				Statement stmt2 = conn.createStatement();
+				ResultSet rsSchedule = stmt2
+						.executeQuery("SELECT TOP 1 nombre FROM tipo_prenda WHERE id = " + typeId);
+				strType = "-";
+				while (rsSchedule.next()) {
+					strType = rsSchedule.getString("nombre");
+				}
+				
+			}
+
+			item.put("name", name);
+			item.put("itemBarCode", itemBarCode);
+			item.put("type", strType);
+			item.put("size", size);
+			item.put("price", price);
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException ex) {
+					ex.printStackTrace();
+				}
+			}
+		}
+
+		return item;
+
 	}
 
 }
