@@ -193,8 +193,23 @@ public class ControllerSalesPage {
 	}
 
 	@FXML
-	void cancel(ActionEvent event) {
+	void cancel(ActionEvent event) throws IOException {
+		
+		String[] params = { String.valueOf(currentUser.getId()) };
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/YesNoAlertDialog.fxml"));
+		ControllerYesNoAlertDialog control = new ControllerYesNoAlertDialog(0, 0, "Atención",
+				"Esta acción es permanente, no se podrá deshacer. Preste atención y revise los datos.",
+				"¿Está seguro de que desea cancelar esta venta?",
+				"SÍ", "No", "ticketDelete", params);
+		loader.setController(control);
+		Parent root = loader.load();
 
+		Stage stage = new Stage();
+		stage.initStyle(StageStyle.UNDECORATED);
+		stage.setScene(new Scene(root));
+		stage.showAndWait();
+		initialize();
+		
 	}
 
 	@FXML

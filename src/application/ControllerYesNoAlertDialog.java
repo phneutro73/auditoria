@@ -100,6 +100,9 @@ public class ControllerYesNoAlertDialog {
 		case "ticketDeleteItem":
 			ticketDeleteItem();
 			break;
+		case "ticketDelete":
+			ticketDelete();
+			break;
 		default:
 			break;
 		}
@@ -363,8 +366,37 @@ public class ControllerYesNoAlertDialog {
 			stage.initStyle(StageStyle.UNDECORATED);
 			stage.setScene(new Scene(root));
 			stage.show();
-		}
-		
+		}	
 	}
 
+	void ticketDelete() throws IOException {
+		
+		SalesPageConnection salesDB = new SalesPageConnection();
+		boolean success = salesDB.deleteTicket(Integer.parseInt(params[0]));
+		
+		if (success) {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
+			ControllerAlertDialog control = new ControllerAlertDialog(120, 210, "Eliminado correctamente",
+					"La venta ha sido cancelada correctamente.");
+			loader.setController(control);
+			Parent root = loader.load();
+
+			Stage stage = new Stage();
+			stage.initStyle(StageStyle.UNDECORATED);
+			stage.setScene(new Scene(root));
+			stage.show();
+		} else {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
+			ControllerAlertDialog control = new ControllerAlertDialog(120, 210, "Error",
+					"Ha habido un error, la venta no ha sido cancelada.");
+			loader.setController(control);
+			Parent root = loader.load();
+
+			Stage stage = new Stage();
+			stage.initStyle(StageStyle.UNDECORATED);
+			stage.setScene(new Scene(root));
+			stage.show();
+		}	
+		
+	}
 }
