@@ -83,7 +83,7 @@ public class ControllerAddNewSchedule {
 						stage.show();
 					} else {
 						FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
-						ControllerAlertDialog control = new ControllerAlertDialog(140, 210, "Error",
+						ControllerAlertDialog control = new ControllerAlertDialog(120, 210, "Error",
 								"Se ha producido un error. Por favor, inténtelo de nuevo.");
 						loader.setController(control);
 						Parent root = loader.load();

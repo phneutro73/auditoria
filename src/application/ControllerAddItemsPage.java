@@ -312,12 +312,12 @@ public class ControllerAddItemsPage {
 	boolean checkAllFields() {
 		if ((!fieldBarCode.getText().isEmpty() && fieldBarCode.getText() != null && fieldBarCode.getText() != "")
 				&& (!fieldName.getText().isEmpty() && fieldName.getText() != null && fieldName.getText() != "")
-				// && (fieldType.getValue().toString() != "-")
+				&& (fieldType.getValue().toString() != "-")
 				&& (!fieldSize.getText().isEmpty() && fieldSize.getText() != null && fieldSize.getText() != "")
 				&& (!fieldPrice.getText().isEmpty() && fieldPrice.getText() != null && fieldPrice.getText() != "")
 				&& (!fieldQuantity.getText().isEmpty() && fieldQuantity.getText() != null
 						&& fieldQuantity.getText() != "")
-		// && (fieldType.getValue().toString() != "-")
+				&& (fieldShop.getValue().toString() != "-")
 		) {
 			return true;
 		} else {

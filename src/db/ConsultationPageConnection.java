@@ -292,5 +292,87 @@ public class ConsultationPageConnection {
 		return item;
 
 	}
+	
+	public List<Hashtable<String, Object>> getItemsWithBarCode(String barCode) {
+		Connection conn = null;
+		List<Hashtable<String, Object>> items = new ArrayList<>();
+		Hashtable<String, Object> currentItem = new Hashtable<String, Object>();
+		
+		try {
+			conn = DriverManager.getConnection(connectionUrl);
+			System.out.println("Connected to DB");
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery("[sp_search_item] '" + barCode + "'");
+
+			while (rs.next()) {
+				int id = rs.getInt("id");
+				String name = rs.getString("nombre");
+				int type = rs.getInt("tipo_id");
+				String size = rs.getString("talla");
+				double price = rs.getDouble("precio");
+
+				currentItem.put("id", id);
+				currentItem.put("name", name);
+				currentItem.put("barCode", barCode);
+				currentItem.put("typeId", type);
+				currentItem.put("size", size);
+				currentItem.put("price", price);
+				
+				items.add(currentItem);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException ex) {
+					ex.printStackTrace();
+				}
+			}
+		}
+		return items;
+	}
+	
+	public boolean updateItem(int itemId, String itemBarCode, String itemName, String itemType, String itemSize, double price) {
+		
+		boolean success = false;
+		Connection conn = null;
+
+		try {
+
+			conn = DriverManager.getConnection(connectionUrl);
+			System.out.println("Connected to DB");
+			
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT TOP 1 id FROM tipo_prenda WHERE nombre = '" + itemType + "'");
+			int typeId = -1;
+			while (rs.next()) {
+				typeId = rs.getInt("id");
+			}
+			
+			String query = "[sp_update_item]" + "		@ID = " + itemId + "," + "		@BAR_CODE = '" + itemBarCode + "',"
+					+ "		@NAME = '" + itemName + "'," + "		@TYPE_ID = " + typeId + "," + "		@SIZE = '" 
+					+ itemSize + "'," + "		@PRICE = " + price;
+
+			PreparedStatement statement = conn.prepareStatement(query);
+			statement.executeUpdate();
+			success = true;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			success = false;
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException ex) {
+					ex.printStackTrace();
+				}
+			}
+			success = true;
+		}
+		return success;
+	}
 
 }
