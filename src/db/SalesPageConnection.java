@@ -59,7 +59,7 @@ public class SalesPageConnection {
 		}
 		return item;
 	}
-	
+
 	public List<String> listItemTypes() {
 		Connection conn = null;
 		List<String> types = new ArrayList<>();
@@ -89,7 +89,7 @@ public class SalesPageConnection {
 		}
 		return types;
 	}
-	
+
 	public ObservableList<ModelTicketTable> getTicketTable(int userId) {
 
 		Connection conn = null;
@@ -103,12 +103,8 @@ public class SalesPageConnection {
 			rsItems = stmt.executeQuery("[sp_list_ticket] " + userId);
 
 			while (rsItems.next()) {
-				obList.add(new ModelTicketTable(
-						rsItems.getInt("id"), 
-						rsItems.getString("CB"),
-						rsItems.getString("nombre"), 
-						rsItems.getString("nombre_tipo"), 
-						rsItems.getString("talla"),
+				obList.add(new ModelTicketTable(rsItems.getInt("id_prenda"), rsItems.getString("CB"),
+						rsItems.getString("nombre"), rsItems.getString("nombre_tipo"), rsItems.getString("talla"),
 						rsItems.getDouble("precio")));
 			}
 
@@ -128,7 +124,7 @@ public class SalesPageConnection {
 
 		return obList;
 	}
-	
+
 	public boolean addItemToTicket(int itemId, int userId, int quantity) {
 
 		boolean success = false;
@@ -138,8 +134,8 @@ public class SalesPageConnection {
 
 			conn = DriverManager.getConnection(connectionUrl);
 			System.out.println("Connected to DB");
-			String query = "[sp_add_item_ticket]" + "		@ITEM_ID = " + itemId + "," + "		@USER_ID = " + userId + ","
-					+ "		@QUANTITY= " + quantity;
+			String query = "[sp_add_item_ticket]" + "		@ITEM_ID = " + itemId + "," + "		@USER_ID = " + userId
+					+ "," + "		@QUANTITY= " + quantity;
 			PreparedStatement statement = conn.prepareStatement(query);
 			statement.executeUpdate();
 			success = true;
@@ -155,15 +151,14 @@ public class SalesPageConnection {
 					ex.printStackTrace();
 				}
 			}
-			success = true;
 		}
 
 		return success;
 
 	}
-	
+
 	public boolean deleteTicketItem(int ticketId, int userId) {
-		
+
 		boolean success = false;
 		Connection conn = null;
 
@@ -171,7 +166,8 @@ public class SalesPageConnection {
 			conn = DriverManager.getConnection(connectionUrl);
 			System.out.println("Connected to DB");
 			Statement stmt = conn.createStatement();
-			stmt.executeUpdate("[sp_delete_ticket_item]"  + "		@TICKET_ID = " + ticketId + "," + "		@USER_ID = " + userId);
+			stmt.executeUpdate(
+					"[sp_delete_ticket_item]" + "		@TICKET_ID = " + ticketId + "," + "		@USER_ID = " + userId);
 			success = true;
 
 		} catch (SQLException e) {
@@ -185,14 +181,13 @@ public class SalesPageConnection {
 					ex.printStackTrace();
 				}
 			}
-			success = true;
 		}
 
 		return success;
 	}
-	
+
 	public boolean deleteTicket(int userId) {
-		
+
 		boolean success = false;
 		Connection conn = null;
 
@@ -214,11 +209,77 @@ public class SalesPageConnection {
 					ex.printStackTrace();
 				}
 			}
-			success = true;
 		}
 
 		return success;
-		
+
 	}
-	
+
+	public boolean makeASale(int itemId, int userId, int quantity, int shopId) {
+
+		boolean success = false;
+		Connection conn = null;
+
+		try {
+
+			conn = DriverManager.getConnection(connectionUrl);
+			System.out.println("Connected to DB");
+			String query = "[sp_add_sale]" + "		@ITEM_ID = " + itemId + "," + "		@USER_ID = " + userId + ","
+					+ "		@QUANTITY = " + quantity + "," + "		@SHOP_ID = " + shopId;
+			PreparedStatement statement = conn.prepareStatement(query);
+			statement.executeUpdate();
+			success = true;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			success = false;
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException ex) {
+					ex.printStackTrace();
+				}
+			}
+		}
+
+		return success;
+
+	}
+
+	public boolean checkIsInShop(int itemId, int shopId) {
+		boolean isInShop = false;
+		Connection conn = null;
+		ResultSet rsItems = null;
+
+		try {
+
+			conn = DriverManager.getConnection(connectionUrl);
+			System.out.println("Connected to DB");
+			Statement stmt = conn.createStatement();
+			rsItems = stmt.executeQuery("[sp_check_item_shop]" + "		@ITEM_ID = " + itemId + "," + "		@SHOP_ID = " + shopId);
+			
+			while (rsItems.next()) {
+				if (rsItems.getInt("cantidad") > 0) {
+					isInShop = true;
+				}
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			isInShop = false;
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException ex) {
+					ex.printStackTrace();
+				}
+			}
+		}
+
+		return isInShop;
+
+	}
+
 }

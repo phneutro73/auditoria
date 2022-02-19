@@ -226,7 +226,7 @@
 														</GridPane>
 														<HBox alignment="CENTER" prefWidth="473.0" VBox.vgrow="NEVER">
 															<children>
-																<JFXButton fx:id="btnAcceptSearch" onAction="#addItem" styleClass="buttonMainColor" text="ACEPTAR" />
+																<JFXButton fx:id="btnAcceptSearch" onAction="#addItem" styleClass="buttonMainColor" text="AÑADIR" />
 															</children>
 															<VBox.margin>
 																<Insets top="5.0" />
@@ -274,7 +274,7 @@
 														<Label text="Total:" />
 														<HBox alignment="TOP_RIGHT" prefHeight="32.0" prefWidth="108.0">
 															<children>
-																<Label fx:id="lblTotal" prefHeight="35.0" prefWidth="23.0" text="€">
+																<Label fx:id="lblTotal" maxWidth="1.7976931348623157E308" prefHeight="35.0" prefWidth="109.0" text="€" textAlignment="RIGHT" HBox.hgrow="ALWAYS">
 																	<font>
 																		<Font name="System Bold" size="24.0" />
 																	</font>
