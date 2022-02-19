@@ -13,6 +13,7 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import models.ModelAllReservationsTable;
 import models.ModelItemTable;
 import models.ModelRoleTable;
 
@@ -373,6 +374,48 @@ public class ConsultationPageConnection {
 			success = true;
 		}
 		return success;
+	}
+	
+	public ObservableList<ModelAllReservationsTable> getAllReservationsTable(boolean hist) {
+
+		Connection conn = null;
+		ResultSet rsItems = null;
+		ObservableList<ModelAllReservationsTable> obList = FXCollections.observableArrayList();
+
+		try {
+			conn = DriverManager.getConnection(connectionUrl);
+			System.out.println("Connected to DB");
+			Statement stmt = conn.createStatement();
+			rsItems = stmt.executeQuery("[sp_list_reservations] " + hist);
+
+			while (rsItems.next()) {
+				obList.add(new ModelAllReservationsTable(
+						rsItems.getInt("id"), 
+						rsItems.getString("correo"),
+						rsItems.getString("dni"), 
+						rsItems.getString("nombre_tienda"), 
+						rsItems.getString("CB"),
+						rsItems.getInt("cantidad"), 
+						rsItems.getDouble("precio"),
+						rsItems.getDate("fin_reserva_datetime"),
+						rsItems.getTime("fin_reserva_datetime")));
+			}
+
+		}
+
+		catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException ex) {
+					ex.printStackTrace();
+				}
+			}
+		}
+
+		return obList;
 	}
 
 }

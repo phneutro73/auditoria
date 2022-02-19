@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXTabPane?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="parent" prefHeight="631.0" prefWidth="938.0" styleClass="softBackgroundParent" stylesheets="@application.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+	<children>
+		<VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+			<children>
+				<AnchorPane maxHeight="-Infinity" minHeight="-Infinity" prefHeight="80.0" prefWidth="900.0" VBox.vgrow="NEVER">
+					<children>
+						<AnchorPane layoutX="31.0" prefHeight="55.0" prefWidth="166.0" styleClass="pageTitle" stylesheets="@application.css">
+							<children>
+								<ImageView fitHeight="25.0" fitWidth="25.0" layoutX="28.0" layoutY="13.0">
+									<image>
+										<Image url="@../resources/assets/admin_high_icon.png" />
+									</image>
+								</ImageView>
+								<Label layoutX="62.0" layoutY="16.0" text="Consulta" textFill="#f0fbfd">
+									<font>
+										<Font name="System Bold" size="15.0" />
+									</font>
+								</Label>
+							</children>
+						</AnchorPane>
+						<ImageView fitHeight="15.0" fitWidth="9.0" layoutX="216.0" layoutY="20.0">
+							<image>
+								<Image url="@../resources/assets/NextIcon.png" />
+							</image>
+						</ImageView>
+						<Label fx:id="subtitle" layoutX="245.0" layoutY="18.0" text="Ver reservas" textFill="#434345">
+							<font>
+								<Font name="System Bold" size="13.0" />
+							</font>
+						</Label>
+					</children>
+				</AnchorPane>
+            <JFXTabPane VBox.vgrow="ALWAYS">
+               <tabs>
+                  <Tab text="Reservas actuales">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                  				<AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="card" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+                                 <children>
+                                    <VBox prefHeight="200.0" prefWidth="100.0" spacing="15.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <HBox alignment="CENTER" prefHeight="25.0" prefWidth="715.0" spacing="20.0">
+                                             <children>
+                                                <ImageView fitHeight="21.0" fitWidth="19.0">
+                                                   <image>
+                                                      <Image url="@../resources/assets/searchIcon.png" />
+                                                   </image>
+                                                </ImageView>
+                                                <JFXTextField fx:id="txtCurrentReservationsSearch" labelFloat="true" prefHeight="25.0" prefWidth="664.0" promptText="Búsqueda de reservas actuales..." styleClass="searchTextField" stylesheets="@application.css" HBox.hgrow="ALWAYS" />
+                                             </children>
+                                             <padding>
+                                                <Insets left="20.0" right="30.0" />
+                                             </padding>
+                                          </HBox>
+                                          <TableView fx:id="currentReservationsTable" onMousePressed="#selectReservation" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                                             <columns>
+                                                <TableColumn fx:id="idCurrentReservationsTable" maxWidth="100.0" minWidth="40.0" prefWidth="40.0" text="ID" />
+                                                <TableColumn fx:id="emailCurrentReservationsTable" maxWidth="600.0" minWidth="150.0" prefWidth="180.0" text="Correo" />
+                                                <TableColumn fx:id="dniCurrentReservationsTable" maxWidth="500.0" minWidth="100.0" prefWidth="100.0" text="DNI" />
+                                                <TableColumn fx:id="shopIdCurrentReservationsTable" maxWidth="500.0" minWidth="100.0" prefWidth="120.0" text="Tienda" />
+                                                <TableColumn fx:id="barCodeCurrentReservationsTable" maxWidth="200.0" minWidth="70.0" prefWidth="70.0" text="C. Barras" />
+                                                <TableColumn fx:id="quantityCurrentReservationsTable" maxWidth="200.0" minWidth="70.0" prefWidth="70.0" text="Cantidad" />
+                                                <TableColumn fx:id="priceCurrentReservationsTable" maxWidth="225.0" minWidth="70.0" prefWidth="70.0" text="Precio" />
+                                                <TableColumn fx:id="dateCurrentReservationsTable" maxWidth="225.0" minWidth="90.0" prefWidth="75.0" text="Fecha fin" />
+                                                <TableColumn fx:id="timeCurrentReservationsTable" maxWidth="225.0" minWidth="90.0" prefWidth="75.0" text="Hora fin" />
+                                             </columns>
+                                             <columnResizePolicy>
+                                                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                             </columnResizePolicy>
+                                          </TableView>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="30.0" left="40.0" right="40.0" top="30.0" />
+                                 </padding>
+                  				</AnchorPane>
+                           </children>
+                        </AnchorPane>
+                    </content>
+                  </Tab>
+                  <Tab text="Histórico de reservas">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="card" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+                                 <children>
+                                    <VBox prefHeight="200.0" prefWidth="100.0" spacing="15.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <HBox alignment="CENTER" prefHeight="25.0" prefWidth="715.0" spacing="20.0">
+                                             <children>
+                                                <ImageView fitHeight="21.0" fitWidth="19.0">
+                                                   <image>
+                                                      <Image url="@../resources/assets/searchIcon.png" />
+                                                   </image>
+                                                </ImageView>
+                                                <JFXTextField fx:id="txtReservationHistoryTable" labelFloat="true" prefHeight="25.0" prefWidth="664.0" promptText="Búsqueda de reservas pasadas..." styleClass="searchTextField" stylesheets="@application.css" HBox.hgrow="ALWAYS" />
+                                             </children>
+                                             <padding>
+                                                <Insets left="20.0" right="30.0" />
+                                             </padding>
+                                          </HBox>
+                                          <TableView fx:id="reservationHistoryTable" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                                             <columns>
+                                                <TableColumn fx:id="idReservationHistoryTable" maxWidth="100.0" minWidth="40.0" prefWidth="40.0" text="ID" />
+                                                <TableColumn fx:id="emailReservationHistoryTable" maxWidth="600.0" minWidth="150.0" prefWidth="180.0" text="Correo" />
+                                                <TableColumn fx:id="dniReservationHistoryTable" maxWidth="500.0" minWidth="100.0" prefWidth="100.0" text="DNI" />
+                                                <TableColumn fx:id="shopIdReservationHistoryTable" maxWidth="500.0" minWidth="100.0" prefWidth="120.0" text="Tienda" />
+                                                <TableColumn fx:id="barCodeReservationHistoryTable" maxWidth="200.0" minWidth="70.0" prefWidth="70.0" text="C. Barras" />
+                                                <TableColumn fx:id="quantityReservationHistoryTable" maxWidth="200.0" minWidth="70.0" prefWidth="70.0" text="Cantidad" />
+                                                <TableColumn fx:id="priceReservationHistoryTable" maxWidth="225.0" minWidth="70.0" prefWidth="70.0" text="Precio" />
+                                                <TableColumn fx:id="dateReservationHistoryTable" maxWidth="225.0" minWidth="90.0" prefWidth="75.0" text="Fecha fin" />
+                                                <TableColumn fx:id="timeReservationHistoryTable" maxWidth="225.0" minWidth="90.0" prefWidth="75.0" text="Hora fin" />
+                                             </columns>
+                                             <columnResizePolicy>
+                                                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                             </columnResizePolicy>
+                                          </TableView>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="30.0" left="40.0" right="40.0" top="30.0" />
+                                 </padding>
+                              </AnchorPane>
+                           </children>
+                        </AnchorPane>
+                    </content>
+                  </Tab>
+               </tabs>
+            </JFXTabPane>
+			</children>
+		</VBox>
+	</children>
+</AnchorPane>

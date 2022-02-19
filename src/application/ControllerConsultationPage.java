@@ -107,6 +107,10 @@ public class ControllerConsultationPage {
 
 	@FXML
 	private JFXButton btnDetailsItem;
+	
+	@FXML
+    private JFXButton btnReservations;
+
 
 	boolean isExpanded;
 	int idItemSelected;
@@ -121,6 +125,7 @@ public class ControllerConsultationPage {
 		isExpanded = false;
 		txtItemSearch.setFocusTraversable(false);
 		itemTable.setFocusTraversable(false);
+		btnReservations.setFocusTraversable(false);
 
 		btnEditItem.setDisable(true);
 		btnDeleteItem.setDisable(true);
@@ -265,6 +270,20 @@ public class ControllerConsultationPage {
 			btnDetailsItem.setDisable(true);
 		}
 	}
+	
+
+    @FXML
+    void seeAllReservations(MouseEvent event) throws IOException {
+    	FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/SeeAllReservations.fxml"));
+    	ControllerSeeAllReservations control = new ControllerSeeAllReservations(currentUser);
+		loader.setController(control);
+		Parent root = loader.load();
+
+		Stage stage = new Stage();
+		stage.setScene(new Scene(root));
+		stage.showAndWait();
+		initialize();
+    }
 
 	void getItems(ConsultationPageConnection consultDB) {
 
@@ -319,5 +338,7 @@ public class ControllerConsultationPage {
 		itemTable.setItems(sortedItemData);
 		
 	}
+	
+	
 
 }
