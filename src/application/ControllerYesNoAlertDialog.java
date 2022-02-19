@@ -8,6 +8,7 @@ import com.jfoenix.controls.JFXButton;
 import db.AddItemsPageConnection;
 import db.AdministratorPageConnection;
 import db.ConsultationPageConnection;
+import db.SalesPageConnection;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -95,6 +96,9 @@ public class ControllerYesNoAlertDialog {
 			break;
 		case "consultDeleteItem":
 			consultDeleteItem();
+			break;
+		case "ticketDeleteItem":
+			ticketDeleteItem();
 			break;
 		default:
 			break;
@@ -304,7 +308,6 @@ public class ControllerYesNoAlertDialog {
 
 	void consultDeleteItem() throws IOException {
 
-		AdministratorPageConnection adminDB = new AdministratorPageConnection();
 		ConsultationPageConnection consultDB = new ConsultationPageConnection();
 		boolean success = consultDB.deleteItem(Integer.parseInt(params[0]));
 
@@ -331,6 +334,37 @@ public class ControllerYesNoAlertDialog {
 			stage.setScene(new Scene(root));
 			stage.show();
 		}
+	}
+	
+	void ticketDeleteItem() throws IOException {
+		
+		SalesPageConnection salesDB = new SalesPageConnection();
+		boolean success = salesDB.deleteTicketItem(Integer.parseInt(params[0]), Integer.parseInt(params[1]));
+		
+		if (success) {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
+			ControllerAlertDialog control = new ControllerAlertDialog(120, 210, "Eliminado correctamente",
+					"El artículo ha sido eliminado correctamente.");
+			loader.setController(control);
+			Parent root = loader.load();
+
+			Stage stage = new Stage();
+			stage.initStyle(StageStyle.UNDECORATED);
+			stage.setScene(new Scene(root));
+			stage.show();
+		} else {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
+			ControllerAlertDialog control = new ControllerAlertDialog(120, 210, "Error",
+					"Ha habido un error, el artículo no ha sido eliminado.");
+			loader.setController(control);
+			Parent root = loader.load();
+
+			Stage stage = new Stage();
+			stage.initStyle(StageStyle.UNDECORATED);
+			stage.setScene(new Scene(root));
+			stage.show();
+		}
+		
 	}
 
 }

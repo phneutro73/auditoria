@@ -135,8 +135,6 @@ public class ControllerConsultationPage {
 	@FXML
 	void deleteItem(MouseEvent event) throws IOException {
 
-		AdministratorPageConnection adminDB = new AdministratorPageConnection();
-
 		String[] params = { String.valueOf(idItemSelected) };
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/YesNoAlertDialog.fxml"));
 		ControllerYesNoAlertDialog control = new ControllerYesNoAlertDialog(0, 0, "Atención",
