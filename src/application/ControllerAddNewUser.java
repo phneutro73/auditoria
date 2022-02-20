@@ -39,6 +39,9 @@ public class ControllerAddNewUser {
 	private Label subtitle;
 
 	@FXML
+	private AnchorPane txtEditInstructions;
+
+	@FXML
 	private Label lblPersonalInfo;
 
 	@FXML
@@ -262,6 +265,7 @@ public class ControllerAddNewUser {
 
 		try {
 
+			txtEditInstructions.setVisible(false);
 			AdministratorPageConnection adminDB = new AdministratorPageConnection();
 
 			List<String> schedules = adminDB.listSchedules();

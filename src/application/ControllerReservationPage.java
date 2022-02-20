@@ -9,6 +9,7 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 
 import db.ConsultationPageConnection;
+import db.SalesPageConnection;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -47,6 +48,9 @@ public class ControllerReservationPage {
 
 	@FXML
 	private VBox drawer;
+
+	@FXML
+	private AnchorPane parent;
 
 	@FXML
 	private HBox btnMenu;
@@ -120,10 +124,21 @@ public class ControllerReservationPage {
 	@FXML
 	private JFXButton btnReservation;
 
+	@FXML
+	private AnchorPane logOutButton;
+
 	boolean isExpanded;
 
 	@FXML
 	void initialize() {
+
+		if (currentUser.getRoleId() != 2) {
+			btnAdministrator.setVisible(false);
+		}
+
+		if (currentUser.getRoleId() != 2) {
+			btnAdministrator.setVisible(false);
+		}
 
 		ConsultationPageConnection consultDB = new ConsultationPageConnection();
 		isExpanded = false;
@@ -288,6 +303,37 @@ public class ControllerReservationPage {
 			stage.initStyle(StageStyle.UNDECORATED);
 			stage.setScene(new Scene(root));
 			stage.show();
+		}
+	}
+
+	@FXML
+	void logOut(MouseEvent event) throws IOException {
+		SalesPageConnection salesDB = new SalesPageConnection();
+
+		boolean unfinishedSales = salesDB.unfinishedTicket(currentUser.getId());
+
+		if (unfinishedSales) {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
+			ControllerAlertDialog control = new ControllerAlertDialog(120, 210, "Error",
+					"Tiene una venta en curso. Es necesario que la finalice o cancele.");
+			loader.setController(control);
+			Parent root = loader.load();
+
+			Stage stage = new Stage();
+			stage.initStyle(StageStyle.UNDECORATED);
+			stage.setScene(new Scene(root));
+			stage.show();
+		} else {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/login.fxml"));
+			controller_login control = new controller_login();
+			loader.setController(control);
+			Parent root = loader.load();
+
+			Stage stage = new Stage();
+			stage.initStyle(StageStyle.UNDECORATED);
+			stage.setScene(new Scene(root));
+			stage.show();
+			((Node) (event.getSource())).getScene().getWindow().hide();
 		}
 	}
 

@@ -29,7 +29,7 @@
 								<ImageView fitHeight="25.0" fitWidth="25.0"
 									layoutX="28.0" layoutY="13.0">
 									<image>
-										<Image url="@../resources/assets/admin_high_icon.png" />
+										<Image url="@../resources/assets/SalesHighIcon.png" />
 									</image>
 								</ImageView>
 								<Label layoutX="62.0" layoutY="16.0" text="Ventas"

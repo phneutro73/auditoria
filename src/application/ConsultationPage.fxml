@@ -14,8 +14,8 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane minWidth="1000.0" prefHeight="650.0"
-	prefWidth="941.0" styleClass="softBackgroundParent"
+<AnchorPane fx:id="parent" minWidth="1000.0"
+	prefHeight="650.0" prefWidth="941.0" styleClass="softBackgroundParent"
 	stylesheets="@application.css" xmlns="http://javafx.com/javafx/8.0.171"
 	xmlns:fx="http://javafx.com/fxml/1">
 	<children>
@@ -74,7 +74,8 @@
 									<graphic>
 										<ImageView fitHeight="40.0" fitWidth="40.0">
 											<image>
-												<Image url="@../resources/assets/consult_icon.png" />
+												<Image
+													url="@../resources/assets/consult_high_icon.png" />
 											</image>
 										</ImageView>
 									</graphic>
@@ -95,25 +96,6 @@
 										<ImageView fitHeight="40.0" fitWidth="40.0">
 											<image>
 												<Image url="@../resources/assets/add_icon.png" />
-											</image>
-										</ImageView>
-									</graphic>
-								</Label>
-							</children>
-							<padding>
-								<Insets left="10.0" />
-							</padding>
-						</HBox>
-						<HBox fx:id="btnStatistics" alignment="CENTER_LEFT"
-							prefHeight="100.0" prefWidth="52.0" styleClass="menuButton"
-							stylesheets="@styleMenu.css">
-							<children>
-								<Label styleClass="labelMenuButtons"
-									stylesheets="@styleMenu.css" text="   ESTADÍSTICAS">
-									<graphic>
-										<ImageView fitHeight="40.0" fitWidth="40.0">
-											<image>
-												<Image url="@../resources/assets/statistics_icon.png" />
 											</image>
 										</ImageView>
 									</graphic>
@@ -170,6 +152,19 @@
 												<Font name="System Bold" size="15.0" />
 											</font>
 										</Label>
+									</children>
+								</AnchorPane>
+								<AnchorPane fx:id="logOutButton" layoutX="752.0"
+									onMouseClicked="#logOut" prefHeight="55.0" prefWidth="65.0"
+									styleClass="pageTitle" stylesheets="@application.css"
+									AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="0.0">
+									<children>
+										<ImageView fitHeight="25.0" fitWidth="25.0"
+											layoutX="20.0" layoutY="13.0">
+											<image>
+												<Image url="@../resources/assets/LogOutIcon.png" />
+											</image>
+										</ImageView>
 									</children>
 								</AnchorPane>
 							</children>

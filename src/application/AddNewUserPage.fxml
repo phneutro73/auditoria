@@ -59,11 +59,11 @@
 								<Font name="System Bold" size="13.0" />
 							</font>
 						</Label>
-						<AnchorPane layoutX="610.0" layoutY="8.0"
-							prefHeight="46.0" prefWidth="268.0" style="sh: red;"
-							styleClass="smallNote" stylesheets="@application.css"
-							AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="15.0"
-							AnchorPane.topAnchor="10.0">
+						<AnchorPane fx:id="txtEditInstructions" layoutX="610.0"
+							layoutY="8.0" prefHeight="46.0" prefWidth="268.0"
+							style="sh: red;" styleClass="smallNote"
+							stylesheets="@application.css" AnchorPane.bottomAnchor="0.0"
+							AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="10.0">
 							<children>
 								<Label layoutX="15.0" layoutY="6.0" prefHeight="34.0"
 									prefWidth="244.0"

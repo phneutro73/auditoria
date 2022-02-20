@@ -320,5 +320,36 @@ public class SalesPageConnection {
 
 		return obList;
 	}
+	
+	public boolean unfinishedTicket(int userId) {
+		Connection conn = null;
+		ResultSet rsItems = null;
+		boolean isTicket = false;
+
+		try {
+			conn = DriverManager.getConnection(connectionUrl);
+			System.out.println("Connected to DB");
+			Statement stmt = conn.createStatement();
+			rsItems = stmt.executeQuery("[sp_list_ticket] " + userId);
+
+			while (rsItems.next()) {
+				isTicket = true;
+			}
+		}
+
+		catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException ex) {
+					ex.printStackTrace();
+				}
+			}
+		}
+
+		return isTicket;
+	}
 
 }

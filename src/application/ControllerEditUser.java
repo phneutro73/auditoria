@@ -52,6 +52,9 @@ public class ControllerEditUser {
 	private Label subtitle;
 
 	@FXML
+	private AnchorPane txtEditInstructions;
+
+	@FXML
 	private Label lblPersonalInfo;
 
 	@FXML
