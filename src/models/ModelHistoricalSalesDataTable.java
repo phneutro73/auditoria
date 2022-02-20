@@ -1,5 +1,7 @@
 package models;
 
+import java.util.Date;
+
 public class ModelHistoricalSalesDataTable {
 
 	int itemId;
@@ -7,10 +9,10 @@ public class ModelHistoricalSalesDataTable {
 	String user;
 	String shop;
 	double price;
-	String date;
+	Date date;
 
 	public ModelHistoricalSalesDataTable(int itemId, String itemBarCode, String user, String shop, double price,
-			String date) {
+			Date date) {
 		super();
 		this.itemId = itemId;
 		this.itemBarCode = itemBarCode;
@@ -68,11 +70,15 @@ public class ModelHistoricalSalesDataTable {
 		this.price = price;
 	}
 
-	public String getDate() {
+	public Date getDate() {
 		return date;
 	}
+	
+	public String getStrDate() {
+		return String.valueOf(date);
+	}
 
-	public void setDate(String date) {
+	public void setDate(Date date) {
 		this.date = date;
 	}
 	

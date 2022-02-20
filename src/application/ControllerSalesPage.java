@@ -1,11 +1,17 @@
 package application;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Hashtable;
+import java.util.List;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 
+import db.AddItemsPageConnection;
+import db.SalesPageConnection;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,12 +21,15 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import models.CurrentUser;
+import models.ModelAllReservationsTable;
 import models.ModelTicketTable;
 
 public class ControllerSalesPage {
@@ -87,25 +96,25 @@ public class ControllerSalesPage {
 	private JFXButton btnAcceptSearch;
 
 	@FXML
-	private TableView<ModelTicketTable> shoppingTable;
+	private TableView<ModelTicketTable> ticketTable;
 
 	@FXML
-	private TableColumn<ModelTicketTable, String> idItemShoppingTable;
+	private TableColumn<ModelTicketTable, String> idItemTicketTable;
 
 	@FXML
-	private TableColumn<ModelTicketTable, String> barCodeShoppingTable;
+	private TableColumn<ModelTicketTable, String> barCodeTicketTable;
 
 	@FXML
-	private TableColumn<ModelTicketTable, String> nameShoppingTable;
+	private TableColumn<ModelTicketTable, String> nameTicketTable;
 
 	@FXML
-	private TableColumn<ModelTicketTable, String> itemTypeShoppingTable;
+	private TableColumn<ModelTicketTable, String> itemTypeTicketTable;
 
 	@FXML
-	private TableColumn<ModelTicketTable, String> sizeShoppingTable;
+	private TableColumn<ModelTicketTable, String> sizeTicketTable;
 
 	@FXML
-	private TableColumn<ModelTicketTable, String> priceShoppingTable;
+	private TableColumn<ModelTicketTable, String> priceTicketTable;
 
 	@FXML
 	private VBox vBoxButtons;
@@ -123,30 +132,175 @@ public class ControllerSalesPage {
 	private JFXButton btnCancel;
 
 	boolean isExpanded;
+	int itemIdAdd = -1;
+	int itemIdSelected = -1;
+	int numItems = 0;
 
 	@FXML
 	void initialize() {
+
+		SalesPageConnection salesDB = new SalesPageConnection();
 		btnDeleteItem.setDisable(true);
 		isExpanded = false;
-	}
-
-	@FXML
-	void accept(ActionEvent event) {
-
-	}
-
-	@FXML
-	void addItem(ActionEvent event) {
+		getTicket(salesDB);
+		getItemTypes(salesDB);
+		listenerBarCodeField(salesDB);
 
 	}
 
 	@FXML
-	void cancel(ActionEvent event) {
+	void accept(ActionEvent event) throws IOException {
+
+		if (ticketTable.getItems().size() > 0) {
+			SalesPageConnection salesDB = new SalesPageConnection();
+
+			boolean isError = false;
+			for (int i = 0; i < ticketTable.getItems().size(); i++) {
+				int id = ticketTable.getItems().get(i).getItemId();
+				boolean success = salesDB.makeASale(id, currentUser.getId(), 1, currentUser.getShopId());
+
+				if (!success) {
+					isError = true;
+				}
+			}
+
+			if (isError) {
+				FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
+				ControllerAlertDialog control = new ControllerAlertDialog(120, 210, "Error",
+						"Se ha producido un error al guardar los datos de la venta.");
+				loader.setController(control);
+				Parent root = loader.load();
+
+				Stage stage = new Stage();
+				stage.initStyle(StageStyle.UNDECORATED);
+				stage.setScene(new Scene(root));
+				stage.show();
+
+				initialize();
+
+			} else {
+
+				FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
+				ControllerAlertDialog control = new ControllerAlertDialog(120, 210, "Error",
+						"Venta realizada correctamente.");
+				loader.setController(control);
+				Parent root = loader.load();
+
+				Stage stage = new Stage();
+				stage.initStyle(StageStyle.UNDECORATED);
+				stage.setScene(new Scene(root));
+				stage.show();
+
+				initialize();
+
+			}
+
+		}
 
 	}
 
 	@FXML
-	void deleteItem(MouseEvent event) {
+	void addItem(ActionEvent event) throws IOException {
+
+		if (itemIdAdd != -1) {
+
+			SalesPageConnection salesDB = new SalesPageConnection();
+			boolean isInShop = salesDB.checkIsInShop(itemIdSelected, currentUser.getShopId());
+
+			if (isInShop) {
+
+				boolean success = salesDB.addItemToTicket(itemIdAdd, currentUser.getId(), 1);
+
+				if (success) {
+
+					FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
+					ControllerAlertDialog control = new ControllerAlertDialog(120, 210, "Error",
+							"El artículo se ha añadido correctamente.");
+					loader.setController(control);
+					Parent root = loader.load();
+
+					Stage stage = new Stage();
+					stage.initStyle(StageStyle.UNDECORATED);
+					stage.setScene(new Scene(root));
+					stage.show();
+
+					numItems += 1;
+
+					initialize();
+
+				} else {
+
+					FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
+					ControllerAlertDialog control = new ControllerAlertDialog(120, 210, "Error",
+							"Se ha producido un error. Por favor, inténtelo más tarde.");
+					loader.setController(control);
+					Parent root = loader.load();
+
+					Stage stage = new Stage();
+					stage.initStyle(StageStyle.UNDECORATED);
+					stage.setScene(new Scene(root));
+					stage.show();
+
+					initialize();
+
+				}
+			} else {
+				FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
+				ControllerAlertDialog control = new ControllerAlertDialog(120, 210, "Error",
+						"No hay stock del artículo en tienda. Revise los datos.");
+				loader.setController(control);
+				Parent root = loader.load();
+
+				Stage stage = new Stage();
+				stage.initStyle(StageStyle.UNDECORATED);
+				stage.setScene(new Scene(root));
+				stage.show();
+
+				initialize();
+			}
+
+		}
+	}
+
+	@FXML
+	void cancel(ActionEvent event) throws IOException {
+
+		String[] params = { String.valueOf(currentUser.getId()) };
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/YesNoAlertDialog.fxml"));
+		ControllerYesNoAlertDialog control = new ControllerYesNoAlertDialog(0, 0, "Atención",
+				"Esta acción es permanente, no se podrá deshacer. Preste atención y revise los datos.",
+				"¿Está seguro de que desea cancelar esta venta?", "SÍ", "No", "ticketDelete", params);
+		loader.setController(control);
+		Parent root = loader.load();
+
+		Stage stage = new Stage();
+		stage.initStyle(StageStyle.UNDECORATED);
+		stage.setScene(new Scene(root));
+		stage.showAndWait();
+		numItems = 0;
+		lblTotal.setText("€");
+		initialize();
+
+	}
+
+	@FXML
+	void deleteItem(MouseEvent event) throws IOException {
+
+		String[] params = { String.valueOf(itemIdSelected), String.valueOf(currentUser.getId()) };
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/YesNoAlertDialog.fxml"));
+		ControllerYesNoAlertDialog control = new ControllerYesNoAlertDialog(0, 0, "Atención",
+				"Esta acción es permanente, no se podrá deshacer. Preste atención y revise los datos.",
+				"¿Está seguro de que desea eliminar el artículo con el siguiente ID: " + String.valueOf(itemIdSelected)
+						+ " del ticket?",
+				"SÍ", "No", "ticketDeleteItem", params);
+		loader.setController(control);
+		Parent root = loader.load();
+
+		Stage stage = new Stage();
+		stage.initStyle(StageStyle.UNDECORATED);
+		stage.setScene(new Scene(root));
+		stage.showAndWait();
+		initialize();
 
 	}
 
@@ -234,17 +388,77 @@ public class ControllerSalesPage {
 	}
 
 	@FXML
-	void onMouseEntered(MouseEvent event) {
-
-	}
-
-	@FXML
-	void onMouseExited(MouseEvent event) {
-
-	}
-
-	@FXML
 	void selectItem(MouseEvent event) {
-		hideMenu(event);
+		try {
+			hideMenu(event);
+			itemIdSelected = ticketTable.getSelectionModel().getSelectedItem().getItemId();
+			btnDeleteItem.setDisable(false);
+			btnDeleteItem.setFocusTraversable(false);
+		} catch (Exception e) {
+			itemIdSelected = -1;
+			btnDeleteItem.setDisable(true);
+			btnDeleteItem.setFocusTraversable(true);
+		}
+	}
+
+	void getTicket(SalesPageConnection salesDB) {
+
+		ObservableList<ModelTicketTable> obList = salesDB.getTicketTable(currentUser.getId());
+
+		idItemTicketTable.setCellValueFactory(new PropertyValueFactory<>("itemId"));
+		barCodeTicketTable.setCellValueFactory(new PropertyValueFactory<>("itemBarCode"));
+		nameTicketTable.setCellValueFactory(new PropertyValueFactory<>("itemName"));
+		itemTypeTicketTable.setCellValueFactory(new PropertyValueFactory<>("itemType"));
+		sizeTicketTable.setCellValueFactory(new PropertyValueFactory<>("size"));
+		priceTicketTable.setCellValueFactory(new PropertyValueFactory<>("itemPrice"));
+
+		ticketTable.setItems(obList);
+
+		if (ticketTable.getItems().size() != 0) {
+			if (lblTotal.getText().equals("€")) {
+				lblTotal.setText(Double.toString(obList.get(0).getItemPrice()) + " €");
+			} else {
+				double price = Double.parseDouble(lblTotal.getText().substring(0, lblTotal.getText().length() - 2));
+				double totalPrice;
+				if (numItems > ticketTable.getItems().size()) {
+					totalPrice = price - obList.get(0).getItemPrice();
+				} else {
+					totalPrice = price + obList.get(0).getItemPrice();
+				}
+				lblTotal.setText(Double.toString(totalPrice) + " €");
+			}
+		} else {
+			lblTotal.setText("€");
+		}
+
+	}
+
+	void getItemTypes(SalesPageConnection salesDB) {
+		List<String> itemTypes = salesDB.listItemTypes();
+		fieldItemType.getItems().removeAll(fieldItemType.getItems());
+		fieldItemType.getItems().addAll(itemTypes);
+		fieldItemType.getSelectionModel().select("-");
+	}
+
+	void listenerBarCodeField(SalesPageConnection salesDB) {
+
+		fieldBarCode.textProperty().addListener((observable, oldValue, newValue) -> {
+			Hashtable<String, Object> item = salesDB.getItemWithBarCode(newValue);
+
+			if (!item.isEmpty()) {
+				fieldName.setText((String) item.get("name"));
+				fieldItemType.getSelectionModel().select((String) item.get("type"));
+				fieldSize.setText((String) item.get("size"));
+				fieldPrice.setText((String) item.get("price").toString());
+				itemIdAdd = Integer.parseInt(item.get("id").toString());
+			} else {
+				fieldName.setText("");
+				fieldItemType.getSelectionModel().select("-");
+				fieldSize.setText("");
+				fieldPrice.setText("");
+				itemIdAdd = -1;
+			}
+		});
+
 	}
 }
