@@ -128,6 +128,15 @@
 										</Label>
 									</children>
 								</AnchorPane>
+                        <AnchorPane fx:id="logOutButton" layoutX="776.0" onMouseClicked="#logOut" prefHeight="55.0" prefWidth="65.0" styleClass="pageTitle" stylesheets="@application.css" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="20.0" layoutY="13.0">
+                                 <image>
+                                    <Image url="@../resources/assets/LogOutIcon.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </AnchorPane>
 							</children>
 						</AnchorPane>
 						<AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="card" stylesheets="@application.css" VBox.vgrow="ALWAYS">

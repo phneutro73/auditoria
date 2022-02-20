@@ -44,11 +44,8 @@ public class controller_login {
 	@FXML
 	private AnchorPane parent;
 
-	@FXML
-	private Button btnLogin;
-
-	@FXML
-	private JFXButton btnForget;
+    @FXML
+    private JFXButton btnLogin;
 
 	@FXML
 	private TextField fieldUser;
@@ -82,11 +79,6 @@ public class controller_login {
 	}
 
 	@FXML
-	void forgetFunction(ActionEvent event) {
-		// TODO
-	}
-
-	@FXML
 	void loginFunction(ActionEvent event) throws IOException {
 		try {
 
@@ -94,33 +86,47 @@ public class controller_login {
 			int width = gd.getDisplayMode().getWidth();
 			int height = gd.getDisplayMode().getHeight();
 
-			LoginPageConnection loginDB = new LoginPageConnection();
+			try {
+				LoginPageConnection loginDB = new LoginPageConnection();
 
-			byte[] salt = loginDB.getSalt(fieldUser.getText());
-			byte[] hash = loginDB.getHash(fieldUser.getText());
-			byte[] calculatedHash = calculateHash(fieldPassword.getText(), salt);
-			System.out.println(salt[salt.length - 1]);
-			System.out.println(hash[hash.length - 1]);
-			System.out.println(hash[hash.length - 1]);
-			System.out.println(calculatedHash[calculatedHash.length - 1]);
-			if (Arrays.equals(hash, calculatedHash)) {
+				byte[] salt = loginDB.getSalt(fieldUser.getText());
+				byte[] hash = loginDB.getHash(fieldUser.getText());
+				byte[] calculatedHash = calculateHash(fieldPassword.getText(), salt);
+				System.out.println(salt[salt.length - 1]);
+				System.out.println(hash[hash.length - 1]);
+				System.out.println(hash[hash.length - 1]);
+				System.out.println(calculatedHash[calculatedHash.length - 1]);
+				if (Arrays.equals(hash, calculatedHash)) {
 
-				CurrentUser currentUser = loginDB.getCurrentUser(fieldUser.getText());
-				FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/SalesPage.fxml"));
-				ControllerSalesPage control = new ControllerSalesPage(0, 0, currentUser);
-				loader.setController(control);
-				Parent root = loader.load();
+					CurrentUser currentUser = loginDB.getCurrentUser(fieldUser.getText());
+					FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/SalesPage.fxml"));
+					ControllerSalesPage control = new ControllerSalesPage(0, 0, currentUser);
+					loader.setController(control);
+					Parent root = loader.load();
 
-				Stage stage = new Stage();
-				stage.setScene(new Scene(root));
-				stage.show();
-				((Node) (event.getSource())).getScene().getWindow().hide();
+					Stage stage = new Stage();
+					stage.setScene(new Scene(root));
+					stage.show();
+					((Node) (event.getSource())).getScene().getWindow().hide();
 
-			} else {
+				} else {
 
+					FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
+					ControllerAlertDialog control = new ControllerAlertDialog(120, 210, "Error",
+							"Las credenciales no son correctas, pruebe de nuevo.");
+					loader.setController(control);
+					Parent root = loader.load();
+
+					Stage stage = new Stage();
+					stage.initStyle(StageStyle.UNDECORATED);
+					stage.setScene(new Scene(root));
+					stage.show();
+
+				}
+			} catch (Exception e) {
 				FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
 				ControllerAlertDialog control = new ControllerAlertDialog(120, 210, "Error",
-						"Las credenciales no son correctas, pruebe de nuevo.");
+						"Su IP se encuentra fuera de rango, hable con el administrador.");
 				loader.setController(control);
 				Parent root = loader.load();
 
@@ -128,14 +134,11 @@ public class controller_login {
 				stage.initStyle(StageStyle.UNDECORATED);
 				stage.setScene(new Scene(root));
 				stage.show();
-
 			}
-			// SOLO SI EL USUARIO EXISTE Y LA CONTRASEÃ‘A ES CORRECTA
-
 		} catch (Exception e) {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
-			ControllerAlertDialog control = new ControllerAlertDialog(120, 210, "Error",
-					"Su IP se encuentra fuera de rango, hable con el administrador.");
+			ControllerAlertDialog control = new ControllerAlertDialog(140, 250, "Error",
+					"Error inesperado, inténtelo de nuevo o póngase en contacto con el administrador.");
 			loader.setController(control);
 			Parent root = loader.load();
 

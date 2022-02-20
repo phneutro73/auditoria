@@ -56,6 +56,7 @@ import models.ModelScheduleTable;
 import models.ModelShopTable;
 import models.ModelUserTable;
 import db.AdministratorPageConnection;
+import db.SalesPageConnection;
 
 public class controller_administrator {
 
@@ -245,6 +246,9 @@ public class controller_administrator {
 
 	@FXML
 	private JFXButton btnDeleteItemType;
+	
+    @FXML
+    private AnchorPane logOutButton;
 
 	boolean isExpanded = false;
 	int idUserSelected;
@@ -900,5 +904,36 @@ public class controller_administrator {
 		stage.show();
 		((Node) (event.getSource())).getScene().getWindow().hide();
 	}
+	
+    @FXML
+    void logOut(MouseEvent event) throws IOException {
+    	SalesPageConnection salesDB = new SalesPageConnection();
+    	
+    	boolean unfinishedSales = salesDB.unfinishedTicket(currentUser.getId());
+    	
+    	if(unfinishedSales) {
+    		FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
+			ControllerAlertDialog control = new ControllerAlertDialog(120, 210, "Error",
+					"Tiene una venta en curso. Es necesario que la finalice o cancele.");
+			loader.setController(control);
+			Parent root = loader.load();
+
+			Stage stage = new Stage();
+			stage.initStyle(StageStyle.UNDECORATED);
+			stage.setScene(new Scene(root));
+			stage.show();
+    	} else {
+    		FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/login.fxml"));
+    		controller_login control = new controller_login();
+    		loader.setController(control);
+    		Parent root = loader.load();
+
+    		Stage stage = new Stage();
+			stage.initStyle(StageStyle.UNDECORATED);
+    		stage.setScene(new Scene(root));
+    		stage.show();
+    		((Node) (event.getSource())).getScene().getWindow().hide();
+    	}
+    }
 
 }
