@@ -1,0 +1,20 @@
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[sp_create_role]
+(
+    @NAME VARCHAR(20)
+)
+AS
+BEGIN
+    
+    SET NOCOUNT ON
+
+	INSERT INTO roles
+	VALUES
+		(@NAME)
+
+END
+GO

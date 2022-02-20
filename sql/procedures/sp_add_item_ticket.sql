@@ -1,0 +1,29 @@
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[sp_add_item_ticket]
+(
+    @ITEM_ID INT
+	,@USER_ID INT
+	,@QUANTITY INT
+
+)
+AS
+BEGIN
+    
+    SET NOCOUNT ON
+
+	INSERT INTO ticket
+	VALUES
+		(@ITEM_ID
+		,@USER_ID
+		,@QUANTITY
+		,DEFAULT
+		,GETDATE())
+
+	
+
+END
+GO

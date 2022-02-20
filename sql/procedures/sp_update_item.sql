@@ -1,0 +1,31 @@
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[sp_update_item]
+(
+	@ID INT
+	,@BAR_CODE VARCHAR(10)
+    ,@NAME VARCHAR(20)
+	,@TYPE_ID INT
+	,@SIZE VARCHAR(10)
+	,@PRICE DECIMAL(10,2)
+
+)
+AS
+BEGIN
+    
+    SET NOCOUNT ON
+	
+	UPDATE prendas
+	SET nombre = @NAME
+		,CB = @BAR_CODE
+		,tipo_id = @TYPE_ID
+		,talla = @SIZE
+		,precio = @PRICE
+	WHERE id = @ID
+
+END
+
+GO
