@@ -138,6 +138,10 @@ public class ControllerSalesPage {
 
 	@FXML
 	void initialize() {
+		
+		if (currentUser.getRoleId() != 2) {
+			btnAdministrator.setVisible(false);
+		}
 
 		SalesPageConnection salesDB = new SalesPageConnection();
 		btnDeleteItem.setDisable(true);

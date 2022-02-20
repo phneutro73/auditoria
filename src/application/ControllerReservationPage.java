@@ -124,6 +124,10 @@ public class ControllerReservationPage {
 
 	@FXML
 	void initialize() {
+		
+		if (currentUser.getRoleId() != 2) {
+			btnAdministrator.setVisible(false);
+		}
 
 		ConsultationPageConnection consultDB = new ConsultationPageConnection();
 		isExpanded = false;
