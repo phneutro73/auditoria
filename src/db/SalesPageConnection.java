@@ -12,6 +12,7 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import models.ModelHistoricalSalesDataTable;
 import models.ModelItemTable;
 import models.ModelTicketTable;
 
@@ -280,6 +281,44 @@ public class SalesPageConnection {
 
 		return isInShop;
 
+	}
+	
+	public ObservableList<ModelHistoricalSalesDataTable> getHistoricalSalesTable() {
+
+		Connection conn = null;
+		ResultSet rsItems = null;
+		ObservableList<ModelHistoricalSalesDataTable> obList = FXCollections.observableArrayList();
+
+		try {
+			conn = DriverManager.getConnection(connectionUrl);
+			System.out.println("Connected to DB");
+			Statement stmt = conn.createStatement();
+			rsItems = stmt.executeQuery("[sp_list_historical_sales]");
+
+			while (rsItems.next()) {
+				obList.add(new ModelHistoricalSalesDataTable(
+						rsItems.getInt("id_prenda"), 
+						rsItems.getString("CB"),
+						rsItems.getString("user_name"), 
+						rsItems.getString("nombre_tienda"), 
+						rsItems.getDouble("precio"),
+						rsItems.getDate("venta_datetime")));
+			}
+		}
+
+		catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException ex) {
+					ex.printStackTrace();
+				}
+			}
+		}
+
+		return obList;
 	}
 
 }
