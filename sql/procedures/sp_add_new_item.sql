@@ -1,0 +1,42 @@
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[sp_add_new_item]
+(
+	@BAR_CODE VARCHAR(10)
+    ,@NAME VARCHAR(20)
+	,@TYPE_ID INT
+	,@SIZE VARCHAR(10)
+	,@PRICE DECIMAL(10,2)
+	,@QUANTITY DECIMAL(10,2)
+	,@SHOP_ID INT
+)
+AS
+BEGIN
+    
+    SET NOCOUNT ON
+
+	
+	INSERT INTO prendas
+	VALUES
+		(@NAME
+		,@BAR_CODE
+		,@TYPE_ID
+		,@SIZE
+		,@PRICE
+		)
+
+	DECLARE @item_id INT = SCOPE_IDENTITY()
+
+	INSERT INTO prenda_tienda
+	VALUES 
+		(@item_id
+		,@SHOP_ID
+		,@QUANTITY
+		)
+		
+
+END
+GO

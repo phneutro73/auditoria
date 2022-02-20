@@ -1,0 +1,22 @@
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[sp_delete_ticket_item]
+(
+	@TICKET_ID INT
+	,@USER_ID INT
+)
+AS
+BEGIN
+    
+    SET NOCOUNT ON
+
+	DELETE
+	FROM ticket
+	WHERE id = @TICKET_ID
+		AND id_usuario = @USER_ID
+
+END
+GO

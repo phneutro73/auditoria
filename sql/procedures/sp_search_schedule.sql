@@ -1,0 +1,20 @@
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[sp_search_schedule]
+(
+	@ID INT
+)
+AS
+BEGIN
+    
+    SET NOCOUNT ON
+
+	SELECT *
+	FROM schedules
+	WHERE id = @ID
+
+END
+GO

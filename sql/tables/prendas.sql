@@ -1,0 +1,18 @@
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[prendas](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[nombre] [varchar](60) NOT NULL,
+	[CB] [varchar](255) NOT NULL,
+	[tipo_id] [varchar](255) NOT NULL,
+	[talla] [varchar](255) NOT NULL,
+	[precio] [decimal](19, 2) NOT NULL
+) ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[prendas] ADD PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO

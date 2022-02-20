@@ -1,0 +1,20 @@
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[sp_delete_user]
+(
+	@ID INT
+)
+AS
+BEGIN
+    
+    SET NOCOUNT ON
+
+	DELETE
+	FROM users
+	WHERE id = @ID
+
+END
+GO
