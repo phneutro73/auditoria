@@ -188,7 +188,7 @@ public class ControllerSalesPage {
 			} else {
 
 				FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
-				ControllerAlertDialog control = new ControllerAlertDialog(120, 210, "Error",
+				ControllerAlertDialog control = new ControllerAlertDialog(120, 210, "Venta correcta",
 						"Venta realizada correctamente.");
 				loader.setController(control);
 				Parent root = loader.load();
