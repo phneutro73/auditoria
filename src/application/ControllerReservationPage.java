@@ -50,6 +50,9 @@ public class ControllerReservationPage {
 	private VBox drawer;
 
 	@FXML
+	private AnchorPane parent;
+
+	@FXML
 	private HBox btnMenu;
 
 	@FXML
@@ -128,6 +131,10 @@ public class ControllerReservationPage {
 
 	@FXML
 	void initialize() {
+		
+		if (currentUser.getRoleId() != 2) {
+			btnAdministrator.setVisible(false);
+		}
 		
 		if (currentUser.getRoleId() != 2) {
 			btnAdministrator.setVisible(false);

@@ -42,6 +42,9 @@ public class ControllerConsultationPage {
 	}
 
 	@FXML
+	private AnchorPane parent;
+
+	@FXML
 	private VBox drawer;
 
 	@FXML
@@ -121,10 +124,6 @@ public class ControllerConsultationPage {
 
 	@FXML
 	void initialize() {
-		
-		if (currentUser.getRoleId() != 2) {
-			btnAdministrator.setVisible(false);
-		}
 
 		ConsultationPageConnection consultDB = new ConsultationPageConnection();
 

@@ -28,6 +28,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
@@ -87,33 +89,62 @@ public class controller_login {
 			int height = gd.getDisplayMode().getHeight();
 
 			try {
-				LoginPageConnection loginDB = new LoginPageConnection();
+				
+				if (checkAllFields()) {
+					LoginPageConnection loginDB = new LoginPageConnection();
 
-				byte[] salt = loginDB.getSalt(fieldUser.getText());
-				byte[] hash = loginDB.getHash(fieldUser.getText());
-				byte[] calculatedHash = calculateHash(fieldPassword.getText(), salt);
-				System.out.println(salt[salt.length - 1]);
-				System.out.println(hash[hash.length - 1]);
-				System.out.println(hash[hash.length - 1]);
-				System.out.println(calculatedHash[calculatedHash.length - 1]);
-				if (Arrays.equals(hash, calculatedHash)) {
+					byte[] salt = loginDB.getSalt(fieldUser.getText());
+					byte[] hash = loginDB.getHash(fieldUser.getText());
+					if (salt != null) {
+						byte[] calculatedHash = calculateHash(fieldPassword.getText(), salt);
+						System.out.println(salt[salt.length - 1]);
+						System.out.println(hash[hash.length - 1]);
+						System.out.println(hash[hash.length - 1]);
+						System.out.println(calculatedHash[calculatedHash.length - 1]);
+						if (Arrays.equals(hash, calculatedHash)) {
 
-					CurrentUser currentUser = loginDB.getCurrentUser(fieldUser.getText());
-					FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/SalesPage.fxml"));
-					ControllerSalesPage control = new ControllerSalesPage(0, 0, currentUser);
-					loader.setController(control);
-					Parent root = loader.load();
+							CurrentUser currentUser = loginDB.getCurrentUser(fieldUser.getText());
+							FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/SalesPage.fxml"));
+							ControllerSalesPage control = new ControllerSalesPage(0, 0, currentUser);
+							loader.setController(control);
+							Parent root = loader.load();
 
-					Stage stage = new Stage();
-					stage.setScene(new Scene(root));
-					stage.show();
-					((Node) (event.getSource())).getScene().getWindow().hide();
+							Stage stage = new Stage();
+							stage.setScene(new Scene(root));
+							stage.show();
+							((Node) (event.getSource())).getScene().getWindow().hide();
 
+						} else {
+
+							FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
+							ControllerAlertDialog control = new ControllerAlertDialog(120, 210, "Error",
+									"Las credenciales no son correctas, pruebe de nuevo.");
+							loader.setController(control);
+							Parent root = loader.load();
+
+							Stage stage = new Stage();
+							stage.initStyle(StageStyle.UNDECORATED);
+							stage.setScene(new Scene(root));
+							stage.show();
+
+						}
+					} else {
+						FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
+						ControllerAlertDialog control = new ControllerAlertDialog(120, 210, "Error",
+								"Las credenciales no son correctas, pruebe de nuevo.");
+						loader.setController(control);
+						Parent root = loader.load();
+
+						Stage stage = new Stage();
+						stage.initStyle(StageStyle.UNDECORATED);
+						stage.setScene(new Scene(root));
+						stage.show();
+					}
+					
 				} else {
-
 					FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
 					ControllerAlertDialog control = new ControllerAlertDialog(120, 210, "Error",
-							"Las credenciales no son correctas, pruebe de nuevo.");
+							"Rellene todos los campos");
 					loader.setController(control);
 					Parent root = loader.load();
 
@@ -121,8 +152,8 @@ public class controller_login {
 					stage.initStyle(StageStyle.UNDECORATED);
 					stage.setScene(new Scene(root));
 					stage.show();
-
 				}
+				
 			} catch (Exception e) {
 				FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
 				ControllerAlertDialog control = new ControllerAlertDialog(120, 210, "Error",
@@ -150,6 +181,14 @@ public class controller_login {
 		}
 
 	}
+	
+    boolean checkAllFields() {
+    	if ((!fieldUser.getText().isEmpty() && fieldUser.getText() != null && fieldUser.getText() != "") && (!fieldPassword.getText().isEmpty() && fieldPassword.getText() != null && fieldPassword.getText() != "")) {
+    		return true;
+    	} else {
+    		return false;
+    	}
+    }
 
 	byte[] calculateHash(String password, byte[] salt) throws NoSuchAlgorithmException, InvalidKeySpecException {
 		KeySpec spec = new PBEKeySpec(password.toCharArray(), salt, 65536, 128);

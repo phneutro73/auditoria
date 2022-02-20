@@ -96,6 +96,7 @@ public class ControllerAddItemsPage {
 
 	@FXML
 	void initialize() {
+		
 		isExpanded = false;
 		
 		if (currentUser.getRoleId() != 2) {
