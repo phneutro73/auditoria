@@ -9,18 +9,31 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 
-<AnchorPane fx:id="parent" prefHeight="378.0" prefWidth="270.0" styleClass="softBackgroundParent" stylesheets="@application.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="parent" prefHeight="378.0"
+	prefWidth="270.0" styleClass="softBackgroundParent"
+	stylesheets="@application.css" xmlns="http://javafx.com/javafx/8.0.171"
+	xmlns:fx="http://javafx.com/fxml/1">
 	<children>
-		<TextField fx:id="fieldUser" layoutX="25.0" layoutY="222.0" prefHeight="32.0" prefWidth="220.0" promptText="Usuario" style="-fx-background-radius: 20;" />
-		<PasswordField fx:id="fieldPassword" layoutX="25.0" layoutY="267.0" prefHeight="32.0" prefWidth="220.0" promptText="Contraseña" style="-fx-background-radius: 20;" />
-		<ImageView fitHeight="134.0" fitWidth="144.0" layoutX="69.0" layoutY="56.0" pickOnBounds="true" preserveRatio="true">
+		<TextField fx:id="fieldUser" layoutX="25.0" layoutY="222.0"
+			prefHeight="32.0" prefWidth="220.0" promptText="Usuario"
+			style="-fx-background-radius: 20;" />
+		<PasswordField fx:id="fieldPassword" layoutX="25.0"
+			layoutY="267.0" prefHeight="32.0" prefWidth="220.0"
+			promptText="Contraseña" style="-fx-background-radius: 20;" />
+		<ImageView fitHeight="134.0" fitWidth="144.0" layoutX="69.0"
+			layoutY="56.0" pickOnBounds="true" preserveRatio="true">
 			<image>
 				<Image url="@../resources/assets/logo.png" />
 			</image>
 		</ImageView>
-		<HBox alignment="CENTER_RIGHT" prefHeight="25.0" prefWidth="270.0" styleClass="topBar" stylesheets="@application.css">
+		<HBox alignment="CENTER_RIGHT" prefHeight="25.0"
+			prefWidth="270.0" styleClass="topBar" stylesheets="@application.css">
 			<children>
-				<Label fx:id="btnMinimize" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#minimizeScreen" prefHeight="25.0" prefWidth="25.0" styleClass="minimizeButton" stylesheets="@application.css">
+				<Label fx:id="btnMinimize" alignment="CENTER"
+					maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+					minWidth="-Infinity" onMouseClicked="#minimizeScreen"
+					prefHeight="25.0" prefWidth="25.0" styleClass="minimizeButton"
+					stylesheets="@application.css">
 					<graphic>
 						<ImageView fitHeight="4.0" fitWidth="14.0">
 							<image>
@@ -29,7 +42,11 @@
 						</ImageView>
 					</graphic>
 				</Label>
-				<Label fx:id="btnClose" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#closeScreen" prefHeight="25.0" prefWidth="25.0" styleClass="closeButton" stylesheets="@application.css">
+				<Label fx:id="btnClose" alignment="CENTER"
+					maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+					minWidth="-Infinity" onMouseClicked="#closeScreen"
+					prefHeight="25.0" prefWidth="25.0" styleClass="closeButton"
+					stylesheets="@application.css">
 					<graphic>
 						<ImageView fitHeight="24.0" fitWidth="24.0">
 							<image>
@@ -40,11 +57,16 @@
 				</Label>
 			</children>
 		</HBox>
-		<ImageView fx:id="loadingIcon" fitHeight="100.0" fitWidth="100.0" layoutX="85.0" layoutY="180.0" visible="false">
+		<ImageView fx:id="loadingIcon" fitHeight="100.0"
+			fitWidth="100.0" layoutX="85.0" layoutY="180.0" visible="false">
 			<image>
 				<Image url="@../resources/assets/loading.png" />
 			</image>
 		</ImageView>
-      <JFXButton fx:id="btnLogin" layoutX="-1.0" layoutY="329.0" onAction="#loginFunction" prefHeight="53.0" prefWidth="270.0" style="-fx-background-radius: 0;" styleClass="buttonMainColor" text="INICIAR SESIÓN" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+		<JFXButton fx:id="btnLogin" layoutX="-1.0" layoutY="329.0"
+			onAction="#loginFunction" prefHeight="53.0" prefWidth="270.0"
+			style="-fx-background-radius: 0;" styleClass="buttonMainColor"
+			text="INICIAR SESIÓN" AnchorPane.bottomAnchor="0.0"
+			AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
 	</children>
 </AnchorPane>

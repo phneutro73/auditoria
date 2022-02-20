@@ -46,8 +46,8 @@ public class controller_login {
 	@FXML
 	private AnchorPane parent;
 
-    @FXML
-    private JFXButton btnLogin;
+	@FXML
+	private JFXButton btnLogin;
 
 	@FXML
 	private TextField fieldUser;
@@ -89,7 +89,7 @@ public class controller_login {
 			int height = gd.getDisplayMode().getHeight();
 
 			try {
-				
+
 				if (checkAllFields()) {
 					LoginPageConnection loginDB = new LoginPageConnection();
 
@@ -140,7 +140,7 @@ public class controller_login {
 						stage.setScene(new Scene(root));
 						stage.show();
 					}
-					
+
 				} else {
 					FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
 					ControllerAlertDialog control = new ControllerAlertDialog(120, 210, "Error",
@@ -153,7 +153,7 @@ public class controller_login {
 					stage.setScene(new Scene(root));
 					stage.show();
 				}
-				
+
 			} catch (Exception e) {
 				FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
 				ControllerAlertDialog control = new ControllerAlertDialog(120, 210, "Error",
@@ -181,14 +181,16 @@ public class controller_login {
 		}
 
 	}
-	
-    boolean checkAllFields() {
-    	if ((!fieldUser.getText().isEmpty() && fieldUser.getText() != null && fieldUser.getText() != "") && (!fieldPassword.getText().isEmpty() && fieldPassword.getText() != null && fieldPassword.getText() != "")) {
-    		return true;
-    	} else {
-    		return false;
-    	}
-    }
+
+	boolean checkAllFields() {
+		if ((!fieldUser.getText().isEmpty() && fieldUser.getText() != null && fieldUser.getText() != "")
+				&& (!fieldPassword.getText().isEmpty() && fieldPassword.getText() != null
+						&& fieldPassword.getText() != "")) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 
 	byte[] calculateHash(String password, byte[] salt) throws NoSuchAlgorithmException, InvalidKeySpecException {
 		KeySpec spec = new PBEKeySpec(password.toCharArray(), salt, 65536, 128);

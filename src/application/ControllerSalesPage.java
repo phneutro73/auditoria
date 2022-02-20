@@ -130,9 +130,9 @@ public class ControllerSalesPage {
 
 	@FXML
 	private JFXButton btnCancel;
-	
-    @FXML
-    private AnchorPane logOutButton;
+
+	@FXML
+	private AnchorPane logOutButton;
 
 	boolean isExpanded;
 	int itemIdAdd = -1;
@@ -141,7 +141,7 @@ public class ControllerSalesPage {
 
 	@FXML
 	void initialize() {
-		
+
 		if (currentUser.getRoleId() != 2) {
 			btnAdministrator.setVisible(false);
 		}
@@ -407,16 +407,15 @@ public class ControllerSalesPage {
 			btnDeleteItem.setFocusTraversable(true);
 		}
 	}
-	
 
-    @FXML
-    void logOut(MouseEvent event) throws IOException {
-    	SalesPageConnection salesDB = new SalesPageConnection();
-    	
-    	boolean unfinishedSales = salesDB.unfinishedTicket(currentUser.getId());
-    	
-    	if(unfinishedSales) {
-    		FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
+	@FXML
+	void logOut(MouseEvent event) throws IOException {
+		SalesPageConnection salesDB = new SalesPageConnection();
+
+		boolean unfinishedSales = salesDB.unfinishedTicket(currentUser.getId());
+
+		if (unfinishedSales) {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
 			ControllerAlertDialog control = new ControllerAlertDialog(120, 210, "Error",
 					"Tiene una venta en curso. Es necesario que la finalice o cancele.");
 			loader.setController(control);
@@ -426,19 +425,19 @@ public class ControllerSalesPage {
 			stage.initStyle(StageStyle.UNDECORATED);
 			stage.setScene(new Scene(root));
 			stage.show();
-    	} else {
-    		FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/login.fxml"));
-    		controller_login control = new controller_login();
-    		loader.setController(control);
-    		Parent root = loader.load();
+		} else {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/login.fxml"));
+			controller_login control = new controller_login();
+			loader.setController(control);
+			Parent root = loader.load();
 
-    		Stage stage = new Stage();
+			Stage stage = new Stage();
 			stage.initStyle(StageStyle.UNDECORATED);
-    		stage.setScene(new Scene(root));
-    		stage.show();
-    		((Node) (event.getSource())).getScene().getWindow().hide();
-    	}
-    }
+			stage.setScene(new Scene(root));
+			stage.show();
+			((Node) (event.getSource())).getScene().getWindow().hide();
+		}
+	}
 
 	void getTicket(SalesPageConnection salesDB) {
 
