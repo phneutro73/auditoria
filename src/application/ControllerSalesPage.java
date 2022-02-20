@@ -138,14 +138,14 @@ public class ControllerSalesPage {
 
 	@FXML
 	void initialize() {
-		
+
 		SalesPageConnection salesDB = new SalesPageConnection();
 		btnDeleteItem.setDisable(true);
 		isExpanded = false;
 		getTicket(salesDB);
 		getItemTypes(salesDB);
 		listenerBarCodeField(salesDB);
-		
+
 	}
 
 	@FXML
@@ -153,17 +153,17 @@ public class ControllerSalesPage {
 
 		if (ticketTable.getItems().size() > 0) {
 			SalesPageConnection salesDB = new SalesPageConnection();
-			
+
 			boolean isError = false;
 			for (int i = 0; i < ticketTable.getItems().size(); i++) {
 				int id = ticketTable.getItems().get(i).getItemId();
 				boolean success = salesDB.makeASale(id, currentUser.getId(), 1, currentUser.getShopId());
-				
+
 				if (!success) {
 					isError = true;
 				}
 			}
-			
+
 			if (isError) {
 				FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
 				ControllerAlertDialog control = new ControllerAlertDialog(120, 210, "Error",
@@ -177,9 +177,9 @@ public class ControllerSalesPage {
 				stage.show();
 
 				initialize();
-				
+
 			} else {
-				
+
 				FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
 				ControllerAlertDialog control = new ControllerAlertDialog(120, 210, "Error",
 						"Venta realizada correctamente.");
@@ -192,28 +192,27 @@ public class ControllerSalesPage {
 				stage.show();
 
 				initialize();
-				
+
 			}
-			
-		
+
 		}
-		
+
 	}
 
 	@FXML
 	void addItem(ActionEvent event) throws IOException {
-		
+
 		if (itemIdAdd != -1) {
-			
+
 			SalesPageConnection salesDB = new SalesPageConnection();
 			boolean isInShop = salesDB.checkIsInShop(itemIdSelected, currentUser.getShopId());
-			
+
 			if (isInShop) {
-				
+
 				boolean success = salesDB.addItemToTicket(itemIdAdd, currentUser.getId(), 1);
-				
+
 				if (success) {
-					
+
 					FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
 					ControllerAlertDialog control = new ControllerAlertDialog(120, 210, "Error",
 							"El artículo se ha añadido correctamente.");
@@ -224,13 +223,13 @@ public class ControllerSalesPage {
 					stage.initStyle(StageStyle.UNDECORATED);
 					stage.setScene(new Scene(root));
 					stage.show();
-					
+
 					numItems += 1;
 
 					initialize();
-					
+
 				} else {
-					
+
 					FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
 					ControllerAlertDialog control = new ControllerAlertDialog(120, 210, "Error",
 							"Se ha producido un error. Por favor, inténtelo más tarde.");
@@ -243,7 +242,7 @@ public class ControllerSalesPage {
 					stage.show();
 
 					initialize();
-					
+
 				}
 			} else {
 				FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
@@ -259,19 +258,18 @@ public class ControllerSalesPage {
 
 				initialize();
 			}
-			
+
 		}
 	}
 
 	@FXML
 	void cancel(ActionEvent event) throws IOException {
-		
+
 		String[] params = { String.valueOf(currentUser.getId()) };
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/YesNoAlertDialog.fxml"));
 		ControllerYesNoAlertDialog control = new ControllerYesNoAlertDialog(0, 0, "Atención",
 				"Esta acción es permanente, no se podrá deshacer. Preste atención y revise los datos.",
-				"¿Está seguro de que desea cancelar esta venta?",
-				"SÍ", "No", "ticketDelete", params);
+				"¿Está seguro de que desea cancelar esta venta?", "SÍ", "No", "ticketDelete", params);
 		loader.setController(control);
 		Parent root = loader.load();
 
@@ -282,12 +280,12 @@ public class ControllerSalesPage {
 		numItems = 0;
 		lblTotal.setText("€");
 		initialize();
-		
+
 	}
 
 	@FXML
 	void deleteItem(MouseEvent event) throws IOException {
-		
+
 		String[] params = { String.valueOf(itemIdSelected), String.valueOf(currentUser.getId()) };
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/YesNoAlertDialog.fxml"));
 		ControllerYesNoAlertDialog control = new ControllerYesNoAlertDialog(0, 0, "Atención",
@@ -303,7 +301,7 @@ public class ControllerSalesPage {
 		stage.setScene(new Scene(root));
 		stage.showAndWait();
 		initialize();
-		
+
 	}
 
 	@FXML
@@ -402,9 +400,9 @@ public class ControllerSalesPage {
 			btnDeleteItem.setFocusTraversable(true);
 		}
 	}
-	
+
 	void getTicket(SalesPageConnection salesDB) {
-		
+
 		ObservableList<ModelTicketTable> obList = salesDB.getTicketTable(currentUser.getId());
 
 		idItemTicketTable.setCellValueFactory(new PropertyValueFactory<>("itemId"));
@@ -415,7 +413,7 @@ public class ControllerSalesPage {
 		priceTicketTable.setCellValueFactory(new PropertyValueFactory<>("itemPrice"));
 
 		ticketTable.setItems(obList);
-		
+
 		if (ticketTable.getItems().size() != 0) {
 			if (lblTotal.getText().equals("€")) {
 				lblTotal.setText(Double.toString(obList.get(0).getItemPrice()) + " €");
@@ -432,21 +430,21 @@ public class ControllerSalesPage {
 		} else {
 			lblTotal.setText("€");
 		}
-		
+
 	}
-	
+
 	void getItemTypes(SalesPageConnection salesDB) {
 		List<String> itemTypes = salesDB.listItemTypes();
 		fieldItemType.getItems().removeAll(fieldItemType.getItems());
 		fieldItemType.getItems().addAll(itemTypes);
 		fieldItemType.getSelectionModel().select("-");
 	}
-	
+
 	void listenerBarCodeField(SalesPageConnection salesDB) {
-		
+
 		fieldBarCode.textProperty().addListener((observable, oldValue, newValue) -> {
 			Hashtable<String, Object> item = salesDB.getItemWithBarCode(newValue);
-			
+
 			if (!item.isEmpty()) {
 				fieldName.setText((String) item.get("name"));
 				fieldItemType.getSelectionModel().select((String) item.get("type"));
@@ -461,6 +459,6 @@ public class ControllerSalesPage {
 				itemIdAdd = -1;
 			}
 		});
-		
+
 	}
 }

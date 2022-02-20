@@ -338,12 +338,12 @@ public class ControllerYesNoAlertDialog {
 			stage.show();
 		}
 	}
-	
+
 	void ticketDeleteItem() throws IOException {
-		
+
 		SalesPageConnection salesDB = new SalesPageConnection();
 		boolean success = salesDB.deleteTicketItem(Integer.parseInt(params[0]), Integer.parseInt(params[1]));
-		
+
 		if (success) {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
 			ControllerAlertDialog control = new ControllerAlertDialog(120, 210, "Eliminado correctamente",
@@ -366,14 +366,14 @@ public class ControllerYesNoAlertDialog {
 			stage.initStyle(StageStyle.UNDECORATED);
 			stage.setScene(new Scene(root));
 			stage.show();
-		}	
+		}
 	}
 
 	void ticketDelete() throws IOException {
-		
+
 		SalesPageConnection salesDB = new SalesPageConnection();
 		boolean success = salesDB.deleteTicket(Integer.parseInt(params[0]));
-		
+
 		if (success) {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
 			ControllerAlertDialog control = new ControllerAlertDialog(120, 210, "Eliminado correctamente",
@@ -396,7 +396,7 @@ public class ControllerYesNoAlertDialog {
 			stage.initStyle(StageStyle.UNDECORATED);
 			stage.setScene(new Scene(root));
 			stage.show();
-		}	
-		
+		}
+
 	}
 }

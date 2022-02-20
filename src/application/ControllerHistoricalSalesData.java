@@ -42,15 +42,15 @@ public class ControllerHistoricalSalesData {
 	private TableColumn<ModelHistoricalSalesDataTable, String> dateHistoricalSalesTable;
 
 	@FXML
-	void initialize () {
+	void initialize() {
 		getData();
 		historicalSalesTable.setFocusTraversable(false);
 	}
 
 	void getData() {
-		
+
 		SalesPageConnection salesDB = new SalesPageConnection();
-		
+
 		ObservableList<ModelHistoricalSalesDataTable> obList = salesDB.getHistoricalSalesTable();
 
 		itemIdHistoricalSalesTable.setCellValueFactory(new PropertyValueFactory<>("itemId"));
@@ -61,7 +61,7 @@ public class ControllerHistoricalSalesData {
 		dateHistoricalSalesTable.setCellValueFactory(new PropertyValueFactory<>("date"));
 
 		historicalSalesTable.setItems(obList);
-		
+
 	}
 
 }
