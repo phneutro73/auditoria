@@ -639,7 +639,7 @@
 																					text="Nombre" />
 																				<TableColumn fx:id="directionShopTable"
 																					maxWidth="500.0" minWidth="100.0" prefWidth="300.0"
-																					text="Dirección" />
+																					text=Direccion" />
 																				<TableColumn fx:id="numUsersShopTable"
 																					maxWidth="150.0" minWidth="40.0"
 																					text="Trabajadores" />

@@ -86,7 +86,7 @@
 									</rowConstraints>
 									<children>
 										<Label fx:id="lblName" text="NOMBRE" />
-										<Label fx:id="lblDirection" text="DIRECCIÓN"
+										<Label fx:id="lblDirection" text=DIRECCION"
 											GridPane.rowIndex="1" />
 										<JFXTextField fx:id="fieldName"
 											maxWidth="1.7976931348623157E308" prefWidth="1000.0"
