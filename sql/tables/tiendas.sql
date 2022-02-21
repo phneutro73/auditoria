@@ -5,7 +5,7 @@ GO
 CREATE TABLE [dbo].[tiendas](
 	[id] [int] IDENTITY(1,1) NOT NULL,
 	[nombre_tienda] [varchar](40) NOT NULL,
-	[dirección] [varchar](255) NOT NULL
+	[direccion] [varchar](255) NOT NULL
 ) ON [PRIMARY]
 GO
 ALTER TABLE [dbo].[tiendas] ADD PRIMARY KEY CLUSTERED 
@@ -17,7 +17,7 @@ SET ANSI_PADDING ON
 GO
 ALTER TABLE [dbo].[tiendas] ADD UNIQUE NONCLUSTERED 
 (
-	[dirección] ASC
+	[direccion] ASC
 )WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 GO
 SET ANSI_PADDING ON

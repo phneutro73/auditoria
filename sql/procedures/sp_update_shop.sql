@@ -7,7 +7,7 @@ CREATE PROCEDURE [dbo].[sp_update_shop]
 (
 	@ID INT
     ,@NOMBRE_TIENDA VARCHAR(50)
-	,@DIRECCIÓN VARCHAR(100)
+	,@DIRECCION VARCHAR(100)
 
 )
 AS
@@ -17,7 +17,7 @@ BEGIN
 	
 	UPDATE tiendas
 	SET nombre_tienda = @NOMBRE_TIENDA
-		,dirección = @DIRECCIÓN
+		,direccion = @DIRECCION
 	WHERE id = @ID
 
 END

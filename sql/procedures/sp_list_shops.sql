@@ -12,12 +12,12 @@ BEGIN
 
 	SELECT t.id,
 		t.nombre_tienda,
-		t.dirección,
+		t.direccion,
 		COUNT(ut.user_id) 'count_users_shop'
 	FROM tiendas t
 		LEFT JOIN user_tienda ut
 			ON t.id = ut.tienda_id
-	GROUP BY t.id, t.nombre_tienda, t.dirección
+	GROUP BY t.id, t.nombre_tienda, t.direccion
 
 END
 GO
