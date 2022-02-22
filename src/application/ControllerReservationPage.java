@@ -148,6 +148,10 @@ public class ControllerReservationPage {
 		fieldShopName.getItems().removeAll(fieldShopName.getItems());
 		fieldShopName.getItems().addAll(tiendas);
 		fieldShopName.getSelectionModel().select("-");
+		
+		fieldEmail.setText("");
+		fieldDni.setText("");
+		chkPrivacy.setSelected(false);
 
 	}
 
@@ -256,6 +260,8 @@ public class ControllerReservationPage {
 						stage.initStyle(StageStyle.UNDECORATED);
 						stage.setScene(new Scene(root));
 						stage.show();
+						
+						initialize();
 					} else {
 						FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
 						ControllerAlertDialog control = new ControllerAlertDialog(140, 210, "Error",
