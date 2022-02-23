@@ -15,7 +15,7 @@
 	xmlns:fx="http://javafx.com/fxml/1">
 	<children>
 		<TextField fx:id="fieldUser" layoutX="25.0" layoutY="222.0"
-			prefHeight="32.0" prefWidth="220.0" promptText="Usuario"
+			prefHeight="32.0" prefWidth="220.0" promptText="Correo"
 			style="-fx-background-radius: 20;" />
 		<PasswordField fx:id="fieldPassword" layoutX="25.0"
 			layoutY="267.0" prefHeight="32.0" prefWidth="220.0"

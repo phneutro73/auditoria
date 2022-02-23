@@ -765,7 +765,7 @@ public class AdministratorPageConnection {
 
 			while (rsShops.next()) {
 				obList.add(new ModelShopTable(rsShops.getInt("id"), rsShops.getString("nombre_tienda"),
-						rsShops.getString("dirección"), rsShops.getInt("count_users_shop")));
+						rsShops.getString("direccion"), rsShops.getInt("count_users_shop")));
 			}
 		}
 
