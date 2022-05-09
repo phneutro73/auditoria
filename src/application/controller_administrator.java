@@ -441,22 +441,37 @@ public class controller_administrator {
 	@FXML
 	void editRole(ActionEvent event) throws IOException {
 
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AddNewRolePage.fxml"));
-		ControllerEditRole control = new ControllerEditRole(0, 0, idRoleSelected);
-		loader.setController(control);
-		Parent root = loader.load();
-
-		Stage stage = new Stage();
-		stage.setScene(new Scene(root));
-		stage.showAndWait();
-		initialize();
+		if (idRoleSelected != 0) {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AddNewRolePage.fxml"));
+			ControllerEditRole control = new ControllerEditRole(0, 0, idRoleSelected);
+			loader.setController(control);
+			Parent root = loader.load();
+	
+			Stage stage = new Stage();
+			stage.setScene(new Scene(root));
+			stage.showAndWait();
+			initialize();
+		} else {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
+			ControllerAlertDialog control = new ControllerAlertDialog(120, 210, "Error",
+					"No se puede modificar ese puesto.");
+			loader.setController(control);
+			Parent root = loader.load();
+	
+			Stage stage = new Stage();
+			stage.initStyle(StageStyle.UNDECORATED);
+			stage.setScene(new Scene(root));
+			stage.show();
+	
+			initialize();
+		}
 
 	}
 
 	@FXML
 	void deleteRole(ActionEvent event) throws IOException {
 
-		if (idRoleSelected != 2) {
+		if (idRoleSelected != 0) {
 			String[] params = { String.valueOf(idRoleSelected) };
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/YesNoAlertDialog.fxml"));
 			ControllerYesNoAlertDialog control = new ControllerYesNoAlertDialog(0, 0, "Atención",
