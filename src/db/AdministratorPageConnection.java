@@ -764,8 +764,16 @@ public class AdministratorPageConnection {
 			rsShops = stmt.executeQuery("[sp_list_shops]");
 
 			while (rsShops.next()) {
+				String num;
+				if (rsShops.getInt("numero") == 0) {
+					num = "s/n";
+				} else {
+					num = Integer.toString(rsShops.getInt("numero"));
+				}
 				obList.add(new ModelShopTable(rsShops.getInt("id"), rsShops.getString("nombre_tienda"),
-						rsShops.getString("direccion"), rsShops.getInt("count_users_shop")));
+						rsShops.getString("calle") + ", " + num, rsShops.getString("ciudad"), 
+						rsShops.getString("provincia"), rsShops.getString("cp"), rsShops.getString("pais"), 
+						rsShops.getInt("count_users_shop")));
 			}
 		}
 

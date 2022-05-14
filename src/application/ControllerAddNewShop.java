@@ -1,15 +1,29 @@
 package application;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 
 import db.AdministratorPageConnection;
+import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -27,6 +41,21 @@ public class ControllerAddNewShop {
 
 	@FXML
 	private Label lblDirection;
+	
+	@FXML
+    private Label lblStreet;
+
+    @FXML
+    private Label lblCity;
+
+    @FXML
+    private Label lblProvince;
+
+    @FXML
+    private Label lblCP;
+
+    @FXML
+    private Label lblCountry;
 
 	@FXML
 	private JFXTextField fieldName;
@@ -39,6 +68,21 @@ public class ControllerAddNewShop {
 
 	@FXML
 	private JFXButton btnAccept;
+	
+    @FXML
+    private JFXComboBox<String> cmbStreet;
+
+    @FXML
+    private JFXComboBox<String> cmbProvince;
+
+    @FXML
+    private JFXComboBox<String> cmbCountry;
+
+    @FXML
+    private JFXComboBox<String> cmbCity;
+
+    @FXML
+    private JFXTextField fieldCP;
 
 	@FXML
 	void cancelExit(ActionEvent event) {
@@ -91,8 +135,9 @@ public class ControllerAddNewShop {
 
 	@FXML
 	void initialize() {
-
+		
 	}
+	
 
 	boolean checkAllFields() {
 
