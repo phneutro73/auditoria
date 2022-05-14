@@ -12,8 +12,8 @@ import java.util.List;
 import models.CurrentUser;
 
 public class LoginPageConnection {
-	static String connectionUrl = "jdbc:sqlserver://azure-informatica.database.windows.net:1433;" + "database=pr-infor;"
-			+ "user=flpi@azure-informatica;" + "password=Flyingpigs1!;" + "encrypt=true;"
+	static String connectionUrl = "jdbc:sqlserver://pr-infor.database.windows.net:1433;" + "database=pr-infor;"
+			+ "user=admin2022@pr-infor;" + "password=Flipi2022;" + "encrypt=true;"
 			+ "trustServerCertificate=false;" + "hostNameInCertificate=*.database.windows.net;" + "loginTimeout=30";
 
 	public byte[] getSalt(String email) {

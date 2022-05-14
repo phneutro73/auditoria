@@ -132,11 +132,7 @@ public class ControllerReservationPage {
 	@FXML
 	void initialize() {
 
-		if (currentUser.getRoleId() != 2) {
-			btnAdministrator.setVisible(false);
-		}
-
-		if (currentUser.getRoleId() != 2) {
+		if (currentUser.getRoleId() != 1) {
 			btnAdministrator.setVisible(false);
 		}
 

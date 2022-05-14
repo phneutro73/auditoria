@@ -21,8 +21,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class AdministratorPageConnection {
-	static String connectionUrl = "jdbc:sqlserver://azure-informatica.database.windows.net:1433;" + "database=pr-infor;"
-			+ "user=flpi@azure-informatica;" + "password=Flyingpigs1!;" + "encrypt=true;"
+	static String connectionUrl = "jdbc:sqlserver://pr-infor.database.windows.net:1433;" + "database=pr-infor;"
+			+ "user=admin2022@pr-infor;" + "password=Flipi2022;" + "encrypt=true;"
 			+ "trustServerCertificate=false;" + "hostNameInCertificate=*.database.windows.net;" + "loginTimeout=30";
 
 	public List<String> listRoles() {
@@ -764,8 +764,16 @@ public class AdministratorPageConnection {
 			rsShops = stmt.executeQuery("[sp_list_shops]");
 
 			while (rsShops.next()) {
+				String num;
+				if (rsShops.getInt("numero") == 0) {
+					num = "s/n";
+				} else {
+					num = Integer.toString(rsShops.getInt("numero"));
+				}
 				obList.add(new ModelShopTable(rsShops.getInt("id"), rsShops.getString("nombre_tienda"),
-						rsShops.getString("direccion"), rsShops.getInt("count_users_shop")));
+						rsShops.getString("calle") + ", " + num, rsShops.getString("ciudad"), 
+						rsShops.getString("provincia"), rsShops.getString("cp"), rsShops.getString("pais"), 
+						rsShops.getInt("count_users_shop")));
 			}
 		}
 

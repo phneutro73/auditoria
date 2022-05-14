@@ -125,7 +125,7 @@ public class ControllerConsultationPage {
 	@FXML
 	void initialize() {
 
-		if (currentUser.getRoleId() != 2) {
+		if (currentUser.getRoleId() != 1) {
 			btnAdministrator.setVisible(false);
 		}
 

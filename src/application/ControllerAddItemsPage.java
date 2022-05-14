@@ -99,7 +99,7 @@ public class ControllerAddItemsPage {
 
 		isExpanded = false;
 
-		if (currentUser.getRoleId() != 2) {
+		if (currentUser.getRoleId() != 1) {
 			btnAdministrator.setVisible(false);
 		}
 
