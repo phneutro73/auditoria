@@ -155,11 +155,13 @@ public class ControllerAddNewShop {
 		
 		cmbProvince.getSelectionModel().selectedItemProperty().addListener((options, oldValue, newValue) -> {
 			   
-			if (!cmbProvince.getValue().toString().equals("-")) {
-				getComboCity();
-			} else {
-				cmbCity.setDisable(true);
-				cmbCity.setValue("-");
+			if (cmbProvince.getValue() != null && !cmbProvince.getValue().toString().equals("")) {
+				if (!cmbProvince.getValue().toString().equals("-")) {
+					getComboCity();
+				} else {
+					cmbCity.setDisable(true);
+					cmbCity.setValue("-");
+				}
 			}
 			
 		});
@@ -174,6 +176,7 @@ public class ControllerAddNewShop {
 		cmbStreet.getSelectionModel().select("-");
 		cmbStreet.setDisable(true);
 		
+		// TODO COMPROBAR CÓMO VIENEN LOS CÓDIGOS POSTALES Y SI DEPENDE PREVIAMENTE DE ALGO
 		fieldCP.setText("-");
 		fieldCP.setDisable(true);
 		
@@ -185,9 +188,10 @@ public class ControllerAddNewShop {
 
 		try {
 
-			if ((!fieldName.getText().isEmpty() && fieldName.getText() != null && fieldName.getText() != "")
+			// TODO cambiar la parte de la dirección
+			if ((!fieldName.getText().isEmpty() && fieldName.getText() != null && !fieldName.getText().toString().equals(""))
 					&& (!fieldDirection.getText().isEmpty() && fieldDirection.getText() != null
-							&& fieldDirection.getText() != "")) {
+							&& !fieldDirection.getText().toString().equals(""))) {
 				return true;
 			} else {
 				return false;
@@ -216,7 +220,7 @@ public class ControllerAddNewShop {
 			
 			cmbCity.getSelectionModel().selectedItemProperty().addListener((options, oldValue, newValue) -> {
 				   
-				if (cmbCity.getValue() != null) {
+				if (cmbCity.getValue() != null && !cmbCity.getValue().toString().equals("")) {
 					if (!cmbCity.getValue().toString().equals("-")) {
 						getComboStreet();
 					} else {
@@ -251,7 +255,7 @@ public class ControllerAddNewShop {
 			
 			cmbStreet.getSelectionModel().selectedItemProperty().addListener((options, oldValue, newValue) -> {
 				   
-				if (cmbStreet.getValue() != null) {
+				if (cmbStreet.getValue() != null && !cmbStreet.getValue().toString().equals("")) {
 					if (!cmbStreet.getValue().toString().equals("-")) {
 						fieldCP.setText("");
 						fieldCP.setDisable(false);
