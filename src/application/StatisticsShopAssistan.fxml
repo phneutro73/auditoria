@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXTabPane?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="parent" minWidth="1000.0"
+	prefHeight="650.0" prefWidth="941.0" styleClass="softBackgroundParent"
+	stylesheets="@application.css" xmlns="http://javafx.com/javafx/8.0.171"
+	xmlns:fx="http://javafx.com/fxml/1">
+	<children>
+		<HBox layoutX="1.0" layoutY="5.0" prefHeight="250.0"
+			prefWidth="617.0" AnchorPane.bottomAnchor="0.0"
+			AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+			AnchorPane.topAnchor="0.0">
+			<children>
+				<VBox fx:id="drawer" fillWidth="false" prefHeight="650.0"
+					prefWidth="49.0" styleClass="menu" stylesheets="@styleMenu.css">
+					<children>
+						<HBox fx:id="btnMenu" alignment="CENTER_LEFT"
+							onMouseClicked="#expandMenu" prefHeight="43.0" prefWidth="60.0"
+							styleClass="menuButton" stylesheets="@styleMenu.css">
+							<children>
+								<Label prefHeight="1.0" prefWidth="48.0" text=" ">
+									<graphic>
+										<ImageView fitHeight="20.0" fitWidth="35.0">
+											<image>
+												<Image url="@../resources/assets/menuIcon.png" />
+											</image>
+										</ImageView>
+									</graphic>
+								</Label>
+							</children>
+							<padding>
+								<Insets left="10.0" />
+							</padding>
+						</HBox>
+						<Pane prefHeight="56.0" prefWidth="60.0" />
+						<HBox fx:id="btnSales" alignment="CENTER_LEFT"
+							onMouseClicked="#goToSalesPage" prefHeight="60.0"
+							prefWidth="60.0" styleClass="menuButton"
+							stylesheets="@styleMenu.css">
+							<children>
+								<Label styleClass="labelMenuButtons"
+									stylesheets="@styleMenu.css" text="   VENTAS">
+									<graphic>
+										<ImageView fitHeight="40.0" fitWidth="40.0">
+											<image>
+												<Image url="@../resources/assets/sales_icon.png" />
+											</image>
+										</ImageView>
+									</graphic>
+								</Label>
+							</children>
+							<VBox.margin>
+								<Insets />
+							</VBox.margin>
+							<padding>
+								<Insets left="10.0" />
+							</padding>
+						</HBox>
+						<HBox fx:id="btnConsultation" alignment="CENTER_LEFT"
+							onMouseClicked="#goToConsultationPage" styleClass="menuButton"
+							stylesheets="@styleMenu.css">
+							<children>
+								<Label styleClass="labelMenuButtons" text="   CONSULTA">
+									<graphic>
+										<ImageView fitHeight="40.0" fitWidth="40.0">
+											<image>
+												<Image url="@../resources/assets/consult_icon.png" />
+											</image>
+										</ImageView>
+									</graphic>
+								</Label>
+							</children>
+							<VBox.margin>
+								<Insets />
+							</VBox.margin>
+							<padding>
+								<Insets left="10.0" />
+							</padding>
+						</HBox>
+						<HBox fx:id="btnAddItem" alignment="CENTER_LEFT"
+							onMouseClicked="#goToAddItemsPage" styleClass="menuButton"
+							stylesheets="@application.css">
+							<children>
+								<Label styleClass="labelMenuButtons"
+									stylesheets="@styleMenu.css" text="   AÑADIR ARTÍCULOS">
+									<graphic>
+										<ImageView fitHeight="40.0" fitWidth="40.0">
+											<image>
+												<Image url="@../resources/assets/add_icon.png" />
+											</image>
+										</ImageView>
+									</graphic>
+								</Label>
+							</children>
+							<VBox.margin>
+								<Insets />
+							</VBox.margin>
+							<padding>
+								<Insets left="10.0" />
+							</padding>
+						</HBox>
+						<HBox fx:id="btnStatistics" alignment="CENTER_LEFT"
+							onMouseClicked="#goToStatisticsPage" prefHeight="100.0"
+							prefWidth="52.0" styleClass="selectedMenuButton"
+							stylesheets="@styleMenu.css">
+							<children>
+								<Label styleClass="labelMenuButtons"
+									stylesheets="@styleMenu.css" text="   VER ESTADÍSTICAS">
+									<graphic>
+										<ImageView fitHeight="40.0" fitWidth="40.0">
+											<image>
+												<Image url="@../resources/assets/statistics_icon.png" />
+											</image>
+										</ImageView>
+									</graphic>
+								</Label>
+							</children>
+							<padding>
+								<Insets left="10.0" />
+							</padding>
+						</HBox>
+						<HBox fx:id="btnAdministrator" alignment="CENTER_LEFT"
+							styleClass="menuButton" stylesheets="@application.css">
+							<children>
+								<Label styleClass="labelMenuSelectedButton"
+									stylesheets="@styleMenu.css" text="   ADMINISTRADOR">
+									<graphic>
+										<ImageView fitHeight="40.0" fitWidth="40.0">
+											<image>
+												<Image url="@../resources/assets/admin_high_icon.png" />
+											</image>
+										</ImageView>
+									</graphic>
+								</Label>
+							</children>
+							<VBox.margin>
+								<Insets />
+							</VBox.margin>
+							<padding>
+								<Insets left="10.0" />
+							</padding>
+						</HBox>
+					</children>
+					<padding>
+						<Insets top="15.0" />
+					</padding>
+				</VBox>
+				<VBox fx:id="body" onMouseClicked="#hideMenu"
+					prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+					<children>
+						<AnchorPane maxHeight="-Infinity" minHeight="-Infinity"
+							prefHeight="80.0" prefWidth="100.0" VBox.vgrow="NEVER">
+							<children>
+								<AnchorPane layoutX="29.0" prefHeight="55.0"
+									prefWidth="173.0" styleClass="pageTitle"
+									stylesheets="@application.css">
+									<children>
+										<ImageView fitHeight="25.0" fitWidth="25.0"
+											layoutX="28.0" layoutY="13.0">
+											<image>
+												<Image url="@../resources/assets/admin_high_icon.png" />
+											</image>
+										</ImageView>
+										<Label layoutX="62.0" layoutY="16.0" text="Estadísticas"
+											textFill="#f0fbfd">
+											<font>
+												<Font name="System Bold" size="15.0" />
+											</font>
+										</Label>
+									</children>
+								</AnchorPane>
+								<ImageView fitHeight="15.0" fitWidth="9.0"
+									layoutX="221.0" layoutY="20.0">
+									<image>
+										<Image url="@../resources/assets/NextIcon.png" />
+									</image>
+								</ImageView>
+								<Label fx:id="subtitle" layoutX="250.0" layoutY="18.0"
+									text="Mis estadísticas" textFill="#434345">
+									<font>
+										<Font name="System Bold" size="13.0" />
+									</font>
+								</Label>
+								<AnchorPane fx:id="logOutButton" layoutX="752.0"
+									onMouseClicked="#logOut" prefHeight="55.0" prefWidth="65.0"
+									styleClass="pageTitle" stylesheets="@application.css"
+									AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="0.0">
+									<children>
+										<ImageView fitHeight="25.0" fitWidth="25.0"
+											layoutX="20.0" layoutY="13.0">
+											<image>
+												<Image url="@../resources/assets/LogOutIcon.png" />
+											</image>
+										</ImageView>
+									</children>
+								</AnchorPane>
+							</children>
+						</AnchorPane>
+						<JFXTabPane onMouseClicked="#hideMenu"
+							prefHeight="622.0" prefWidth="940.0" styleClass="tab"
+							stylesheets="@application.css" VBox.vgrow="ALWAYS">
+							<tabs>
+								<Tab text="Mis estadísticas">
+									<content>
+										<AnchorPane>
+											<children>
+												<AnchorPane prefHeight="492.0" prefWidth="895.0"
+													styleClass="card" AnchorPane.bottomAnchor="17.0"
+													AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0"
+													AnchorPane.topAnchor="17.0">
+													<children>
+														<VBox prefHeight="410.0" prefWidth="529.0"
+															AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+															AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+															<children>
+																<Label styleClass="cardTitle"
+																	text="MIS ESTADÍSTICAS:   datos generados a partir de mi actividad.">
+																	<VBox.margin>
+																		<Insets bottom="20.0" left="30.0" right="30.0"
+																			top="20.0" />
+																	</VBox.margin>
+																</Label>
+																<HBox maxHeight="1.7976931348623157E308"
+																	prefHeight="371.0" prefWidth="815.0" spacing="15.0"
+																	VBox.vgrow="ALWAYS">
+																	<VBox.margin>
+																		<Insets bottom="30.0" left="40.0" right="40.0"
+																			top="15.0" />
+																	</VBox.margin>
+																</HBox>
+															</children>
+														</VBox>
+													</children>
+												</AnchorPane>
+											</children>
+										</AnchorPane>
+									</content>
+								</Tab>
+								<Tab text="Mi tienda">
+									<content>
+										<AnchorPane>
+											<children>
+												<AnchorPane prefHeight="492.0" prefWidth="895.0"
+													styleClass="card" AnchorPane.bottomAnchor="17.0"
+													AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0"
+													AnchorPane.topAnchor="17.0">
+													<children>
+														<VBox prefHeight="410.0" prefWidth="529.0"
+															AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+															AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+															<children>
+																<Label styleClass="cardTitle"
+																	text="MI TIENDA:   datos obtenidos por la actividad global de mi tienda.">
+																	<VBox.margin>
+																		<Insets bottom="20.0" left="30.0" right="30.0"
+																			top="20.0" />
+																	</VBox.margin>
+																</Label>
+																<HBox maxHeight="1.7976931348623157E308"
+																	prefHeight="371.0" prefWidth="815.0" spacing="15.0"
+																	VBox.vgrow="ALWAYS">
+																	<VBox.margin>
+																		<Insets bottom="30.0" left="40.0" right="40.0"
+																			top="15.0" />
+																	</VBox.margin>
+																</HBox>
+															</children>
+														</VBox>
+													</children>
+												</AnchorPane>
+											</children>
+										</AnchorPane>
+									</content>
+								</Tab>
+							</tabs>
+						</JFXTabPane>
+					</children>
+				</VBox>
+			</children>
+		</HBox>
+	</children>
+</AnchorPane>
