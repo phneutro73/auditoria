@@ -160,6 +160,11 @@ public class ControllerAddItemsPage {
 		stage.show();
 		((Node) (event.getSource())).getScene().getWindow().hide();
 	}
+	
+	@FXML
+	void goToStatisticsPage(MouseEvent event) throws IOException {
+		//TODO
+	}
 
 	@FXML
 	void saveNewItem(ActionEvent event) throws IOException {

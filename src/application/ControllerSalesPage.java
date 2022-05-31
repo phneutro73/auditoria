@@ -380,6 +380,11 @@ public class ControllerSalesPage {
 		stage.setScene(new Scene(root));
 		stage.show();
 	}
+	
+	@FXML
+	void goToStatisticsPage(MouseEvent event) throws IOException {
+		//TODO
+	}
 
 	@FXML
 	void hideMenu(MouseEvent event) {

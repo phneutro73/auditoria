@@ -918,6 +918,11 @@ public class controller_administrator {
 		stage.show();
 		((Node) (event.getSource())).getScene().getWindow().hide();
 	}
+	
+	@FXML
+	void goToStatisticsPage(MouseEvent event) throws IOException {
+		//TODO
+	}
 
 	@FXML
 	void logOut(MouseEvent event) throws IOException {
