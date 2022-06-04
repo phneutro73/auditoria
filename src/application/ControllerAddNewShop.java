@@ -5,10 +5,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import com.google.maps.model.AddressComponentType;
+import com.google.maps.model.PlaceDetails;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 
+import application.AutoCompleteAddressField.AddressPrediction;
 import db.AdministratorPageConnection;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
@@ -17,17 +20,21 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import models.ComboBoxAutoComplete;
+import org.apache.commons.lang3.StringUtils;
+
 
 public class ControllerAddNewShop {
 
@@ -61,8 +68,6 @@ public class ControllerAddNewShop {
 	@FXML
 	private JFXTextField fieldName;
 
-	@FXML
-	private JFXTextField fieldDirection;
 
 	@FXML
 	private JFXButton btnCancel;
@@ -71,16 +76,16 @@ public class ControllerAddNewShop {
 	private JFXButton btnAccept;
 	
     @FXML
-    private JFXComboBox<String> cmbStreet;
+    private JFXTextField cmbStreet;
 
     @FXML
-    private JFXComboBox<String> cmbProvince;
+    private JFXTextField cmbProvince;
 
     @FXML
-    private JFXComboBox<String> cmbCountry;
+    private JFXTextField cmbCountry;
 
     @FXML
-    private JFXComboBox<String> cmbCity;
+    private JFXTextField cmbCity;
 
     @FXML
     private JFXTextField fieldCP;
@@ -93,14 +98,14 @@ public class ControllerAddNewShop {
 
 	@FXML
 	void saveNewShop(ActionEvent event) {
-
+        
 		try {
 
 			if (checkAllFields()) {
 
 				AdministratorPageConnection adminDB = new AdministratorPageConnection();
-				boolean success = adminDB.addShop(fieldName.getText(), fieldDirection.getText());
-
+				// TODO meter los nuevos datos
+/*
 				if (success) {
 					FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
 					ControllerAlertDialog control = new ControllerAlertDialog(120, 210, "Guardado correcto",
@@ -115,7 +120,7 @@ public class ControllerAddNewShop {
 				} else {
 					FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
 					ControllerAlertDialog control = new ControllerAlertDialog(120, 210, "Error",
-							"Se ha producido un error inesperado. Por favor, inténtelo más tarde.");
+							"Se ha producido un error inesperado. Por favor, intï¿½ntelo mï¿½s tarde.");
 					loader.setController(control);
 					Parent root = loader.load();
 
@@ -123,7 +128,7 @@ public class ControllerAddNewShop {
 					stage.initStyle(StageStyle.UNDECORATED);
 					stage.setScene(new Scene(root));
 					stage.show();
-				}
+				}*/
 
 				Stage stage = (Stage) btnCancel.getScene().getWindow();
 				stage.close();
@@ -136,49 +141,58 @@ public class ControllerAddNewShop {
 
 	@FXML
 	void initialize() {
-		
-		ObservableList<String> countries = FXCollections.observableArrayList(
-				"España (ES)");
-		ObservableList<String> provinces = FXCollections.observableArrayList(
-				"-", "Provincia 1", "Provincia 2");
-		
-		cmbCountry.getItems().removeAll(cmbCountry.getItems());
-		cmbCountry.getItems().addAll(countries);
-		cmbCountry.setValue(cmbCountry.getItems().get(0));
 		cmbCountry.setDisable(true);
 		
-		cmbProvince.setEditable(true);
-		cmbProvince.getItems().removeAll(cmbProvince.getItems());
-		cmbProvince.getItems().addAll(provinces);
-		cmbProvince.setValue(cmbProvince.getItems().get(0));
-		new ComboBoxAutoComplete<String>(cmbProvince);
-		
-		cmbProvince.getSelectionModel().selectedItemProperty().addListener((options, oldValue, newValue) -> {
-			   
-			if (cmbProvince.getValue() != null && !cmbProvince.getValue().toString().equals("")) {
-				if (!cmbProvince.getValue().toString().equals("-")) {
-					getComboCity();
-				} else {
-					cmbCity.setDisable(true);
-					cmbCity.setValue("-");
-				}
-			}
-			
-		});
+		cmbProvince.setDisable(true);
 
-		cmbCity.getItems().removeAll(cmbCity.getItems());
-		cmbCity.getItems().addAll("-");
-		cmbCity.getSelectionModel().select("-");
 		cmbCity.setDisable(true);
 
-		cmbStreet.getItems().removeAll(cmbStreet.getItems());
-		cmbStreet.getItems().addAll("-");
-		cmbStreet.getSelectionModel().select("-");
 		cmbStreet.setDisable(true);
-		
-		// TODO COMPROBAR CÓMO VIENEN LOS CÓDIGOS POSTALES Y SI DEPENDE PREVIAMENTE DE ALGO
-		fieldCP.setText("-");
+
 		fieldCP.setDisable(true);
+		
+		AutoCompleteAddressField text = new AutoCompleteAddressField();
+
+        text.getEntryMenu().setOnAction((ActionEvent e) ->
+        {
+            ((MenuItem) e.getTarget()).addEventHandler(Event.ANY, (Event event2) ->
+            {
+                if (text.getLastSelectedObject() != null)
+                {
+                    text.setText(text.getLastSelectedObject().toString());
+                    PlaceDetails place = AutoCompleteAddressField.getPlace((AddressPrediction) text.getLastSelectedObject());
+                    if (place != null)
+                    {
+                    	fieldCP.setText(AutoCompleteAddressField.getComponentLongName(place.addressComponents, AddressComponentType.POSTAL_CODE));
+                    	cmbCity.setText(AutoCompleteAddressField.getComponentLongName(place.addressComponents, AddressComponentType.LOCALITY));
+                    	cmbProvince.setText(AutoCompleteAddressField.getComponentLongName(place.addressComponents, AddressComponentType.ADMINISTRATIVE_AREA_LEVEL_1));
+                    	cmbCountry.setText(AutoCompleteAddressField.getComponentLongName(place.addressComponents, AddressComponentType.COUNTRY));
+                    	cmbStreet.setText(AutoCompleteAddressField.getComponentLongName(place.addressComponents, AddressComponentType.STREET_ADDRESS));
+                    	cmbCountry.setDisable(false);
+                		
+                		cmbProvince.setDisable(false);
+
+                		cmbCity.setDisable(false);
+
+                		cmbStreet.setDisable(false);
+
+                		fieldCP.setDisable(false);
+
+                    } else
+                    {
+                    	cmbStreet.setText("");
+                    	fieldCP.setText("");
+                    	cmbCity.setText("");
+                    	cmbProvince.setText("");
+                    	cmbCountry.setText("");
+                    }
+                }
+            });
+        });
+        
+        grdAddSchedule.add(text, 1, 1);
+
+		
 		
 		// TODO hacer que los cmb's sean filtros autocompletables
 	}
@@ -188,89 +202,19 @@ public class ControllerAddNewShop {
 
 		try {
 
-			// TODO cambiar la parte de la dirección
-			if ((!fieldName.getText().isEmpty() && fieldName.getText() != null && !fieldName.getText().toString().equals(""))
+			// TODO cambiar la parte de la direcciï¿½n
+			/*if ((!fieldName.getText().isEmpty() && fieldName.getText() != null && !fieldName.getText().toString().equals(""))
 					&& (!fieldDirection.getText().isEmpty() && fieldDirection.getText() != null
 							&& !fieldDirection.getText().toString().equals(""))) {
 				return true;
 			} else {
 				return false;
 			}
-
+*/
+			return true;
 		} catch (Exception e) {
 			System.out.println("ERROR: controller_administrator.java - checkAllFields() - " + e.toString());
 			return false;
 		}
-	}
-	
-	void getComboCity() {
-		
-		try {
-
-			cmbCity.setDisable(false);
-			cmbCity.setEditable(true);
-			
-			ObservableList<String> cities = FXCollections.observableArrayList(
-					"-", "Ciudad 1", "Ciudad 2", "Ciudad 3");
-			
-			cmbCity.getItems().removeAll(cmbCity.getItems());
-			cmbCity.getItems().addAll(cities);
-			cmbCity.setValue(cmbCity.getItems().get(0));
-			new ComboBoxAutoComplete<String>(cmbCity);
-			
-			cmbCity.getSelectionModel().selectedItemProperty().addListener((options, oldValue, newValue) -> {
-				   
-				if (cmbCity.getValue() != null && !cmbCity.getValue().toString().equals("")) {
-					if (!cmbCity.getValue().toString().equals("-")) {
-						getComboStreet();
-					} else {
-						cmbStreet.setDisable(true);
-						cmbStreet.setValue("-");
-					}
-				}
-				
-				
-			}); 
-			
-		} catch (Exception e) {
-			System.out.println("ERROR: getComboCity: " + e.getStackTrace());
-		}
-		
-	}
-	
-	void getComboStreet() {
-		
-		try {
-			
-			cmbStreet.setDisable(false);
-			cmbStreet.setEditable(true);
-
-			ObservableList<String> streets = FXCollections.observableArrayList(
-					"-", "Calle 1", "Calle 2", "Calle 3", "Calle 4", "Calle 5");
-			
-			cmbStreet.getItems().removeAll(cmbStreet.getItems());
-			cmbStreet.getItems().addAll(streets);
-			cmbStreet.setValue(cmbStreet.getItems().get(0));
-			new ComboBoxAutoComplete<String>(cmbStreet);
-			
-			cmbStreet.getSelectionModel().selectedItemProperty().addListener((options, oldValue, newValue) -> {
-				   
-				if (cmbStreet.getValue() != null && !cmbStreet.getValue().toString().equals("")) {
-					if (!cmbStreet.getValue().toString().equals("-")) {
-						fieldCP.setText("");
-						fieldCP.setDisable(false);
-					} else {
-						fieldCP.setText("-");
-						fieldCP.setDisable(true);
-					}
-				}
-				
-				
-			}); 
-			
-		} catch (Exception e) {
-			System.out.println("ERROR: getComboStreet: " + e.getStackTrace());
-		}
-		
 	}
 }
