@@ -222,7 +222,7 @@ public class ControllerSalesPage {
 
 					FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
 					ControllerAlertDialog control = new ControllerAlertDialog(120, 210, "Error",
-							"El artículo se ha añadido correctamente.");
+							"El artï¿½culo se ha aï¿½adido correctamente.");
 					loader.setController(control);
 					Parent root = loader.load();
 
@@ -239,7 +239,7 @@ public class ControllerSalesPage {
 
 					FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
 					ControllerAlertDialog control = new ControllerAlertDialog(120, 210, "Error",
-							"Se ha producido un error. Por favor, inténtelo más tarde.");
+							"Se ha producido un error. Por favor, intï¿½ntelo mï¿½s tarde.");
 					loader.setController(control);
 					Parent root = loader.load();
 
@@ -254,7 +254,7 @@ public class ControllerSalesPage {
 			} else {
 				FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
 				ControllerAlertDialog control = new ControllerAlertDialog(120, 210, "Error",
-						"No hay stock del artículo en tienda. Revise los datos.");
+						"No hay stock del artï¿½culo en tienda. Revise los datos.");
 				loader.setController(control);
 				Parent root = loader.load();
 
@@ -274,9 +274,9 @@ public class ControllerSalesPage {
 
 		String[] params = { String.valueOf(currentUser.getId()) };
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/YesNoAlertDialog.fxml"));
-		ControllerYesNoAlertDialog control = new ControllerYesNoAlertDialog(0, 0, "Atención",
-				"Esta acción es permanente, no se podrá deshacer. Preste atención y revise los datos.",
-				"¿Está seguro de que desea cancelar esta venta?", "SÍ", "No", "ticketDelete", params);
+		ControllerYesNoAlertDialog control = new ControllerYesNoAlertDialog(0, 0, "Atenciï¿½n",
+				"Esta acciï¿½n es permanente, no se podrï¿½ deshacer. Preste atenciï¿½n y revise los datos.",
+				"ï¿½Estï¿½ seguro de que desea cancelar esta venta?", "Sï¿½", "No", "ticketDelete", params);
 		loader.setController(control);
 		Parent root = loader.load();
 
@@ -285,7 +285,7 @@ public class ControllerSalesPage {
 		stage.setScene(new Scene(root));
 		stage.showAndWait();
 		numItems = 0;
-		lblTotal.setText("€");
+		lblTotal.setText("ï¿½");
 		initialize();
 
 	}
@@ -295,11 +295,11 @@ public class ControllerSalesPage {
 
 		String[] params = { String.valueOf(itemIdSelected), String.valueOf(currentUser.getId()) };
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/YesNoAlertDialog.fxml"));
-		ControllerYesNoAlertDialog control = new ControllerYesNoAlertDialog(0, 0, "Atención",
-				"Esta acción es permanente, no se podrá deshacer. Preste atención y revise los datos.",
-				"¿Está seguro de que desea eliminar el artículo con el siguiente ID: " + String.valueOf(itemIdSelected)
+		ControllerYesNoAlertDialog control = new ControllerYesNoAlertDialog(0, 0, "Atenciï¿½n",
+				"Esta acciï¿½n es permanente, no se podrï¿½ deshacer. Preste atenciï¿½n y revise los datos.",
+				"ï¿½Estï¿½ seguro de que desea eliminar el artï¿½culo con el siguiente ID: " + String.valueOf(itemIdSelected)
 						+ " del ticket?",
-				"SÍ", "No", "ticketDeleteItem", params);
+				"Sï¿½", "No", "ticketDeleteItem", params);
 		loader.setController(control);
 		Parent root = loader.load();
 
@@ -481,8 +481,8 @@ public class ControllerSalesPage {
 		ticketTable.setItems(obList);
 
 		if (ticketTable.getItems().size() != 0) {
-			if (lblTotal.getText().equals("€")) {
-				lblTotal.setText(Double.toString(obList.get(0).getItemPrice()) + " €");
+			if (lblTotal.getText().equals("ï¿½")) {
+				lblTotal.setText(Double.toString(obList.get(0).getItemPrice()) + " ï¿½");
 			} else {
 				double price = Double.parseDouble(lblTotal.getText().substring(0, lblTotal.getText().length() - 2));
 				double totalPrice;
@@ -491,10 +491,10 @@ public class ControllerSalesPage {
 				} else {
 					totalPrice = price + obList.get(0).getItemPrice();
 				}
-				lblTotal.setText(Double.toString(totalPrice) + " €");
+				lblTotal.setText(Double.toString(totalPrice) + " ï¿½");
 			}
 		} else {
-			lblTotal.setText("€");
+			lblTotal.setText("ï¿½");
 		}
 
 	}
@@ -509,21 +509,24 @@ public class ControllerSalesPage {
 	void listenerBarCodeField(SalesPageConnection salesDB) {
 
 		fieldBarCode.textProperty().addListener((observable, oldValue, newValue) -> {
-			Hashtable<String, Object> item = salesDB.getItemWithBarCode(newValue);
+			if (newValue.length() == 13) {
+				Hashtable<String, Object> item = salesDB.getItemWithBarCode(newValue);
 
-			if (!item.isEmpty()) {
-				fieldName.setText((String) item.get("name"));
-				fieldItemType.getSelectionModel().select((String) item.get("type"));
-				fieldSize.setText((String) item.get("size"));
-				fieldPrice.setText((String) item.get("price").toString());
-				itemIdAdd = Integer.parseInt(item.get("id").toString());
-			} else {
-				fieldName.setText("");
-				fieldItemType.getSelectionModel().select("-");
-				fieldSize.setText("");
-				fieldPrice.setText("");
-				itemIdAdd = -1;
+				if (!item.isEmpty()) {
+					fieldName.setText((String) item.get("name"));
+					fieldItemType.getSelectionModel().select((String) item.get("type"));
+					fieldSize.setText((String) item.get("size"));
+					fieldPrice.setText((String) item.get("price").toString());
+					itemIdAdd = Integer.parseInt(item.get("id").toString());
+				} else {
+					fieldName.setText("");
+					fieldItemType.getSelectionModel().select("-");
+					fieldSize.setText("");
+					fieldPrice.setText("");
+					itemIdAdd = -1;
+				}
 			}
+			
 		});
 
 	}

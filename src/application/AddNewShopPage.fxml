@@ -97,37 +97,18 @@
 									</rowConstraints>
 									<children>
 										<Label fx:id="lblName" text="NOMBRE" />
-										<Label fx:id="lblDirection" text="DIRECCIÓN"
-											GridPane.rowIndex="1" />
-										<JFXTextField fx:id="fieldName"
-											maxWidth="1.7976931348623157E308" prefWidth="1000.0"
-											GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" />
-										<JFXTextField fx:id="fieldDirection"
-											GridPane.columnIndex="1" GridPane.rowIndex="1" />
-										<Label fx:id="lblStreet" text="CALLE"
-											GridPane.rowIndex="5" />
-										<Label fx:id="lblCity" text="CIUDAD"
-											GridPane.rowIndex="4" />
-										<Label fx:id="lblProvince" text="PROVINCIA"
-											GridPane.rowIndex="3" />
-										<Label fx:id="lblCP" text="CP" GridPane.rowIndex="6" />
-										<Label fx:id="lblCountry" text="PAÍS"
-											GridPane.rowIndex="2" />
-										<JFXComboBox fx:id="cmbStreet" prefHeight="27.0"
-											prefWidth="410.0" GridPane.columnIndex="1"
-											GridPane.rowIndex="5" />
-										<JFXComboBox fx:id="cmbProvince" prefHeight="27.0"
-											prefWidth="410.0" GridPane.columnIndex="1"
-											GridPane.rowIndex="3" />
-										<JFXComboBox fx:id="cmbCountry" prefHeight="27.0"
-											prefWidth="410.0" GridPane.columnIndex="1"
-											GridPane.rowIndex="2" />
-										<JFXComboBox fx:id="cmbCity" prefHeight="27.0"
-											prefWidth="410.0" GridPane.columnIndex="1"
-											GridPane.rowIndex="4" />
-										<JFXTextField fx:id="fieldCP"
-											maxWidth="1.7976931348623157E308" prefWidth="1000.0"
-											GridPane.columnIndex="1" GridPane.rowIndex="6" />
+										<Label fx:id="lblDirection" text="DIRECCIÓN" GridPane.rowIndex="1" />
+										<JFXTextField fx:id="fieldName" maxWidth="1.7976931348623157E308" prefWidth="1000.0" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" />
+			                              <Label fx:id="lblStreet" text="CALLE" GridPane.rowIndex="5" />
+			                              <Label fx:id="lblCity" text="CIUDAD" GridPane.rowIndex="4" />
+			                              <Label fx:id="lblProvince" text="PROVINCIA" GridPane.rowIndex="3" />
+			                              <Label fx:id="lblCP" text="CP" GridPane.rowIndex="6" />
+			                              <Label fx:id="lblCountry" text="PAÍS" GridPane.rowIndex="2" />
+			                              <JFXTextField fx:id="cmbStreet" prefHeight="27.0" prefWidth="410.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+			                              <JFXTextField fx:id="cmbProvince" prefHeight="27.0" prefWidth="410.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+			                              <JFXTextField fx:id="cmbCountry" prefHeight="27.0" prefWidth="410.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+			                              <JFXTextField fx:id="cmbCity" prefHeight="27.0" prefWidth="410.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+			                              <JFXTextField fx:id="fieldCP" maxWidth="1.7976931348623157E308" prefWidth="1000.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
 									</children>
 									<VBox.margin>
 										<Insets left="10.0" />

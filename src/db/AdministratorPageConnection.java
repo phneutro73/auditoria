@@ -826,7 +826,7 @@ public class AdministratorPageConnection {
 
 	}
 	
-	public boolean addShop(String name, String direction) {
+	public boolean addShop(String name, String street, int number, String city, String province, String cp, String country) {
 
 		boolean success = true;
 		Connection conn = null;
@@ -835,7 +835,7 @@ public class AdministratorPageConnection {
 
 			conn = DriverManager.getConnection(connectionUrl);
 			System.out.println("Connected to DB");
-			String query = "[sp_create_shop]" + "		@NAME = '" + name + "',		@DIRECTION = '" + direction + "'";
+			String query = "[sp_create_shop]" + "		@NAME = '" + name + "',		@STREET = '" + street + "',		@NUMBER = '" + number + "',		@CITY = '" + city + "',		@PROVINCE = '" + province + "',		@CP = '" +cp + "',		@COUNTRY = '" +country+ "'";
 			PreparedStatement statement = conn.prepareStatement(query);
 			statement.executeUpdate();
 			success = true;
@@ -870,7 +870,7 @@ public class AdministratorPageConnection {
 			while (rs.next()) {
 				int id = rs.getInt("id");
 				String name = rs.getString("nombre_tienda");
-				String direction = rs.getString("dirección");
+				String direction = rs.getString("direcciï¿½n");
 				shop.put("id", String.valueOf(id));
 				shop.put("shopName", name);
 				shop.put("shopDirection", direction);
@@ -899,7 +899,7 @@ public class AdministratorPageConnection {
 			conn = DriverManager.getConnection(connectionUrl);
 			System.out.println("Connected to DB");
 			String query = "[sp_update_shop]" + "		@ID = " + shopId + "," + "		@NOMBRE_TIENDA = '" + name + "',"
-					+ "		@DIRECCIÓN = '" + direction + "'"; 
+					+ "		@DIRECCIï¿½N = '" + direction + "'"; 
 					
 			PreparedStatement statement = conn.prepareStatement(query);
 			statement.executeUpdate();
