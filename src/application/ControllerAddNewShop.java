@@ -104,8 +104,8 @@ public class ControllerAddNewShop {
 			if (checkAllFields()) {
 
 				AdministratorPageConnection adminDB = new AdministratorPageConnection();
-				// TODO meter los nuevos datos
-/*
+				boolean success = adminDB.addShop(fieldName.getText(), cmbStreet.getText(), fieldNumber.getText(), cmbCity.getText(),cmbProvince.getText(), fieldCP.getText(), cmbCountry.getText());
+
 				if (success) {
 					FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
 					ControllerAlertDialog control = new ControllerAlertDialog(120, 210, "Guardado correcto",
@@ -128,7 +128,7 @@ public class ControllerAddNewShop {
 					stage.initStyle(StageStyle.UNDECORATED);
 					stage.setScene(new Scene(root));
 					stage.show();
-				}*/
+				}
 
 				Stage stage = (Stage) btnCancel.getScene().getWindow();
 				stage.close();
