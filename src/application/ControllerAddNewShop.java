@@ -49,21 +49,21 @@ public class ControllerAddNewShop {
 
 	@FXML
 	private Label lblDirection;
-	
+
 	@FXML
-    private Label lblStreet;
+	private Label lblStreet;
 
-    @FXML
-    private Label lblCity;
+	@FXML
+	private Label lblCity;
 
-    @FXML
-    private Label lblProvince;
+	@FXML
+	private Label lblProvince;
 
-    @FXML
-    private Label lblCP;
+	@FXML
+	private Label lblCP;
 
-    @FXML
-    private Label lblCountry;
+	@FXML
+	private Label lblCountry;
 
 	@FXML
 	private JFXTextField fieldName;
@@ -87,8 +87,11 @@ public class ControllerAddNewShop {
     @FXML
     private JFXTextField cmbCity;
 
-    @FXML
-    private JFXTextField fieldCP;
+	@FXML
+	private JFXComboBox<String> cmbCity;
+
+	@FXML
+	private JFXTextField fieldCP;
 
 	@FXML
 	void cancelExit(ActionEvent event) {
@@ -191,16 +194,13 @@ public class ControllerAddNewShop {
         });
         
         grdAddSchedule.add(text, 1, 1);
-
-		
-		
 		// TODO hacer que los cmb's sean filtros autocompletables
 	}
-	
 
 	boolean checkAllFields() {
 
 		try {
+
 
 			// TODO cambiar la parte de la direcci�n
 			/*if ((!fieldName.getText().isEmpty() && fieldName.getText() != null && !fieldName.getText().toString().equals(""))

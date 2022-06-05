@@ -79,6 +79,13 @@
 	-fx-label-padding: 5.0px 0.0px 10.0px 0.0px;
 }
 
+.cardSubtitleSmall {
+	-fx-text-fill: -main-color;
+	-fx-font-size: 14.0px;
+	-fx-font-weight: bold;
+	-fx-label-padding: 7.0px 0.0px 5.0px 0.0px;
+}
+
 .searchTextField {
 	-jfx-focus-color: -main-color;
 	-fx-font-style: italic;
@@ -97,6 +104,24 @@
 	-fx-background-color: -soft-color;
 	-fx-background-radius: 5.0px 5.0px 5.0px 5.0px;
 	-fx-text-fill: black;
+}
+
+.buttonSeveralOptions1 {
+	-fx-background-color: -soft-color;
+	-fx-background-radius: 5.0px 5.0px 5.0px 5.0px;
+	-fx-pref-width: 200.0;
+	-fx-pref-height: 100.0;
+	-fx-text-fill: black;
+	-fx-font-weight: bold;
+}
+
+.buttonSeveralOptions2 {
+	-fx-background-color: -soft-color2;
+	-fx-background-radius: 10.0px;
+	-fx-pref-width: 200.0;
+	-fx-pref-height: 50.0;
+	-fx-text-fill: black;
+	-fx-font-weight: bold;
 }
 
 /* tables */
@@ -168,4 +193,9 @@
 	-fx-boder-color: -main-color;
 }
 
+/* Container */
+.container {
+	-fx-background-color: rgba(221.0, 237.0, 240.0, 0.2);
+	-fx-background-radius: 10.0
+} 
 
