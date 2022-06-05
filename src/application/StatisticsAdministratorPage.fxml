@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXTabPane?>
+<?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
@@ -238,6 +242,95 @@
 																		<Insets bottom="30.0" left="40.0" right="40.0"
 																			top="15.0" />
 																	</VBox.margin>
+																	<children>
+																		<VBox>
+																			<children>
+																				<Label styleClass="cardSubtitleSmall"
+																					text="Mis datos" />
+																				<GridPane>
+																					<columnConstraints>
+																						<ColumnConstraints
+																							hgrow="SOMETIMES" maxWidth="80.0" minWidth="10.0"
+																							prefWidth="70.0" />
+																						<ColumnConstraints
+																							hgrow="SOMETIMES" maxWidth="150.0"
+																							minWidth="10.0" prefWidth="150.0" />
+																					</columnConstraints>
+																					<rowConstraints>
+																						<RowConstraints minHeight="10.0"
+																							prefHeight="30.0" vgrow="SOMETIMES" />
+																						<RowConstraints minHeight="10.0"
+																							prefHeight="30.0" vgrow="SOMETIMES" />
+																						<RowConstraints minHeight="10.0"
+																							prefHeight="30.0" vgrow="SOMETIMES" />
+																					</rowConstraints>
+																					<children>
+																						<Label text="Nombre" />
+																						<Label text="Email" GridPane.rowIndex="1" />
+																						<Label text="Puesto" GridPane.rowIndex="2" />
+																						<JFXTextField
+																							GridPane.columnIndex="1" />
+																						<JFXTextField
+																							GridPane.columnIndex="1" GridPane.rowIndex="1" />
+																						<JFXTextField
+																							GridPane.columnIndex="1" GridPane.rowIndex="2" />
+																					</children>
+																				</GridPane>
+																				<Label styleClass="cardSubtitleSmall"
+																					text="Mi horario" />
+																				<GridPane>
+																					<columnConstraints>
+																						<ColumnConstraints
+																							hgrow="SOMETIMES" maxWidth="80.0" minWidth="10.0"
+																							prefWidth="70.0" />
+																						<ColumnConstraints
+																							hgrow="SOMETIMES" maxWidth="150.0"
+																							minWidth="10.0" prefWidth="150.0" />
+																					</columnConstraints>
+																					<rowConstraints>
+																						<RowConstraints minHeight="10.0"
+																							prefHeight="30.0" vgrow="SOMETIMES" />
+																						<RowConstraints minHeight="10.0"
+																							prefHeight="30.0" vgrow="SOMETIMES" />
+																						<RowConstraints minHeight="10.0"
+																							prefHeight="30.0" vgrow="SOMETIMES" />
+																						<RowConstraints minHeight="10.0"
+																							prefHeight="30.0" vgrow="SOMETIMES" />
+																						<RowConstraints minHeight="10.0"
+																							prefHeight="30.0" vgrow="SOMETIMES" />
+																						<RowConstraints minHeight="10.0"
+																							prefHeight="30.0" vgrow="SOMETIMES" />
+																						<RowConstraints minHeight="10.0"
+																							prefHeight="30.0" vgrow="SOMETIMES" />
+																					</rowConstraints>
+																					<children>
+																						<Label text="Lunes" />
+																						<Label text="Martes" GridPane.rowIndex="1" />
+																						<Label text="Miércoles"
+																							GridPane.rowIndex="2" />
+																						<Label text="Jueves" GridPane.rowIndex="3" />
+																						<Label text="Viernes" GridPane.rowIndex="4" />
+																						<Label text="Sábado" GridPane.rowIndex="5" />
+																						<Label text="Domingo" GridPane.rowIndex="6" />
+																						<JFXTextField
+																							GridPane.columnIndex="1" />
+																						<JFXTextField
+																							GridPane.columnIndex="1" GridPane.rowIndex="1" />
+																						<JFXTextField
+																							GridPane.columnIndex="1" GridPane.rowIndex="2" />
+																						<JFXTextField
+																							GridPane.columnIndex="1" GridPane.rowIndex="3" />
+																						<JFXTextField
+																							GridPane.columnIndex="1" GridPane.rowIndex="4" />
+																						<JFXTextField
+																							GridPane.columnIndex="1" GridPane.rowIndex="5" />
+																						<JFXTextField
+																							GridPane.columnIndex="1" GridPane.rowIndex="6" />
+																					</children>
+																				</GridPane>
+																			</children>
+																		</VBox>
+																	</children>
 																</HBox>
 															</children>
 														</VBox>

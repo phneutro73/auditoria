@@ -42,21 +42,21 @@ public class ControllerAddNewShop {
 
 	@FXML
 	private Label lblDirection;
-	
+
 	@FXML
-    private Label lblStreet;
+	private Label lblStreet;
 
-    @FXML
-    private Label lblCity;
+	@FXML
+	private Label lblCity;
 
-    @FXML
-    private Label lblProvince;
+	@FXML
+	private Label lblProvince;
 
-    @FXML
-    private Label lblCP;
+	@FXML
+	private Label lblCP;
 
-    @FXML
-    private Label lblCountry;
+	@FXML
+	private Label lblCountry;
 
 	@FXML
 	private JFXTextField fieldName;
@@ -69,21 +69,21 @@ public class ControllerAddNewShop {
 
 	@FXML
 	private JFXButton btnAccept;
-	
-    @FXML
-    private JFXComboBox<String> cmbStreet;
 
-    @FXML
-    private JFXComboBox<String> cmbProvince;
+	@FXML
+	private JFXComboBox<String> cmbStreet;
 
-    @FXML
-    private JFXComboBox<String> cmbCountry;
+	@FXML
+	private JFXComboBox<String> cmbProvince;
 
-    @FXML
-    private JFXComboBox<String> cmbCity;
+	@FXML
+	private JFXComboBox<String> cmbCountry;
 
-    @FXML
-    private JFXTextField fieldCP;
+	@FXML
+	private JFXComboBox<String> cmbCity;
+
+	@FXML
+	private JFXTextField fieldCP;
 
 	@FXML
 	void cancelExit(ActionEvent event) {
@@ -136,25 +136,23 @@ public class ControllerAddNewShop {
 
 	@FXML
 	void initialize() {
-		
-		ObservableList<String> countries = FXCollections.observableArrayList(
-				"España (ES)");
-		ObservableList<String> provinces = FXCollections.observableArrayList(
-				"-", "Provincia 1", "Provincia 2");
-		
+
+		ObservableList<String> countries = FXCollections.observableArrayList("España (ES)");
+		ObservableList<String> provinces = FXCollections.observableArrayList("-", "Provincia 1", "Provincia 2");
+
 		cmbCountry.getItems().removeAll(cmbCountry.getItems());
 		cmbCountry.getItems().addAll(countries);
 		cmbCountry.setValue(cmbCountry.getItems().get(0));
 		cmbCountry.setDisable(true);
-		
+
 		cmbProvince.setEditable(true);
 		cmbProvince.getItems().removeAll(cmbProvince.getItems());
 		cmbProvince.getItems().addAll(provinces);
 		cmbProvince.setValue(cmbProvince.getItems().get(0));
 		new ComboBoxAutoComplete<String>(cmbProvince);
-		
+
 		cmbProvince.getSelectionModel().selectedItemProperty().addListener((options, oldValue, newValue) -> {
-			   
+
 			if (cmbProvince.getValue() != null && !cmbProvince.getValue().toString().equals("")) {
 				if (!cmbProvince.getValue().toString().equals("-")) {
 					getComboCity();
@@ -163,7 +161,7 @@ public class ControllerAddNewShop {
 					cmbCity.setValue("-");
 				}
 			}
-			
+
 		});
 
 		cmbCity.getItems().removeAll(cmbCity.getItems());
@@ -175,21 +173,22 @@ public class ControllerAddNewShop {
 		cmbStreet.getItems().addAll("-");
 		cmbStreet.getSelectionModel().select("-");
 		cmbStreet.setDisable(true);
-		
-		// TODO COMPROBAR CÓMO VIENEN LOS CÓDIGOS POSTALES Y SI DEPENDE PREVIAMENTE DE ALGO
+
+		// TODO COMPROBAR CÓMO VIENEN LOS CÓDIGOS POSTALES Y SI DEPENDE PREVIAMENTE DE
+		// ALGO
 		fieldCP.setText("-");
 		fieldCP.setDisable(true);
-		
+
 		// TODO hacer que los cmb's sean filtros autocompletables
 	}
-	
 
 	boolean checkAllFields() {
 
 		try {
 
 			// TODO cambiar la parte de la dirección
-			if ((!fieldName.getText().isEmpty() && fieldName.getText() != null && !fieldName.getText().toString().equals(""))
+			if ((!fieldName.getText().isEmpty() && fieldName.getText() != null
+					&& !fieldName.getText().toString().equals(""))
 					&& (!fieldDirection.getText().isEmpty() && fieldDirection.getText() != null
 							&& !fieldDirection.getText().toString().equals(""))) {
 				return true;
@@ -202,24 +201,23 @@ public class ControllerAddNewShop {
 			return false;
 		}
 	}
-	
+
 	void getComboCity() {
-		
+
 		try {
 
 			cmbCity.setDisable(false);
 			cmbCity.setEditable(true);
-			
-			ObservableList<String> cities = FXCollections.observableArrayList(
-					"-", "Ciudad 1", "Ciudad 2", "Ciudad 3");
-			
+
+			ObservableList<String> cities = FXCollections.observableArrayList("-", "Ciudad 1", "Ciudad 2", "Ciudad 3");
+
 			cmbCity.getItems().removeAll(cmbCity.getItems());
 			cmbCity.getItems().addAll(cities);
 			cmbCity.setValue(cmbCity.getItems().get(0));
 			new ComboBoxAutoComplete<String>(cmbCity);
-			
+
 			cmbCity.getSelectionModel().selectedItemProperty().addListener((options, oldValue, newValue) -> {
-				   
+
 				if (cmbCity.getValue() != null && !cmbCity.getValue().toString().equals("")) {
 					if (!cmbCity.getValue().toString().equals("-")) {
 						getComboStreet();
@@ -228,33 +226,32 @@ public class ControllerAddNewShop {
 						cmbStreet.setValue("-");
 					}
 				}
-				
-				
-			}); 
-			
+
+			});
+
 		} catch (Exception e) {
 			System.out.println("ERROR: getComboCity: " + e.getStackTrace());
 		}
-		
+
 	}
-	
+
 	void getComboStreet() {
-		
+
 		try {
-			
+
 			cmbStreet.setDisable(false);
 			cmbStreet.setEditable(true);
 
-			ObservableList<String> streets = FXCollections.observableArrayList(
-					"-", "Calle 1", "Calle 2", "Calle 3", "Calle 4", "Calle 5");
-			
+			ObservableList<String> streets = FXCollections.observableArrayList("-", "Calle 1", "Calle 2", "Calle 3",
+					"Calle 4", "Calle 5");
+
 			cmbStreet.getItems().removeAll(cmbStreet.getItems());
 			cmbStreet.getItems().addAll(streets);
 			cmbStreet.setValue(cmbStreet.getItems().get(0));
 			new ComboBoxAutoComplete<String>(cmbStreet);
-			
+
 			cmbStreet.getSelectionModel().selectedItemProperty().addListener((options, oldValue, newValue) -> {
-				   
+
 				if (cmbStreet.getValue() != null && !cmbStreet.getValue().toString().equals("")) {
 					if (!cmbStreet.getValue().toString().equals("-")) {
 						fieldCP.setText("");
@@ -264,13 +261,12 @@ public class ControllerAddNewShop {
 						fieldCP.setDisable(true);
 					}
 				}
-				
-				
-			}); 
-			
+
+			});
+
 		} catch (Exception e) {
 			System.out.println("ERROR: getComboStreet: " + e.getStackTrace());
 		}
-		
+
 	}
 }

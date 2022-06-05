@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXTabPane?>
+<?import com.jfoenix.controls.JFXButton?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Tab?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -111,9 +110,8 @@
 							</padding>
 						</HBox>
 						<HBox fx:id="btnStatistics" alignment="CENTER_LEFT"
-							onMouseClicked="#goToStatisticsPage" prefHeight="100.0"
-							prefWidth="52.0" styleClass="selectedMenuButton"
-							stylesheets="@styleMenu.css">
+							prefHeight="100.0" prefWidth="52.0"
+							styleClass="selectedMenuButton" stylesheets="@styleMenu.css">
 							<children>
 								<Label styleClass="labelMenuButtons"
 									stylesheets="@styleMenu.css" text="   VER ESTADÍSTICAS">
@@ -131,7 +129,8 @@
 							</padding>
 						</HBox>
 						<HBox fx:id="btnAdministrator" alignment="CENTER_LEFT"
-							styleClass="menuButton" stylesheets="@application.css">
+							onMouseClicked="#goToAdministratorPage" styleClass="menuButton"
+							stylesheets="@application.css">
 							<children>
 								<Label styleClass="labelMenuSelectedButton"
 									stylesheets="@styleMenu.css" text="   ADMINISTRADOR">
@@ -207,84 +206,75 @@
 								</AnchorPane>
 							</children>
 						</AnchorPane>
-						<JFXTabPane onMouseClicked="#hideMenu"
-							prefHeight="622.0" prefWidth="940.0" styleClass="tab"
-							stylesheets="@application.css" VBox.vgrow="ALWAYS">
-							<tabs>
-								<Tab text="Mis estadísticas">
-									<content>
-										<AnchorPane>
+						<AnchorPane>
+							<children>
+								<AnchorPane prefHeight="492.0" prefWidth="895.0"
+									styleClass="card" AnchorPane.bottomAnchor="17.0"
+									AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0"
+									AnchorPane.topAnchor="17.0">
+									<children>
+										<VBox prefHeight="410.0" prefWidth="529.0"
+											AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="30.0"
+											AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="20.0">
 											<children>
-												<AnchorPane prefHeight="492.0" prefWidth="895.0"
-													styleClass="card" AnchorPane.bottomAnchor="17.0"
-													AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0"
-													AnchorPane.topAnchor="17.0">
+												<Label styleClass="cardTitle" text="ESTADÍSTICAS">
+													<VBox.margin>
+														<Insets bottom="10.0" />
+													</VBox.margin>
+												</Label>
+												<Label minHeight="40.0" prefHeight="40.0"
+													prefWidth="870.0"
+													text="En esta pestaña, podrá encontrar las estadísticas generadas a partir de sus datos y los de su tienda. Asimismo, podrá consultar los datos con los que está dado/a de alta en el sistema."
+													wrapText="true">
+													<VBox.margin>
+														<Insets bottom="10.0" top="10.0" />
+													</VBox.margin>
+												</Label>
+												<Label
+													text="Para cualquier tipo de cambio de los mismos, por favor, consulte con su administrador/a.">
+													<VBox.margin>
+														<Insets bottom="10.0" top="10.0" />
+													</VBox.margin>
+												</Label>
+												<HBox alignment="CENTER" maxHeight="120.0"
+													minHeight="80.0" prefHeight="80.0" prefWidth="790.0"
+													spacing="15.0" VBox.vgrow="ALWAYS">
+													<VBox.margin>
+														<Insets left="40.0" right="40.0" top="15.0" />
+													</VBox.margin>
 													<children>
-														<VBox prefHeight="410.0" prefWidth="529.0"
-															AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
-															AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-															<children>
-																<Label styleClass="cardTitle"
-																	text="MIS ESTADÍSTICAS:   datos generados a partir de mi actividad.">
-																	<VBox.margin>
-																		<Insets bottom="20.0" left="30.0" right="30.0"
-																			top="20.0" />
-																	</VBox.margin>
-																</Label>
-																<HBox maxHeight="1.7976931348623157E308"
-																	prefHeight="371.0" prefWidth="815.0" spacing="15.0"
-																	VBox.vgrow="ALWAYS">
-																	<VBox.margin>
-																		<Insets bottom="30.0" left="40.0" right="40.0"
-																			top="15.0" />
-																	</VBox.margin>
-																</HBox>
-															</children>
-														</VBox>
+														<JFXButton fx:id="btnMyStatistics"
+															onAction="#goToMyStatisticsPage"
+															styleClass="buttonSeveralOptions2"
+															text="Mis estadísticas" />
+														<JFXButton fx:id="btnMyShopStatistics"
+															layoutX="305.0" layoutY="152.0"
+															onAction="#goToMyShopStatisticsPage"
+															styleClass="buttonSeveralOptions2"
+															text="Estadísticas de mi tienda" />
 													</children>
-												</AnchorPane>
-											</children>
-										</AnchorPane>
-									</content>
-								</Tab>
-								<Tab text="Mi tienda">
-									<content>
-										<AnchorPane>
-											<children>
-												<AnchorPane prefHeight="492.0" prefWidth="895.0"
-													styleClass="card" AnchorPane.bottomAnchor="17.0"
-													AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0"
-													AnchorPane.topAnchor="17.0">
+												</HBox>
+												<HBox alignment="CENTER" maxHeight="120.0"
+													minHeight="80.0" prefHeight="80.0" prefWidth="870.0"
+													spacing="15.0">
 													<children>
-														<VBox prefHeight="410.0" prefWidth="529.0"
-															AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
-															AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-															<children>
-																<Label styleClass="cardTitle"
-																	text="MI TIENDA:   datos obtenidos por la actividad global de mi tienda.">
-																	<VBox.margin>
-																		<Insets bottom="20.0" left="30.0" right="30.0"
-																			top="20.0" />
-																	</VBox.margin>
-																</Label>
-																<HBox maxHeight="1.7976931348623157E308"
-																	prefHeight="371.0" prefWidth="815.0" spacing="15.0"
-																	VBox.vgrow="ALWAYS">
-																	<VBox.margin>
-																		<Insets bottom="30.0" left="40.0" right="40.0"
-																			top="15.0" />
-																	</VBox.margin>
-																</HBox>
-															</children>
-														</VBox>
+														<JFXButton fx:id="btnMyInformation"
+															onAction="#goToMyInformationPage"
+															styleClass="buttonSeveralOptions2"
+															text="Mis datos personales" />
 													</children>
-												</AnchorPane>
+													<VBox.margin>
+														<Insets bottom="30.0" left="40.0" right="40.0" />
+													</VBox.margin>
+												</HBox>
+												<Pane minHeight="23.0" prefHeight="62.0"
+													prefWidth="870.0" VBox.vgrow="ALWAYS" />
 											</children>
-										</AnchorPane>
-									</content>
-								</Tab>
-							</tabs>
-						</JFXTabPane>
+										</VBox>
+									</children>
+								</AnchorPane>
+							</children>
+						</AnchorPane>
 					</children>
 				</VBox>
 			</children>
