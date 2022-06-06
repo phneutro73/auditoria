@@ -1,37 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXTabPane?>
-<?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXButton?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Tab?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="parent" minWidth="1000.0"
-	prefHeight="650.0" prefWidth="941.0" styleClass="softBackgroundParent"
-	stylesheets="@application.css" xmlns="http://javafx.com/javafx/8.0.171"
-	xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="parent" minWidth="1000.0" prefHeight="650.0" prefWidth="941.0" styleClass="softBackgroundParent" stylesheets="@application.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
 	<children>
-		<HBox layoutX="1.0" layoutY="5.0" prefHeight="250.0"
-			prefWidth="617.0" AnchorPane.bottomAnchor="0.0"
-			AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-			AnchorPane.topAnchor="0.0">
+		<HBox layoutX="1.0" layoutY="5.0" prefHeight="250.0" prefWidth="617.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 			<children>
-				<VBox fx:id="drawer" fillWidth="false" prefHeight="650.0"
-					prefWidth="49.0" styleClass="menu" stylesheets="@styleMenu.css">
+				<VBox fx:id="drawer" fillWidth="false" prefHeight="650.0" prefWidth="49.0" styleClass="menu" stylesheets="@styleMenu.css">
 					<children>
-						<HBox fx:id="btnMenu" alignment="CENTER_LEFT"
-							onMouseClicked="#expandMenu" prefHeight="43.0" prefWidth="60.0"
-							styleClass="menuButton" stylesheets="@styleMenu.css">
+						<HBox fx:id="btnMenu" alignment="CENTER_LEFT" onMouseClicked="#expandMenu" prefHeight="43.0" prefWidth="60.0" styleClass="menuButton" stylesheets="@styleMenu.css">
 							<children>
 								<Label prefHeight="1.0" prefWidth="48.0" text=" ">
 									<graphic>
@@ -48,13 +34,9 @@
 							</padding>
 						</HBox>
 						<Pane prefHeight="56.0" prefWidth="60.0" />
-						<HBox fx:id="btnSales" alignment="CENTER_LEFT"
-							onMouseClicked="#goToSalesPage" prefHeight="60.0"
-							prefWidth="60.0" styleClass="menuButton"
-							stylesheets="@styleMenu.css">
+						<HBox fx:id="btnSales" alignment="CENTER_LEFT" onMouseClicked="#goToSalesPage" prefHeight="60.0" prefWidth="60.0" styleClass="menuButton" stylesheets="@styleMenu.css">
 							<children>
-								<Label styleClass="labelMenuButtons"
-									stylesheets="@styleMenu.css" text="   VENTAS">
+								<Label styleClass="labelMenuButtons" stylesheets="@styleMenu.css" text="   VENTAS">
 									<graphic>
 										<ImageView fitHeight="40.0" fitWidth="40.0">
 											<image>
@@ -71,9 +53,7 @@
 								<Insets left="10.0" />
 							</padding>
 						</HBox>
-						<HBox fx:id="btnConsultation" alignment="CENTER_LEFT"
-							onMouseClicked="#goToConsultationPage" styleClass="menuButton"
-							stylesheets="@styleMenu.css">
+						<HBox fx:id="btnConsultation" alignment="CENTER_LEFT" onMouseClicked="#goToConsultationPage" styleClass="menuButton" stylesheets="@styleMenu.css">
 							<children>
 								<Label styleClass="labelMenuButtons" text="   CONSULTA">
 									<graphic>
@@ -92,12 +72,9 @@
 								<Insets left="10.0" />
 							</padding>
 						</HBox>
-						<HBox fx:id="btnAddItem" alignment="CENTER_LEFT"
-							onMouseClicked="#goToAddItemsPage" styleClass="menuButton"
-							stylesheets="@application.css">
+						<HBox fx:id="btnAddItem" alignment="CENTER_LEFT" onMouseClicked="#goToAddItemsPage" styleClass="menuButton" stylesheets="@application.css">
 							<children>
-								<Label styleClass="labelMenuButtons"
-									stylesheets="@styleMenu.css" text="   AÑADIR ARTÍCULOS">
+								<Label styleClass="labelMenuButtons" stylesheets="@styleMenu.css" text="   AÑADIR ARTÍCULOS">
 									<graphic>
 										<ImageView fitHeight="40.0" fitWidth="40.0">
 											<image>
@@ -114,13 +91,9 @@
 								<Insets left="10.0" />
 							</padding>
 						</HBox>
-						<HBox fx:id="btnStatistics" alignment="CENTER_LEFT"
-							onMouseClicked="#goToStatisticsPage" prefHeight="100.0"
-							prefWidth="52.0" styleClass="selectedMenuButton"
-							stylesheets="@styleMenu.css">
+						<HBox fx:id="btnStatistics" alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="52.0" styleClass="selectedMenuButton" stylesheets="@styleMenu.css">
 							<children>
-								<Label styleClass="labelMenuButtons"
-									stylesheets="@styleMenu.css" text="   VER ESTADÍSTICAS">
+								<Label styleClass="labelMenuButtons" stylesheets="@styleMenu.css" text="   VER ESTADÍSTICAS">
 									<graphic>
 										<ImageView fitHeight="40.0" fitWidth="40.0">
 											<image>
@@ -134,11 +107,9 @@
 								<Insets left="10.0" />
 							</padding>
 						</HBox>
-						<HBox fx:id="btnAdministrator" alignment="CENTER_LEFT"
-							styleClass="menuButton" stylesheets="@application.css">
+						<HBox fx:id="btnAdministrator" alignment="CENTER_LEFT" onMouseClicked="#goToAdministratorPage" styleClass="menuButton" stylesheets="@application.css">
 							<children>
-								<Label styleClass="labelMenuSelectedButton"
-									stylesheets="@styleMenu.css" text="   ADMINISTRADOR">
+								<Label styleClass="labelMenuSelectedButton" stylesheets="@styleMenu.css" text="   ADMINISTRADOR">
 									<graphic>
 										<ImageView fitHeight="40.0" fitWidth="40.0">
 											<image>
@@ -160,49 +131,37 @@
 						<Insets top="15.0" />
 					</padding>
 				</VBox>
-				<VBox fx:id="body" onMouseClicked="#hideMenu"
-					prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+				<VBox fx:id="body" onMouseClicked="#hideMenu" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
 					<children>
-						<AnchorPane maxHeight="-Infinity" minHeight="-Infinity"
-							prefHeight="80.0" prefWidth="100.0" VBox.vgrow="NEVER">
+						<AnchorPane maxHeight="-Infinity" minHeight="-Infinity" prefHeight="80.0" prefWidth="100.0" VBox.vgrow="NEVER">
 							<children>
-								<AnchorPane layoutX="29.0" prefHeight="55.0"
-									prefWidth="173.0" styleClass="pageTitle"
-									stylesheets="@application.css">
+								<AnchorPane layoutX="29.0" prefHeight="55.0" prefWidth="173.0" styleClass="pageTitle" stylesheets="@application.css">
 									<children>
-										<ImageView fitHeight="25.0" fitWidth="25.0"
-											layoutX="28.0" layoutY="13.0">
+										<ImageView fitHeight="25.0" fitWidth="25.0" layoutX="28.0" layoutY="13.0">
 											<image>
 												<Image url="@../resources/assets/admin_high_icon.png" />
 											</image>
 										</ImageView>
-										<Label layoutX="62.0" layoutY="16.0" text="Estadísticas"
-											textFill="#f0fbfd">
+										<Label layoutX="62.0" layoutY="16.0" text="Estadísticas" textFill="#f0fbfd">
 											<font>
 												<Font name="System Bold" size="15.0" />
 											</font>
 										</Label>
 									</children>
 								</AnchorPane>
-								<ImageView fitHeight="15.0" fitWidth="9.0"
-									layoutX="221.0" layoutY="20.0">
+								<ImageView fitHeight="15.0" fitWidth="9.0" layoutX="221.0" layoutY="20.0">
 									<image>
 										<Image url="@../resources/assets/NextIcon.png" />
 									</image>
 								</ImageView>
-								<Label fx:id="subtitle" layoutX="250.0" layoutY="18.0"
-									text="Estadísticas generales" textFill="#434345">
+								<Label fx:id="subtitle" layoutX="250.0" layoutY="18.0" text="Mis estadísticas (administrador)" textFill="#434345">
 									<font>
 										<Font name="System Bold" size="13.0" />
 									</font>
 								</Label>
-								<AnchorPane fx:id="logOutButton" layoutX="752.0"
-									onMouseClicked="#logOut" prefHeight="55.0" prefWidth="65.0"
-									styleClass="pageTitle" stylesheets="@application.css"
-									AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="0.0">
+								<AnchorPane fx:id="logOutButton" layoutX="752.0" onMouseClicked="#logOut" prefHeight="55.0" prefWidth="65.0" styleClass="pageTitle" stylesheets="@application.css" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="0.0">
 									<children>
-										<ImageView fitHeight="25.0" fitWidth="25.0"
-											layoutX="20.0" layoutY="13.0">
+										<ImageView fitHeight="25.0" fitWidth="25.0" layoutX="20.0" layoutY="13.0">
 											<image>
 												<Image url="@../resources/assets/LogOutIcon.png" />
 											</image>
@@ -211,245 +170,57 @@
 								</AnchorPane>
 							</children>
 						</AnchorPane>
-						<JFXTabPane onMouseClicked="#hideMenu"
-							prefHeight="622.0" prefWidth="940.0" styleClass="tab"
-							stylesheets="@application.css" VBox.vgrow="ALWAYS">
-							<tabs>
-								<Tab text="Mis estadísticas">
-									<content>
-										<AnchorPane>
+						<AnchorPane>
+							<children>
+								<AnchorPane prefHeight="492.0" prefWidth="895.0" styleClass="card" AnchorPane.bottomAnchor="17.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="17.0">
+									<children>
+										<VBox prefHeight="410.0" prefWidth="529.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="20.0">
 											<children>
-												<AnchorPane prefHeight="492.0" prefWidth="895.0"
-													styleClass="card" AnchorPane.bottomAnchor="17.0"
-													AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0"
-													AnchorPane.topAnchor="17.0">
+												<Label styleClass="cardTitle" text="ESTADÍSTICAS">
+													<VBox.margin>
+														<Insets bottom="10.0" />
+													</VBox.margin>
+												</Label>
+												<Label minHeight="40.0" prefHeight="40.0" prefWidth="870.0" text="En esta pestaña, podrá encontrar las estadísticas generadas a partir de sus datos y los de su tienda. Asimismo, podrá consultar los datos con los que está dado/a de alta en el sistema." wrapText="true">
+													<VBox.margin>
+														<Insets bottom="10.0" top="10.0" />
+													</VBox.margin>
+												</Label>
+												<Label text="Para cualquier tipo de cambio de los mismos, deberá realizarlo desde la pestaña de administrador (quinta opción del menú lateral)..">
+													<VBox.margin>
+														<Insets bottom="10.0" top="10.0" />
+													</VBox.margin>
+												</Label>
+												<HBox alignment="CENTER" maxHeight="120.0" minHeight="80.0" prefHeight="80.0" prefWidth="790.0" spacing="15.0" VBox.vgrow="ALWAYS">
+													<VBox.margin>
+														<Insets left="40.0" right="40.0" top="15.0" />
+													</VBox.margin>
 													<children>
-														<VBox prefHeight="410.0" prefWidth="529.0"
-															AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
-															AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-															<children>
-																<Label styleClass="cardTitle"
-																	text="MIS ESTADÍSTICAS:   datos generados a partir de mi actividad.">
-																	<VBox.margin>
-																		<Insets bottom="20.0" left="30.0" right="30.0"
-																			top="20.0" />
-																	</VBox.margin>
-																</Label>
-																<HBox maxHeight="1.7976931348623157E308"
-																	prefHeight="371.0" prefWidth="815.0" spacing="15.0"
-																	VBox.vgrow="ALWAYS">
-																	<VBox.margin>
-																		<Insets bottom="30.0" left="40.0" right="40.0"
-																			top="15.0" />
-																	</VBox.margin>
-																	<children>
-																		<VBox>
-																			<children>
-																				<Label styleClass="cardSubtitleSmall"
-																					text="Mis datos" />
-																				<GridPane>
-																					<columnConstraints>
-																						<ColumnConstraints
-																							hgrow="SOMETIMES" maxWidth="80.0" minWidth="10.0"
-																							prefWidth="70.0" />
-																						<ColumnConstraints
-																							hgrow="SOMETIMES" maxWidth="150.0"
-																							minWidth="10.0" prefWidth="150.0" />
-																					</columnConstraints>
-																					<rowConstraints>
-																						<RowConstraints minHeight="10.0"
-																							prefHeight="30.0" vgrow="SOMETIMES" />
-																						<RowConstraints minHeight="10.0"
-																							prefHeight="30.0" vgrow="SOMETIMES" />
-																						<RowConstraints minHeight="10.0"
-																							prefHeight="30.0" vgrow="SOMETIMES" />
-																					</rowConstraints>
-																					<children>
-																						<Label text="Nombre" />
-																						<Label text="Email" GridPane.rowIndex="1" />
-																						<Label text="Puesto" GridPane.rowIndex="2" />
-																						<JFXTextField
-																							GridPane.columnIndex="1" />
-																						<JFXTextField
-																							GridPane.columnIndex="1" GridPane.rowIndex="1" />
-																						<JFXTextField
-																							GridPane.columnIndex="1" GridPane.rowIndex="2" />
-																					</children>
-																				</GridPane>
-																				<Label styleClass="cardSubtitleSmall"
-																					text="Mi horario" />
-																				<GridPane>
-																					<columnConstraints>
-																						<ColumnConstraints
-																							hgrow="SOMETIMES" maxWidth="80.0" minWidth="10.0"
-																							prefWidth="70.0" />
-																						<ColumnConstraints
-																							hgrow="SOMETIMES" maxWidth="150.0"
-																							minWidth="10.0" prefWidth="150.0" />
-																					</columnConstraints>
-																					<rowConstraints>
-																						<RowConstraints minHeight="10.0"
-																							prefHeight="30.0" vgrow="SOMETIMES" />
-																						<RowConstraints minHeight="10.0"
-																							prefHeight="30.0" vgrow="SOMETIMES" />
-																						<RowConstraints minHeight="10.0"
-																							prefHeight="30.0" vgrow="SOMETIMES" />
-																						<RowConstraints minHeight="10.0"
-																							prefHeight="30.0" vgrow="SOMETIMES" />
-																						<RowConstraints minHeight="10.0"
-																							prefHeight="30.0" vgrow="SOMETIMES" />
-																						<RowConstraints minHeight="10.0"
-																							prefHeight="30.0" vgrow="SOMETIMES" />
-																						<RowConstraints minHeight="10.0"
-																							prefHeight="30.0" vgrow="SOMETIMES" />
-																					</rowConstraints>
-																					<children>
-																						<Label text="Lunes" />
-																						<Label text="Martes" GridPane.rowIndex="1" />
-																						<Label text="Miércoles"
-																							GridPane.rowIndex="2" />
-																						<Label text="Jueves" GridPane.rowIndex="3" />
-																						<Label text="Viernes" GridPane.rowIndex="4" />
-																						<Label text="Sábado" GridPane.rowIndex="5" />
-																						<Label text="Domingo" GridPane.rowIndex="6" />
-																						<JFXTextField
-																							GridPane.columnIndex="1" />
-																						<JFXTextField
-																							GridPane.columnIndex="1" GridPane.rowIndex="1" />
-																						<JFXTextField
-																							GridPane.columnIndex="1" GridPane.rowIndex="2" />
-																						<JFXTextField
-																							GridPane.columnIndex="1" GridPane.rowIndex="3" />
-																						<JFXTextField
-																							GridPane.columnIndex="1" GridPane.rowIndex="4" />
-																						<JFXTextField
-																							GridPane.columnIndex="1" GridPane.rowIndex="5" />
-																						<JFXTextField
-																							GridPane.columnIndex="1" GridPane.rowIndex="6" />
-																					</children>
-																				</GridPane>
-																			</children>
-																		</VBox>
-																	</children>
-																</HBox>
-															</children>
-														</VBox>
+														<JFXButton fx:id="btnMyStatistics" onAction="#goToMyStatisticsPage" styleClass="buttonSeveralOptions2" text="Mis estadísticas" />
+														<JFXButton fx:id="btnMyShopStatistics" layoutX="305.0" layoutY="152.0" onAction="#goToMyShopStatisticsPage" styleClass="buttonSeveralOptions2" text="Estadísticas de mi tienda" />
 													</children>
-												</AnchorPane>
-											</children>
-										</AnchorPane>
-									</content>
-								</Tab>
-								<Tab text="Mi tienda">
-									<content>
-										<AnchorPane>
-											<children>
-												<AnchorPane prefHeight="492.0" prefWidth="895.0"
-													styleClass="card" AnchorPane.bottomAnchor="17.0"
-													AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0"
-													AnchorPane.topAnchor="17.0">
+												</HBox>
+                                    <HBox alignment="CENTER" maxHeight="120.0" minHeight="80.0" prefHeight="80.0" prefWidth="870.0" spacing="15.0">
+                                       <children>
+                                          <JFXButton fx:id="btnWorkersStatistics" onAction="#goToWorkersStatisticsPage" styleClass="buttonSeveralOptions2" text="Estadísticas de trabajadores" />
+                                          <JFXButton fx:id="btnSmallPandaStatistics" onAction="#goToSmallPandaStatisticsPage" styleClass="buttonSeveralOptions2" text="Estadísticas de SMALL PANDA" />
+                                       </children>
+                                    </HBox>
+												<HBox alignment="CENTER" maxHeight="120.0" minHeight="80.0" prefHeight="80.0" prefWidth="870.0" spacing="15.0">
 													<children>
-														<VBox prefHeight="410.0" prefWidth="529.0"
-															AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
-															AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-															<children>
-																<Label styleClass="cardTitle"
-																	text="MI TIENDA:   datos obtenidos por la actividad global de mi tienda.">
-																	<VBox.margin>
-																		<Insets bottom="20.0" left="30.0" right="30.0"
-																			top="20.0" />
-																	</VBox.margin>
-																</Label>
-																<HBox maxHeight="1.7976931348623157E308"
-																	prefHeight="371.0" prefWidth="815.0" spacing="15.0"
-																	VBox.vgrow="ALWAYS">
-																	<VBox.margin>
-																		<Insets bottom="30.0" left="40.0" right="40.0"
-																			top="15.0" />
-																	</VBox.margin>
-																</HBox>
-															</children>
-														</VBox>
+														<JFXButton fx:id="btnMyInformation" onAction="#goToMyInformationPage" styleClass="buttonSeveralOptions2" text="Mis datos personales" />
 													</children>
-												</AnchorPane>
+													<VBox.margin>
+														<Insets bottom="30.0" left="40.0" right="40.0" />
+													</VBox.margin>
+												</HBox>
+												<Pane minHeight="23.0" prefHeight="62.0" prefWidth="870.0" VBox.vgrow="ALWAYS" />
 											</children>
-										</AnchorPane>
-									</content>
-								</Tab>
-								<Tab text="Trabajadores">
-									<content>
-										<AnchorPane>
-											<children>
-												<AnchorPane prefHeight="492.0" prefWidth="895.0"
-													styleClass="card" AnchorPane.bottomAnchor="17.0"
-													AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0"
-													AnchorPane.topAnchor="17.0">
-													<children>
-														<VBox prefHeight="410.0" prefWidth="529.0"
-															AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
-															AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-															<children>
-																<Label styleClass="cardTitle"
-																	text="TRABAJADORES:   datos de todos los trabajadores">
-																	<VBox.margin>
-																		<Insets bottom="20.0" left="30.0" right="30.0"
-																			top="20.0" />
-																	</VBox.margin>
-																</Label>
-																<HBox maxHeight="1.7976931348623157E308"
-																	prefHeight="371.0" prefWidth="815.0" spacing="15.0"
-																	VBox.vgrow="ALWAYS">
-																	<VBox.margin>
-																		<Insets bottom="30.0" left="40.0" right="40.0"
-																			top="15.0" />
-																	</VBox.margin>
-																</HBox>
-															</children>
-														</VBox>
-													</children>
-												</AnchorPane>
-											</children>
-										</AnchorPane>
-									</content>
-								</Tab>
-								<Tab text="Small Panda">
-									<content>
-										<AnchorPane>
-											<children>
-												<AnchorPane prefHeight="492.0" prefWidth="895.0"
-													styleClass="card" AnchorPane.bottomAnchor="17.0"
-													AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0"
-													AnchorPane.topAnchor="17.0">
-													<children>
-														<VBox prefHeight="410.0" prefWidth="529.0"
-															AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
-															AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-															<children>
-																<Label styleClass="cardTitle"
-																	text="SMALL PANDA:   datos de toda la empresa.">
-																	<VBox.margin>
-																		<Insets bottom="20.0" left="30.0" right="30.0"
-																			top="20.0" />
-																	</VBox.margin>
-																</Label>
-																<HBox maxHeight="1.7976931348623157E308"
-																	prefHeight="371.0" prefWidth="815.0" spacing="15.0"
-																	VBox.vgrow="ALWAYS">
-																	<VBox.margin>
-																		<Insets bottom="30.0" left="40.0" right="40.0"
-																			top="15.0" />
-																	</VBox.margin>
-																</HBox>
-															</children>
-														</VBox>
-													</children>
-												</AnchorPane>
-											</children>
-										</AnchorPane>
-									</content>
-								</Tab>
-							</tabs>
-						</JFXTabPane>
+										</VBox>
+									</children>
+								</AnchorPane>
+							</children>
+						</AnchorPane>
 					</children>
 				</VBox>
 			</children>
