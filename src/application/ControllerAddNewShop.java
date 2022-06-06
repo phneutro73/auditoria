@@ -35,7 +35,6 @@ import javafx.stage.StageStyle;
 import models.ComboBoxAutoComplete;
 import org.apache.commons.lang3.StringUtils;
 
-
 public class ControllerAddNewShop {
 
 	@FXML
@@ -68,30 +67,36 @@ public class ControllerAddNewShop {
 	@FXML
 	private JFXTextField fieldName;
 
-
 	@FXML
 	private JFXButton btnCancel;
 
 	@FXML
 	private JFXButton btnAccept;
-	
-    @FXML
-    private JFXTextField cmbStreet;
-
-    @FXML
-    private JFXTextField cmbProvince;
-
-    @FXML
-    private JFXTextField cmbCountry;
-
-    @FXML
-    private JFXTextField cmbCity;
 
 	@FXML
-	private JFXComboBox<String> cmbCity;
+	private JFXTextField cmbStreet;
+
+	@FXML
+	private JFXTextField cmbProvince;
+
+	@FXML
+	private JFXTextField cmbCountry;
+
+	@FXML
+	private JFXTextField cmbCity;
+
+//
+//	@FXML
+//	private JFXComboBox<String> cmbCity;
 
 	@FXML
 	private JFXTextField fieldCP;
+
+	@FXML
+	private Label lblNum;
+
+	@FXML
+	private JFXTextField fieldNumber;
 
 	@FXML
 	void cancelExit(ActionEvent event) {
@@ -101,13 +106,14 @@ public class ControllerAddNewShop {
 
 	@FXML
 	void saveNewShop(ActionEvent event) {
-        
+
 		try {
 
 			if (checkAllFields()) {
 
 				AdministratorPageConnection adminDB = new AdministratorPageConnection();
-				boolean success = adminDB.addShop(fieldName.getText(), cmbStreet.getText(), fieldNumber.getText(), cmbCity.getText(),cmbProvince.getText(), fieldCP.getText(), cmbCountry.getText());
+				boolean success = adminDB.addShop(fieldName.getText(), cmbStreet.getText(), fieldNumber.getText(),
+						cmbCity.getText(), cmbProvince.getText(), fieldCP.getText(), cmbCountry.getText());
 
 				if (success) {
 					FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
@@ -144,73 +150,67 @@ public class ControllerAddNewShop {
 
 	@FXML
 	void initialize() {
+
 		cmbCountry.setDisable(true);
-		
 		cmbProvince.setDisable(true);
-
 		cmbCity.setDisable(true);
-
 		cmbStreet.setDisable(true);
-
 		fieldCP.setDisable(true);
-		
+
 		AutoCompleteAddressField text = new AutoCompleteAddressField();
 
-        text.getEntryMenu().setOnAction((ActionEvent e) ->
-        {
-            ((MenuItem) e.getTarget()).addEventHandler(Event.ANY, (Event event2) ->
-            {
-                if (text.getLastSelectedObject() != null)
-                {
-                    text.setText(text.getLastSelectedObject().toString());
-                    PlaceDetails place = AutoCompleteAddressField.getPlace((AddressPrediction) text.getLastSelectedObject());
-                    if (place != null)
-                    {
-                    	fieldCP.setText(AutoCompleteAddressField.getComponentLongName(place.addressComponents, AddressComponentType.POSTAL_CODE));
-                    	cmbCity.setText(AutoCompleteAddressField.getComponentLongName(place.addressComponents, AddressComponentType.LOCALITY));
-                    	cmbProvince.setText(AutoCompleteAddressField.getComponentLongName(place.addressComponents, AddressComponentType.ADMINISTRATIVE_AREA_LEVEL_1));
-                    	cmbCountry.setText(AutoCompleteAddressField.getComponentLongName(place.addressComponents, AddressComponentType.COUNTRY));
-                    	cmbStreet.setText(AutoCompleteAddressField.getComponentLongName(place.addressComponents, AddressComponentType.STREET_ADDRESS));
-                    	cmbCountry.setDisable(false);
-                		
-                		cmbProvince.setDisable(false);
+		text.getEntryMenu().setOnAction((ActionEvent e) -> {
+			((MenuItem) e.getTarget()).addEventHandler(Event.ANY, (Event event2) -> {
+				if (text.getLastSelectedObject() != null) {
+					text.setText(text.getLastSelectedObject().toString());
+					PlaceDetails place = AutoCompleteAddressField
+							.getPlace((AddressPrediction) text.getLastSelectedObject());
+					if (place != null) {
+						fieldCP.setText(AutoCompleteAddressField.getComponentLongName(place.addressComponents,
+								AddressComponentType.POSTAL_CODE));
+						cmbCity.setText(AutoCompleteAddressField.getComponentLongName(place.addressComponents,
+								AddressComponentType.LOCALITY));
+						cmbProvince.setText(AutoCompleteAddressField.getComponentLongName(place.addressComponents,
+								AddressComponentType.ADMINISTRATIVE_AREA_LEVEL_1));
+						cmbCountry.setText(AutoCompleteAddressField.getComponentLongName(place.addressComponents,
+								AddressComponentType.COUNTRY));
+						cmbStreet.setText(AutoCompleteAddressField.getComponentLongName(place.addressComponents,
+								AddressComponentType.ROUTE));
+						fieldCP.setText(AutoCompleteAddressField.getComponentLongName(place.addressComponents,
+								AddressComponentType.POSTAL_CODE));
 
-                		cmbCity.setDisable(false);
+						cmbCountry.setDisable(false);
+						cmbProvince.setDisable(false);
+						cmbCity.setDisable(false);
+						cmbStreet.setDisable(false);
+						fieldCP.setDisable(false);
 
-                		cmbStreet.setDisable(false);
+					} else {
+						cmbStreet.setText("");
+						fieldCP.setText("");
+						cmbCity.setText("");
+						cmbProvince.setText("");
+						cmbCountry.setText("");
+					}
+				}
+			});
+		});
 
-                		fieldCP.setDisable(false);
-
-                    } else
-                    {
-                    	cmbStreet.setText("");
-                    	fieldCP.setText("");
-                    	cmbCity.setText("");
-                    	cmbProvince.setText("");
-                    	cmbCountry.setText("");
-                    }
-                }
-            });
-        });
-        
-        grdAddSchedule.add(text, 1, 1);
-		// TODO hacer que los cmb's sean filtros autocompletables
+		grdAddSchedule.add(text, 1, 1);
 	}
 
 	boolean checkAllFields() {
 
 		try {
 
-
 			// TODO cambiar la parte de la direcci�n
-			/*if ((!fieldName.getText().isEmpty() && fieldName.getText() != null && !fieldName.getText().toString().equals(""))
-					&& (!fieldDirection.getText().isEmpty() && fieldDirection.getText() != null
-							&& !fieldDirection.getText().toString().equals(""))) {
-				return true;
-			} else {
-				return false;
-			}
-*/
+			/*
+			 * if ((!fieldName.getText().isEmpty() && fieldName.getText() != null &&
+			 * !fieldName.getText().toString().equals("")) &&
+			 * (!fieldDirection.getText().isEmpty() && fieldDirection.getText() != null &&
+			 * !fieldDirection.getText().toString().equals(""))) { return true; } else {
+			 * return false; }
+			 */
 			return true;
 		} catch (Exception e) {
 			System.out.println("ERROR: controller_administrator.java - checkAllFields() - " + e.toString());

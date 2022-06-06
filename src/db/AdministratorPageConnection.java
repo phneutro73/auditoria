@@ -22,8 +22,8 @@ import java.sql.SQLException;
 
 public class AdministratorPageConnection {
 	static String connectionUrl = "jdbc:sqlserver://pr-infor.database.windows.net:1433;" + "database=pr-infor;"
-			+ "user=admin2022@pr-infor;" + "password=Flipi2022;" + "encrypt=true;"
-			+ "trustServerCertificate=false;" + "hostNameInCertificate=*.database.windows.net;" + "loginTimeout=30";
+			+ "user=admin2022@pr-infor;" + "password=Flipi2022;" + "encrypt=true;" + "trustServerCertificate=false;"
+			+ "hostNameInCertificate=*.database.windows.net;" + "loginTimeout=30";
 
 	public List<String> listRoles() {
 		Connection conn = null;
@@ -124,7 +124,7 @@ public class AdministratorPageConnection {
 	}
 
 	public boolean deleteUser(int userId) {
-		
+
 		boolean success = false;
 		Connection conn = null;
 
@@ -134,7 +134,7 @@ public class AdministratorPageConnection {
 			Statement stmt = conn.createStatement();
 			stmt.executeUpdate("[sp_delete_user] " + userId);
 			success = true;
-			
+
 		} catch (SQLException e) {
 			success = false;
 			e.printStackTrace();
@@ -214,13 +214,14 @@ public class AdministratorPageConnection {
 	}
 
 	public boolean addUser(String name, String surname, String dob, String username, String idNumber, String email,
-			byte[] salt, byte[] hash, int mon, int tue, int wed, int thu, int fri, int sat, int sun, String role, String shop) {
+			byte[] salt, byte[] hash, int mon, int tue, int wed, int thu, int fri, int sat, int sun, String role,
+			String shop) {
 		boolean success = false;
 		Connection conn = null;
 		try {
 			conn = DriverManager.getConnection(connectionUrl);
 			System.out.println("Connected to DB");
-			
+
 			Statement stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT TOP 1 id FROM tiendas WHERE nombre_tienda = '" + shop + "'");
 			int shopId = -1;
@@ -232,7 +233,7 @@ public class AdministratorPageConnection {
 			while (rs.next()) {
 				roleId = rs.getInt("id");
 			}
-			
+
 			String query = ("[sp_create_user]" + "		@NAME = '" + name + "'," + "		@SURNAME = '" + surname
 					+ "'," + "		@DOB = '" + dob + "'," + "		@USERNAME = '" + username + "',"
 					+ "		@ID_NUMBER = '" + idNumber + "'," + "		@EMAIL = '" + email + "',"
@@ -453,7 +454,7 @@ public class AdministratorPageConnection {
 			String userName = null;
 			int shopId = 0;
 			String roleName = null;
-			String shopName = null; 
+			String shopName = null;
 			String scheduleName = null;
 
 			while (rs.next()) {
@@ -468,9 +469,10 @@ public class AdministratorPageConnection {
 				email = rs.getString("email");
 				userName = rs.getString("user_name");
 				shopId = rs.getInt("tienda_id");
-				
+
 				Statement stmt2 = conn.createStatement();
-				ResultSet rsSchedule = stmt2.executeQuery("SELECT TOP 1 schedule_name FROM schedules WHERE id = " + scheduleId);
+				ResultSet rsSchedule = stmt2
+						.executeQuery("SELECT TOP 1 schedule_name FROM schedules WHERE id = " + scheduleId);
 				scheduleName = "-";
 				while (rsSchedule.next()) {
 					scheduleName = rsSchedule.getString("schedule_name");
@@ -665,7 +667,7 @@ public class AdministratorPageConnection {
 	}
 
 	public boolean deleteSchedule(int scheduleId) {
-		
+
 		boolean success = false;
 		Connection conn = null;
 
@@ -691,7 +693,7 @@ public class AdministratorPageConnection {
 		}
 		return success;
 	}
-	
+
 	public boolean addRole(String name) {
 
 		boolean success = true;
@@ -722,9 +724,9 @@ public class AdministratorPageConnection {
 
 		return success;
 	}
-	
+
 	public boolean deleteRole(int roleId) {
-		
+
 		boolean success = false;
 		Connection conn = null;
 
@@ -734,7 +736,7 @@ public class AdministratorPageConnection {
 			Statement stmt = conn.createStatement();
 			stmt.executeUpdate("[sp_delete_role] " + roleId);
 			success = true;
-			
+
 		} catch (SQLException e) {
 			success = false;
 			e.printStackTrace();
@@ -750,7 +752,7 @@ public class AdministratorPageConnection {
 		}
 		return success;
 	}
-	
+
 	public ObservableList<ModelShopTable> getShopsTable() {
 
 		Connection conn = null;
@@ -771,8 +773,8 @@ public class AdministratorPageConnection {
 					num = Integer.toString(rsShops.getInt("numero"));
 				}
 				obList.add(new ModelShopTable(rsShops.getInt("id"), rsShops.getString("nombre_tienda"),
-						rsShops.getString("calle") + ", " + num, rsShops.getString("ciudad"), 
-						rsShops.getString("provincia"), rsShops.getString("cp"), rsShops.getString("pais"), 
+						rsShops.getString("calle") + ", " + num, rsShops.getString("ciudad"),
+						rsShops.getString("provincia"), rsShops.getString("cp"), rsShops.getString("pais"),
 						rsShops.getInt("count_users_shop")));
 			}
 		}
@@ -792,7 +794,7 @@ public class AdministratorPageConnection {
 		return obList;
 
 	}
-	
+
 	public ObservableList<ModelItemTypeTable> getItemTypesTable() {
 
 		Connection conn = null;
@@ -825,8 +827,9 @@ public class AdministratorPageConnection {
 		return obList;
 
 	}
-	
-	public boolean addShop(String name, String street, int number, String city, String province, String cp, String country) {
+
+	public boolean addShop(String name, String street, String number, String city, String province, String cp,
+			String country) {
 
 		boolean success = true;
 		Connection conn = null;
@@ -835,7 +838,10 @@ public class AdministratorPageConnection {
 
 			conn = DriverManager.getConnection(connectionUrl);
 			System.out.println("Connected to DB");
-			String query = "[sp_create_shop]" + "		@NAME = '" + name + "',		@STREET = '" + street + "',		@NUMBER = '" + number + "',		@CITY = '" + city + "',		@PROVINCE = '" + province + "',		@CP = '" +cp + "',		@COUNTRY = '" +country+ "'";
+			int num = Integer.valueOf(number);
+			String query = "[sp_create_shop]" + "		@NAME = '" + name + "',		@STREET = '" + street
+					+ "',		@NUMBER = '" + num + "',		@CITY = '" + city + "',		@PROVINCE = '" + province
+					+ "',		@CP = '" + cp + "',		@COUNTRY = '" + country + "'";
 			PreparedStatement statement = conn.prepareStatement(query);
 			statement.executeUpdate();
 			success = true;
@@ -856,8 +862,8 @@ public class AdministratorPageConnection {
 
 		return success;
 	}
-	
-	public Hashtable<String, String> getShop(int scheduleId) {
+
+	public Hashtable<String, String> getShop(int shopId) {
 		Connection conn = null;
 		Hashtable<String, String> shop = new Hashtable<String, String>();
 
@@ -865,15 +871,25 @@ public class AdministratorPageConnection {
 			conn = DriverManager.getConnection(connectionUrl);
 			System.out.println("Connected to DB");
 			Statement stmt = conn.createStatement();
-			ResultSet rs = stmt.executeQuery("[sp_search_shop] " + scheduleId);
+			ResultSet rs = stmt.executeQuery("[sp_search_shop] " + shopId);
 
 			while (rs.next()) {
 				int id = rs.getInt("id");
 				String name = rs.getString("nombre_tienda");
-				String direction = rs.getString("direcci�n");
+				String street = rs.getString("calle");
+				int num = rs.getInt("numero");
+				String city = rs.getString("ciudad");
+				String province = rs.getString("provincia");
+				String cp = rs.getString("cp");
+				String country = rs.getString("pais");
 				shop.put("id", String.valueOf(id));
 				shop.put("shopName", name);
-				shop.put("shopDirection", direction);
+				shop.put("shopStreet", street);
+				shop.put("shopNumber", String.valueOf(num));
+				shop.put("shopCity", city);
+				shop.put("shopProvince", province);
+				shop.put("shopCp", cp);
+				shop.put("shopCountry", country);
 			}
 
 		} catch (SQLException e) {
@@ -889,7 +905,7 @@ public class AdministratorPageConnection {
 		}
 		return shop;
 	}
-	
+
 	public boolean updateShop(int shopId, String name, String direction) {
 		boolean success = false;
 		Connection conn = null;
@@ -898,9 +914,9 @@ public class AdministratorPageConnection {
 
 			conn = DriverManager.getConnection(connectionUrl);
 			System.out.println("Connected to DB");
-			String query = "[sp_update_shop]" + "		@ID = " + shopId + "," + "		@NOMBRE_TIENDA = '" + name + "',"
-					+ "		@DIRECCI�N = '" + direction + "'"; 
-					
+			String query = "[sp_update_shop]" + "		@ID = " + shopId + "," + "		@NOMBRE_TIENDA = '" + name
+					+ "'," + "		@DIRECCI�N = '" + direction + "'";
+
 			PreparedStatement statement = conn.prepareStatement(query);
 			statement.executeUpdate();
 			success = true;
@@ -920,9 +936,9 @@ public class AdministratorPageConnection {
 		}
 		return success;
 	}
-	
+
 	public boolean deleteShop(int shopId) {
-		
+
 		boolean success = false;
 		Connection conn = null;
 
@@ -948,7 +964,7 @@ public class AdministratorPageConnection {
 		}
 		return success;
 	}
- 	
+
 	public boolean addItemType(String name) {
 
 		boolean success = true;
@@ -979,7 +995,7 @@ public class AdministratorPageConnection {
 
 		return success;
 	}
-	
+
 	public Hashtable<String, String> getItemType(int itemTypeId) {
 		Connection conn = null;
 		Hashtable<String, String> itemType = new Hashtable<String, String>();
@@ -1010,7 +1026,7 @@ public class AdministratorPageConnection {
 		}
 		return itemType;
 	}
-	
+
 	public boolean updateItemType(int itemTypeId, String name) {
 		boolean success = false;
 		Connection conn = null;
@@ -1019,8 +1035,8 @@ public class AdministratorPageConnection {
 
 			conn = DriverManager.getConnection(connectionUrl);
 			System.out.println("Connected to DB");
-			String query = "[sp_update_item_type]" + "		@ID = " + itemTypeId + "," + "		@NAME = '" + name + "'"; 
-					
+			String query = "[sp_update_item_type]" + "		@ID = " + itemTypeId + "," + "		@NAME = '" + name + "'";
+
 			PreparedStatement statement = conn.prepareStatement(query);
 			statement.executeUpdate();
 			success = true;
@@ -1040,9 +1056,9 @@ public class AdministratorPageConnection {
 		}
 		return success;
 	}
-	
+
 	public boolean deleteItemType(int itemTypeId) {
-		
+
 		boolean success = false;
 		Connection conn = null;
 
@@ -1066,10 +1082,10 @@ public class AdministratorPageConnection {
 			}
 			success = true;
 		}
-		
+
 		return success;
 	}
-	
+
 	public List<String> listShops() {
 		Connection conn = null;
 		List<String> shops = new ArrayList<>();

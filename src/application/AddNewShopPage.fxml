@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
@@ -15,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="373.0" prefWidth="600.0"
+<AnchorPane prefHeight="399.0" prefWidth="600.0"
 	styleClass="softBackgroundParent" stylesheets="@application.css"
 	xmlns="http://javafx.com/javafx/8.0.171"
 	xmlns:fx="http://javafx.com/fxml/1">
@@ -94,21 +93,44 @@
 											prefHeight="30.0" vgrow="SOMETIMES" />
 										<RowConstraints minHeight="10.0"
 											prefHeight="30.0" vgrow="SOMETIMES" />
+										<RowConstraints minHeight="10.0"
+											prefHeight="30.0" vgrow="SOMETIMES" />
 									</rowConstraints>
 									<children>
 										<Label fx:id="lblName" text="NOMBRE" />
-										<Label fx:id="lblDirection" text="DIRECCIÓN" GridPane.rowIndex="1" />
-										<JFXTextField fx:id="fieldName" maxWidth="1.7976931348623157E308" prefWidth="1000.0" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" />
-			                              <Label fx:id="lblStreet" text="CALLE" GridPane.rowIndex="5" />
-			                              <Label fx:id="lblCity" text="CIUDAD" GridPane.rowIndex="4" />
-			                              <Label fx:id="lblProvince" text="PROVINCIA" GridPane.rowIndex="3" />
-			                              <Label fx:id="lblCP" text="CP" GridPane.rowIndex="6" />
-			                              <Label fx:id="lblCountry" text="PAÍS" GridPane.rowIndex="2" />
-			                              <JFXTextField fx:id="cmbStreet" prefHeight="27.0" prefWidth="410.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-			                              <JFXTextField fx:id="cmbProvince" prefHeight="27.0" prefWidth="410.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-			                              <JFXTextField fx:id="cmbCountry" prefHeight="27.0" prefWidth="410.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-			                              <JFXTextField fx:id="cmbCity" prefHeight="27.0" prefWidth="410.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-			                              <JFXTextField fx:id="fieldCP" maxWidth="1.7976931348623157E308" prefWidth="1000.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+										<Label fx:id="lblDirection" text="DIRECCIÓN"
+											GridPane.rowIndex="1" />
+										<JFXTextField fx:id="fieldName"
+											maxWidth="1.7976931348623157E308" prefWidth="1000.0"
+											GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" />
+										<Label fx:id="lblStreet" text="CALLE"
+											GridPane.rowIndex="6" />
+										<Label fx:id="lblCity" text="CIUDAD"
+											GridPane.rowIndex="5" />
+										<Label fx:id="lblProvince" text="PROVINCIA"
+											GridPane.rowIndex="4" />
+										<Label fx:id="lblCP" text="CP" GridPane.rowIndex="7" />
+										<Label fx:id="lblCountry" text="PAÍS"
+											GridPane.rowIndex="3" />
+										<JFXTextField fx:id="cmbStreet" prefHeight="27.0"
+											prefWidth="410.0" GridPane.columnIndex="1"
+											GridPane.rowIndex="6" />
+										<JFXTextField fx:id="cmbProvince"
+											prefHeight="27.0" prefWidth="410.0" GridPane.columnIndex="1"
+											GridPane.rowIndex="4" />
+										<JFXTextField fx:id="cmbCountry"
+											prefHeight="27.0" prefWidth="410.0" GridPane.columnIndex="1"
+											GridPane.rowIndex="3" />
+										<JFXTextField fx:id="cmbCity" prefHeight="27.0"
+											prefWidth="410.0" GridPane.columnIndex="1"
+											GridPane.rowIndex="5" />
+										<JFXTextField fx:id="fieldCP"
+											maxWidth="1.7976931348623157E308" prefWidth="1000.0"
+											GridPane.columnIndex="1" GridPane.rowIndex="7" />
+										<Label fx:id="lblNum" text="NÚMERO"
+											GridPane.rowIndex="2" />
+										<JFXTextField fx:id="fieldNumber"
+											GridPane.columnIndex="1" GridPane.rowIndex="2" />
 									</children>
 									<VBox.margin>
 										<Insets left="10.0" />
