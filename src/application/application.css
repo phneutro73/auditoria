@@ -201,6 +201,18 @@
 /* Container */
 .container {
 	-fx-background-color: rgba(221.0, 237.0, 240.0, 0.2);
-	-fx-background-radius: 10.0
+	-fx-background-radius: 10.0;
 } 
+
+/* line chart */
+.chart-plot-background {
+	-fx-background-color: transparent
+}
+
+.default-color0.chart-series-line {
+    -fx-stroke:  -main-color;
+}
+.default-color0.chart-line-symbol {
+	-fx-background-color: -main-color, white
+}
 

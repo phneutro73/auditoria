@@ -297,8 +297,8 @@ public class ControllerSalesPage {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/YesNoAlertDialog.fxml"));
 		ControllerYesNoAlertDialog control = new ControllerYesNoAlertDialog(0, 0, "Atenci�n",
 				"Esta acci�n es permanente, no se podr� deshacer. Preste atenci�n y revise los datos.",
-				"�Est� seguro de que desea eliminar el art�culo con el siguiente ID: " + String.valueOf(itemIdSelected)
-						+ " del ticket?",
+				"�Est� seguro de que desea eliminar el art�culo con el siguiente ID: "
+						+ String.valueOf(itemIdSelected) + " del ticket?",
 				"S�", "No", "ticketDeleteItem", params);
 		loader.setController(control);
 		Parent root = loader.load();
@@ -526,7 +526,7 @@ public class ControllerSalesPage {
 					itemIdAdd = -1;
 				}
 			}
-			
+
 		});
 
 	}
