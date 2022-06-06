@@ -863,7 +863,7 @@ public class AdministratorPageConnection {
 		return success;
 	}
 
-	public Hashtable<String, String> getShop(int scheduleId) {
+	public Hashtable<String, String> getShop(int shopId) {
 		Connection conn = null;
 		Hashtable<String, String> shop = new Hashtable<String, String>();
 
@@ -871,15 +871,25 @@ public class AdministratorPageConnection {
 			conn = DriverManager.getConnection(connectionUrl);
 			System.out.println("Connected to DB");
 			Statement stmt = conn.createStatement();
-			ResultSet rs = stmt.executeQuery("[sp_search_shop] " + scheduleId);
+			ResultSet rs = stmt.executeQuery("[sp_search_shop] " + shopId);
 
 			while (rs.next()) {
 				int id = rs.getInt("id");
 				String name = rs.getString("nombre_tienda");
-				String direction = rs.getString("direcci�n");
+				String street = rs.getString("calle");
+				int num = rs.getInt("numero");
+				String city = rs.getString("ciudad");
+				String province = rs.getString("provincia");
+				String cp = rs.getString("cp");
+				String country = rs.getString("pais");
 				shop.put("id", String.valueOf(id));
 				shop.put("shopName", name);
-				shop.put("shopDirection", direction);
+				shop.put("shopStreet", street);
+				shop.put("shopNumber", String.valueOf(num));
+				shop.put("shopCity", city);
+				shop.put("shopProvince", province);
+				shop.put("shopCp", cp);
+				shop.put("shopCountry", country);
 			}
 
 		} catch (SQLException e) {

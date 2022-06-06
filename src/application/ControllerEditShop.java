@@ -41,7 +41,40 @@ public class ControllerEditShop {
 	private JFXTextField fieldName;
 
 	@FXML
-	private JFXTextField fieldDirection;
+	private Label lblStreet;
+
+	@FXML
+	private Label lblCity;
+
+	@FXML
+	private Label lblProvince;
+
+	@FXML
+	private Label lblCP;
+
+	@FXML
+	private Label lblCountry;
+
+	@FXML
+	private JFXTextField cmbStreet;
+
+	@FXML
+	private JFXTextField cmbProvince;
+
+	@FXML
+	private JFXTextField cmbCountry;
+
+	@FXML
+	private JFXTextField cmbCity;
+
+	@FXML
+	private JFXTextField fieldCP;
+
+	@FXML
+	private Label lblNum;
+
+	@FXML
+	private JFXTextField fieldNumber;
 
 	@FXML
 	private JFXButton btnCancel;
@@ -62,31 +95,27 @@ public class ControllerEditShop {
 
 			if (checkAllFields()) {
 				AdministratorPageConnection adminDB = new AdministratorPageConnection();
-				boolean success = adminDB.updateShop(shopId, fieldName.getText(), fieldDirection.getText());
-
-				if (success) {
-					FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
-					ControllerAlertDialog control = new ControllerAlertDialog(120, 210, "Guardado correcto",
-							"Los datos de la tienda se han guardado correctamente");
-					loader.setController(control);
-					Parent root = loader.load();
-
-					Stage stage = new Stage();
-					stage.initStyle(StageStyle.UNDECORATED);
-					stage.setScene(new Scene(root));
-					stage.show();
-				} else {
-					FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
-					ControllerAlertDialog control = new ControllerAlertDialog(140, 210, "Error",
-							"Se ha producido un error. Por favor, inténtelo de nuevo.");
-					loader.setController(control);
-					Parent root = loader.load();
-
-					Stage stage = new Stage();
-					stage.initStyle(StageStyle.UNDECORATED);
-					stage.setScene(new Scene(root));
-					stage.show();
-				}
+				// TODO: Añadir tienda a la BBDD
+				/*
+				 * boolean success = adminDB.updateShop(shopId, fieldName.getText(),
+				 * fieldDirection.getText());
+				 * 
+				 * if (success) { FXMLLoader loader = new
+				 * FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
+				 * ControllerAlertDialog control = new ControllerAlertDialog(120, 210,
+				 * "Guardado correcto", "Los datos de la tienda se han guardado correctamente");
+				 * loader.setController(control); Parent root = loader.load();
+				 * 
+				 * Stage stage = new Stage(); stage.initStyle(StageStyle.UNDECORATED);
+				 * stage.setScene(new Scene(root)); stage.show(); } else { FXMLLoader loader =
+				 * new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
+				 * ControllerAlertDialog control = new ControllerAlertDialog(140, 210, "Error",
+				 * "Se ha producido un error. Por favor, inténtelo de nuevo.");
+				 * loader.setController(control); Parent root = loader.load();
+				 * 
+				 * Stage stage = new Stage(); stage.initStyle(StageStyle.UNDECORATED);
+				 * stage.setScene(new Scene(root)); stage.show(); }
+				 */
 
 				Stage stage = (Stage) btnCancel.getScene().getWindow();
 				stage.close();
@@ -118,13 +147,13 @@ public class ControllerEditShop {
 
 		try {
 
-			if ((!fieldName.getText().isEmpty() && fieldName.getText() != null && fieldName.getText() != "")
-					&& (!fieldDirection.getText().isEmpty() && fieldDirection.getText() != null
-							&& fieldDirection.getText() != "")) {
-				return true;
-			} else {
-				return false;
-			}
+			/*
+			 * if ((!fieldName.getText().isEmpty() && fieldName.getText() != null &&
+			 * fieldName.getText() != "") && (!fieldDirection.getText().isEmpty() &&
+			 * fieldDirection.getText() != null && fieldDirection.getText() != "")) { return
+			 * true; } else { return false; }
+			 */
+			return true;
 
 		} catch (Exception e) {
 			System.out.println("ERROR: controller_administrator.java - checkAllFields() - " + e.toString());
@@ -142,9 +171,29 @@ public class ControllerEditShop {
 				String shopName = shop.get("shopName");
 				fieldName.setText(shopName);
 			}
-			if (shop.containsKey("shopName")) {
-				String shopDirection = shop.get("shopDirection");
-				fieldDirection.setText(shopDirection);
+			if (shop.containsKey("shopStreet")) {
+				String shopStreet = shop.get("shopStreet");
+				cmbStreet.setText(shopStreet);
+			}
+			if (shop.containsKey("shopNumber")) {
+				String shopNumber = shop.get("shopNumber");
+				fieldNumber.setText(shopNumber);
+			}
+			if (shop.containsKey("shopCity")) {
+				String shopCity = shop.get("shopCity");
+				cmbCity.setText(shopCity);
+			}
+			if (shop.containsKey("shopProvince")) {
+				String shopProvince = shop.get("shopProvince");
+				cmbProvince.setText(shopProvince);
+			}
+			if (shop.containsKey("shopCp")) {
+				String shopCp = shop.get("shopCp");
+				fieldCP.setText(shopCp);
+			}
+			if (shop.containsKey("shopCountry")) {
+				String shopCountry = shop.get("shopCountry");
+				cmbCountry.setText(shopCountry);
 			}
 
 		} catch (Exception e) {
