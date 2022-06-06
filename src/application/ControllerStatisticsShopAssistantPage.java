@@ -150,7 +150,7 @@ public class ControllerStatisticsShopAssistantPage {
 	@FXML
 	void goToMyStatisticsPage(ActionEvent event) throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/MyStatisticsPage.fxml"));
-		ControllerMyStatisticsPage control = new ControllerMyStatisticsPage();
+		ControllerMyStatisticsPage control = new ControllerMyStatisticsPage(0, 0, currentUser);
 		loader.setController(control);
 		Parent root = loader.load();
 
