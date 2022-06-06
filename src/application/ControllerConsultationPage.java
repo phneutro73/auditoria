@@ -264,8 +264,8 @@ public class ControllerConsultationPage {
 			stage.show();
 			((Node) (event.getSource())).getScene().getWindow().hide();
 		} else {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/StatisticsShopAssistantPage.fxml"));
-			ControllerStatisticsShopAssistantPage control = new ControllerStatisticsShopAssistantPage(0, 0,
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/StatisticsAdministratorPage.fxml"));
+			ControllerStatisticsAdministratorPage control = new ControllerStatisticsAdministratorPage(0, 0,
 					currentUser);
 			loader.setController(control);
 			Parent root = loader.load();
