@@ -206,8 +206,16 @@ public class ControllerStatisticsAdministratorPage {
 	}
 
 	@FXML
-	void goToWorkersStatisticsPage(ActionEvent event) {
+	void goToWorkersStatisticsPage(ActionEvent event) throws IOException {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/WorkersStatisticsPage.fxml"));
+		ControllerWorkersStatisticsPage control = new ControllerWorkersStatisticsPage(0, 0, currentUser);
+		loader.setController(control);
+		Parent root = loader.load();
 
+		Stage stage = new Stage();
+		stage.setScene(new Scene(root));
+		stage.showAndWait();
+		initialize();
 	}
 
 	@FXML

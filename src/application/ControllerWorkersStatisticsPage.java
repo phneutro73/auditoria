@@ -7,8 +7,19 @@ import javafx.scene.chart.LineChart;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import models.CurrentUser;
 
-public class ControllerWorkersStatisticPage {
+public class ControllerWorkersStatisticsPage {
+
+	double height;
+	double width;
+	CurrentUser currentUser;
+
+	public ControllerWorkersStatisticsPage(double height, double width, CurrentUser currentUser) {
+		this.height = height;
+		this.width = width;
+		this.currentUser = currentUser;
+	}
 
 	@FXML
 	private ResourceBundle resources;
