@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.scene.chart.LineChart;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -35,33 +36,36 @@ public class ControllerMyShopStatisticsPage {
 	private Label subtitle;
 
 	@FXML
-	private Label monthSales;
+	private Label lblMonthSales;
 
 	@FXML
-	private Label totalSales;
+	private Label lblTotalSales;
 
 	@FXML
-	private Label monthEarnings;
+	private Label lblMonthEarnings;
 
 	@FXML
-	private Label totalEarnings;
+	private Label lblTotalEarnings;
 
 	@FXML
-	private Label workersNum;
+	private Label lblWorkersNum;
 
 	@FXML
-	private Label itemsSold;
+	private Label lblItemsSold;
 
 	@FXML
-	private Label itemsStock;
+	private Label lblItemsStock;
 
 	@FXML
-	private Label itemsSoldToday;
+	private Label lblItemsSoldToday;
 
 	@FXML
-	private LineChart<String, Double> dailyEarnignsChar;
+	private LineChart<String, Double> dailyEarnignsChart;
 
-	// TODO: Hacer el modelo de la tabla
+	@FXML
+	private PieChart pieChartItemTypes;
+
+	// TODO: Modelo de la tabla
 	@FXML
 	private TableView<?> shopStatisticsTable;
 
