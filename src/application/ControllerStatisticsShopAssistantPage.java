@@ -143,14 +143,22 @@ public class ControllerStatisticsShopAssistantPage {
 	}
 
 	@FXML
-	void goToMyShopStatisticsPage(ActionEvent event) {
-		// TODO
+	void goToMyShopStatisticsPage(ActionEvent event) throws IOException {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/MyShopStatisticsPage.fxml"));
+		ControllerMyShopStatisticsPage control = new ControllerMyShopStatisticsPage(0, 0, currentUser);
+		loader.setController(control);
+		Parent root = loader.load();
+
+		Stage stage = new Stage();
+		stage.setScene(new Scene(root));
+		stage.showAndWait();
+		initialize();
 	}
 
 	@FXML
 	void goToMyStatisticsPage(ActionEvent event) throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/MyStatisticsPage.fxml"));
-		ControllerMyStatisticsPage control = new ControllerMyStatisticsPage();
+		ControllerMyStatisticsPage control = new ControllerMyStatisticsPage(0, 0, currentUser);
 		loader.setController(control);
 		Parent root = loader.load();
 

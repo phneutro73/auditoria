@@ -12,8 +12,8 @@ import java.util.List;
 
 public class AddItemsPageConnection {
 	static String connectionUrl = "jdbc:sqlserver://pr-infor.database.windows.net:1433;" + "database=pr-infor;"
-			+ "user=admin2022@pr-infor;" + "password=Flipi2022;" + "encrypt=true;"
-			+ "trustServerCertificate=false;" + "hostNameInCertificate=*.database.windows.net;" + "loginTimeout=30";
+			+ "user=admin2022@pr-infor;" + "password=Flipi2022;" + "encrypt=true;" + "trustServerCertificate=false;"
+			+ "hostNameInCertificate=*.database.windows.net;" + "loginTimeout=30";
 
 	public Hashtable<String, Object> getItemWithBarCode(String barCode) {
 		Connection conn = null;
@@ -205,7 +205,7 @@ public class AddItemsPageConnection {
 		return success;
 
 	}
-	
+
 	public int getTypeId(String type) {
 
 		Connection conn = null;
@@ -218,7 +218,7 @@ public class AddItemsPageConnection {
 
 			Statement stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT TOP 1 id FROM tipo_prenda WHERE nombre = '" + type + "'");
-			
+
 			while (rs.next()) {
 				typeId = rs.getInt("id");
 			}
@@ -234,7 +234,7 @@ public class AddItemsPageConnection {
 				}
 			}
 		}
-		
+
 		return typeId;
 
 	}

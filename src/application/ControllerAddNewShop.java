@@ -129,7 +129,7 @@ public class ControllerAddNewShop {
 				} else {
 					FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
 					ControllerAlertDialog control = new ControllerAlertDialog(120, 210, "Error",
-							"Se ha producido un error inesperado. Por favor, intï¿½ntelo mï¿½s tarde.");
+							"Se ha producido un error inesperado. Por favor, inténtelo máss tarde.");
 					loader.setController(control);
 					Parent root = loader.load();
 
@@ -141,6 +141,17 @@ public class ControllerAddNewShop {
 
 				Stage stage = (Stage) btnCancel.getScene().getWindow();
 				stage.close();
+			} else {
+				FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
+				ControllerAlertDialog control = new ControllerAlertDialog(120, 210, "Error",
+						"Es necesario que rellene todos los campos.");
+				loader.setController(control);
+				Parent root = loader.load();
+
+				Stage stage = new Stage();
+				stage.initStyle(StageStyle.UNDECORATED);
+				stage.setScene(new Scene(root));
+				stage.show();
 			}
 
 		} catch (Exception e) {
@@ -203,15 +214,25 @@ public class ControllerAddNewShop {
 
 		try {
 
-			// TODO cambiar la parte de la direcciï¿½n
-			/*
-			 * if ((!fieldName.getText().isEmpty() && fieldName.getText() != null &&
-			 * !fieldName.getText().toString().equals("")) &&
-			 * (!fieldDirection.getText().isEmpty() && fieldDirection.getText() != null &&
-			 * !fieldDirection.getText().toString().equals(""))) { return true; } else {
-			 * return false; }
-			 */
-			return true;
+			if ((!fieldName.getText().isEmpty() && fieldName.getText() != null
+					&& !fieldName.getText().toString().equals(""))
+					&& (!cmbCountry.getText().isEmpty() && cmbCountry.getText() != null
+							&& !cmbCountry.getText().toString().equals(""))
+					&& (!cmbProvince.getText().isEmpty() && cmbProvince.getText() != null
+							&& !cmbProvince.getText().toString().equals(""))
+					&& (!cmbCity.getText().isEmpty() && cmbCity.getText() != null
+							&& !cmbCity.getText().toString().equals(""))
+					&& (!cmbStreet.getText().isEmpty() && cmbStreet.getText() != null
+							&& !cmbStreet.getText().toString().equals(""))
+					&& (!fieldCP.getText().isEmpty() && fieldCP.getText() != null
+							&& !fieldCP.getText().toString().equals(""))
+					&& (!fieldNumber.getText().isEmpty() && fieldNumber.getText() != null
+							&& !fieldNumber.getText().toString().equals(""))) {
+				return true;
+			} else {
+				return false;
+			}
+
 		} catch (Exception e) {
 			System.out.println("ERROR: controller_administrator.java - checkAllFields() - " + e.toString());
 			return false;
