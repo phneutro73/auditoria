@@ -40,40 +40,40 @@ public class ControllerMyStatisticsPage {
 	private Label subtitle;
 
 	@FXML
-	private Label monthSales;
+	private Label lblMonthSales;
 
 	@FXML
-	private Label totalSales;
+	private Label lblTotalSales;
 
 	@FXML
-	private Label monthEarnings;
+	private Label lblMonthEarnings;
 
 	@FXML
-	private Label totalEarnings;
+	private Label lblTotalEarnings;
 
 	@FXML
-	private Label weekWorkHours;
+	private Label lblWeekWorkHours;
 
 	@FXML
-	private Label mondayWorkHours;
+	private Label lblMondayWorkHours;
 
 	@FXML
-	private Label tuesdayWorkHours;
+	private Label lblTuesdayWorkHours;
 
 	@FXML
-	private Label wednesdayWorkHours;
+	private Label lblWednesdayWorkHours;
 
 	@FXML
-	private Label thursdayWorkHours;
+	private Label lblThursdayWorkHours;
 
 	@FXML
-	private Label fridayWorkHours;
+	private Label lblFridayWorkHours;
 
 	@FXML
-	private Label saturdayWorkHours;
+	private Label lblSaturdayWorkHours;
 
 	@FXML
-	private Label sundayWorkHours;
+	private Label lblSundayWorkHours;
 
 	@FXML
 	private LineChart<String, Number> dailyEarningsChart;

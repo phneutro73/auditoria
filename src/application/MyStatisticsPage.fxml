@@ -84,14 +84,24 @@
 													<children>
 														<Label styleClass="cardSubtitleSmall"
 															text="Número de ventas este mes" wrapText="true" />
-														<Label fx:id="monthSales" prefHeight="17.0"
-															prefWidth="170.0" text="0 ventas este mes" />
+														<HBox spacing="15.0">
+															<children>
+																<Label fx:id="lblMonthSales" prefHeight="17.0"
+																	text="0" />
+																<Label text="ventas este mes." />
+															</children>
+														</HBox>
 														<Pane prefHeight="13.0" prefWidth="170.0"
 															VBox.vgrow="NEVER" />
 														<Label styleClass="cardSubtitleSmall"
 															text="Número de ventas totales" wrapText="true" />
-														<Label fx:id="totalSales" prefHeight="17.0"
-															prefWidth="200.0" text="0 ventas totales" />
+														<HBox spacing="15.0">
+															<children>
+																<Label fx:id="lblTotalSales" prefHeight="17.0"
+																	text="0" />
+																<Label text="ventas totales." />
+															</children>
+														</HBox>
 													</children>
 												</VBox>
 											</children>
@@ -106,14 +116,24 @@
 													<children>
 														<Label styleClass="cardSubtitleSmall"
 															text="Ganancias de este mes" wrapText="true" />
-														<Label fx:id="monthEarnings" prefHeight="17.0"
-															prefWidth="170.0" text="0 €/mes" />
+														<HBox spacing="15.0">
+															<children>
+																<Label fx:id="lblMonthEarnings" prefHeight="17.0"
+																	text="0" />
+																<Label text="€ este mes." />
+															</children>
+														</HBox>
 														<Pane prefHeight="33.0" prefWidth="200.0"
 															VBox.vgrow="NEVER" />
 														<Label styleClass="cardSubtitleSmall"
 															text="Ganancias totales" wrapText="true" />
-														<Label fx:id="totalEarnings" prefHeight="17.0"
-															prefWidth="200.0" text="0 € totales" />
+														<HBox spacing="15.0">
+															<children>
+																<Label fx:id="lblTotalEarnings" prefHeight="17.0"
+																	text="0" />
+																<Label text="€ totales." />
+															</children>
+														</HBox>
 													</children>
 												</VBox>
 											</children>
@@ -129,19 +149,23 @@
 														<Label prefHeight="36.0" prefWidth="277.0"
 															styleClass="cardSubtitleSmall"
 															text="Horas trabajadas a la semana" wrapText="true" />
-														<HBox spacing="10.0">
+														<HBox spacing="30.0">
 															<children>
-																<Label fx:id="weekWorkHours" prefHeight="17.0"
-																	prefWidth="170.0" text="0 h/semanales" />
-																<GridPane prefHeight="121.0" prefWidth="170.0"
+																<HBox prefHeight="109.0" prefWidth="112.0"
+																	spacing="15.0">
+																	<children>
+																		<Label fx:id="lblWeekWorkHours"
+																			prefHeight="17.0" text="0" />
+																		<Label text="h/semana." />
+																	</children>
+																</HBox>
+																<GridPane prefHeight="109.0" prefWidth="145.0"
 																	HBox.hgrow="ALWAYS">
 																	<columnConstraints>
 																		<ColumnConstraints hgrow="SOMETIMES"
-																			maxWidth="80.33331298828125" minWidth="10.0"
-																			prefWidth="78.33331298828125" />
+																			maxWidth="118.0" minWidth="10.0" prefWidth="81.0" />
 																		<ColumnConstraints hgrow="SOMETIMES"
-																			maxWidth="107.0" minWidth="10.0"
-																			prefWidth="91.66668701171875" />
+																			maxWidth="107.0" minWidth="10.0" prefWidth="79.0" />
 																	</columnConstraints>
 																	<rowConstraints>
 																		<RowConstraints minHeight="10.0"
@@ -167,20 +191,54 @@
 																		<Label text="Viernes" GridPane.rowIndex="4" />
 																		<Label text="Sábado" GridPane.rowIndex="5" />
 																		<Label text="Domingo" GridPane.rowIndex="6" />
-																		<Label fx:id="mondayWorkHours" text="0 h"
-																			GridPane.columnIndex="1" />
-																		<Label fx:id="tuesdayWorkHours" text="0 h"
-																			GridPane.columnIndex="1" GridPane.rowIndex="1" />
-																		<Label fx:id="wednesdayWorkHours" text="0 h"
-																			GridPane.columnIndex="1" GridPane.rowIndex="2" />
-																		<Label fx:id="thursdayWorkHours" text="0 h"
-																			GridPane.columnIndex="1" GridPane.rowIndex="3" />
-																		<Label fx:id="fridayWorkHours" text="0 h"
-																			GridPane.columnIndex="1" GridPane.rowIndex="4" />
-																		<Label fx:id="saturdayWorkHours" text="0 h"
-																			GridPane.columnIndex="1" GridPane.rowIndex="5" />
-																		<Label fx:id="sundayWorkHours" text="0 h"
-																			GridPane.columnIndex="1" GridPane.rowIndex="6" />
+																		<HBox spacing="15.0" GridPane.columnIndex="1">
+																			<children>
+																				<Label fx:id="lblMondayWorkHours" text="0" />
+																				<Label text="h" />
+																			</children>
+																		</HBox>
+																		<HBox spacing="15.0" GridPane.columnIndex="1"
+																			GridPane.rowIndex="1">
+																			<children>
+																				<Label fx:id="lblTuesdayWorkHours" text="0" />
+																				<Label text="h" />
+																			</children>
+																		</HBox>
+																		<HBox spacing="15.0" GridPane.columnIndex="1"
+																			GridPane.rowIndex="2">
+																			<children>
+																				<Label fx:id="lblWednesdayWorkHours" text="0" />
+																				<Label text="h" />
+																			</children>
+																		</HBox>
+																		<HBox spacing="15.0" GridPane.columnIndex="1"
+																			GridPane.rowIndex="3">
+																			<children>
+																				<Label fx:id="lblThursdayWorkHours" text="0" />
+																				<Label text="h" />
+																			</children>
+																		</HBox>
+																		<HBox spacing="15.0" GridPane.columnIndex="1"
+																			GridPane.rowIndex="4">
+																			<children>
+																				<Label fx:id="lblFridayWorkHours" text="0" />
+																				<Label text="h" />
+																			</children>
+																		</HBox>
+																		<HBox spacing="15.0" GridPane.columnIndex="1"
+																			GridPane.rowIndex="5">
+																			<children>
+																				<Label fx:id="lblSaturdayWorkHours" text="0" />
+																				<Label text="h" />
+																			</children>
+																		</HBox>
+																		<HBox spacing="15.0" GridPane.columnIndex="1"
+																			GridPane.rowIndex="6">
+																			<children>
+																				<Label fx:id="lblSundayWorkHours" text="0" />
+																				<Label text="h" />
+																			</children>
+																		</HBox>
 																	</children>
 																</GridPane>
 															</children>
