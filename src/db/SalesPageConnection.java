@@ -18,8 +18,8 @@ import models.ModelTicketTable;
 
 public class SalesPageConnection {
 	static String connectionUrl = "jdbc:sqlserver://pr-infor.database.windows.net:1433;" + "database=pr-infor;"
-			+ "user=admin2022@pr-infor;" + "password=Flipi2022;" + "encrypt=true;"
-			+ "trustServerCertificate=false;" + "hostNameInCertificate=*.database.windows.net;" + "loginTimeout=30";
+			+ "user=admin2022@pr-infor;" + "password=Flipi2022;" + "encrypt=true;" + "trustServerCertificate=false;"
+			+ "hostNameInCertificate=*.database.windows.net;" + "loginTimeout=30";
 
 	public Hashtable<String, Object> getItemWithBarCode(String barCode) {
 		Connection conn = null;
@@ -258,8 +258,9 @@ public class SalesPageConnection {
 			conn = DriverManager.getConnection(connectionUrl);
 			System.out.println("Connected to DB");
 			Statement stmt = conn.createStatement();
-			rsItems = stmt.executeQuery("[sp_check_item_shop]" + "		@ITEM_ID = " + itemId + "," + "		@SHOP_ID = " + shopId);
-			
+			rsItems = stmt.executeQuery(
+					"[sp_check_item_shop]" + "		@ITEM_ID = " + itemId + "," + "		@SHOP_ID = " + shopId);
+
 			while (rsItems.next()) {
 				if (rsItems.getInt("cantidad") > 0) {
 					isInShop = true;
@@ -282,7 +283,7 @@ public class SalesPageConnection {
 		return isInShop;
 
 	}
-	
+
 	public ObservableList<ModelHistoricalSalesDataTable> getHistoricalSalesTable() {
 
 		Connection conn = null;
@@ -296,12 +297,8 @@ public class SalesPageConnection {
 			rsItems = stmt.executeQuery("[sp_list_historical_sales]");
 
 			while (rsItems.next()) {
-				obList.add(new ModelHistoricalSalesDataTable(
-						rsItems.getInt("id_prenda"), 
-						rsItems.getString("CB"),
-						rsItems.getString("user_name"), 
-						rsItems.getString("nombre_tienda"), 
-						rsItems.getDouble("precio"),
+				obList.add(new ModelHistoricalSalesDataTable(rsItems.getInt("id_prenda"), rsItems.getString("CB"),
+						rsItems.getString("user_name"), rsItems.getString("nombre_tienda"), rsItems.getDouble("precio"),
 						rsItems.getDate("venta_datetime")));
 			}
 		}
@@ -320,7 +317,7 @@ public class SalesPageConnection {
 
 		return obList;
 	}
-	
+
 	public boolean unfinishedTicket(int userId) {
 		Connection conn = null;
 		ResultSet rsItems = null;

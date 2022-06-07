@@ -20,8 +20,8 @@ import models.ModelRoleTable;
 public class ConsultationPageConnection {
 
 	static String connectionUrl = "jdbc:sqlserver://pr-infor.database.windows.net:1433;" + "database=pr-infor;"
-			+ "user=admin2022@pr-infor;" + "password=Flipi2022;" + "encrypt=true;"
-			+ "trustServerCertificate=false;" + "hostNameInCertificate=*.database.windows.net;" + "loginTimeout=30";
+			+ "user=admin2022@pr-infor;" + "password=Flipi2022;" + "encrypt=true;" + "trustServerCertificate=false;"
+			+ "hostNameInCertificate=*.database.windows.net;" + "loginTimeout=30";
 
 	public ObservableList<ModelItemTable> getItemsTable(int shopId) {
 
@@ -238,7 +238,7 @@ public class ConsultationPageConnection {
 		try {
 			conn = DriverManager.getConnection(connectionUrl);
 			System.out.println("Connected to DB");
-			
+
 			Statement stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT TOP 1 CB FROM prendas WHERE id = " + itemId);
 			String itemBarCode = "";
@@ -263,13 +263,12 @@ public class ConsultationPageConnection {
 				price = rs.getDouble("precio");
 
 				Statement stmt2 = conn.createStatement();
-				ResultSet rsSchedule = stmt2
-						.executeQuery("SELECT TOP 1 nombre FROM tipo_prenda WHERE id = " + typeId);
+				ResultSet rsSchedule = stmt2.executeQuery("SELECT TOP 1 nombre FROM tipo_prenda WHERE id = " + typeId);
 				strType = "-";
 				while (rsSchedule.next()) {
 					strType = rsSchedule.getString("nombre");
 				}
-				
+
 			}
 
 			item.put("name", name);
@@ -293,12 +292,12 @@ public class ConsultationPageConnection {
 		return item;
 
 	}
-	
+
 	public List<Hashtable<String, Object>> getItemsWithBarCode(String barCode) {
 		Connection conn = null;
 		List<Hashtable<String, Object>> items = new ArrayList<>();
 		Hashtable<String, Object> currentItem = new Hashtable<String, Object>();
-		
+
 		try {
 			conn = DriverManager.getConnection(connectionUrl);
 			System.out.println("Connected to DB");
@@ -318,7 +317,7 @@ public class ConsultationPageConnection {
 				currentItem.put("typeId", type);
 				currentItem.put("size", size);
 				currentItem.put("price", price);
-				
+
 				items.add(currentItem);
 			}
 		} catch (SQLException e) {
@@ -334,9 +333,10 @@ public class ConsultationPageConnection {
 		}
 		return items;
 	}
-	
-	public boolean updateItem(int itemId, String itemBarCode, String itemName, String itemType, String itemSize, double price) {
-		
+
+	public boolean updateItem(int itemId, String itemBarCode, String itemName, String itemType, String itemSize,
+			double price) {
+
 		boolean success = false;
 		Connection conn = null;
 
@@ -344,17 +344,17 @@ public class ConsultationPageConnection {
 
 			conn = DriverManager.getConnection(connectionUrl);
 			System.out.println("Connected to DB");
-			
+
 			Statement stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT TOP 1 id FROM tipo_prenda WHERE nombre = '" + itemType + "'");
 			int typeId = -1;
 			while (rs.next()) {
 				typeId = rs.getInt("id");
 			}
-			
-			String query = "[sp_update_item]" + "		@ID = " + itemId + "," + "		@BAR_CODE = '" + itemBarCode + "',"
-					+ "		@NAME = '" + itemName + "'," + "		@TYPE_ID = " + typeId + "," + "		@SIZE = '" 
-					+ itemSize + "'," + "		@PRICE = " + price;
+
+			String query = "[sp_update_item]" + "		@ID = " + itemId + "," + "		@BAR_CODE = '" + itemBarCode
+					+ "'," + "		@NAME = '" + itemName + "'," + "		@TYPE_ID = " + typeId + ","
+					+ "		@SIZE = '" + itemSize + "'," + "		@PRICE = " + price;
 
 			PreparedStatement statement = conn.prepareStatement(query);
 			statement.executeUpdate();
@@ -375,7 +375,7 @@ public class ConsultationPageConnection {
 		}
 		return success;
 	}
-	
+
 	public ObservableList<ModelAllReservationsTable> getAllReservationsTable(boolean hist) {
 
 		Connection conn = null;
@@ -389,16 +389,10 @@ public class ConsultationPageConnection {
 			rsItems = stmt.executeQuery("[sp_list_reservations] " + hist);
 
 			while (rsItems.next()) {
-				obList.add(new ModelAllReservationsTable(
-						rsItems.getInt("id"), 
-						rsItems.getString("correo"),
-						rsItems.getString("dni"), 
-						rsItems.getString("nombre_tienda"), 
-						rsItems.getString("CB"),
-						rsItems.getInt("cantidad"), 
-						rsItems.getDouble("precio"),
-						rsItems.getDate("fin_reserva_datetime"),
-						rsItems.getTime("fin_reserva_datetime")));
+				obList.add(new ModelAllReservationsTable(rsItems.getInt("id"), rsItems.getString("correo"),
+						rsItems.getString("dni"), rsItems.getString("nombre_tienda"), rsItems.getString("CB"),
+						rsItems.getInt("cantidad"), rsItems.getDouble("precio"),
+						rsItems.getDate("fin_reserva_datetime"), rsItems.getTime("fin_reserva_datetime")));
 			}
 
 		}

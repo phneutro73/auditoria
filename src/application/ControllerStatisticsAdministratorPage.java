@@ -23,123 +23,123 @@ public class ControllerStatisticsAdministratorPage {
 		this.width = width;
 		this.currentUser = currentUser;
 	}
-	
-    @FXML
-    private ResourceBundle resources;
 
-    @FXML
-    private URL location;
+	@FXML
+	private ResourceBundle resources;
 
-    @FXML
-    private AnchorPane parent;
+	@FXML
+	private URL location;
 
-    @FXML
-    private VBox drawer;
+	@FXML
+	private AnchorPane parent;
 
-    @FXML
-    private HBox btnMenu;
+	@FXML
+	private VBox drawer;
 
-    @FXML
-    private HBox btnSales;
+	@FXML
+	private HBox btnMenu;
 
-    @FXML
-    private HBox btnConsultation;
+	@FXML
+	private HBox btnSales;
 
-    @FXML
-    private HBox btnAddItem;
+	@FXML
+	private HBox btnConsultation;
 
-    @FXML
-    private HBox btnStatistics;
+	@FXML
+	private HBox btnAddItem;
 
-    @FXML
-    private HBox btnAdministrator;
+	@FXML
+	private HBox btnStatistics;
 
-    @FXML
-    private VBox body;
+	@FXML
+	private HBox btnAdministrator;
 
-    @FXML
-    private Label subtitle;
+	@FXML
+	private VBox body;
 
-    @FXML
-    private AnchorPane logOutButton;
+	@FXML
+	private Label subtitle;
 
-    @FXML
-    private JFXButton btnMyStatistics;
+	@FXML
+	private AnchorPane logOutButton;
 
-    @FXML
-    private JFXButton btnMyShopStatistics;
+	@FXML
+	private JFXButton btnMyStatistics;
 
-    @FXML
-    private JFXButton btnWorkersStatistics;
+	@FXML
+	private JFXButton btnMyShopStatistics;
 
-    @FXML
-    private JFXButton btnSmallPandaStatistics;
+	@FXML
+	private JFXButton btnWorkersStatistics;
 
-    @FXML
-    private JFXButton btnMyInformation;
+	@FXML
+	private JFXButton btnSmallPandaStatistics;
 
-    @FXML
-    void expandMenu(MouseEvent event) {
+	@FXML
+	private JFXButton btnMyInformation;
 
-    }
+	@FXML
+	void expandMenu(MouseEvent event) {
 
-    @FXML
-    void goToAddItemsPage(MouseEvent event) {
+	}
 
-    }
+	@FXML
+	void goToAddItemsPage(MouseEvent event) {
 
-    @FXML
-    void goToAdministratorPage(MouseEvent event) {
+	}
 
-    }
+	@FXML
+	void goToAdministratorPage(MouseEvent event) {
 
-    @FXML
-    void goToConsultationPage(MouseEvent event) {
+	}
 
-    }
+	@FXML
+	void goToConsultationPage(MouseEvent event) {
 
-    @FXML
-    void goToMyInformationPage(ActionEvent event) {
+	}
 
-    }
+	@FXML
+	void goToMyInformationPage(ActionEvent event) {
 
-    @FXML
-    void goToMyShopStatisticsPage(ActionEvent event) {
+	}
 
-    }
+	@FXML
+	void goToMyShopStatisticsPage(ActionEvent event) {
 
-    @FXML
-    void goToMyStatisticsPage(ActionEvent event) {
+	}
 
-    }
+	@FXML
+	void goToMyStatisticsPage(ActionEvent event) {
 
-    @FXML
-    void goToSalesPage(MouseEvent event) {
+	}
 
-    }
+	@FXML
+	void goToSalesPage(MouseEvent event) {
 
-    @FXML
-    void goToSmallPandaStatisticsPage(ActionEvent event) {
+	}
 
-    }
+	@FXML
+	void goToSmallPandaStatisticsPage(ActionEvent event) {
 
-    @FXML
-    void goToWorkersStatisticsPage(ActionEvent event) {
+	}
 
-    }
+	@FXML
+	void goToWorkersStatisticsPage(ActionEvent event) {
 
-    @FXML
-    void hideMenu(MouseEvent event) {
+	}
 
-    }
+	@FXML
+	void hideMenu(MouseEvent event) {
 
-    @FXML
-    void logOut(MouseEvent event) {
+	}
 
-    }
+	@FXML
+	void logOut(MouseEvent event) {
 
-    @FXML
-    void initialize() {
-        
-    }
+	}
+
+	@FXML
+	void initialize() {
+
+	}
 }

@@ -906,8 +906,8 @@ public class AdministratorPageConnection {
 		return shop;
 	}
 
-	public boolean updateShop(int shopId, String name, String country, String province, String city, String street, String cp,
-			String number) {
+	public boolean updateShop(int shopId, String name, String country, String province, String city, String street,
+			String cp, String number) {
 		boolean success = false;
 		Connection conn = null;
 
@@ -916,9 +916,10 @@ public class AdministratorPageConnection {
 			conn = DriverManager.getConnection(connectionUrl);
 			int num = Integer.valueOf(number);
 			System.out.println("Connected to DB");
-			String query = "[sp_update_shop]" + "		@ID = " + shopId + "," + "		@NAME = '" + name + "',		@STREET = '" + street
-					+ "',		@NUMBER = '" + num + "',		@CITY = '" + city + "',		@PROVINCE = '" + province
-					+ "',		@CP = '" + cp + "',		@COUNTRY = '" + country + "'";
+			String query = "[sp_update_shop]" + "		@ID = " + shopId + "," + "		@NAME = '" + name
+					+ "',		@STREET = '" + street + "',		@NUMBER = '" + num + "',		@CITY = '" + city
+					+ "',		@PROVINCE = '" + province + "',		@CP = '" + cp + "',		@COUNTRY = '" + country
+					+ "'";
 
 			PreparedStatement statement = conn.prepareStatement(query);
 			statement.executeUpdate();
