@@ -201,8 +201,16 @@ public class ControllerStatisticsAdministratorPage {
 	}
 
 	@FXML
-	void goToSmallPandaStatisticsPage(ActionEvent event) {
+	void goToSmallPandaStatisticsPage(ActionEvent event) throws IOException {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/SmallPandaStatisticsPage.fxml"));
+		ControllerSmallPandaStatisticsPage control = new ControllerSmallPandaStatisticsPage(0, 0, currentUser);
+		loader.setController(control);
+		Parent root = loader.load();
 
+		Stage stage = new Stage();
+		stage.setScene(new Scene(root));
+		stage.showAndWait();
+		initialize();
 	}
 
 	@FXML

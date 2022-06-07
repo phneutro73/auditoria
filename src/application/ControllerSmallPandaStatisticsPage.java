@@ -8,9 +8,20 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
+import models.CurrentUser;
 
 public class ControllerSmallPandaStatisticsPage {
 
+	double height;
+	double width;
+	CurrentUser currentUser;
+
+	public ControllerSmallPandaStatisticsPage(double height, double width, CurrentUser currentUser) {
+		this.height = height;
+		this.width = width;
+		this.currentUser = currentUser;
+	}
+	
     @FXML
     private ResourceBundle resources;
 
