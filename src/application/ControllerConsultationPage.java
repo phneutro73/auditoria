@@ -251,7 +251,6 @@ public class ControllerConsultationPage {
 
 	@FXML
 	void goToStatisticsPage(MouseEvent event) throws IOException {
-		// TODO hay que añadir la página de estadísticas del administrador
 		if (currentUser.getRoleId() != 1) {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/StatisticsShopAssistantPage.fxml"));
 			ControllerStatisticsShopAssistantPage control = new ControllerStatisticsShopAssistantPage(0, 0,
