@@ -362,7 +362,7 @@ public class controller_administrator {
 				"Esta acción es permanente, no se podrá deshacer. Preste atención y revise los datos.",
 				"¿Está seguro de que desea eliminar al usuario con el siguiente ID: " + String.valueOf(idUserSelected)
 						+ "?",
-				"SÍ", "No", "adminDeleteUser", params);
+				"Sí", "No", "adminDeleteUser", params);
 		loader.setController(control);
 		Parent root = loader.load();
 
@@ -412,7 +412,7 @@ public class controller_administrator {
 				"Esta acción es permanente, no se podrá deshacer. Preste atención y revise los datos.",
 				"¿Está seguro de que desea eliminar el horario con el siguiente ID: "
 						+ String.valueOf(idScheduleSelected) + "?",
-				"SÍ", "No", "adminDeleteSchedule", params);
+				"Sí", "No", "adminDeleteSchedule", params);
 		loader.setController(control);
 		Parent root = loader.load();
 
@@ -478,7 +478,7 @@ public class controller_administrator {
 					"Esta acción es permanente, no se podrá deshacer. Preste atención y revise los datos.",
 					"¿Está seguro de que desea eliminar el puesto con el siguiente ID: "
 							+ String.valueOf(idRoleSelected) + "?",
-					"SÍ", "No", "adminDeleteRole", params);
+					"Sí", "No", "adminDeleteRole", params);
 			loader.setController(control);
 			Parent root = loader.load();
 
@@ -545,7 +545,7 @@ public class controller_administrator {
 				"Esta acción es permanente, no se podrá deshacer. Preste atención y revise los datos.",
 				"¿Está seguro de que desea eliminar la tienda con el siguiente ID: " + String.valueOf(idShopSelected)
 						+ "?",
-				"SÍ", "No", "adminDeleteShop", params);
+				"Sí", "No", "adminDeleteShop", params);
 		loader.setController(control);
 		Parent root = loader.load();
 
@@ -598,7 +598,7 @@ public class controller_administrator {
 				"Esta acción es permanente, no se podrá deshacer. Preste atención y revise los datos.",
 				"¿Está seguro de que desea eliminar el tipo de artículo con el siguiente ID: "
 						+ String.valueOf(idItemTypeSelected) + "?",
-				"SÍ", "No", "adminDeleteItemType", params);
+				"Sí", "No", "adminDeleteItemType", params);
 		loader.setController(control);
 		Parent root = loader.load();
 
