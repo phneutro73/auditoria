@@ -222,7 +222,7 @@ public class ControllerSalesPage {
 
 					FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
 					ControllerAlertDialog control = new ControllerAlertDialog(120, 210, "Error",
-							"El artï¿½culo se ha aï¿½adido correctamente.");
+							"El artículo se ha añadido correctamente.");
 					loader.setController(control);
 					Parent root = loader.load();
 
@@ -239,7 +239,7 @@ public class ControllerSalesPage {
 
 					FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
 					ControllerAlertDialog control = new ControllerAlertDialog(120, 210, "Error",
-							"Se ha producido un error. Por favor, intï¿½ntelo mï¿½s tarde.");
+							"Se ha producido un error. Por favor, inténtelo más tarde.");
 					loader.setController(control);
 					Parent root = loader.load();
 
@@ -254,7 +254,7 @@ public class ControllerSalesPage {
 			} else {
 				FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
 				ControllerAlertDialog control = new ControllerAlertDialog(120, 210, "Error",
-						"No hay stock del artï¿½culo en tienda. Revise los datos.");
+						"No hay stock del artículo en tienda. Revise los datos.");
 				loader.setController(control);
 				Parent root = loader.load();
 
@@ -274,9 +274,9 @@ public class ControllerSalesPage {
 
 		String[] params = { String.valueOf(currentUser.getId()) };
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/YesNoAlertDialog.fxml"));
-		ControllerYesNoAlertDialog control = new ControllerYesNoAlertDialog(0, 0, "Atenciï¿½n",
-				"Esta acciï¿½n es permanente, no se podrï¿½ deshacer. Preste atenciï¿½n y revise los datos.",
-				"ï¿½Estï¿½ seguro de que desea cancelar esta venta?", "Sï¿½", "No", "ticketDelete", params);
+		ControllerYesNoAlertDialog control = new ControllerYesNoAlertDialog(0, 0, "Atención",
+				"Esta acción es permanente, no se podrá deshacer. Preste atención y revise los datos.",
+				"¿Está seguro de que desea cancelar esta venta?", "Sí", "No", "ticketDelete", params);
 		loader.setController(control);
 		Parent root = loader.load();
 
@@ -285,7 +285,7 @@ public class ControllerSalesPage {
 		stage.setScene(new Scene(root));
 		stage.showAndWait();
 		numItems = 0;
-		lblTotal.setText("ï¿½");
+		lblTotal.setText("0");
 		initialize();
 
 	}
@@ -296,10 +296,10 @@ public class ControllerSalesPage {
 		String[] params = { String.valueOf(itemIdSelected), String.valueOf(currentUser.getId()) };
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/YesNoAlertDialog.fxml"));
 		ControllerYesNoAlertDialog control = new ControllerYesNoAlertDialog(0, 0, "Atenciï¿½n",
-				"Esta acciï¿½n es permanente, no se podrï¿½ deshacer. Preste atenciï¿½n y revise los datos.",
-				"ï¿½Estï¿½ seguro de que desea eliminar el artï¿½culo con el siguiente ID: "
+				"Esta acción es permanente, no se podrá deshacer. Preste atención y revise los datos.",
+				"¿Está seguro de que desea eliminar el artículo con el siguiente ID: "
 						+ String.valueOf(itemIdSelected) + " del ticket?",
-				"Sï¿½", "No", "ticketDeleteItem", params);
+				"Sí", "No", "ticketDeleteItem", params);
 		loader.setController(control);
 		Parent root = loader.load();
 
@@ -481,8 +481,8 @@ public class ControllerSalesPage {
 		ticketTable.setItems(obList);
 
 		if (ticketTable.getItems().size() != 0) {
-			if (lblTotal.getText().equals("ï¿½")) {
-				lblTotal.setText(Double.toString(obList.get(0).getItemPrice()) + " ï¿½");
+			if (lblTotal.getText().equals("0")) {
+				lblTotal.setText(Double.toString(obList.get(0).getItemPrice()));
 			} else {
 				double price = Double.parseDouble(lblTotal.getText().substring(0, lblTotal.getText().length() - 2));
 				double totalPrice;
@@ -491,10 +491,10 @@ public class ControllerSalesPage {
 				} else {
 					totalPrice = price + obList.get(0).getItemPrice();
 				}
-				lblTotal.setText(Double.toString(totalPrice) + " ï¿½");
+				lblTotal.setText(Double.toString(totalPrice));
 			}
 		} else {
-			lblTotal.setText("ï¿½");
+			lblTotal.setText("0");
 		}
 
 	}
