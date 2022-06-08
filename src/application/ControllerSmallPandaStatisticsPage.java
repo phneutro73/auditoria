@@ -76,21 +76,6 @@ public class ControllerSmallPandaStatisticsPage {
 
     @FXML
     void initialize() {
-        assert parent != null : "fx:id=\"parent\" was not injected: check your FXML file 'SmallPandaStatisticsPage.fxml'.";
-        assert subtitle != null : "fx:id=\"subtitle\" was not injected: check your FXML file 'SmallPandaStatisticsPage.fxml'.";
-        assert lblMonthSales != null : "fx:id=\"lblMonthSales\" was not injected: check your FXML file 'SmallPandaStatisticsPage.fxml'.";
-        assert lblTotalSales != null : "fx:id=\"lblTotalSales\" was not injected: check your FXML file 'SmallPandaStatisticsPage.fxml'.";
-        assert lblMonthEarnings != null : "fx:id=\"lblMonthEarnings\" was not injected: check your FXML file 'SmallPandaStatisticsPage.fxml'.";
-        assert lblTotalEarnings != null : "fx:id=\"lblTotalEarnings\" was not injected: check your FXML file 'SmallPandaStatisticsPage.fxml'.";
-        assert lblWorkersNum != null : "fx:id=\"lblWorkersNum\" was not injected: check your FXML file 'SmallPandaStatisticsPage.fxml'.";
-        assert lblItemsSold != null : "fx:id=\"lblItemsSold\" was not injected: check your FXML file 'SmallPandaStatisticsPage.fxml'.";
-        assert lblItemsStock != null : "fx:id=\"lblItemsStock\" was not injected: check your FXML file 'SmallPandaStatisticsPage.fxml'.";
-        assert lblItemsSoldToday != null : "fx:id=\"lblItemsSoldToday\" was not injected: check your FXML file 'SmallPandaStatisticsPage.fxml'.";
-        assert lineChartDailyEarnigns != null : "fx:id=\"lineChartDailyEarnigns\" was not injected: check your FXML file 'SmallPandaStatisticsPage.fxml'.";
-        assert lineChartDailySales != null : "fx:id=\"lineChartDailySales\" was not injected: check your FXML file 'SmallPandaStatisticsPage.fxml'.";
-        assert shopsEarningsTable != null : "fx:id=\"shopsEarningsTable\" was not injected: check your FXML file 'SmallPandaStatisticsPage.fxml'.";
-        assert colShopsShopsEarningsTable != null : "fx:id=\"colShopsShopsEarningsTable\" was not injected: check your FXML file 'SmallPandaStatisticsPage.fxml'.";
-        assert colEarningssShopsEarningsTable != null : "fx:id=\"colEarningssShopsEarningsTable\" was not injected: check your FXML file 'SmallPandaStatisticsPage.fxml'.";
 
     }
 }
