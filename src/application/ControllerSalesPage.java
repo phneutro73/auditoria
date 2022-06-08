@@ -276,7 +276,7 @@ public class ControllerSalesPage {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/YesNoAlertDialog.fxml"));
 		ControllerYesNoAlertDialog control = new ControllerYesNoAlertDialog(0, 0, "Atención",
 				"Esta acción es permanente, no se podrá deshacer. Preste atención y revise los datos.",
-				"¿Está seguro de que desea cancelar esta venta?", "Sí", "No", "ticketDelete", params);
+				"adminEstá seguro de que desea cancelar esta venta?", "Sí", "No", "ticketDelete", params);
 		loader.setController(control);
 		Parent root = loader.load();
 
