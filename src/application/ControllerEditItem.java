@@ -104,7 +104,7 @@ public class ControllerEditItem {
 
 					if (success) {
 						FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
-						ControllerAlertDialog control = new ControllerAlertDialog(120, 210, "Guardado correcto",
+						ControllerAlertDialog control = new ControllerAlertDialog(120, 210, "Acción completada",
 								"Los datos del arículo se han guardado correctamente");
 						loader.setController(control);
 						Parent root = loader.load();
@@ -137,7 +137,7 @@ public class ControllerEditItem {
 
 						if (success) {
 							FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
-							ControllerAlertDialog control = new ControllerAlertDialog(120, 210, "Guardado correcto",
+							ControllerAlertDialog control = new ControllerAlertDialog(120, 210, "Acción completada",
 									"Los datos del arículo se han guardado correctamente");
 							loader.setController(control);
 							Parent root = loader.load();
