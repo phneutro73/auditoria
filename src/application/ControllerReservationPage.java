@@ -247,7 +247,7 @@ public class ControllerReservationPage {
 
 					if (success) {
 						FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
-						ControllerAlertDialog control = new ControllerAlertDialog(120, 210, "Guardado correcto",
+						ControllerAlertDialog control = new ControllerAlertDialog(120, 210, "Acción completada",
 								"La reserva se ha realizado correctamente.");
 						loader.setController(control);
 						Parent root = loader.load();

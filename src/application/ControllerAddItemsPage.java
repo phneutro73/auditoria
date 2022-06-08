@@ -163,7 +163,6 @@ public class ControllerAddItemsPage {
 
 	@FXML
 	void goToStatisticsPage(MouseEvent event) throws IOException {
-		// TODO hay que añadir la página de estadísticas del administrador
 		if (currentUser.getRoleId() != 1) {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/StatisticsShopAssistantPage.fxml"));
 			ControllerStatisticsShopAssistantPage control = new ControllerStatisticsShopAssistantPage(0, 0,
@@ -206,7 +205,7 @@ public class ControllerAddItemsPage {
 
 					if (success) {
 						FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
-						ControllerAlertDialog control = new ControllerAlertDialog(120, 210, "Error",
+						ControllerAlertDialog control = new ControllerAlertDialog(120, 210, "Acción completada",
 								"El artículo se ha guardado correctamente.");
 						loader.setController(control);
 						Parent root = loader.load();
@@ -268,7 +267,7 @@ public class ControllerAddItemsPage {
 								getClass().getResource("/application/YesNoAlertDialog.fxml"));
 						ControllerYesNoAlertDialog control = new ControllerYesNoAlertDialog(165, 275, "Atención",
 								"Este artículo ya está registrado en la base de datos.",
-								"¿Está seguro de que quiere añadir " + fieldQuantity.getText() + " más?", "SÍ", "NO",
+								"¿Está seguro de que quiere añadir " + fieldQuantity.getText() + " más?", "Sí", "No",
 								"addItemsUpdateQuantity", params);
 						loader.setController(control);
 						Parent root = loader.load();

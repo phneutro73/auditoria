@@ -381,12 +381,19 @@
 															VBox.vgrow="ALWAYS" />
 														<Label text="Total:" />
 														<HBox alignment="TOP_RIGHT" prefHeight="32.0"
-															prefWidth="108.0">
+															prefWidth="108.0" spacing="15.0">
 															<children>
 																<Label fx:id="lblTotal"
 																	maxWidth="1.7976931348623157E308" prefHeight="35.0"
-																	prefWidth="109.0" text="€" textAlignment="RIGHT"
+																	prefWidth="109.0" text="0" textAlignment="RIGHT"
 																	HBox.hgrow="ALWAYS">
+																	<font>
+																		<Font name="System Bold" size="24.0" />
+																	</font>
+																</Label>
+																<Label fx:id="lblTotal1"
+																	maxWidth="1.7976931348623157E308" prefHeight="35.0"
+																	prefWidth="29.0" text="€" textAlignment="RIGHT">
 																	<font>
 																		<Font name="System Bold" size="24.0" />
 																	</font>

@@ -153,7 +153,7 @@ public class ControllerConsultationPage {
 				"Esta acción es permanente, no se podrá deshacer. Preste atención y revise los datos.",
 				"¿Está seguro de que desea eliminar el artículo con el siguiente ID: " + String.valueOf(idItemSelected)
 						+ "?",
-				"SÍ", "No", "consultDeleteItem", params);
+				"Sí", "No", "consultDeleteItem", params);
 		loader.setController(control);
 		Parent root = loader.load();
 
@@ -251,7 +251,6 @@ public class ControllerConsultationPage {
 
 	@FXML
 	void goToStatisticsPage(MouseEvent event) throws IOException {
-		// TODO hay que añadir la página de estadísticas del administrador
 		if (currentUser.getRoleId() != 1) {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/StatisticsShopAssistantPage.fxml"));
 			ControllerStatisticsShopAssistantPage control = new ControllerStatisticsShopAssistantPage(0, 0,
