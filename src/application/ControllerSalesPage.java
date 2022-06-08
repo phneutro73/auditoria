@@ -221,7 +221,7 @@ public class ControllerSalesPage {
 				if (success) {
 
 					FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/AlertDialog.fxml"));
-					ControllerAlertDialog control = new ControllerAlertDialog(120, 210, "Error",
+					ControllerAlertDialog control = new ControllerAlertDialog(120, 210, "Acción completada",
 							"El artículo se ha añadido correctamente.");
 					loader.setController(control);
 					Parent root = loader.load();
@@ -295,7 +295,7 @@ public class ControllerSalesPage {
 
 		String[] params = { String.valueOf(itemIdSelected), String.valueOf(currentUser.getId()) };
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/YesNoAlertDialog.fxml"));
-		ControllerYesNoAlertDialog control = new ControllerYesNoAlertDialog(0, 0, "Atenciï¿½n",
+		ControllerYesNoAlertDialog control = new ControllerYesNoAlertDialog(0, 0, "Atención",
 				"Esta acción es permanente, no se podrá deshacer. Preste atención y revise los datos.",
 				"¿Está seguro de que desea eliminar el artículo con el siguiente ID: "
 						+ String.valueOf(itemIdSelected) + " del ticket?",
@@ -383,7 +383,6 @@ public class ControllerSalesPage {
 
 	@FXML
 	void goToStatisticsPage(MouseEvent event) throws IOException {
-		// TODO hay que añadir la página de estadísticas del administrador
 		if (currentUser.getRoleId() != 1) {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/StatisticsShopAssistantPage.fxml"));
 			ControllerStatisticsShopAssistantPage control = new ControllerStatisticsShopAssistantPage(0, 0,
