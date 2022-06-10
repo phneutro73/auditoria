@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="parent" prefHeight="406.0"
+<AnchorPane fx:id="parent" prefHeight="419.0"
 	prefWidth="817.0" styleClass="softBackgroundParent"
 	stylesheets="@application.css" xmlns="http://javafx.com/javafx/8.0.171"
 	xmlns:fx="http://javafx.com/fxml/1">
@@ -117,6 +117,8 @@
 															prefHeight="30.0" vgrow="SOMETIMES" />
 														<RowConstraints minHeight="10.0"
 															prefHeight="30.0" vgrow="SOMETIMES" />
+														<RowConstraints minHeight="10.0"
+															prefHeight="30.0" vgrow="SOMETIMES" />
 													</rowConstraints>
 													<children>
 														<Label fx:id="lblName" text="NOMBRE" />
@@ -127,9 +129,9 @@
 														<Label fx:id="lblDob" text="FECHA DE NACIMIENTO"
 															GridPane.rowIndex="3" />
 														<Label fx:id="lblEmail" text="EMAIL"
-															GridPane.rowIndex="4" />
-														<Label fx:id="lblRole" text="PUESTO"
 															GridPane.rowIndex="5" />
+														<Label fx:id="lblRole" text="PUESTO"
+															GridPane.rowIndex="6" />
 														<JFXTextField fx:id="fieldName"
 															maxWidth="1.7976931348623157E308" prefWidth="1000.0"
 															GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" />
@@ -145,15 +147,19 @@
 															GridPane.rowIndex="3" />
 														<JFXTextField fx:id="fieldEmail"
 															prefWidth="1000.0" GridPane.columnIndex="1"
-															GridPane.rowIndex="4" />
+															GridPane.rowIndex="5" />
 														<JFXComboBox fx:id="cmbRole"
 															maxWidth="1.7976931348623157E308" prefWidth="1000.0"
-															GridPane.columnIndex="1" GridPane.rowIndex="5" />
+															GridPane.columnIndex="1" GridPane.rowIndex="6" />
 														<Label fx:id="lblShop" text="TIENDA"
-															GridPane.rowIndex="6" />
+															GridPane.rowIndex="7" />
 														<JFXComboBox fx:id="cmbShop"
 															maxWidth="1.7976931348623157E308" prefWidth="1000.0"
-															GridPane.columnIndex="1" GridPane.rowIndex="6" />
+															GridPane.columnIndex="1" GridPane.rowIndex="7" />
+														<Label text="USUARIO" GridPane.rowIndex="4" />
+														<JFXTextField fx:id="fieldUser"
+															prefWidth="1000.0" style="-jfx-focus-color: red;"
+															GridPane.columnIndex="1" GridPane.rowIndex="4" />
 													</children>
 													<VBox.margin>
 														<Insets left="10.0" />
@@ -190,6 +196,8 @@
 															prefHeight="30.0" vgrow="SOMETIMES" />
 														<RowConstraints minHeight="10.0"
 															prefHeight="30.0" vgrow="SOMETIMES" />
+														<RowConstraints minHeight="10.0"
+															prefHeight="30.0" vgrow="SOMETIMES" />
 													</rowConstraints>
 													<children>
 														<Label fx:id="lblMonday" text="LUNES">
@@ -199,7 +207,7 @@
 														</Label>
 														<Label fx:id="lblTuesday" text="MARTES"
 															GridPane.rowIndex="1" />
-														<Label fx:id="flblWednesday" text="MIÉRCOLES"
+														<Label fx:id="lblWednesday" text="MIÉRCOLES"
 															GridPane.rowIndex="2" />
 														<Label fx:id="lblThursday" text="JUEVES"
 															GridPane.rowIndex="3" />
