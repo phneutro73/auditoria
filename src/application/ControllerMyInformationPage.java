@@ -152,37 +152,47 @@ public class ControllerMyInformationPage {
 	@FXML
 	void initialize() {
 
-		AdministratorPageConnection adminDB = new AdministratorPageConnection();
+		Date dob = currentUser.getDob();
+		Instant instant = Instant.ofEpochMilli(dob.getTime());
+		LocalDate dobLocalDate = instant.atZone(ZoneId.systemDefault()).toLocalDate();
 
-		cmbRole.getSelectionModel().select("-");
-		cmbMonday.getSelectionModel().select("-");
-		cmbTuesday.getSelectionModel().select("-");
-		cmbWednesday.getSelectionModel().select("-");
-		cmbThursday.getSelectionModel().select("-");
-		cmbFriday.getSelectionModel().select("-");
-		cmbSaturday.getSelectionModel().select("-");
-		cmbSunday.getSelectionModel().select("-");
-		cmbShop.getSelectionModel().select("-");
+		fieldName.setText(currentUser.getName());
+		fieldSurname.setText(currentUser.getSurname());
+		fieldDNI.setText(currentUser.getIdNumber());
+		fieldDob.setValue(dobLocalDate);
+		fieldUser.setText(currentUser.getUserName());
+		fieldEmail.setText(currentUser.getEmail());
 
-		getUser(adminDB);
-		// TODO: Rellenar todos los campos
-		/*
-		 * fieldName.setText(currentUser.getName());
-		 * fieldSurname.setText(currentUser.getSurname());
-		 * fieldDNI.setText(currentUser.getIdNumber()); // fieldDob
-		 * fieldEmail.setText(currentUser.getEmail());
-		 */
-		/*
-		 * cmbMonday.getSelectionModel().select(schedule.get(0));
-		 * cmbTuesday.getSelectionModel().select(schedule.get(1));
-		 * cmbWednesday.getSelectionModel().select(schedule.get(2));
-		 * cmbThursday.getSelectionModel().select(schedule.get(3));
-		 * cmbFriday.getSelectionModel().select(schedule.get(4));
-		 * cmbSaturday.getSelectionModel().select(schedule.get(5));
-		 * cmbSunday.getSelectionModel().select(schedule.get(6));
-		 */
+		cmbRole.getItems().removeAll(cmbRole.getItems());
+		cmbRole.getItems().add(currentUser.getRoleName());
+		cmbRole.getSelectionModel().select(currentUser.getRoleName());
 
-		// TODO: Inhabilitar todos los campos
+		cmbShop.getItems().removeAll(cmbShop.getItems());
+		cmbShop.getItems().addAll(currentUser.getShopName());
+		cmbShop.getSelectionModel().select(currentUser.getShopName());
+
+		cmbMonday.getItems().removeAll(cmbShop.getItems());
+		cmbMonday.getItems().addAll(currentUser.getMondaySch());
+		cmbMonday.getSelectionModel().select(currentUser.getMondaySch());
+		cmbTuesday.getItems().removeAll(cmbShop.getItems());
+		cmbTuesday.getItems().addAll(currentUser.getTuesdaySch());
+		cmbTuesday.getSelectionModel().select(currentUser.getTuesdaySch());
+		cmbWednesday.getItems().removeAll(cmbShop.getItems());
+		cmbWednesday.getItems().addAll(currentUser.getWednesdaySch());
+		cmbWednesday.getSelectionModel().select(currentUser.getWednesdaySch());
+		cmbThursday.getItems().removeAll(cmbShop.getItems());
+		cmbThursday.getItems().addAll(currentUser.getThursdaySch());
+		cmbThursday.getSelectionModel().select(currentUser.getThursdaySch());
+		cmbFriday.getItems().removeAll(cmbShop.getItems());
+		cmbFriday.getItems().addAll(currentUser.getFridaySch());
+		cmbFriday.getSelectionModel().select(currentUser.getFridaySch());
+		cmbSaturday.getItems().removeAll(cmbShop.getItems());
+		cmbSaturday.getItems().addAll(currentUser.getSaturdaySch());
+		cmbSaturday.getSelectionModel().select(currentUser.getSaturdaySch());
+		cmbSunday.getItems().removeAll(cmbShop.getItems());
+		cmbSunday.getItems().addAll(currentUser.getSundaySch());
+		cmbSunday.getSelectionModel().select(currentUser.getSundaySch());
+
 		fieldName.setDisable(true);
 		fieldSurname.setDisable(true);
 		fieldDNI.setDisable(true);
@@ -198,10 +208,15 @@ public class ControllerMyInformationPage {
 		cmbFriday.setDisable(true);
 		cmbSunday.setDisable(true);
 		cmbSaturday.setDisable(true);
+
+		if (currentUser.getRoleId() == 1) {
+			txtEditInstructions.setVisible(false);
+		}
 		// TODO: Quitar el vbox que sobra (está porque se necesitaban los botones)
 	}
 
 	void getUser(AdministratorPageConnection adminDB) {
+
 		Hashtable<String, Object> user = adminDB.getUser(currentUser.getId());
 
 		String name;
@@ -216,7 +231,7 @@ public class ControllerMyInformationPage {
 		String shop;
 
 		if (user.containsKey("name")) {
-			name = (String) user.get("name");
+			name = currentUser.getName();
 			fieldName.setText(name);
 		}
 		if (user.containsKey("surname")) {

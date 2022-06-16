@@ -1,5 +1,7 @@
 package models;
 
+import java.util.Date;
+
 public class CurrentUser {
 
 	int id;
@@ -7,9 +9,12 @@ public class CurrentUser {
 	String surname;
 	String userName;
 	String idNumber;
+	Date dob;
 	String email;
 	int roleId;
+	String roleName;
 	int shopId;
+	String shopName;
 	String mondaySch;
 	String tuesdaySch;
 	String wednesdaySch;
@@ -18,18 +23,21 @@ public class CurrentUser {
 	String saturdaySch;
 	String sundaySch;
 
-	public CurrentUser(int id, String name, String surname, String idNumber, String userName, String email, int roleId,
-			int shopId, String mondaySch, String tuesdaySch, String wednesdaySch, String thursdaySch, String fridaySch, 
-			String saturdaySch, String sundaySch) {
+	public CurrentUser(int id, String name, String surname, String idNumber, String userName, Date dob, String email,
+			int roleId, String roleName, int shopId, String shopName, String mondaySch, String tuesdaySch,
+			String wednesdaySch, String thursdaySch, String fridaySch, String saturdaySch, String sundaySch) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.surname = surname;
 		this.userName = userName;
 		this.idNumber = idNumber;
+		this.dob = dob;
 		this.email = email;
 		this.roleId = roleId;
+		this.roleName = roleName;
 		this.shopId = shopId;
+		this.shopName = shopName;
 		this.mondaySch = mondaySch;
 		this.tuesdaySch = tuesdaySch;
 		this.wednesdaySch = wednesdaySch;
@@ -37,6 +45,30 @@ public class CurrentUser {
 		this.fridaySch = fridaySch;
 		this.saturdaySch = saturdaySch;
 		this.sundaySch = sundaySch;
+	}
+
+	public String getRoleName() {
+		return roleName;
+	}
+
+	public void setRoleName(String roleName) {
+		this.roleName = roleName;
+	}
+
+	public String getShopName() {
+		return shopName;
+	}
+
+	public void setShopName(String shopName) {
+		this.shopName = shopName;
+	}
+
+	public Date getDob() {
+		return dob;
+	}
+
+	public void setDob(Date dob) {
+		this.dob = dob;
 	}
 
 	public int getId() {

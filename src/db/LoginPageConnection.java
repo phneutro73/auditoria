@@ -78,7 +78,7 @@ public class LoginPageConnection {
 	}
 
 	public CurrentUser getCurrentUser(String email) {
-		// TODO: ver forma de hacer una sóla llamada a bbdd
+		// TODO: ver forma de hacer una sola llamada a bbdd
 		Connection conn = null;
 		Hashtable<String, Object> user = new Hashtable<String, Object>();
 		Hashtable<Integer, String> schedule = new Hashtable<Integer, String>();
@@ -132,27 +132,30 @@ public class LoginPageConnection {
 				dob = rs.getDate("dob");
 				idNumber = rs.getString("id_number");
 				scheduleId = rs.getInt("schedule_id");
+				scheduleName = rs.getString("schedule_name");
 				weekday = rs.getInt("weekday");
 				roleId = rs.getInt("role_id");
+				roleName = rs.getString("role_name");
 				userName = rs.getString("user_name");
 				shopId = rs.getInt("tienda_id");
-
-				Statement stmt2 = conn.createStatement();
-				ResultSet rsSchedule = stmt2
-						.executeQuery("SELECT TOP 1 schedule_name FROM schedules WHERE id = " + scheduleId);
-				scheduleName = "-";
-				while (rsSchedule.next()) {
-					scheduleName = rsSchedule.getString("schedule_name");
-				}
+				shopName = rs.getString("nombre_tienda");
 				schedule.put(weekday, scheduleName);
-				ResultSet rsRole = stmt2.executeQuery("SELECT TOP 1 role_name FROM roles WHERE id = " + roleId);
-				while (rsRole.next()) {
-					roleName = rsRole.getString("role_name");
-				}
-				ResultSet rsShop = stmt2.executeQuery("SELECT TOP 1 nombre_tienda FROM tiendas WHERE id = " + shopId);
-				while (rsShop.next()) {
-					shopName = rsShop.getString("nombre_tienda");
-				}
+
+				/*
+				 * Statement stmt2 = conn.createStatement(); ResultSet rsSchedule = stmt2
+				 * .executeQuery("SELECT TOP 1 schedule_name FROM schedules WHERE id = " +
+				 * scheduleId); scheduleName = "-"; while (rsSchedule.next()) { scheduleName =
+				 * rsSchedule.getString("schedule_name"); }
+				 */
+				/*
+				 * ResultSet rsRole =
+				 * stmt2.executeQuery("SELECT TOP 1 role_name FROM roles WHERE id = " + roleId);
+				 * while (rsRole.next()) { roleName = rsRole.getString("role_name"); } ResultSet
+				 * rsShop =
+				 * stmt2.executeQuery("SELECT TOP 1 nombre_tienda FROM tiendas WHERE id = " +
+				 * shopId); while (rsShop.next()) { shopName =
+				 * rsShop.getString("nombre_tienda"); }
+				 */
 			}
 			user.put("id", id);
 			user.put("name", name);
@@ -161,19 +164,19 @@ public class LoginPageConnection {
 			user.put("idNumber", idNumber);
 			user.put("schedule", schedule);
 			user.put("userName", userName);
-			user.put("roleId", roleName);
+			user.put("roleId", roleId);
 
 			CurrentUser currentUser = new CurrentUser((int) user.get("id"), (String) user.get("name"),
-					(String) user.get("surname"), (String) user.get("idNumber"), (String) user.get("userName"), email,
-					roleId, shopId, (String) schedule.get(0), (String) schedule.get(1), (String) schedule.get(2),
-					(String) schedule.get(3), (String) schedule.get(4), (String) schedule.get(5),
-					(String) schedule.get(6));
+					(String) user.get("surname"), (String) user.get("idNumber"), (String) user.get("userName"),
+					(Date) user.get("dob"), email, roleId, roleName, shopId, shopName, (String) schedule.get(0),
+					(String) schedule.get(1), (String) schedule.get(2), (String) schedule.get(3),
+					(String) schedule.get(4), (String) schedule.get(5), (String) schedule.get(6));
 			return currentUser;
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			CurrentUser error = new CurrentUser(-1, null, null, null, null, null, -1, -1, null, null, null, null, null,
-					null, null);
+			CurrentUser error = new CurrentUser(-1, null, null, null, null, null, null, -1, null, -1, null, null, null,
+					null, null, null, null, null);
 			return error;
 		}
 
