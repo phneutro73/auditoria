@@ -4,8 +4,11 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.Calendar;
+import java.util.Hashtable;
+import java.util.List;
 import java.util.ResourceBundle;
 
+import db.StatisticsPageConnection;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.chart.CategoryAxis;
@@ -28,16 +31,13 @@ public class ControllerMyStatisticsPage {
 	}
 
 	@FXML
-	private ResourceBundle resources;
-
-	@FXML
-	private URL location;
-
-	@FXML
 	private AnchorPane parent;
 
 	@FXML
 	private Label subtitle;
+
+	@FXML
+	private Label lblUserName;
 
 	@FXML
 	private Label lblMonthSales;
@@ -50,30 +50,6 @@ public class ControllerMyStatisticsPage {
 
 	@FXML
 	private Label lblTotalEarnings;
-
-	@FXML
-	private Label lblWeekWorkHours;
-
-	@FXML
-	private Label lblMondayWorkHours;
-
-	@FXML
-	private Label lblTuesdayWorkHours;
-
-	@FXML
-	private Label lblWednesdayWorkHours;
-
-	@FXML
-	private Label lblThursdayWorkHours;
-
-	@FXML
-	private Label lblFridayWorkHours;
-
-	@FXML
-	private Label lblSaturdayWorkHours;
-
-	@FXML
-	private Label lblSundayWorkHours;
 
 	@FXML
 	private LineChart<String, Number> dailyEarningsChart;
@@ -110,7 +86,13 @@ public class ControllerMyStatisticsPage {
 
 	@FXML
 	void initialize() {
+
+		StatisticsPageConnection statisticsDB = new StatisticsPageConnection();
+
 		initLineChar();
+		getRanking(statisticsDB);
+		getUserStatistics(statisticsDB);
+
 	}
 
 	private void initLineChar() {
@@ -137,5 +119,28 @@ public class ControllerMyStatisticsPage {
 
 		dailyEarningsChart.getData().addAll(series);
 		dailyEarningsChart.lookup(".chart-plot-background").setStyle("-fx-background-color: transparent");
+	}
+
+	private void getRanking(StatisticsPageConnection statisticsDB) {
+		List<String> ranking = statisticsDB.getUserRanking(currentUser.getShopId(), 10);
+		ranking1.setText(ranking.get(0));
+		ranking2.setText(ranking.get(1));
+		ranking3.setText(ranking.get(2));
+		ranking4.setText(ranking.get(3));
+		ranking5.setText(ranking.get(4));
+		ranking6.setText(ranking.get(5));
+		ranking7.setText(ranking.get(6));
+		ranking8.setText(ranking.get(7));
+		ranking9.setText(ranking.get(8));
+		ranking10.setText(ranking.get(9));
+
+	}
+
+	private void getUserStatistics(StatisticsPageConnection statisticsDB) {
+		Hashtable<String, Object> userStatistics = statisticsDB.getUserStatistics(currentUser.getId());
+		lblMonthEarnings.setText(userStatistics.get("lastMonthEarnings").toString());
+		lblTotalEarnings.setText(userStatistics.get("totalEarnings").toString());
+		lblMonthSales.setText(userStatistics.get("numSales").toString());
+		lblTotalSales.setText(userStatistics.get("numLastMonthSales").toString());
 	}
 }

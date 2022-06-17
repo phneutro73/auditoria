@@ -21,11 +21,11 @@ public class ModelHistoricalSalesDataTable {
 		this.price = price;
 		this.date = date;
 	}
-	
+
 	public int getItemId() {
 		return itemId;
 	}
-	
+
 	public String getStrItemId() {
 		return String.valueOf(itemId);
 	}
@@ -62,10 +62,10 @@ public class ModelHistoricalSalesDataTable {
 		return price;
 	}
 
-	public String getStrPrice()  {
+	public String getStrPrice() {
 		return String.valueOf(price);
 	}
-	
+
 	public void setPrice(double price) {
 		this.price = price;
 	}
@@ -73,7 +73,7 @@ public class ModelHistoricalSalesDataTable {
 	public Date getDate() {
 		return date;
 	}
-	
+
 	public String getStrDate() {
 		return String.valueOf(date);
 	}
@@ -81,5 +81,5 @@ public class ModelHistoricalSalesDataTable {
 	public void setDate(Date date) {
 		this.date = date;
 	}
-	
+
 }

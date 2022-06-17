@@ -8,7 +8,7 @@ public class ModelTicketTable {
 	String itemType;
 	String size;
 	double itemPrice;
-	
+
 	public ModelTicketTable(int itemId, String itemBarCode, String itemName, String itemType, String size,
 			double itemPrice) {
 		super();
@@ -23,7 +23,7 @@ public class ModelTicketTable {
 	public int getItemId() {
 		return itemId;
 	}
-	
+
 	public String getStrItemId() {
 		return String.valueOf(itemId);
 	}
@@ -67,7 +67,7 @@ public class ModelTicketTable {
 	public double getItemPrice() {
 		return itemPrice;
 	}
-	
+
 	public String getStrItemPrice() {
 		return String.valueOf(itemPrice);
 	}
@@ -75,5 +75,5 @@ public class ModelTicketTable {
 	public void setItemPrice(double itemPrice) {
 		this.itemPrice = itemPrice;
 	}
-	
+
 }

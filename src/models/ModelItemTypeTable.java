@@ -18,7 +18,7 @@ public class ModelItemTypeTable {
 	public String getStrId() {
 		return String.valueOf(id);
 	}
-	
+
 	public void setId(int id) {
 		this.id = id;
 	}

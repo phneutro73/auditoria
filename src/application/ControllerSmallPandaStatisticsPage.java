@@ -21,61 +21,61 @@ public class ControllerSmallPandaStatisticsPage {
 		this.width = width;
 		this.currentUser = currentUser;
 	}
-	
-    @FXML
-    private ResourceBundle resources;
 
-    @FXML
-    private URL location;
+	@FXML
+	private ResourceBundle resources;
 
-    @FXML
-    private AnchorPane parent;
+	@FXML
+	private URL location;
 
-    @FXML
-    private Label subtitle;
+	@FXML
+	private AnchorPane parent;
 
-    @FXML
-    private Label lblMonthSales;
+	@FXML
+	private Label subtitle;
 
-    @FXML
-    private Label lblTotalSales;
+	@FXML
+	private Label lblMonthSales;
 
-    @FXML
-    private Label lblMonthEarnings;
+	@FXML
+	private Label lblTotalSales;
 
-    @FXML
-    private Label lblTotalEarnings;
+	@FXML
+	private Label lblMonthEarnings;
 
-    @FXML
-    private Label lblWorkersNum;
+	@FXML
+	private Label lblTotalEarnings;
 
-    @FXML
-    private Label lblItemsSold;
+	@FXML
+	private Label lblWorkersNum;
 
-    @FXML
-    private Label lblItemsStock;
+	@FXML
+	private Label lblItemsSold;
 
-    @FXML
-    private Label lblItemsSoldToday;
+	@FXML
+	private Label lblItemsStock;
 
-    @FXML
-    private LineChart<String, Double> lineChartDailyEarnigns;
+	@FXML
+	private Label lblItemsSoldToday;
 
-    @FXML
-    private LineChart<String, Double> lineChartDailySales;
+	@FXML
+	private LineChart<String, Double> lineChartDailyEarnigns;
 
-    // TODO: Hacer modelo tabla
-    @FXML
-    private TableView<?> shopsEarningsTable;
+	@FXML
+	private LineChart<String, Double> lineChartDailySales;
 
-    @FXML
-    private TableColumn<?, ?> colShopsShopsEarningsTable;
+	// TODO: Hacer modelo tabla
+	@FXML
+	private TableView<?> shopsEarningsTable;
 
-    @FXML
-    private TableColumn<?, ?> colEarningssShopsEarningsTable;
+	@FXML
+	private TableColumn<?, ?> colShopsShopsEarningsTable;
 
-    @FXML
-    void initialize() {
+	@FXML
+	private TableColumn<?, ?> colEarningssShopsEarningsTable;
 
-    }
+	@FXML
+	void initialize() {
+
+	}
 }
