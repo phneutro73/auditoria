@@ -51,9 +51,6 @@ public class ControllerMyShopStatisticsPage {
 	private Label lblWorkersNum;
 
 	@FXML
-	private Label lblItemsSold;
-
-	@FXML
 	private Label lblItemsStock;
 
 	@FXML
