@@ -5,7 +5,10 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Hashtable;
 import java.util.List;
 
@@ -87,5 +90,44 @@ public class StatisticsPageConnection {
 			}
 		}
 		return userStatistics;
+	}
+
+	public Hashtable<String, Object> getLineChart(int userId, String firstDay, String lastDay) {
+		Connection conn = null;
+		Hashtable<String, Object> data = new Hashtable<String, Object>();
+		try {
+			conn = DriverManager.getConnection(connectionUrl);
+			System.out.println("Connected to DB");
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery(
+					"[sp_get_statistics_earnings_chart] " + userId + ", '" + firstDay + "', '" + lastDay + "'");
+
+			List<String> dates = new ArrayList<>();
+			List<Double> values = new ArrayList<>();
+
+			while (rs.next()) {
+				String date = rs.getString("date");
+				Double value = (Double) rs.getDouble("earnings");
+				dates.add(date);
+				values.add(value);
+			}
+
+			data.put("dates", dates);
+			data.put("values", values);
+
+		}
+
+		catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException ex) {
+					ex.printStackTrace();
+				}
+			}
+		}
+		return data;
 	}
 }
