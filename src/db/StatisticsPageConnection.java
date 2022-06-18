@@ -130,4 +130,55 @@ public class StatisticsPageConnection {
 		}
 		return data;
 	}
+	
+	public Hashtable<String, Object> getShopStatistics(int shopId) {
+		Connection conn = null;
+		Hashtable<String, Object> userStatistics = new Hashtable<String, Object>();
+		try {
+			conn = DriverManager.getConnection(connectionUrl);
+			System.out.println("Connected to DB");
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery("[sp_get_statistics_shop] " + shopId);
+
+			Double totalEarnings = 0.0;
+			int numSales = 0;
+			Double lastMonthEarnings = 0.0;
+			int numLastMonthSales = 0;
+			int numWorkers = 0;
+			int numItemsStock = 0;
+			int numItemsSoldToday = 0;
+
+			while (rs.next()) {
+				totalEarnings = rs.getDouble("GANANCIAS_TOTALES");
+				numSales = rs.getInt("NUM_VENTAS");
+				lastMonthEarnings = rs.getDouble("GANANCIAS_ULT_MES");
+				numLastMonthSales = rs.getInt("NUM_VENTAS_ULT_MES");
+				numWorkers = rs.getInt("NUM_TRABAJADORES");
+				numItemsStock = rs.getInt("NUM_PRENDAS");
+				numItemsSoldToday = rs.getInt("NUM_PRENDAS_HOY");
+			}
+
+			userStatistics.put("totalEarnings", totalEarnings);
+			userStatistics.put("numSales", numSales);
+			userStatistics.put("lastMonthEarnings", lastMonthEarnings);
+			userStatistics.put("numLastMonthSales", numLastMonthSales);
+			userStatistics.put("numWorkers", numWorkers);
+			userStatistics.put("numItemsStock", numItemsStock);
+			userStatistics.put("numItemsSoldToday", numItemsSoldToday);
+
+		}
+
+		catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException ex) {
+					ex.printStackTrace();
+				}
+			}
+		}
+		return userStatistics;
+	}
 }

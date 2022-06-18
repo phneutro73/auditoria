@@ -1,7 +1,10 @@
 package application;
 
 import java.net.URL;
+import java.util.Hashtable;
 import java.util.ResourceBundle;
+
+import db.StatisticsPageConnection;
 import javafx.fxml.FXML;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.PieChart;
@@ -34,6 +37,9 @@ public class ControllerMyShopStatisticsPage {
 
 	@FXML
 	private Label subtitle;
+
+	@FXML
+	private Label lblShopName;
 
 	@FXML
 	private Label lblMonthSales;
@@ -75,5 +81,21 @@ public class ControllerMyShopStatisticsPage {
 	@FXML
 	void initialize() {
 
+		StatisticsPageConnection statisticsDB = new StatisticsPageConnection();
+
+		lblShopName.setText(currentUser.getShopName());
+		getShopStatistics(statisticsDB);
+
+	}
+
+	private void getShopStatistics(StatisticsPageConnection statisticsDB) {
+		Hashtable<String, Object> userStatistics = statisticsDB.getShopStatistics(currentUser.getShopId());
+		lblMonthEarnings.setText(userStatistics.get("lastMonthEarnings").toString());
+		lblTotalEarnings.setText(userStatistics.get("totalEarnings").toString());
+		lblMonthSales.setText(userStatistics.get("numSales").toString());
+		lblTotalSales.setText(userStatistics.get("numLastMonthSales").toString());
+		lblWorkersNum.setText(userStatistics.get("numWorkers").toString());
+		lblItemsStock.setText(userStatistics.get("numItemsStock").toString());
+		lblItemsSoldToday.setText(userStatistics.get("numItemsSoldToday").toString());
 	}
 }
