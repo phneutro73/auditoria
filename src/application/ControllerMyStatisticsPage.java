@@ -92,6 +92,7 @@ public class ControllerMyStatisticsPage {
 
 		StatisticsPageConnection statisticsDB = new StatisticsPageConnection();
 
+		lblUserName.setText(currentUser.getUserName());
 		initLineChar(statisticsDB);
 		getRanking(statisticsDB);
 		getUserStatistics(statisticsDB);
