@@ -16,68 +16,95 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="parent" prefHeight="622.0" prefWidth="994.0" styleClass="softBackgroundParent" stylesheets="@application.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="parent" prefHeight="622.0"
+	prefWidth="994.0" styleClass="softBackgroundParent"
+	stylesheets="@application.css" xmlns="http://javafx.com/javafx/8.0.171"
+	xmlns:fx="http://javafx.com/fxml/1">
 	<children>
-		<VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="817.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+		<VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="817.0"
+			AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+			AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 			<children>
-				<AnchorPane prefHeight="56.0" prefWidth="900.0" VBox.vgrow="NEVER">
+				<AnchorPane prefHeight="56.0" prefWidth="900.0"
+					VBox.vgrow="NEVER">
 					<children>
-						<AnchorPane layoutX="31.0" prefHeight="55.0" prefWidth="183.0" styleClass="pageTitle" stylesheets="@application.css">
+						<AnchorPane layoutX="31.0" prefHeight="55.0"
+							prefWidth="183.0" styleClass="pageTitle"
+							stylesheets="@application.css">
 							<children>
-								<ImageView fitHeight="25.0" fitWidth="25.0" layoutX="28.0" layoutY="13.0">
+								<ImageView fitHeight="25.0" fitWidth="25.0"
+									layoutX="28.0" layoutY="13.0">
 									<image>
 										<Image url="@../resources/assets/admin_high_icon.png" />
 									</image>
 								</ImageView>
-								<Label layoutX="62.0" layoutY="16.0" text="Estadísticas" textFill="#f0fbfd">
+								<Label layoutX="62.0" layoutY="16.0" text="Estadísticas"
+									textFill="#f0fbfd">
 									<font>
 										<Font name="System Bold" size="15.0" />
 									</font>
 								</Label>
 							</children>
 						</AnchorPane>
-						<ImageView fitHeight="15.0" fitWidth="9.0" layoutX="235.0" layoutY="20.0">
+						<ImageView fitHeight="15.0" fitWidth="9.0"
+							layoutX="235.0" layoutY="20.0">
 							<image>
 								<Image url="@../resources/assets/NextIcon.png" />
 							</image>
 						</ImageView>
-						<Label fx:id="subtitle" layoutX="264.0" layoutY="18.0" text="Estadísticas de mi tienda" textFill="#434345">
+						<Label fx:id="subtitle" layoutX="264.0" layoutY="18.0"
+							text="Estadísticas de mi tienda" textFill="#434345">
 							<font>
 								<Font name="System Bold" size="13.0" />
 							</font>
 						</Label>
-                  <Label fx:id="lblShopName" layoutX="474.0" layoutY="19.0" text="NombreTienda" textFill="#434345">
-                     <font>
-                        <Font name="System Bold" size="13.0" />
-                     </font>
-                  </Label>
+						<Label fx:id="lblShopName" layoutX="474.0" layoutY="19.0"
+							text="NombreTienda" textFill="#434345">
+							<font>
+								<Font name="System Bold" size="13.0" />
+							</font>
+						</Label>
 					</children>
 				</AnchorPane>
-				<AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="card" VBox.vgrow="ALWAYS">
+				<AnchorPane prefHeight="200.0" prefWidth="200.0"
+					styleClass="card" VBox.vgrow="ALWAYS">
 					<VBox.margin>
 						<Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
 					</VBox.margin>
 					<children>
-						<VBox layoutX="103.0" layoutY="96.0" prefHeight="200.0" prefWidth="767.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+						<VBox layoutX="103.0" layoutY="96.0" prefHeight="200.0"
+							prefWidth="767.0" AnchorPane.bottomAnchor="14.0"
+							AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0"
+							AnchorPane.topAnchor="10.0">
 							<children>
-								<HBox prefHeight="168.0" prefWidth="924.0" spacing="15.0" VBox.vgrow="NEVER">
+								<HBox prefHeight="168.0" prefWidth="924.0" spacing="15.0"
+									VBox.vgrow="NEVER">
 									<children>
-										<AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="container" HBox.hgrow="ALWAYS">
+										<AnchorPane prefHeight="200.0" prefWidth="200.0"
+											styleClass="container" HBox.hgrow="ALWAYS">
 											<children>
-												<VBox layoutX="24.0" prefHeight="126.0" prefWidth="100.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="5.0">
+												<VBox layoutX="24.0" prefHeight="126.0"
+													prefWidth="100.0" AnchorPane.bottomAnchor="5.0"
+													AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0"
+													AnchorPane.topAnchor="5.0">
 													<children>
-														<Label styleClass="cardSubtitleSmall" text="Número de ventas este mes" wrapText="true" />
+														<Label styleClass="cardSubtitleSmall"
+															text="Número de ventas este mes" wrapText="true" />
 														<HBox spacing="15.0">
 															<children>
-																<Label fx:id="lblMonthSales" prefHeight="17.0" text="0" />
+																<Label fx:id="lblMonthSales" prefHeight="17.0"
+																	text="0" />
 																<Label text="ventas este mes." />
 															</children>
 														</HBox>
-														<Pane prefHeight="13.0" prefWidth="170.0" VBox.vgrow="NEVER" />
-														<Label styleClass="cardSubtitleSmall" text="Número de ventas totales" wrapText="true" />
+														<Pane prefHeight="13.0" prefWidth="170.0"
+															VBox.vgrow="NEVER" />
+														<Label styleClass="cardSubtitleSmall"
+															text="Número de ventas totales" wrapText="true" />
 														<HBox spacing="15.0">
 															<children>
-																<Label fx:id="lblTotalSales" prefHeight="17.0" text="0" />
+																<Label fx:id="lblTotalSales" prefHeight="17.0"
+																	text="0" />
 																<Label text="ventas totales." />
 															</children>
 														</HBox>
@@ -85,22 +112,31 @@
 												</VBox>
 											</children>
 										</AnchorPane>
-										<AnchorPane prefHeight="154.0" prefWidth="145.0" styleClass="container" HBox.hgrow="ALWAYS">
+										<AnchorPane prefHeight="154.0" prefWidth="145.0"
+											styleClass="container" HBox.hgrow="ALWAYS">
 											<children>
-												<VBox layoutX="24.0" prefHeight="126.0" prefWidth="100.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="5.0">
+												<VBox layoutX="24.0" prefHeight="126.0"
+													prefWidth="100.0" AnchorPane.bottomAnchor="5.0"
+													AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0"
+													AnchorPane.topAnchor="5.0">
 													<children>
-														<Label styleClass="cardSubtitleSmall" text="Ganancias de este mes" wrapText="true" />
+														<Label styleClass="cardSubtitleSmall"
+															text="Ganancias de este mes" wrapText="true" />
 														<HBox spacing="15.0">
 															<children>
-																<Label fx:id="lblMonthEarnings" prefHeight="17.0" text="0" />
+																<Label fx:id="lblMonthEarnings" prefHeight="17.0"
+																	text="0" />
 																<Label text="€ este mes." />
 															</children>
 														</HBox>
-														<Pane prefHeight="13.0" prefWidth="133.0" VBox.vgrow="NEVER" />
-														<Label styleClass="cardSubtitleSmall" text="Ganancias totales" wrapText="true" />
+														<Pane prefHeight="13.0" prefWidth="133.0"
+															VBox.vgrow="NEVER" />
+														<Label styleClass="cardSubtitleSmall"
+															text="Ganancias totales" wrapText="true" />
 														<HBox spacing="15.0">
 															<children>
-																<Label fx:id="lblTotalEarnings" prefHeight="17.0" text="0" />
+																<Label fx:id="lblTotalEarnings" prefHeight="17.0"
+																	text="0" />
 																<Label text="€ totales." />
 															</children>
 														</HBox>
@@ -108,28 +144,38 @@
 												</VBox>
 											</children>
 										</AnchorPane>
-										<AnchorPane prefHeight="154.0" prefWidth="191.0" styleClass="container" HBox.hgrow="ALWAYS">
+										<AnchorPane prefHeight="154.0" prefWidth="191.0"
+											styleClass="container" HBox.hgrow="ALWAYS">
 											<children>
-												<VBox layoutX="24.0" prefHeight="126.0" prefWidth="100.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="5.0">
+												<VBox layoutX="24.0" prefHeight="126.0"
+													prefWidth="100.0" AnchorPane.bottomAnchor="5.0"
+													AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0"
+													AnchorPane.topAnchor="5.0">
 													<children>
-														<Label styleClass="cardSubtitleSmall" text="Número de trabajadores" wrapText="true" />
+														<Label styleClass="cardSubtitleSmall"
+															text="Número de trabajadores" wrapText="true" />
 														<HBox spacing="15.0">
 															<children>
-																<Label fx:id="lblWorkersNum" prefHeight="17.0" text="0" />
+																<Label fx:id="lblWorkersNum" prefHeight="17.0"
+																	text="0" />
 																<Label text="trabajadores en tienda." />
 															</children>
 														</HBox>
-														<Label styleClass="cardSubtitleSmall" text="Artículos en almacén" wrapText="true" />
+														<Label styleClass="cardSubtitleSmall"
+															text="Artículos en almacén" wrapText="true" />
 														<HBox spacing="15.0">
 															<children>
-																<Label fx:id="lblItemsStock" prefHeight="17.0" text="0" />
+																<Label fx:id="lblItemsStock" prefHeight="17.0"
+																	text="0" />
 																<Label text="artículos en almacén." />
 															</children>
 														</HBox>
-														<Label styleClass="cardSubtitleSmall" text="Artículos vendidos hoy" wrapText="true" />
+														<Label styleClass="cardSubtitleSmall"
+															text="Artículos vendidos hoy" wrapText="true" />
 														<HBox spacing="15.0">
 															<children>
-																<Label fx:id="lblItemsSoldToday" prefHeight="17.0" text="0" />
+																<Label fx:id="lblItemsSoldToday" prefHeight="17.0"
+																	text="0" />
 																<Label text="artículos vendidos hoy." />
 															</children>
 														</HBox>
@@ -139,20 +185,29 @@
 										</AnchorPane>
 									</children>
 									<VBox.margin>
-										<Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+										<Insets bottom="10.0" left="10.0" right="10.0"
+											top="10.0" />
 									</VBox.margin>
 									<padding>
 										<Insets bottom="5.0" />
 									</padding>
 								</HBox>
-								<HBox prefHeight="262.0" prefWidth="767.0" spacing="20.0" VBox.vgrow="ALWAYS">
+								<HBox prefHeight="262.0" prefWidth="767.0" spacing="20.0"
+									VBox.vgrow="ALWAYS">
 									<children>
-										<AnchorPane prefHeight="311.0" prefWidth="413.0" styleClass="container" HBox.hgrow="ALWAYS">
+										<AnchorPane prefHeight="311.0" prefWidth="413.0"
+											styleClass="container" HBox.hgrow="ALWAYS">
 											<children>
-												<VBox layoutX="24.0" prefHeight="126.0" prefWidth="100.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="5.0">
+												<VBox layoutX="24.0" prefHeight="126.0"
+													prefWidth="100.0" AnchorPane.bottomAnchor="5.0"
+													AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0"
+													AnchorPane.topAnchor="5.0">
 													<children>
-														<Label styleClass="cardSubtitleSmall" text="Ganancias diarias" wrapText="true" />
-														<LineChart fx:id="dailyEarnignsChart" createSymbols="false" legendVisible="false" prefHeight="118.0" prefWidth="399.0" VBox.vgrow="ALWAYS">
+														<Label styleClass="cardSubtitleSmall"
+															text="Ganancias diarias" wrapText="true" />
+														<LineChart fx:id="dailyEarningsChart"
+															createSymbols="false" legendVisible="false"
+															prefHeight="118.0" prefWidth="399.0" VBox.vgrow="ALWAYS">
 															<xAxis>
 																<CategoryAxis side="BOTTOM" />
 															</xAxis>
@@ -167,29 +222,47 @@
 												<Insets left="10.0" />
 											</HBox.margin>
 										</AnchorPane>
-										<AnchorPane prefHeight="311.0" prefWidth="217.0" styleClass="container">
+										<AnchorPane prefHeight="311.0" prefWidth="217.0"
+											styleClass="container">
 											<children>
-												<VBox layoutX="24.0" prefHeight="126.0" prefWidth="100.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="5.0">
+												<VBox layoutX="24.0" prefHeight="126.0"
+													prefWidth="100.0" AnchorPane.bottomAnchor="5.0"
+													AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0"
+													AnchorPane.topAnchor="5.0">
 													<children>
-														<Label styleClass="cardSubtitleSmall" text="Tipos de prendas" wrapText="true" />
-														<Pane prefHeight="22.0" prefWidth="162.0" VBox.vgrow="NEVER" />
-														<PieChart fx:id="pieChartItemTypes" prefHeight="249.0" prefWidth="200.0" />
+														<Label styleClass="cardSubtitleSmall"
+															text="Tipos de prendas" wrapText="true" />
+														<Pane prefHeight="22.0" prefWidth="162.0"
+															VBox.vgrow="NEVER" />
+														<PieChart fx:id="pieChartItemTypes"
+															prefHeight="249.0" prefWidth="200.0" />
 													</children>
 												</VBox>
 											</children>
 										</AnchorPane>
-										<AnchorPane prefHeight="311.0" prefWidth="239.0" styleClass="container" HBox.hgrow="ALWAYS">
+										<AnchorPane prefHeight="311.0" prefWidth="239.0"
+											styleClass="container" HBox.hgrow="ALWAYS">
 											<children>
-												<VBox layoutX="24.0" prefHeight="126.0" prefWidth="100.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="5.0">
+												<VBox layoutX="24.0" prefHeight="126.0"
+													prefWidth="100.0" AnchorPane.bottomAnchor="5.0"
+													AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0"
+													AnchorPane.topAnchor="5.0">
 													<children>
-														<Label styleClass="cardSubtitleSmall" text="Trabajando hoy" wrapText="true" />
-														<TableView fx:id="shopStatisticsTable" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+														<Label styleClass="cardSubtitleSmall"
+															text="Trabajando hoy" wrapText="true" />
+														<TableView fx:id="shopStatisticsTable"
+															prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
 															<columns>
-																<TableColumn fx:id="scheduleShopStatisticsTable" maxWidth="225.0" minWidth="15.0" prefWidth="30.0" text="Horario" />
-																<TableColumn fx:id="userShopStatisticsTable" maxWidth="350.0" minWidth="15.0" prefWidth="150.0" text="Usuario" />
+																<TableColumn
+																	fx:id="scheduleShopStatisticsTable" maxWidth="225.0"
+																	minWidth="15.0" prefWidth="30.0" text="Horario" />
+																<TableColumn fx:id="userShopStatisticsTable"
+																	maxWidth="350.0" minWidth="15.0" prefWidth="150.0"
+																	text="Usuario" />
 															</columns>
 															<columnResizePolicy>
-																<TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+																<TableView
+																	fx:constant="CONSTRAINED_RESIZE_POLICY" />
 															</columnResizePolicy>
 														</TableView>
 													</children>

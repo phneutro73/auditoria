@@ -1,13 +1,18 @@
 package application;
 
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
 import java.util.Hashtable;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import db.StatisticsPageConnection;
 import javafx.fxml.FXML;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.PieChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -63,7 +68,7 @@ public class ControllerMyShopStatisticsPage {
 	private Label lblItemsSoldToday;
 
 	@FXML
-	private LineChart<String, Double> dailyEarnignsChart;
+	private LineChart<String, Double> dailyEarningsChart;
 
 	@FXML
 	private PieChart pieChartItemTypes;
@@ -85,6 +90,7 @@ public class ControllerMyShopStatisticsPage {
 
 		lblShopName.setText(currentUser.getShopName());
 		getShopStatistics(statisticsDB);
+		getLineChar(statisticsDB);
 
 	}
 
@@ -97,5 +103,41 @@ public class ControllerMyShopStatisticsPage {
 		lblWorkersNum.setText(userStatistics.get("numWorkers").toString());
 		lblItemsStock.setText(userStatistics.get("numItemsStock").toString());
 		lblItemsSoldToday.setText(userStatistics.get("numItemsSoldToday").toString());
+	}
+
+	private void getLineChar(StatisticsPageConnection statisticsDB) {
+
+		Calendar c = Calendar.getInstance();
+		LocalDate currentDate = LocalDate.now();
+
+		LocalDate firstDayMonth = LocalDate.now().withDayOfMonth(1);
+		String strFirstDayMonth = firstDayMonth.format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
+		LocalDate aux = firstDayMonth;
+		LocalDate lastDayMonth = currentDate.withDayOfMonth(currentDate.getMonth().length(currentDate.isLeapYear()));
+		String strLastDayMonth = lastDayMonth.format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
+
+		XYChart.Series<String, Double> series = new XYChart.Series<String, Double>();
+		Hashtable<String, Object> data = statisticsDB.getShopLineChart(currentUser.getId(), strFirstDayMonth,
+				strLastDayMonth);
+		List<String> dates = (List<String>) data.get("dates");
+		List<Double> values = (List<Double>) data.get("values");
+
+		while (aux.compareTo(lastDayMonth) <= 0) {
+			String strAux = aux.format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
+			String chartDate = aux.format(DateTimeFormatter.ofPattern("dd-MMM"));
+			Double chartValue = 0.0;
+
+			if (!dates.isEmpty() && !values.isEmpty() && dates.get(0).equals(strAux)) {
+				chartValue = Double.valueOf(values.get(0));
+				dates.remove(0);
+				values.remove(0);
+			}
+
+			series.getData().add(new XYChart.Data<String, Double>(chartDate, chartValue));
+			aux = aux.plusDays(1);
+		}
+
+		dailyEarningsChart.getData().addAll(series);
+		dailyEarningsChart.lookup(".chart-plot-background").setStyle("-fx-background-color: transparent");
 	}
 }

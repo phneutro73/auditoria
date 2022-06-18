@@ -92,7 +92,7 @@ public class StatisticsPageConnection {
 		return userStatistics;
 	}
 
-	public Hashtable<String, Object> getLineChart(int userId, String firstDay, String lastDay) {
+	public Hashtable<String, Object> getUserLineChart(int userId, String firstDay, String lastDay) {
 		Connection conn = null;
 		Hashtable<String, Object> data = new Hashtable<String, Object>();
 		try {
@@ -100,7 +100,7 @@ public class StatisticsPageConnection {
 			System.out.println("Connected to DB");
 			Statement stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery(
-					"[sp_get_statistics_earnings_chart] " + userId + ", '" + firstDay + "', '" + lastDay + "'");
+					"[sp_get_statistics_user_earnings_chart] " + userId + ", '" + firstDay + "', '" + lastDay + "'");
 
 			List<String> dates = new ArrayList<>();
 			List<Double> values = new ArrayList<>();
@@ -130,7 +130,7 @@ public class StatisticsPageConnection {
 		}
 		return data;
 	}
-	
+
 	public Hashtable<String, Object> getShopStatistics(int shopId) {
 		Connection conn = null;
 		Hashtable<String, Object> userStatistics = new Hashtable<String, Object>();
@@ -180,5 +180,44 @@ public class StatisticsPageConnection {
 			}
 		}
 		return userStatistics;
+	}
+
+	public Hashtable<String, Object> getShopLineChart(int shopId, String firstDay, String lastDay) {
+		Connection conn = null;
+		Hashtable<String, Object> data = new Hashtable<String, Object>();
+		try {
+			conn = DriverManager.getConnection(connectionUrl);
+			System.out.println("Connected to DB");
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery(
+					"[sp_get_statistics_shop_earnings_chart] " + shopId + ", '" + firstDay + "', '" + lastDay + "'");
+
+			List<String> dates = new ArrayList<>();
+			List<Double> values = new ArrayList<>();
+
+			while (rs.next()) {
+				String date = rs.getString("date");
+				Double value = (Double) rs.getDouble("earnings");
+				dates.add(date);
+				values.add(value);
+			}
+
+			data.put("dates", dates);
+			data.put("values", values);
+
+		}
+
+		catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException ex) {
+					ex.printStackTrace();
+				}
+			}
+		}
+		return data;
 	}
 }

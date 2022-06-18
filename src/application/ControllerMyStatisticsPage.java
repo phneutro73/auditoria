@@ -111,7 +111,7 @@ public class ControllerMyStatisticsPage {
 		String strLastDayMonth = lastDayMonth.format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
 
 		XYChart.Series<String, Double> series = new XYChart.Series<String, Double>();
-		Hashtable<String, Object> data = statisticsDB.getLineChart(currentUser.getId(), strFirstDayMonth,
+		Hashtable<String, Object> data = statisticsDB.getUserLineChart(currentUser.getId(), strFirstDayMonth,
 				strLastDayMonth);
 		List<String> dates = (List<String>) data.get("dates");
 		List<Double> values = (List<Double>) data.get("values");
