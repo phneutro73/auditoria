@@ -12,6 +12,11 @@ import java.util.Date;
 import java.util.Hashtable;
 import java.util.List;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import models.ModelUserTable;
+import models.ModelWorkersTodayTable;
+
 public class StatisticsPageConnection {
 
 	static String connectionUrl = "jdbc:sqlserver://pr-infor.database.windows.net:1433;" + "database=pr-infor;"
@@ -219,5 +224,35 @@ public class StatisticsPageConnection {
 			}
 		}
 		return data;
+	}
+
+	public ObservableList<ModelWorkersTodayTable> getWorkersTodayTable(int shopId) {
+
+		Connection conn = null;
+		ResultSet rsUsers = null;
+		ObservableList<ModelWorkersTodayTable> obList = FXCollections.observableArrayList();
+
+		try {
+			conn = DriverManager.getConnection(connectionUrl);
+			System.out.println("Connected to DB");
+			Statement stmt = conn.createStatement();
+			rsUsers = stmt.executeQuery("[sp_get_schedule_workers_today] " + shopId);
+
+			while (rsUsers.next()) {
+				obList.add(
+						new ModelWorkersTodayTable(rsUsers.getString("user_name"), rsUsers.getString("schedule_name")));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException ex) {
+					ex.printStackTrace();
+				}
+			}
+		}
+		return obList;
 	}
 }

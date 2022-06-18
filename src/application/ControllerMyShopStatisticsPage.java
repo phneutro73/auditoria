@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import db.StatisticsPageConnection;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.PieChart;
@@ -16,8 +17,10 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import models.CurrentUser;
+import models.ModelWorkersTodayTable;
 
 public class ControllerMyShopStatisticsPage {
 
@@ -73,15 +76,14 @@ public class ControllerMyShopStatisticsPage {
 	@FXML
 	private PieChart pieChartItemTypes;
 
-	// TODO: Modelo de la tabla
 	@FXML
-	private TableView<?> shopStatisticsTable;
+	private TableView<ModelWorkersTodayTable> shopStatisticsTable;
 
 	@FXML
-	private TableColumn<?, ?> scheduleShopStatisticsTable;
+	private TableColumn<ModelWorkersTodayTable, String> scheduleShopStatisticsTable;
 
 	@FXML
-	private TableColumn<?, ?> userShopStatisticsTable;
+	private TableColumn<ModelWorkersTodayTable, String> userShopStatisticsTable;
 
 	@FXML
 	void initialize() {
@@ -91,6 +93,7 @@ public class ControllerMyShopStatisticsPage {
 		lblShopName.setText(currentUser.getShopName());
 		getShopStatistics(statisticsDB);
 		getLineChar(statisticsDB);
+		getWorkersToday(statisticsDB);
 
 	}
 
@@ -139,5 +142,15 @@ public class ControllerMyShopStatisticsPage {
 
 		dailyEarningsChart.getData().addAll(series);
 		dailyEarningsChart.lookup(".chart-plot-background").setStyle("-fx-background-color: transparent");
+	}
+
+	private void getWorkersToday(StatisticsPageConnection statisticsDB) {
+
+		ObservableList<ModelWorkersTodayTable> obList = statisticsDB.getWorkersTodayTable(currentUser.getShopId());
+
+		scheduleShopStatisticsTable.setCellValueFactory(new PropertyValueFactory<>("userName"));
+		userShopStatisticsTable.setCellValueFactory(new PropertyValueFactory<>("scheduleName"));
+
+		shopStatisticsTable.setItems(obList);
 	}
 }
