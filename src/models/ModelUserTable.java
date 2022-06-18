@@ -10,7 +10,8 @@ public class ModelUserTable {
 	String roleName;
 	String shopName;
 
-	public ModelUserTable(int id, String name, String surname, String dni, String dob, String roleName, String shopName) {
+	public ModelUserTable(int id, String name, String surname, String dni, String dob, String roleName,
+			String shopName) {
 		this.id = id;
 		this.name = name;
 		this.surname = surname;
@@ -71,11 +72,11 @@ public class ModelUserTable {
 	public void setRoleName(String roleName) {
 		this.roleName = roleName;
 	}
-	
+
 	public String getShopName() {
 		return shopName;
 	}
-	
+
 	public void setShopName(String shopName) {
 		this.shopName = shopName;
 	}

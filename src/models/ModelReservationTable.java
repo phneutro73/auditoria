@@ -1,7 +1,7 @@
 package models;
 
 public class ModelReservationTable {
-	
+
 	String itemBarCode;
 	String itemName;
 	String itemType;
@@ -10,7 +10,7 @@ public class ModelReservationTable {
 	int inShop;
 	int reservations;
 	double price;
-	
+
 	public ModelReservationTable(String itemBarCode, String itemName, String itemType, String itemSize, int quantity,
 			int inShop, int reservations, double price) {
 		super();
@@ -59,7 +59,7 @@ public class ModelReservationTable {
 	public int getQuantity() {
 		return quantity;
 	}
-	
+
 	public String getStrQuantity() {
 		return String.valueOf(quantity);
 	}
@@ -71,7 +71,7 @@ public class ModelReservationTable {
 	public int getInShop() {
 		return inShop;
 	}
-	
+
 	public String getStrInShop() {
 		return String.valueOf(inShop);
 	}
@@ -83,7 +83,7 @@ public class ModelReservationTable {
 	public int getReservations() {
 		return reservations;
 	}
-	
+
 	public String getStrReservations() {
 		return String.valueOf(reservations);
 	}
@@ -95,7 +95,7 @@ public class ModelReservationTable {
 	public double getPrice() {
 		return price;
 	}
-	
+
 	public String getStrPrice() {
 		return String.valueOf(price);
 	}

@@ -1,11 +1,17 @@
 package application;
 
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.Month;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.Hashtable;
+import java.util.List;
 import java.util.ResourceBundle;
 
+import db.StatisticsPageConnection;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.chart.CategoryAxis;
@@ -28,16 +34,13 @@ public class ControllerMyStatisticsPage {
 	}
 
 	@FXML
-	private ResourceBundle resources;
-
-	@FXML
-	private URL location;
-
-	@FXML
 	private AnchorPane parent;
 
 	@FXML
 	private Label subtitle;
+
+	@FXML
+	private Label lblUserName;
 
 	@FXML
 	private Label lblMonthSales;
@@ -52,31 +55,7 @@ public class ControllerMyStatisticsPage {
 	private Label lblTotalEarnings;
 
 	@FXML
-	private Label lblWeekWorkHours;
-
-	@FXML
-	private Label lblMondayWorkHours;
-
-	@FXML
-	private Label lblTuesdayWorkHours;
-
-	@FXML
-	private Label lblWednesdayWorkHours;
-
-	@FXML
-	private Label lblThursdayWorkHours;
-
-	@FXML
-	private Label lblFridayWorkHours;
-
-	@FXML
-	private Label lblSaturdayWorkHours;
-
-	@FXML
-	private Label lblSundayWorkHours;
-
-	@FXML
-	private LineChart<String, Number> dailyEarningsChart;
+	private LineChart<String, Double> dailyEarningsChart;
 
 	@FXML
 	private Label ranking1;
@@ -110,32 +89,72 @@ public class ControllerMyStatisticsPage {
 
 	@FXML
 	void initialize() {
-		initLineChar();
+
+		StatisticsPageConnection statisticsDB = new StatisticsPageConnection();
+
+		lblUserName.setText(currentUser.getUserName());
+		initLineChar(statisticsDB);
+		getRanking(statisticsDB);
+		getUserStatistics(statisticsDB);
+
 	}
 
-	private void initLineChar() {
+	private void initLineChar(StatisticsPageConnection statisticsDB) {
 
 		Calendar c = Calendar.getInstance();
-		int monthMaxDays = c.getActualMaximum(Calendar.DAY_OF_MONTH);
 		LocalDate currentDate = LocalDate.now();
 
-		int currentMonth = currentDate.getMonthValue();
-		String strCurrentMonth = String.valueOf(currentMonth);
-		while (strCurrentMonth.length() < 2) {
-			strCurrentMonth = '0' + strCurrentMonth;
-		}
+		LocalDate firstDayMonth = LocalDate.now().withDayOfMonth(1);
+		String strFirstDayMonth = firstDayMonth.format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
+		LocalDate aux = firstDayMonth;
+		LocalDate lastDayMonth = currentDate.withDayOfMonth(currentDate.getMonth().length(currentDate.isLeapYear()));
+		String strLastDayMonth = lastDayMonth.format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
 
-		XYChart.Series<String, Number> series = new XYChart.Series<String, Number>();
-		for (int i = 1; i <= monthMaxDays; i++) {
-			String strChartDay = String.valueOf(i);
-			while (strChartDay.length() < 2) {
-				strChartDay = '0' + strChartDay;
+		XYChart.Series<String, Double> series = new XYChart.Series<String, Double>();
+		Hashtable<String, Object> data = statisticsDB.getLineChart(currentUser.getId(), strFirstDayMonth,
+				strLastDayMonth);
+		List<String> dates = (List<String>) data.get("dates");
+		List<Double> values = (List<Double>) data.get("values");
+
+		while (aux.compareTo(lastDayMonth) <= 0) {
+			String strAux = aux.format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
+			String chartDate = aux.format(DateTimeFormatter.ofPattern("dd-MMM"));
+			Double chartValue = 0.0;
+
+			if (!dates.isEmpty() && !values.isEmpty() && dates.get(0).equals(strAux)) {
+				chartValue = Double.valueOf(values.get(0));
+				dates.remove(0);
+				values.remove(0);
 			}
-			String chartDate = strChartDay + '/' + strCurrentMonth;
-			series.getData().add(new XYChart.Data<String, Number>(chartDate, 0.0));
+
+			series.getData().add(new XYChart.Data<String, Double>(chartDate, chartValue));
+			aux = aux.plusDays(1);
 		}
 
 		dailyEarningsChart.getData().addAll(series);
 		dailyEarningsChart.lookup(".chart-plot-background").setStyle("-fx-background-color: transparent");
+	}
+
+	private void getRanking(StatisticsPageConnection statisticsDB) {
+		List<String> ranking = statisticsDB.getUserRanking(currentUser.getShopId(), 10);
+		ranking1.setText(ranking.get(0));
+		ranking2.setText(ranking.get(1));
+		ranking3.setText(ranking.get(2));
+		ranking4.setText(ranking.get(3));
+		ranking5.setText(ranking.get(4));
+		ranking6.setText(ranking.get(5));
+		ranking7.setText(ranking.get(6));
+		ranking8.setText(ranking.get(7));
+		ranking9.setText(ranking.get(8));
+		ranking10.setText(ranking.get(9));
+
+	}
+
+	private void getUserStatistics(StatisticsPageConnection statisticsDB) {
+		Hashtable<String, Object> userStatistics = statisticsDB.getUserStatistics(currentUser.getId());
+		lblMonthEarnings.setText(userStatistics.get("lastMonthEarnings").toString());
+		lblTotalEarnings.setText(userStatistics.get("totalEarnings").toString());
+		lblMonthSales.setText(userStatistics.get("numSales").toString());
+		lblTotalSales.setText(userStatistics.get("numLastMonthSales").toString());
 	}
 }

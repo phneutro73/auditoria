@@ -14,7 +14,7 @@ public class ModelAllReservationsTable {
 	double price;
 	Date endReservationDate;
 	Time endReservationTime;
-	
+
 	public ModelAllReservationsTable(int reservationId, String email, String dni, String shop, String barCode,
 			int quantity, double price, Date endReservationDate, Time endReservationTime) {
 		super();
@@ -36,7 +36,7 @@ public class ModelAllReservationsTable {
 	public String getStrReservationId() {
 		return String.valueOf(reservationId);
 	}
-	
+
 	public void setReservationId(int reservationId) {
 		this.reservationId = reservationId;
 	}
@@ -76,7 +76,7 @@ public class ModelAllReservationsTable {
 	public int getQuantity() {
 		return quantity;
 	}
-	
+
 	public String getStrQuantity() {
 		return String.valueOf(quantity);
 	}
@@ -88,7 +88,7 @@ public class ModelAllReservationsTable {
 	public double getPrice() {
 		return price;
 	}
-	
+
 	public String getStrPrice() {
 		return String.valueOf(price);
 	}
@@ -100,7 +100,7 @@ public class ModelAllReservationsTable {
 	public Date getEndReservationDate() {
 		return endReservationDate;
 	}
-	
+
 	public String getStrEndReservationDate() {
 		return String.valueOf(endReservationDate);
 	}
@@ -108,11 +108,11 @@ public class ModelAllReservationsTable {
 	public void setEndReservationDate(Date endReservationDate) {
 		this.endReservationDate = endReservationDate;
 	}
-	
+
 	public Date getEndReservationTime() {
 		return endReservationTime;
 	}
-	
+
 	public String getStrEndReservationTime() {
 		return String.valueOf(endReservationTime);
 	}
@@ -120,5 +120,5 @@ public class ModelAllReservationsTable {
 	public void setEndReservationTime(Time endReservationTime) {
 		this.endReservationTime = endReservationTime;
 	}
-	
+
 }
