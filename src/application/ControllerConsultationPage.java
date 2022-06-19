@@ -251,29 +251,15 @@ public class ControllerConsultationPage {
 
 	@FXML
 	void goToStatisticsPage(MouseEvent event) throws IOException {
-		if (currentUser.getRoleId() != 1) {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/StatisticsShopAssistantPage.fxml"));
-			ControllerStatisticsShopAssistantPage control = new ControllerStatisticsShopAssistantPage(0, 0,
-					currentUser);
-			loader.setController(control);
-			Parent root = loader.load();
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/StatisticsShopAssistantPage.fxml"));
+		ControllerStatisticsShopAssistantPage control = new ControllerStatisticsShopAssistantPage(0, 0, currentUser);
+		loader.setController(control);
+		Parent root = loader.load();
 
-			Stage stage = new Stage();
-			stage.setScene(new Scene(root));
-			stage.show();
-			((Node) (event.getSource())).getScene().getWindow().hide();
-		} else {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/StatisticsAdministratorPage.fxml"));
-			ControllerStatisticsAdministratorPage control = new ControllerStatisticsAdministratorPage(0, 0,
-					currentUser);
-			loader.setController(control);
-			Parent root = loader.load();
-
-			Stage stage = new Stage();
-			stage.setScene(new Scene(root));
-			stage.show();
-			((Node) (event.getSource())).getScene().getWindow().hide();
-		}
+		Stage stage = new Stage();
+		stage.setScene(new Scene(root));
+		stage.show();
+		((Node) (event.getSource())).getScene().getWindow().hide();
 	}
 
 	@FXML
