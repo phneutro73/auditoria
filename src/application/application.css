@@ -216,3 +216,28 @@
 	-fx-background-color: -main-color, white
 }
 
+/* Pie chart */
+.default-color0.chart-pie {
+	-fx-pie-color: '#333C83'
+}
+.default-color1.chart-pie {
+	-fx-pie-color: '#F24A72'
+}
+.default-color2.chart-pie {
+	-fx-pie-color: '#FDAF75'
+}
+.default-color3.chart-pie {
+	-fx-pie-color: '#EAEA7F'
+}
+.default-color4.chart-pie {
+	-fx-pie-color: '#AAAAAA'
+}
+.chart-pie{
+	-fx-clockwise: false;
+	-fx-pie-label-visible: true;
+	-fx-label-line-length: 2.0;
+	-fx-start-angle: 30.0;
+}
+.chart-pie-label {
+	-fx-font-size: 10.0px;
+}
