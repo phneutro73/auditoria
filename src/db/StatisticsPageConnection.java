@@ -255,4 +255,42 @@ public class StatisticsPageConnection {
 		}
 		return obList;
 	}
+
+	public Hashtable<String, Object> getShopItemTypesPieChart(int shopId) {
+		Connection conn = null;
+		Hashtable<String, Object> data = new Hashtable<String, Object>();
+		try {
+			conn = DriverManager.getConnection(connectionUrl);
+			System.out.println("Connected to DB");
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery("[sp_get_statistics_shop_item_types_chart] " + shopId);
+
+			List<Integer> quantity = new ArrayList<>();
+			List<String> name = new ArrayList<>();
+
+			while (rs.next()) {
+				int itemQuantity = rs.getInt("cantidad");
+				String itemType = rs.getString("nombre");
+				quantity.add(itemQuantity);
+				name.add(itemType);
+			}
+
+			data.put("quantities", quantity);
+			data.put("names", name);
+
+		}
+
+		catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException ex) {
+					ex.printStackTrace();
+				}
+			}
+		}
+		return data;
+	}
 }

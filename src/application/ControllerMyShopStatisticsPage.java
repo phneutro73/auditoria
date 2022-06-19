@@ -1,15 +1,20 @@
 package application;
 
+import java.awt.Color;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.ResourceBundle;
 
 import db.StatisticsPageConnection;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.css.StyleableObjectProperty;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.PieChart;
@@ -17,8 +22,11 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.Tooltip;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Paint;
 import models.CurrentUser;
 import models.ModelWorkersTodayTable;
 
@@ -71,6 +79,9 @@ public class ControllerMyShopStatisticsPage {
 	private Label lblItemsSoldToday;
 
 	@FXML
+	private Label caption;
+
+	@FXML
 	private LineChart<String, Double> dailyEarningsChart;
 
 	@FXML
@@ -94,6 +105,7 @@ public class ControllerMyShopStatisticsPage {
 		getShopStatistics(statisticsDB);
 		getLineChar(statisticsDB);
 		getWorkersToday(statisticsDB);
+		getPieChart(statisticsDB);
 
 	}
 
@@ -152,5 +164,44 @@ public class ControllerMyShopStatisticsPage {
 		userShopStatisticsTable.setCellValueFactory(new PropertyValueFactory<>("scheduleName"));
 
 		shopStatisticsTable.setItems(obList);
+	}
+
+	private void getPieChart(StatisticsPageConnection statisticsDB) {
+
+		Hashtable<String, Object> chartData = statisticsDB.getShopItemTypesPieChart(currentUser.getShopId());
+		List<Integer> quantities = (List<Integer>) chartData.get("quantities");
+		List<String> names = (List<String>) chartData.get("names");
+
+		ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList();
+		Double sumOthers = 0.0;
+
+		for (int i = 0; i < quantities.size(); i++) {
+			if (i < 4) {
+				pieChartData.add(new PieChart.Data(names.get(i), quantities.get(i)));
+			} else {
+				sumOthers = sumOthers + quantities.get(i);
+			}
+		}
+
+		if (sumOthers != 0.0) {
+			pieChartData.add(new PieChart.Data("Otros", sumOthers));
+		}
+		pieChartItemTypes.setData(pieChartData);
+
+		caption.setTextFill(lblShopName.getTextFill());
+		caption.setStyle("-fx-font: 20 arial;");
+		// TODO: Mostrar porcetajes - esto no funciona
+		for (final PieChart.Data data : pieChartItemTypes.getData()) {
+			data.getNode().addEventHandler(MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent>() {
+				@Override
+				public void handle(MouseEvent e) {
+					System.out.println("click pie chart");
+					caption.setTranslateX(e.getSceneX() - caption.getLayoutX());
+					caption.setTranslateY(e.getSceneY() - caption.getLayoutY());
+					caption.setText(String.valueOf(data.getPieValue() + "%"));
+				}
+			});
+		}
+
 	}
 }
