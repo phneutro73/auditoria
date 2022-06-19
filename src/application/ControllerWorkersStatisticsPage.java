@@ -2,12 +2,17 @@ package application;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import db.StatisticsPageConnection;
 import javafx.fxml.FXML;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
 import models.CurrentUser;
+import models.ModelWorkersShopTable;
 
 public class ControllerWorkersStatisticsPage {
 
@@ -22,16 +27,22 @@ public class ControllerWorkersStatisticsPage {
 	}
 
 	@FXML
-	private ResourceBundle resources;
-
-	@FXML
-	private URL location;
-
-	@FXML
 	private AnchorPane parent;
 
 	@FXML
 	private Label subtitle;
+
+	@FXML
+	private Label lblShopName;
+
+	@FXML
+	private TableView<ModelWorkersShopTable> workersShopTable;
+
+	@FXML
+	private TableColumn<ModelWorkersShopTable, String> idWorkersShopTable;
+
+	@FXML
+	private TableColumn<ModelWorkersShopTable, String> nameWorkersShopTable;
 
 	@FXML
 	private Label lblTotalWorkers;
